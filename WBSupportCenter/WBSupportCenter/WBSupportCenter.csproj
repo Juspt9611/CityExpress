@@ -851,6 +851,8 @@
     <Content Include="recursos\sound\voice_on.mp3" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="vistas\Blog.aspx" />
+    <Content Include="vistas\BlogMuestra.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
     <Content Include="Web.config" />
@@ -871,6 +873,20 @@
       <DependentUpon>login.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="vistas\Blog.aspx.cs">
+      <DependentUpon>Blog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\Blog.aspx.designer.cs">
+      <DependentUpon>Blog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\BlogMuestra.aspx.cs">
+      <DependentUpon>BlogMuestra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\BlogMuestra.aspx.designer.cs">
+      <DependentUpon>BlogMuestra.aspx</DependentUpon>
+    </Compile>
     <Compile Include="vistas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -887,7 +903,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="assets\img\" />
     <Folder Include="recursos\img\realestate\thumbs\" />
+    <Folder Include="scripts\ckeditor\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
