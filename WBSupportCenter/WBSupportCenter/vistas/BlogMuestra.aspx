@@ -20,8 +20,7 @@
         <body>
 
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                     <form method="post">
                         <textarea name="editor1" id="editor1">
                             &lt;h2 style="text-align: center;"&gt;&lt;strong&gt;Las tres mejores cosas que aprendes del viaje&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;
@@ -40,7 +39,6 @@
                     <br />
                     <input class="btn btn-primary" id="submit" type="button" value="Guardar">
                 </div>
-                <div class="col-lg-1"></div>
             </div>
             <script>
         
