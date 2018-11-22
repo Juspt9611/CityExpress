@@ -853,6 +853,7 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="vistas\Blog.aspx" />
     <Content Include="vistas\BlogMuestra.aspx" />
+    <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
     <Content Include="Web.config" />
@@ -886,6 +887,13 @@
     </Compile>
     <Compile Include="vistas\BlogMuestra.aspx.designer.cs">
       <DependentUpon>BlogMuestra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\EditarArticulo.aspx.cs">
+      <DependentUpon>EditarArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\EditarArticulo.aspx.designer.cs">
+      <DependentUpon>EditarArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
