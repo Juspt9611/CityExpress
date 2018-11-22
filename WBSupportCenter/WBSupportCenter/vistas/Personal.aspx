@@ -10,7 +10,7 @@
 			<!-- Widget ID (each widget will need unique ID)-->
 			<div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false"	data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false">
 				<header>
-					<h2>Personal</h2>
+					<h2>Articulo</h2>
 				</header>
 
 				<!-- widget div-->
@@ -41,12 +41,11 @@
 											<thead>			                
 												<tr>
 													<th data-hide="phone">ID</th>
-													<th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Name</th>
-													<th data-hide="phone,tablet"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Phone</th>
-													<th>Company</th>
-													<th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Zip</th>
-													<th data-hide="phone,tablet">City</th>
-													<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Date</th>
+													<th data-class="expand"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Nombre</th>
+													<th data-hide="phone,tablet"><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> Categoria</th>
+													<th data-hide="phone,tablet"><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> Fecha Creacion</th>
+													<th data-hide="phone,tablet">Autor</th>
+													<th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar txt-color-blue hidden-md hidden-sm hidden-xs"></i> Status</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -57,7 +56,6 @@
 													<td>Et Rutrum Non Associates</td>
 													<td>35728</td>
 													<td>Fogo</td>
-													<td>03/04/14</td>
 												</tr>
 												<tr>
 													<td>2</td>
@@ -66,7 +64,6 @@
 													<td>Nam Ac Inc.</td>
 													<td>7162</td>
 													<td>Machelen</td>
-													<td>03/23/13</td>
 												</tr>
 												<tr>
 													<td>3</td>
@@ -75,7 +72,6 @@
 													<td>Enim Commodo Limited</td>
 													<td>98611</td>
 													<td>Norman</td>
-													<td>02/13/14</td>
 												</tr>
 												<tr>
 													<td>4</td>
@@ -84,7 +80,6 @@
 													<td>Odio Etiam Institute</td>
 													<td>10312</td>
 													<td>Sautin</td>
-													<td>01/01/13</td>
 												</tr>
 												<tr>
 													<td>5</td>
@@ -93,7 +88,6 @@
 													<td>Neque Ltd</td>
 													<td>29131</td>
 													<td>Glovertown</td>
-													<td>02/16/13</td>
 												</tr>
 											</tbody>
 										</table>								
