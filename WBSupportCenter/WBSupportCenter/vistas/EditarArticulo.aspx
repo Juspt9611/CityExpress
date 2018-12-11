@@ -42,7 +42,7 @@
                                         <div class="pull-right">
                                             <button id="submit" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Aceptar</button>
                                             <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-cloud-upload"></span>  Cargar imagen o video</button>
-                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Cancelar</button>
+                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                                         </div>
 							        </legend>
 							        <div class="form-group">
