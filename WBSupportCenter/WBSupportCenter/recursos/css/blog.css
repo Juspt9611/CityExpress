@@ -329,12 +329,13 @@ section {
 	transform: translateY(-50%);
 }
 .log_reg_text a {
+	cursor: pointer;
 	font-size: 16px;
 	font-weight: 600;
-	color: #ffffff;
+	color: #ffffff !important;
 }
 .log_reg_text a:hover {
-	color: #f4d160;
+	color: #f4d160 !important;
 }
 .log_reg_content > div:not(:last-child)::after {
 	display: inline-block;
@@ -1052,4 +1053,26 @@ section {
 }
 .footer_list li a:hover {
 	color: #f4d160;
+}
+
+/* Modal CSS */
+.modal-content {
+	border: 0;
+}
+.modal-header,
+.modal-footer {
+	background: #28527a;
+}
+
+.modal-header h5,
+.modal-header button {
+	font-size: 24px;
+	font-weight: 600;
+	color: #ffffff;
+}
+
+.modal-footer button {
+	font-size: 16px;
+	font-weight: 600;
+	color: #ffffff;
 }
