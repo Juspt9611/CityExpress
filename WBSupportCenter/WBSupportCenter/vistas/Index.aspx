@@ -1,28 +1,175 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/general.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SupportCenter.Index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SupportCenter.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="input-group input-group-lg">
-	            <%--<span class="input-group-addon"><i class="glyphicon glyphicon-filter"></i></span>--%>
-	            <div class="icon-addon addon-lg">
-                    <asp:TextBox ID="TextBox1" runat="server" type="text" placeholder="Email" class="form-control"></asp:TextBox>
-		            <%--<input type="text" placeholder="Email" class="form-control">--%>
-                    <asp:Label ID="Label1" runat="server" class="glyphicon glyphicon-search" rel="tooltip" title="Buscar"></asp:Label>
-		            <%--<label for="email" class="glyphicon glyphicon-search" rel="tooltip" title="Buscar"></label>--%>
-	            </div>
-	            <span class="input-group-btn">
-                    <asp:Button ID="Button1" runat="server" Text="Buscar!" class="btn btn-default"/>
-		            <%--<button class="btn btn-default" type="button">Buscar!</button>--%>
-	            </span>
-            </div>
-        </div>
-        <div class="col-md-4"></div>
 
-    </div>
+
+
+    	<div class="news">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 sidebar_col">
+					<div class="sidebar">
+
+						<!-- Recent Posts -->
+						<div class="recent_posts sidebar_section magic_fade_in">
+							<div class="sidebar_title_container">
+								<div>Artículos recientes</div>
+							</div>
+							<div class="sidebar_list">
+								<ul>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Nullam lacinia ex eleifend orci...</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Suscipit interdum augue condime...</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Etiam pretium turpis ege...</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Lorem ipsum dolor sit amet...</div>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- News Content -->
+				<div class="col-lg-6">
+					<div class="news_posts">
+						
+						<!-- News Post -->
+						<div class="news_post magic_fade_in">
+							<div class="news_post_content">
+								<div class="news_post_title"><a href="#">Título de artículo</a></div>
+								<div class="news_post_text">
+									<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem, mollitia libero! Quam iste excepturi veniam unde a, sed quis possimus recusandae maxime obcaecati veritatis vero deserunt ipsa officiis, nisi blanditiis?</p>
+								</div>
+								<div class="news_post_meta">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><i class="fa fa-user"></i> <a href="#"> Autor</a></li>
+										<li><i class="fa fa-star"></i> <a href="#"> 5</a></li>
+										<li><i class="fa fa-comment"></i><a href="#"> 3 Comentarios</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- News Post -->
+						<div class="news_post magic_fade_in">
+							<div class="news_post_content">
+								<div class="news_post_title"><a href="#">Título de artículo</a></div>
+								<div class="news_post_text">
+									<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem, mollitia libero! Quam iste excepturi veniam unde a, sed quis possimus recusandae maxime obcaecati veritatis vero deserunt ipsa officiis, nisi blanditiis?</p>
+								</div>
+								<div class="news_post_meta">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><i class="fa fa-user"></i> <a href="#"> Autor</a></li>
+										<li><i class="fa fa-star"></i> <a href="#"> 4.5</a></li>
+										<li><i class="fa fa-comment"></i><a href="#"> 10 Comentarios</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+							<!-- News Post -->
+						<div class="news_post magic_fade_in">
+							<div class="news_post_content">
+								<div class="news_post_title"><a href="#">Título de artículo</a></div>
+								<div class="news_post_text">
+									<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem, mollitia libero! Quam iste excepturi veniam unde a, sed quis possimus recusandae maxime obcaecati veritatis vero deserunt ipsa officiis, nisi blanditiis?</p>
+								</div>
+								<div class="news_post_meta">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><i class="fa fa-user"></i> <a href="#"> Autor</a></li>
+										<li><i class="fa fa-star"></i> <a href="#"> 3</a></li>
+										<li><i class="fa fa-comment"></i><a href="#"> 1 Comentarios</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Page Nav -->
+					<div class="page_nav">
+						<ul class="d-flex flex-row align-items-center justify-content-start">
+							<li class="active"><a href="#">01.</a></li>
+							<li><a href="#">02.</a></li>
+							<li><a href="#">03.</a></li>
+							<li><a href="#" class="d-flex flex-row align-items-center justify-content-start">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- News Sidebar -->
+				<div class="col-lg-3 sidebar_col">
+					<div class="sidebar">
+
+						<!-- Recent Comments -->
+						<div class="recent_posts sidebar_section magic_fade_in">
+							<div class="sidebar_title_container">
+								<div>Categorías</div>
+							</div>
+							<div class="sidebar_list">
+								<ul>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Hotel</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Viajes</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Atención a cliente</div>
+									</a></li>
+									<li><a href="#" class="d-flex flex-row align-items-start justify-content-start">
+										<div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+											<i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+										</div>
+										<div>Promociones</div>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
     
 

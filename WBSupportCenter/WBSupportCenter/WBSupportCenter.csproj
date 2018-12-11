@@ -148,6 +148,7 @@
     <Content Include="recursos\sound\voice_alert.ogg" />
     <Content Include="recursos\sound\voice_off.ogg" />
     <Content Include="recursos\sound\voice_on.ogg" />
+    <Content Include="Blog.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -859,6 +860,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blog.Master.cs">
+      <DependentUpon>Blog.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Blog.Master.designer.cs">
+      <DependentUpon>Blog.Master</DependentUpon>
+    </Compile>
     <Compile Include="general.Master.cs">
       <DependentUpon>general.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
