@@ -5,11 +5,30 @@
 
 
 
+                
+
+
 
     	<div class="news">
+
+            
+
 		<div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6" style="text-align:center">
+                    <div id="form_cent" class="d-flex flex-row align-items-center justify-content-start" style="position:inherit !important">
+						<input type="text" class="domain_search_input" placeholder="Buscar un artículo" required="required" style="border: 1px solid #232D3B !important;"/>
+						<div class="domain_search_dropdown d-flex flex-row align-items-center justify-content-start">
+								<button class="sidebar_search_button d-flex flex-column align-items-center justify-content-center"><img src="../recursos/img/city/search_small.png" alt=""></button>
+						</div>
+					</div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+
 			<div class="row">
-				<div class="col-lg-3 sidebar_col">
+				<div class="col-lg-2 sidebar_col">
 					<div class="sidebar">
 
 						<!-- Recent Posts -->
@@ -53,7 +72,7 @@
 					</div>
 				</div>
 				<!-- News Content -->
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					<div class="news_posts">
 						
 						<!-- News Post -->
@@ -124,7 +143,7 @@
 				</div>
 
 				<!-- News Sidebar -->
-				<div class="col-lg-3 sidebar_col">
+				<div class="col-lg-2 sidebar_col pull-right">
 					<div class="sidebar">
 
 						<!-- Recent Comments -->
