@@ -1,0 +1,24 @@
+﻿.box_table_container{
+    margin: 3rem 0;
+    border: 1px solid #232D3B;
+    border-radius:5px;
+    padding: 2rem;
+    color:#232D3B;
+}
+
+.box_table_title{
+    width:100%;
+    font-size: 16px;
+	font-weight: 600;
+    color:#232D3B;
+    padding-bottom:1rem;
+    border-bottom:1px solid #232D3B;
+}
+
+.box_table_buttons,
+.box_table_form{
+    padding: 1rem 0;
+}
+.box_table_buttons button{
+    margin-right:0.5rem;
+}

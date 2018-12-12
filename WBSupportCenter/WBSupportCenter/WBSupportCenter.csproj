@@ -101,6 +101,7 @@
     <Content Include="general.Master" />
     <Content Include="login.Master" />
     <Content Include="recursos\ajax\demowidget.php" />
+    <Content Include="recursos\css\personal.css" />
     <Content Include="recursos\data\dataList.json" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.eot" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.ttf" />
@@ -852,8 +853,11 @@
     <Content Include="recursos\sound\voice_on.mp3" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="vistas\ArticulosAut.aspx" />
+    <Content Include="vistas\ArticulosRed.aspx" />
     <Content Include="vistas\Blog.aspx" />
     <Content Include="vistas\BlogMuestra.aspx" />
+    <Content Include="vistas\CrearArticulo.aspx" />
     <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
@@ -882,6 +886,20 @@
       <DependentUpon>login.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="vistas\ArticulosAut.aspx.cs">
+      <DependentUpon>ArticulosAut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\ArticulosAut.aspx.designer.cs">
+      <DependentUpon>ArticulosAut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\ArticulosRed.aspx.cs">
+      <DependentUpon>ArticulosRed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\ArticulosRed.aspx.designer.cs">
+      <DependentUpon>ArticulosRed.aspx</DependentUpon>
+    </Compile>
     <Compile Include="vistas\Blog.aspx.cs">
       <DependentUpon>Blog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -895,6 +913,13 @@
     </Compile>
     <Compile Include="vistas\BlogMuestra.aspx.designer.cs">
       <DependentUpon>BlogMuestra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\CrearArticulo.aspx.cs">
+      <DependentUpon>CrearArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\CrearArticulo.aspx.designer.cs">
+      <DependentUpon>CrearArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\EditarArticulo.aspx.cs">
       <DependentUpon>EditarArticulo.aspx</DependentUpon>
