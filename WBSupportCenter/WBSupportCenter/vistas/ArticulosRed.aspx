@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-12 box_table_buttons">
                     <button type="button" class="btn btn-warning float-right"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
-                    <button type="button" class="btn btn-success float-right"><i class="fa fa-plus" aria-hidden="true"></i> Crear</button>        
+                    <button type="button" class="btn btn-success float-right" onclick="window.location.href = 'CrearArticulo.aspx'"><i class="fa fa-plus" aria-hidden="true"></i> Crear</button>        
                 </div>
             </div>
             <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
