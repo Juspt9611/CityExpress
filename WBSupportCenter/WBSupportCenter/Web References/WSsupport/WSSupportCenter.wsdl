@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="dataMenu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idrol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="dataMenuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataMenuResult" type="tns:ArrayOfUsuarioEntidades" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUsuarioEntidades">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UsuarioEntidades" nillable="true" type="tns:UsuarioEntidades" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UsuarioEntidades">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apPaterno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apMaterno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RFC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idPuesto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="c_CP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idEstado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_alta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_mod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="acceso_a_sistemas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estatus" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ArrayOfUsuarioEntidades" nillable="true" type="tns:ArrayOfUsuarioEntidades" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="dataMenuSoapIn">
+    <wsdl:part name="parameters" element="tns:dataMenu" />
+  </wsdl:message>
+  <wsdl:message name="dataMenuSoapOut">
+    <wsdl:part name="parameters" element="tns:dataMenuResponse" />
+  </wsdl:message>
+  <wsdl:message name="dataMenuHttpGetIn">
+    <wsdl:part name="idrol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dataMenuHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  </wsdl:message>
+  <wsdl:message name="dataMenuHttpPostIn">
+    <wsdl:part name="idrol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="dataMenuHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  </wsdl:message>
+  <wsdl:portType name="WSsupportCenterClassSoap">
+    <wsdl:operation name="dataMenu">
+      <wsdl:input message="tns:dataMenuSoapIn" />
+      <wsdl:output message="tns:dataMenuSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSsupportCenterClassHttpGet">
+    <wsdl:operation name="dataMenu">
+      <wsdl:input message="tns:dataMenuHttpGetIn" />
+      <wsdl:output message="tns:dataMenuHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WSsupportCenterClassHttpPost">
+    <wsdl:operation name="dataMenu">
+      <wsdl:input message="tns:dataMenuHttpPostIn" />
+      <wsdl:output message="tns:dataMenuHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="dataMenu">
+      <soap:operation soapAction="http://tempuri.org/dataMenu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSsupportCenterClassSoap12" type="tns:WSsupportCenterClassSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="dataMenu">
+      <soap12:operation soapAction="http://tempuri.org/dataMenu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSsupportCenterClassHttpGet" type="tns:WSsupportCenterClassHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="dataMenu">
+      <http:operation location="/dataMenu" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSsupportCenterClassHttpPost" type="tns:WSsupportCenterClassHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="dataMenu">
+      <http:operation location="/dataMenu" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSsupportCenterClass">
+    <wsdl:port name="WSsupportCenterClassSoap" binding="tns:WSsupportCenterClassSoap">
+      <soap:address location="http://localhost:31525/WSSupportCenter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSsupportCenterClassSoap12" binding="tns:WSsupportCenterClassSoap12">
+      <soap12:address location="http://localhost:31525/WSSupportCenter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSsupportCenterClassHttpGet" binding="tns:WSsupportCenterClassHttpGet">
+      <http:address location="http://localhost:31525/WSSupportCenter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSsupportCenterClassHttpPost" binding="tns:WSsupportCenterClassHttpPost">
+      <http:address location="http://localhost:31525/WSSupportCenter.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

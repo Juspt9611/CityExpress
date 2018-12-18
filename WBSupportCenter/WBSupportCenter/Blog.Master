@@ -18,6 +18,32 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
 
+    <style>
+        .circulo{
+            border-radius: 50%;
+            background: #000;
+            width: 50px;
+            height: 50px;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            display: flex;
+
+        }
+        .text-Cir{
+            font-family: sans-serif;
+            color: #fcea1d !important;
+            font-size: 20px !important;
+            font-weight: bold;
+        }
+        @media screen and (max-width: 600px) {
+            .listasOcultar {
+                display:none !important;
+            }
+        }
+        
+    </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -34,18 +60,22 @@
 					    <div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
 						    <div style="padding-top:2px;">
 
-                                <a> <h2 style="color:#FFF;">Support <span style="color:#fcea1d;">Center</span></h2></a>
+                                <a> <h2 style="color:#FFF;">Support<span style="color:#fcea1d;">Center</span></h2></a>
 							    <%--<span> <img src="../recursos/img/city/logo.png" alt="SmartAdmin" style="width:50%;height:4rem;"> </span>--%>
 						    </div>
 
-						    <div class="log_reg">
+						    
+
+
+
+						    <%--<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>--%>
+
+					    </div>
+                        <div class="log_reg">
 							    <div class="log_reg_content d-flex flex-row align-items-center justify-content-start">
-								    <div class="login log_reg_text"><a data-toggle="modal" data-target="#modalLoginCity">Iniciar sesión</a></div>
-								    <div class="register log_reg_text"><a data-toggle="modal" data-target="#modalRegistro">Registrarse</a></div>
+								    <div class="login log_reg_text circulo"  data-toggle="modal" data-target="#modalLoginCity"><a class="text-Cir">MD</a></div>
 							    </div>
 						    </div>
-						    <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
-					    </div>
 				    </div>
 			    </div>
 		    </div>
@@ -53,7 +83,7 @@
 
 	    <!-- Menu -->
 	
-	    <div class="menu_overlay trans_400"></div>
+	    <%--<div class="menu_overlay trans_400"></div>
 	    <div class="menu trans_400">
 		    <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
 		    <div class="log_reg">
@@ -70,7 +100,7 @@
 					    <li><a href="index.html">Opción menú</a></li>
 			    </ul>
 		    </nav>
-	    </div>
+	    </div>--%>
 
 	    <!-- Home -->
 
@@ -124,6 +154,7 @@
 					    <div class="footer_about">
 						    <div class="footer_logo">Support<span>Center</span></div>
 						    <div class="copyright">
+                                <%--<button type="button" id="eg7" class="btn btn-default"><i class="fa fa-thumbs-up"></i> Extra Small Alert</button>--%>
 							    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados</a>
 						    </div>
 					    </div>
@@ -222,6 +253,9 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-success">Iniciar Sesión</button>
+
+              
+
           </div>
         </div>
       </div>
@@ -236,6 +270,8 @@
     <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
     <script src="../recursos/js/blog/blog.js"></script>
 
+    <script src="../recursos/js/notification/SmartNotification.min.js"></script>
+
     <script src="../recursos/js/datatables.min.js"></script>
 
     <%--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>--%>
@@ -243,8 +279,49 @@
     <script type="text/javascript" class="init">
 	
         $(document).ready(function() {
-	        $('#example').DataTable();
-        } );
+            $('#example').DataTable();
+            $('#eg7').click(function () {
+
+                $.smallBox({
+                    title: "James Simmons liked your comment",
+                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
+                    color: "#296191",
+                    iconSmall: "fa fa-thumbs-up bounce animated",
+                    timeout: 4000
+                });
+
+            })
+            $("#smart-mod-eg1").click(function (e) {
+                $.SmartMessageBox({
+                    title: "Smart Alert!",
+                    content: "This is a confirmation box. Can be programmed for button callback",
+                    buttons: '[No][Yes]'
+                }, function (ButtonPressed) {
+                    if (ButtonPressed === "Yes") {
+
+                        $.smallBox({
+                            title: "Callback function",
+                            content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
+                            color: "#659265",
+                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+                    }
+                    if (ButtonPressed === "No") {
+                        $.smallBox({
+                            title: "Callback function",
+                            content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
+                            color: "#C46A69",
+                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                            timeout: 4000
+                        });
+                    }
+
+                });
+                e.preventDefault();
+            })
+        });
+
 
 	</script>
 

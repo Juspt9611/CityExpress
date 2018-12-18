@@ -15,9 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WBSupportCenter", "WBSuppor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WSSuportCenter", "WSSuportCenter", "{81F6BA57-FFE5-4422-9307-39A17F7F22FB}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSSupportCenter(1)", "WSSupportCenter\", "{94F77586-5C6D-474A-90FA-FF66B41E42D4}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WSSupportCenter", "WSSupportCenter\", "{94F77586-5C6D-474A-90FA-FF66B41E42D4}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		ProjectReferences = "{8fc24cc0-016e-4948-8902-f4d8a3bda341}|SupportCenter.Negocio.dll;{9af0c326-cccb-47d2-ac87-457e9a0629a1}|SupportCenter.Entidades.dll;{88376554-5918-49D8-8D53-F1423F0E5D3F}|SupportCenter.Datos.dll;{9F326943-5354-4F2A-84C8-349EF2D02E05}|SupportCenter.Framework.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_31525"
 		Debug.AspNetCompiler.PhysicalPath = "WSSupportCenter\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_31525\"
