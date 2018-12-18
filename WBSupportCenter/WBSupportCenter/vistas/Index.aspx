@@ -147,6 +147,7 @@
                            <a href="#" class="d-flex flex-row align-items-start justify-content-start">
                               <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
                                  <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
+                                  <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
                               </div>
                               <div>Hotel</div>
                            </a>
@@ -154,8 +155,8 @@
                         <li>
                            <a href="#" class="d-flex flex-row align-items-start justify-content-start">
                               <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
                               </div>
                               <div>Viajes</div>
                            </a>
@@ -163,8 +164,8 @@
                         <li>
                            <a href="#" class="d-flex flex-row align-items-start justify-content-start">
                               <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
                               </div>
                               <div>Atención a cliente</div>
                            </a>
@@ -172,8 +173,8 @@
                         <li>
                            <a href="#" class="d-flex flex-row align-items-start justify-content-start">
                               <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
+                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
                               </div>
                               <div>Promociones</div>
                            </a>
