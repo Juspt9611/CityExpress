@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Sesion.master.cs" Inherits="WBSupportCenter.Sesion" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>SupportCenter</title>
+
+    <link href="recursos/StyleLogin/StyleLogin.css" rel="stylesheet" />
+    <script src="recursos/StyleLogin/jquery-1.11.1.min.js"></script>
+    <script src="recursos/StyleLogin/bootstrap.min.js"></script>
+    <link href="recursos/StyleLogin/bootstrap.min.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="container">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

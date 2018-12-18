@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SupportCenter {
-    public partial class login : System.Web.UI.MasterPage {
+namespace WBSupportCenter {
+    public partial class Sesion : System.Web.UI.MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
 
         }
