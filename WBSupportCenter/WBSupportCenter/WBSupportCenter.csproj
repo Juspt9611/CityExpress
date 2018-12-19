@@ -95,12 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="general.Master" />
-    <Content Include="login.Master" />
     <Content Include="recursos\ajax\demowidget.php" />
+    <Content Include="recursos\css\blog.css" />
+    <Content Include="recursos\css\blog_responsive.css" />
     <Content Include="recursos\css\personal.css" />
     <Content Include="recursos\data\dataList.json" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.eot" />
@@ -150,6 +148,25 @@
     <Content Include="recursos\sound\voice_off.ogg" />
     <Content Include="recursos\sound\voice_on.ogg" />
     <Content Include="Blog.Master" />
+    <Content Include="recursos\StyleLogin\bootstrap.min.css" />
+    <Content Include="recursos\StyleLogin\bootstrap.min.js" />
+    <Content Include="recursos\StyleLogin\img\laptop-1478822_1920.jpg" />
+    <Content Include="recursos\StyleLogin\img\Login.png" />
+    <Content Include="recursos\StyleLogin\jquery-1.11.1.min.js" />
+    <Content Include="recursos\StyleLogin\StyleLogin.css" />
+    <Content Include="Sesion.Master" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\WSsupport1\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\WSsupport1\UsuarioEntidades.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\WSsupport1\WSSupportCenter.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -861,6 +878,8 @@
     <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
+    <Content Include="vistas\Sesion.aspx" />
+    <None Include="Web References\WSsupport1\WSSupportCenter.disco" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -878,14 +897,19 @@
     <Compile Include="general.Master.designer.cs">
       <DependentUpon>general.Master</DependentUpon>
     </Compile>
-    <Compile Include="login.Master.cs">
-      <DependentUpon>login.Master</DependentUpon>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Sesion.Master.cs">
+      <DependentUpon>Sesion.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="login.Master.designer.cs">
-      <DependentUpon>login.Master</DependentUpon>
+    <Compile Include="Sesion.Master.designer.cs">
+      <DependentUpon>Sesion.Master</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="vistas\ArticulosAut.aspx.cs">
       <DependentUpon>ArticulosAut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -942,11 +966,39 @@
     <Compile Include="vistas\Personal.aspx.designer.cs">
       <DependentUpon>Personal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="vistas\Sesion.aspx.cs">
+      <DependentUpon>Sesion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\Sesion.aspx.designer.cs">
+      <DependentUpon>Sesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WSsupport1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\img\" />
     <Folder Include="recursos\img\realestate\thumbs\" />
     <Folder Include="scripts\ckeditor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:31525/WSSupportCenter.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WSsupport1\</RelPath>
+      <UpdateFromURL>http://localhost:31525/WSSupportCenter.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WBSupportCenter_WSsupport1_WSsupportCenterClass</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

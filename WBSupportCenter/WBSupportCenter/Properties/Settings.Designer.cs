@@ -32,5 +32,15 @@ namespace WBSupportCenter.Properties {
                 return ((string)(this["WBSupportCenter_WSsupport_WSsupportCenterClass"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:31525/WSSupportCenter.asmx")]
+        public string WBSupportCenter_WSsupport1_WSsupportCenterClass {
+            get {
+                return ((string)(this["WBSupportCenter_WSsupport1_WSsupportCenterClass"]));
+            }
+        }
     }
 }

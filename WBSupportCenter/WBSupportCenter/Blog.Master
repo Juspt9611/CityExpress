@@ -146,7 +146,7 @@
 
         <!-- Footer -->
 
-	    <footer class="footer magic_fade_in">
+	    <footer class="footer magic_fade_in" style="background: #232D3B;">
 		    <div class="container">
 			    <div class="row">
 				

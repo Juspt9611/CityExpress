@@ -25,7 +25,10 @@
                      <div>Artículos recientes</div>
                   </div>
                   <div class="sidebar_list">
-                     <ul>
+
+                      <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+                     
+                      <ul runat="server">
                         <li>
                            <a href="#" class="d-flex flex-row align-items-start justify-content-start">
                               <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">

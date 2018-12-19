@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -271,7 +271,7 @@ section {
 	z-index: 100;
 }
 .header.scrolled {
-	background: #28527a;
+	background: #0181BB;
 	padding-top: 6px;
 	padding-bottom: 6px;
 }
