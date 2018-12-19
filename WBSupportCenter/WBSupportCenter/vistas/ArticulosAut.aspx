@@ -29,21 +29,21 @@
                     <td>Vacaciones</td>
                     <td>05/11/2018</td>
                     <td>Nuevo</td>
-                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</button></td>
+                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></td>
                 </tr>
                 <tr>
                     <td>002</td>
                     <td>Vacaciones</td>
                     <td>03/11/2018</td>
                     <td>Editado</td>
-                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</button></td>
+                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></td>
                 </tr>
                 <tr>
                     <td>010</td>
                     <td>Promociones</td>
                     <td>10/11/2018</td>
                     <td>Editado</td>
-                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Visualizar</button></td>
+                    <td class="text-center"><button type="button" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></td>
                 </tr>
             </tbody>
             <tfoot>

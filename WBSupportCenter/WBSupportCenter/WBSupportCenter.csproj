@@ -872,10 +872,8 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="vistas\ArticulosAut.aspx" />
     <Content Include="vistas\ArticulosRed.aspx" />
-    <Content Include="vistas\Blog.aspx" />
     <Content Include="vistas\BlogMuestra.aspx" />
     <Content Include="vistas\CrearArticulo.aspx" />
-    <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
     <Content Include="vistas\Sesion.aspx" />
@@ -924,13 +922,6 @@
     <Compile Include="vistas\ArticulosRed.aspx.designer.cs">
       <DependentUpon>ArticulosRed.aspx</DependentUpon>
     </Compile>
-    <Compile Include="vistas\Blog.aspx.cs">
-      <DependentUpon>Blog.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vistas\Blog.aspx.designer.cs">
-      <DependentUpon>Blog.aspx</DependentUpon>
-    </Compile>
     <Compile Include="vistas\BlogMuestra.aspx.cs">
       <DependentUpon>BlogMuestra.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -944,13 +935,6 @@
     </Compile>
     <Compile Include="vistas\CrearArticulo.aspx.designer.cs">
       <DependentUpon>CrearArticulo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="vistas\EditarArticulo.aspx.cs">
-      <DependentUpon>EditarArticulo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="vistas\EditarArticulo.aspx.designer.cs">
-      <DependentUpon>EditarArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
