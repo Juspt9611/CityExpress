@@ -22,3 +22,22 @@
 .box_table_buttons button{
     margin-right:0.5rem;
 }
+
+.form-control-error{
+    border:1px solid red;
+}
+
+/***************
+    UL
+    **********************/
+
+.item {
+  cursor: pointer;
+}
+.bold {
+  font-weight: bold;
+}
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+}

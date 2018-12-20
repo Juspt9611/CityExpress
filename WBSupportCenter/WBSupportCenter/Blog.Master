@@ -297,56 +297,11 @@
     <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
     <script src="../recursos/js/blog/blog.js"></script>
 
-    <script src="../recursos/js/notification/SmartNotification.min.js"></script>
-
     <script src="../recursos/js/datatables.min.js"></script>
-
-    <%--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>--%>
-
     <script type="text/javascript" class="init">
 	
         $(document).ready(function() {
             $('#example').DataTable();
-            $('#eg7').click(function () {
-
-                $.smallBox({
-                    title: "James Simmons liked your comment",
-                    content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                    color: "#296191",
-                    iconSmall: "fa fa-thumbs-up bounce animated",
-                    timeout: 4000
-                });
-
-            });
-            $("#smart-mod-eg1").click(function (e) {
-                $.SmartMessageBox({
-                    title: "Smart Alert!",
-                    content: "This is a confirmation box. Can be programmed for button callback",
-                    buttons: '[No][Yes]'
-                }, function (ButtonPressed) {
-                    if (ButtonPressed === "Yes") {
-
-                        $.smallBox({
-                            title: "Callback function",
-                            content: "<i class='fa fa-clock-o'></i> <i>You pressed Yes...</i>",
-                            color: "#659265",
-                            iconSmall: "fa fa-check fa-2x fadeInRight animated",
-                            timeout: 4000
-                        });
-                    }
-                    if (ButtonPressed === "No") {
-                        $.smallBox({
-                            title: "Callback function",
-                            content: "<i class='fa fa-clock-o'></i> <i>You pressed No...</i>",
-                            color: "#C46A69",
-                            iconSmall: "fa fa-times fa-2x fadeInRight animated",
-                            timeout: 4000
-                        });
-                    }
-
-                });
-                e.preventDefault();
-            });
 
             $("#menu-toggle").click(function (e) {
                 e.preventDefault();
@@ -354,7 +309,6 @@
                 $("#wrapper").toggleClass("toggled");
                 
             });
-
         });
 
 

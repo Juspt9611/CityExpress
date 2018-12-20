@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
 
 namespace WBSupportCenter.vistas
 {
@@ -13,5 +14,19 @@ namespace WBSupportCenter.vistas
         {
 
         }
+
+        [WebMethod]
+        public static string OnSubmit()
+        {
+            return "it worked";
+        }
+
+        [WebMethod]
+        public static string registrarArticulo(string nombreArticulo, string contenido)
+        {
+            System.Diagnostics.Debug.WriteLine(contenido);
+            return "it worked";
+        }
+
     }
 }
