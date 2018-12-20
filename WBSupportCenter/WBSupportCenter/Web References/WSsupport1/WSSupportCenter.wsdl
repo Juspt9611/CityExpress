@@ -2,84 +2,121 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="dataMenu">
+      <s:element name="WSOptenerArt">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSOptenerArtResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="idrol" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="WSOptenerArtResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="dataMenuResponse">
+      <s:element name="WSOptenerCatg">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSOptenerCatgResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="dataMenuResult" type="tns:ArrayOfUsuarioEntidades" />
+            <s:element minOccurs="0" maxOccurs="1" name="WSOptenerCatgResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfUsuarioEntidades">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="UsuarioEntidades" nillable="true" type="tns:UsuarioEntidades" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="UsuarioEntidades">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="apPaterno" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="apMaterno" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="RFC" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="idPuesto" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="c_CP" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="idEstado" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="fecha_alta" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="fecha_mod" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="acceso_a_sistemas" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="estatus" type="s:string" />
-        </s:sequence>
-      </s:complexType>
-      <s:element name="ArrayOfUsuarioEntidades" nillable="true" type="tns:ArrayOfUsuarioEntidades" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="dataMenuSoapIn">
-    <wsdl:part name="parameters" element="tns:dataMenu" />
+  <wsdl:message name="WSOptenerArtSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOptenerArt" />
   </wsdl:message>
-  <wsdl:message name="dataMenuSoapOut">
-    <wsdl:part name="parameters" element="tns:dataMenuResponse" />
+  <wsdl:message name="WSOptenerArtSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOptenerArtResponse" />
   </wsdl:message>
-  <wsdl:message name="dataMenuHttpGetIn">
-    <wsdl:part name="idrol" type="s:string" />
+  <wsdl:message name="WSOptenerCatgSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOptenerCatg" />
   </wsdl:message>
-  <wsdl:message name="dataMenuHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  <wsdl:message name="WSOptenerCatgSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOptenerCatgResponse" />
   </wsdl:message>
-  <wsdl:message name="dataMenuHttpPostIn">
-    <wsdl:part name="idrol" type="s:string" />
+  <wsdl:message name="WSOptenerArtHttpGetIn" />
+  <wsdl:message name="WSOptenerArtHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
-  <wsdl:message name="dataMenuHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  <wsdl:message name="WSOptenerCatgHttpGetIn" />
+  <wsdl:message name="WSOptenerCatgHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerArtHttpPostIn" />
+  <wsdl:message name="WSOptenerArtHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerCatgHttpPostIn" />
+  <wsdl:message name="WSOptenerCatgHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
   </wsdl:message>
   <wsdl:portType name="WSsupportCenterClassSoap">
-    <wsdl:operation name="dataMenu">
-      <wsdl:input message="tns:dataMenuSoapIn" />
-      <wsdl:output message="tns:dataMenuSoapOut" />
+    <wsdl:operation name="WSOptenerArt">
+      <wsdl:input message="tns:WSOptenerArtSoapIn" />
+      <wsdl:output message="tns:WSOptenerArtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <wsdl:input message="tns:WSOptenerCatgSoapIn" />
+      <wsdl:output message="tns:WSOptenerCatgSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpGet">
-    <wsdl:operation name="dataMenu">
-      <wsdl:input message="tns:dataMenuHttpGetIn" />
-      <wsdl:output message="tns:dataMenuHttpGetOut" />
+    <wsdl:operation name="WSOptenerArt">
+      <wsdl:input message="tns:WSOptenerArtHttpGetIn" />
+      <wsdl:output message="tns:WSOptenerArtHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <wsdl:input message="tns:WSOptenerCatgHttpGetIn" />
+      <wsdl:output message="tns:WSOptenerCatgHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpPost">
-    <wsdl:operation name="dataMenu">
-      <wsdl:input message="tns:dataMenuHttpPostIn" />
-      <wsdl:output message="tns:dataMenuHttpPostOut" />
+    <wsdl:operation name="WSOptenerArt">
+      <wsdl:input message="tns:WSOptenerArtHttpPostIn" />
+      <wsdl:output message="tns:WSOptenerArtHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <wsdl:input message="tns:WSOptenerCatgHttpPostIn" />
+      <wsdl:output message="tns:WSOptenerCatgHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="dataMenu">
-      <soap:operation soapAction="http://tempuri.org/dataMenu" style="document" />
+    <wsdl:operation name="WSOptenerArt">
+      <soap:operation soapAction="http://tempuri.org/WSOptenerArt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <soap:operation soapAction="http://tempuri.org/WSOptenerCatg" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -90,8 +127,17 @@
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassSoap12" type="tns:WSsupportCenterClassSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="dataMenu">
-      <soap12:operation soapAction="http://tempuri.org/dataMenu" style="document" />
+    <wsdl:operation name="WSOptenerArt">
+      <soap12:operation soapAction="http://tempuri.org/WSOptenerArt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <soap12:operation soapAction="http://tempuri.org/WSOptenerCatg" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -102,8 +148,17 @@
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassHttpGet" type="tns:WSsupportCenterClassHttpGet">
     <http:binding verb="GET" />
-    <wsdl:operation name="dataMenu">
-      <http:operation location="/dataMenu" />
+    <wsdl:operation name="WSOptenerArt">
+      <http:operation location="/WSOptenerArt" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <http:operation location="/WSOptenerCatg" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -114,8 +169,17 @@
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassHttpPost" type="tns:WSsupportCenterClassHttpPost">
     <http:binding verb="POST" />
-    <wsdl:operation name="dataMenu">
-      <http:operation location="/dataMenu" />
+    <wsdl:operation name="WSOptenerArt">
+      <http:operation location="/WSOptenerArt" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerCatg">
+      <http:operation location="/WSOptenerCatg" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

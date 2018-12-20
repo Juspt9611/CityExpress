@@ -11,13 +11,17 @@ using SupportCenter.Entidades;
 
 public class WSsupportCenterClass : System.Web.Services.WebService {
     
-    readonly  UsuarioNegocio Negocio = new UsuarioNegocio();
+    readonly NGBusqueda Busqueda = new NGBusqueda();
 
     [WebMethod]
-    public List<UsuarioEntidades>  dataMenu(int idrol) {
+    public DataTable WSOptenerArt() {
+        return Busqueda.NG_ObtenerArt();
+    }
 
-        return Negocio.DataUsuario();
+    [WebMethod]
+    public DataTable WSOptenerCatg() {
 
+        return Busqueda.NG_ObtenerCatg();
     }
 
 

@@ -13,12 +13,21 @@ namespace SupportCenter {
     public partial class Index {
         
         /// <summary>
-        /// Control ListBox1.
+        /// Control lstArt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstArt;
+        
+        /// <summary>
+        /// Control lstCatg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstCatg;
     }
 }

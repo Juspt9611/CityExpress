@@ -20,6 +20,7 @@ namespace WBSupportCenter.WSsupport1 {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -29,7 +30,9 @@ namespace WBSupportCenter.WSsupport1 {
     [System.Web.Services.WebServiceBindingAttribute(Name="WSsupportCenterClassSoap", Namespace="http://tempuri.org/")]
     public partial class WSsupportCenterClass : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback dataMenuOperationCompleted;
+        private System.Threading.SendOrPostCallback WSOptenerArtOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSOptenerCatgOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -70,34 +73,62 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public event dataMenuCompletedEventHandler dataMenuCompleted;
+        public event WSOptenerArtCompletedEventHandler WSOptenerArtCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/dataMenu", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public UsuarioEntidades[] dataMenu(int idrol) {
-            object[] results = this.Invoke("dataMenu", new object[] {
-                        idrol});
-            return ((UsuarioEntidades[])(results[0]));
+        public event WSOptenerCatgCompletedEventHandler WSOptenerCatgCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable WSOptenerArt() {
+            object[] results = this.Invoke("WSOptenerArt", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
         }
         
         /// <remarks/>
-        public void dataMenuAsync(int idrol) {
-            this.dataMenuAsync(idrol, null);
+        public void WSOptenerArtAsync() {
+            this.WSOptenerArtAsync(null);
         }
         
         /// <remarks/>
-        public void dataMenuAsync(int idrol, object userState) {
-            if ((this.dataMenuOperationCompleted == null)) {
-                this.dataMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OndataMenuOperationCompleted);
+        public void WSOptenerArtAsync(object userState) {
+            if ((this.WSOptenerArtOperationCompleted == null)) {
+                this.WSOptenerArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerArtOperationCompleted);
             }
-            this.InvokeAsync("dataMenu", new object[] {
-                        idrol}, this.dataMenuOperationCompleted, userState);
+            this.InvokeAsync("WSOptenerArt", new object[0], this.WSOptenerArtOperationCompleted, userState);
         }
         
-        private void OndataMenuOperationCompleted(object arg) {
-            if ((this.dataMenuCompleted != null)) {
+        private void OnWSOptenerArtOperationCompleted(object arg) {
+            if ((this.WSOptenerArtCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.dataMenuCompleted(this, new dataMenuCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WSOptenerArtCompleted(this, new WSOptenerArtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerCatg", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable WSOptenerCatg() {
+            object[] results = this.Invoke("WSOptenerCatg", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOptenerCatgAsync() {
+            this.WSOptenerCatgAsync(null);
+        }
+        
+        /// <remarks/>
+        public void WSOptenerCatgAsync(object userState) {
+            if ((this.WSOptenerCatgOperationCompleted == null)) {
+                this.WSOptenerCatgOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerCatgOperationCompleted);
+            }
+            this.InvokeAsync("WSOptenerCatg", new object[0], this.WSOptenerCatgOperationCompleted, userState);
+        }
+        
+        private void OnWSOptenerCatgOperationCompleted(object arg) {
+            if ((this.WSOptenerCatgCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOptenerCatgCompleted(this, new WSOptenerCatgCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -120,181 +151,54 @@ namespace WBSupportCenter.WSsupport1 {
         }
     }
     
-    /// <comentarios/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
-    [System.SerializableAttribute()]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void WSOptenerArtCompletedEventHandler(object sender, WSOptenerArtCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class UsuarioEntidades {
+    public partial class WSOptenerArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
-        private string nombreField;
+        private object[] results;
         
-        private string apPaternoField;
-        
-        private string apMaternoField;
-        
-        private string rFCField;
-        
-        private string idPuestoField;
-        
-        private string c_CPField;
-        
-        private string idEstadoField;
-        
-        private string emailField;
-        
-        private string fecha_altaField;
-        
-        private string fecha_modField;
-        
-        private string acceso_a_sistemasField;
-        
-        private string estatusField;
-        
-        /// <comentarios/>
-        public string nombre {
-            get {
-                return this.nombreField;
-            }
-            set {
-                this.nombreField = value;
-            }
+        internal WSOptenerArtCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
         }
         
-        /// <comentarios/>
-        public string apPaterno {
+        /// <remarks/>
+        public System.Data.DataTable Result {
             get {
-                return this.apPaternoField;
-            }
-            set {
-                this.apPaternoField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string apMaterno {
-            get {
-                return this.apMaternoField;
-            }
-            set {
-                this.apMaternoField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string RFC {
-            get {
-                return this.rFCField;
-            }
-            set {
-                this.rFCField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string idPuesto {
-            get {
-                return this.idPuestoField;
-            }
-            set {
-                this.idPuestoField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string c_CP {
-            get {
-                return this.c_CPField;
-            }
-            set {
-                this.c_CPField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string idEstado {
-            get {
-                return this.idEstadoField;
-            }
-            set {
-                this.idEstadoField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string fecha_alta {
-            get {
-                return this.fecha_altaField;
-            }
-            set {
-                this.fecha_altaField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string fecha_mod {
-            get {
-                return this.fecha_modField;
-            }
-            set {
-                this.fecha_modField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string acceso_a_sistemas {
-            get {
-                return this.acceso_a_sistemasField;
-            }
-            set {
-                this.acceso_a_sistemasField = value;
-            }
-        }
-        
-        /// <comentarios/>
-        public string estatus {
-            get {
-                return this.estatusField;
-            }
-            set {
-                this.estatusField = value;
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
-    public delegate void dataMenuCompletedEventHandler(object sender, dataMenuCompletedEventArgs e);
+    public delegate void WSOptenerCatgCompletedEventHandler(object sender, WSOptenerCatgCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class dataMenuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WSOptenerCatgCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal dataMenuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WSOptenerCatgCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public UsuarioEntidades[] Result {
+        public System.Data.DataTable Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((UsuarioEntidades[])(this.results[0]));
+                return ((System.Data.DataTable)(this.results[0]));
             }
         }
     }

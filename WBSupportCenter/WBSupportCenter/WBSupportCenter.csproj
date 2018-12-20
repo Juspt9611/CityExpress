@@ -125,6 +125,8 @@
     <Content Include="recursos\fonts\summernote.eot" />
     <Content Include="recursos\fonts\summernote.ttf" />
     <Content Include="recursos\fonts\summernote.woff" />
+    <Content Include="recursos\js\blog\blog.js" />
+    <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
     <Content Include="recursos\js\libs\jquery-2.1.1.min.map" />
     <Content Include="recursos\js\plugin\bootstrap-tags\dist\bootstrap-tagsinput.min.js.map" />
     <Content Include="recursos\js\plugin\ckeditor\CHANGES.md" />
@@ -138,6 +140,11 @@
     <Content Include="recursos\js\plugin\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="recursos\js\plugin\ckeditor\samples\sample_posteddata.php" />
     <Content Include="recursos\js\plugin\ckeditor\skins\moono\readme.md" />
+    <Content Include="recursos\js\Select2\css\select2.css" />
+    <Content Include="recursos\js\Select2\css\select2.min.css" />
+    <Content Include="recursos\js\Select2\js\jquery.js" />
+    <Content Include="recursos\js\Select2\js\select2.min.js" />
+    <Content Include="recursos\js\Select2\js\select2_locale_es.js" />
     <Content Include="recursos\php\demo-comment.php" />
     <Content Include="recursos\php\demo-contacts.php" />
     <Content Include="recursos\php\demo-register.php" />
@@ -159,13 +166,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Web References\WSsupport1\Reference.map">
+    <None Include="Web References\WSsupport1\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <Content Include="Web References\WSsupport1\UsuarioEntidades.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
+    </None>
     <None Include="Web References\WSsupport1\WSSupportCenter.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

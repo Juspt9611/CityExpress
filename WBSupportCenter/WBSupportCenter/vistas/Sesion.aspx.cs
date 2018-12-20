@@ -13,13 +13,13 @@ namespace WBSupportCenter.vistas {
 
         protected void Button1_Click(object sender, EventArgs e) {
 
-            if (string.IsNullOrEmpty(Usuario.Text)) {
-                ErrUsu.Text = ("Debe completar la informacion");
-                //Usuario.Style.Add("border-color", "red");
-                return;
-            }
+            //if (string.IsNullOrEmpty(Usuario.Text)) {
+            //    ErrUsu.Text = ("Debe completar la informacion");
+            //    //Usuario.Style.Add("border-color", "red");
+            //    return;
+            //}
 
-            //Response.Redirect("index.aspx");
+            Response.Redirect("index.aspx");
         }
 
 

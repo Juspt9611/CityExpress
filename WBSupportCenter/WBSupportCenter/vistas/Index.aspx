@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SupportCenter.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="news">
@@ -7,12 +12,13 @@
       <div class="row">
          <div class="col-lg-3"><br /></div>
          <div class="col-lg-6" style="text-align:center">
-            <div id="form_cent" class="d-flex flex-row align-items-center justify-content-start" style="position:inherit !important">
-               <input type="text" class="domain_search_input" placeholder="Buscar un artículo" required="required" style="border: 1px solid #232D3B !important;"/>
-               <div class="domain_search_dropdown d-flex flex-row align-items-center justify-content-start">
-                  <button class="sidebar_search_button d-flex flex-column align-items-center justify-content-center"><img src="../recursos/img/city/search_small.png" alt=""/></button>
-               </div>
-            </div>
+            
+             <select class="js-example-basic-single" name="state">
+              <option value="AL">Alabama</option>
+              <option value="WY">Wyoming</option>
+             </select>
+
+
          </div>
          <div class="col-lg-3"></div>
       </div>
@@ -24,48 +30,8 @@
                   <div class="sidebar_title_container">
                      <div>Artículos recientes</div>
                   </div>
-                  <div class="sidebar_list">
+                  <div class="sidebar_list" runat="server" id="lstArt">
 
-                      <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
-                     
-                      <ul runat="server">
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                              </div>
-                              <div>Nullam lacinia ex eleifend orci...</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                              </div>
-                              <div>Suscipit interdum augue condime...</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                              </div>
-                              <div>Etiam pretium turpis ege...</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true"></i>
-                              </div>
-                              <div>Lorem ipsum dolor sit amet...</div>
-                           </a>
-                        </li>
-                     </ul>
                   </div>
                </div>
             </div>
@@ -144,45 +110,8 @@
                   <div class="sidebar_title_container">
                      <div>Categorías</div>
                   </div>
-                  <div class="sidebar_list">
-                     <ul>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                                  <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                              </div>
-                              <div>Hotel</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                              </div>
-                              <div>Viajes</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                              </div>
-                              <div>Atención a cliente</div>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex flex-row align-items-start justify-content-start">
-                              <div class="sidebar_dot d-flex flex-row align-items-center justify-content-start">
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                                 <i class="fa fa-chevron-right trans_200" aria-hidden="true" style="color:#77DAD5"></i>
-                              </div>
-                              <div>Promociones</div>
-                           </a>
-                        </li>
-                     </ul>
+                  <div class="sidebar_list" runat="server" id="lstCatg">
+                     
                   </div>
                </div>
             </div>
@@ -190,4 +119,21 @@
       </div>
    </div>
 </div>
+
+
+
+
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+
+    </script>
+
+    
+
+
+
 </asp:Content>
