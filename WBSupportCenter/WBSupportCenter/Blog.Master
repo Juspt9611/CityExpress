@@ -57,29 +57,20 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#">
-                        Start Bootstrap
+                        Support Center
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="/vistas/index.aspx">Buscador</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="/vistas/CrearArticulo.aspx">Artículo</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="/vistas/ArticulosRed.aspx">Redactor</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="/vistas/ArticulosAut.aspx">Autorizar Artículos</a>
                 </li>
             </ul>
         </div>
