@@ -32,12 +32,6 @@
                     </div>
                 </form> 
             </div>      
-            <div class="row">
-                <div class="col-lg-12 box_table_buttons">
-                    <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar</button>
-                    <button type="button" class="btn btn-success float-right"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>        
-                </div>
-            </div>
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
@@ -63,6 +57,13 @@
                     CKEDITOR.config.height = '35em';
                 </script>
             </form>
+
+            <div class="row">
+                <div class="col-lg-12 box_table_buttons">
+                    <button type="button" class="btn btn-success float-right"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>        
+                    <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar</button>
+                </div>
+            </div>
      </div>
     </div>
 
