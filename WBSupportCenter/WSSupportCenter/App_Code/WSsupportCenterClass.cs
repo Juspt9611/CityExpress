@@ -46,5 +46,25 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     //    NGArticulos Articulos = new NGArticulos();
     //    return Articulos.NG_ConsultarArtxValidar();
     //}
+
+    [WebMethod]
+    public DataTable HelloWorldDataSet()
+    {
+        DataTable dt = new DataTable("MyDataTable");
+        dt.Columns.Add("column1", typeof(System.String));
+        dt.Columns.Add("column2", typeof(System.String));
+
+        DataRow dr = dt.NewRow();
+        dr["column1"] = "Your Data";
+        dr["column2"] = "Your Data";
+        dt.Rows.Add(dr);
+
+        dr = dt.NewRow();
+        dr["column1"] = "Your Data";
+        dr["column2"] = "Your Data";
+        dt.Rows.Add(dr);
+
+        return dt;
+    }
 }
 
