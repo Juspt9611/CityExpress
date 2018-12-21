@@ -129,6 +129,7 @@
     <Content Include="recursos\fonts\summernote.woff" />
     <Content Include="recursos\js\blog\blog.js" />
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
+    <Content Include="recursos\js\blog\notify.min.js" />
     <Content Include="recursos\js\libs\jquery-2.1.1.min.map" />
     <Content Include="recursos\js\plugin\bootstrap-tags\dist\bootstrap-tagsinput.min.js.map" />
     <Content Include="recursos\js\plugin\ckeditor\CHANGES.md" />
