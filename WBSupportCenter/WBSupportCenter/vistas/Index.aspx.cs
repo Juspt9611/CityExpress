@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -20,13 +21,15 @@ namespace SupportCenter {
 
 
         public void OptenerArt() {
-            DataTable ejemplo = new DataTable();
+            DataTable tblArti = new DataTable();
             lstArt.InnerText = "";
-            ejemplo = metodo.WSOptenerArt();
+            
+            tblArti = ConvertToDataTable(metodo.WSOptenerArt());
+            //ejemplo = metodo.WSOptenerArt();
             lstArt.InnerHtml += "<ul>";
             //Forech para ver Articulos
 
-            foreach (DataRow item in ejemplo.Rows) {
+            foreach (DataRow item in tblArti.Rows) {
                 lstArt.InnerHtml += "<li>";
                 lstArt.InnerHtml += "<a href='#' class='d-flex flex-row align-items-start justify-content-start'>";
                 lstArt.InnerHtml += "<div class='sidebar_dot d-flex flex-row align-items-center justify-content-start'>";
@@ -45,7 +48,7 @@ namespace SupportCenter {
             DataTable DTCateg = new DataTable();
             lstCatg.InnerText="";
 
-            DTCateg =metodo.WSOptenerCatg();
+            DTCateg = ConvertToDataTable(metodo.WSOptenerCatg());
 
             lstCatg.InnerHtml += "<ul>";
             //Forech para ver Articulos
@@ -64,6 +67,23 @@ namespace SupportCenter {
 
             }
             lstCatg.InnerHtml += "</ul>";
+
+        }
+
+
+        public DataTable ConvertToDataTable<T>(IList<T> data) {
+            PropertyDescriptorCollection properties =
+               TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data) {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
 
         }
 

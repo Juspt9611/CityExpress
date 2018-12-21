@@ -10,8 +10,8 @@ namespace SupportCenter.Entidades {
         public int idCategorias { get; set; }
         public int idPadre { get; set; }
         public int idHijo { get; set; }        
-        public string nombreMenu { get; set; }
-        public string descripcionMenu { get; set; }
+        public string nombreCategoria { get; set; }
+        public string descripcionCategoria { get; set; }
         public int estatus { get; set; }
     }
 }

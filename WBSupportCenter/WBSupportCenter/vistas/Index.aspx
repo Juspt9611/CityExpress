@@ -1,10 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SupportCenter.Index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
+    <%--<script src="../scripts/jquery-1.7.min.js"></script>--%>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="news">
@@ -13,10 +11,7 @@
          <div class="col-lg-3"><br /></div>
          <div class="col-lg-6" style="text-align:center">
             
-             <select class="js-example-basic-single" name="state">
-              <option value="AL">Alabama</option>
-              <option value="WY">Wyoming</option>
-             </select>
+             <input type="text" name="ddlUsers" id="ddlUsers" value="" class="form-control" />
 
 
          </div>
@@ -125,11 +120,53 @@
 
     
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function () {
-            $('.js-example-basic-single').select2();
+            $.ajax({
+                type: 'POST',
+                url: '/WSSuportCenter/WSSupportCenter.asmx/WSBusquedaTitulo',
+                data: "{'palabra':'comi'}",
+                contentType: 'application/json; utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {                
+                }
+ 
+            }); 
+            
+            //$('select.form-select').select2();
+            //$("#ddlUsers").select2({
+            //    id: function (e) { return e.Codigo; }, //para hacerlo seleccionable después de traer los datos remotos
+            //    placeholder: "Ingrese un parámetro para buscar",
+            //    minimumInputLength: 1,
+            //    allowClear: true,
+            //    ajax: {
+            //        url: "WSSupportCenter.asmx/WSBusquedaTitulo",
+            //        dataType: 'json',
+            //        type: "POST",
+            //        params: {
+            //            contentType: 'application/json; charset=utf-8'
+            //        },
+            //        quietMillis: 100,
+            //        data: function (term, page) {
+
+            //            console.log(term);
+            //            //return JSON.stringify({ q: term, page_limit: 10 });
+            //        },
+            //        results: function (data, page) {
+            //            return { results: data.d };
+            //        }
+            //    }
+            //});
         });
 
+        function format(ciudad) {
+            //alert('ID:' + ciudad.id + ' - Nombre:' + ciudad.text );
+            return '<span style="color:red;"><b>' + ciudad.id + '</b></span>: ' + ciudad.text;
+            
+        }
     </script>
 
     
