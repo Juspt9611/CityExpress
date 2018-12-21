@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="CrearArticulo.aspx.cs" Inherits="WBSupportCenter.vistas.CrearArticulo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../scripts/ckeditor/ckeditor.js"></script>
-    <script src="../recursos/js/blog/jquery-3.2.1.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
