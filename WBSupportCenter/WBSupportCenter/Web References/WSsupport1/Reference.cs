@@ -24,7 +24,7 @@ namespace WBSupportCenter.WSsupport1 {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WSsupportCenterClassSoap", Namespace="http://tempuri.org/")]
@@ -33,6 +33,12 @@ namespace WBSupportCenter.WSsupport1 {
         private System.Threading.SendOrPostCallback WSOptenerArtOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSOptenerCatgOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSBusquedaTituloOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSOpregistrarArtOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback HelloWorldDataSetOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -79,10 +85,19 @@ namespace WBSupportCenter.WSsupport1 {
         public event WSOptenerCatgCompletedEventHandler WSOptenerCatgCompleted;
         
         /// <remarks/>
+        public event WSBusquedaTituloCompletedEventHandler WSBusquedaTituloCompleted;
+        
+        /// <remarks/>
+        public event WSOpregistrarArtCompletedEventHandler WSOpregistrarArtCompleted;
+        
+        /// <remarks/>
+        public event HelloWorldDataSetCompletedEventHandler HelloWorldDataSetCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable WSOptenerArt() {
+        public Articulos[] WSOptenerArt() {
             object[] results = this.Invoke("WSOptenerArt", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
+            return ((Articulos[])(results[0]));
         }
         
         /// <remarks/>
@@ -107,9 +122,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerCatg", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable WSOptenerCatg() {
+        public CategoriasxSubcategorias[] WSOptenerCatg() {
             object[] results = this.Invoke("WSOptenerCatg", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
+            return ((CategoriasxSubcategorias[])(results[0]));
         }
         
         /// <remarks/>
@@ -133,6 +148,95 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSBusquedaTitulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public BusquedaTitulo[] WSBusquedaTitulo(string palabra) {
+            object[] results = this.Invoke("WSBusquedaTitulo", new object[] {
+                        palabra});
+            return ((BusquedaTitulo[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSBusquedaTituloAsync(string palabra) {
+            this.WSBusquedaTituloAsync(palabra, null);
+        }
+        
+        /// <remarks/>
+        public void WSBusquedaTituloAsync(string palabra, object userState) {
+            if ((this.WSBusquedaTituloOperationCompleted == null)) {
+                this.WSBusquedaTituloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSBusquedaTituloOperationCompleted);
+            }
+            this.InvokeAsync("WSBusquedaTitulo", new object[] {
+                        palabra}, this.WSBusquedaTituloOperationCompleted, userState);
+        }
+        
+        private void OnWSBusquedaTituloOperationCompleted(object arg) {
+            if ((this.WSBusquedaTituloCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSBusquedaTituloCompleted(this, new WSBusquedaTituloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOpregistrarArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias) {
+            object[] results = this.Invoke("WSOpregistrarArt", new object[] {
+                        nombreArticulo,
+                        contenido,
+                        categorias});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, int[] categorias) {
+            this.WSOpregistrarArtAsync(nombreArticulo, contenido, categorias, null);
+        }
+        
+        /// <remarks/>
+        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, int[] categorias, object userState) {
+            if ((this.WSOpregistrarArtOperationCompleted == null)) {
+                this.WSOpregistrarArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOpregistrarArtOperationCompleted);
+            }
+            this.InvokeAsync("WSOpregistrarArt", new object[] {
+                        nombreArticulo,
+                        contenido,
+                        categorias}, this.WSOpregistrarArtOperationCompleted, userState);
+        }
+        
+        private void OnWSOpregistrarArtOperationCompleted(object arg) {
+            if ((this.WSOpregistrarArtCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOpregistrarArtCompleted(this, new WSOpregistrarArtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorldDataSet", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable HelloWorldDataSet() {
+            object[] results = this.Invoke("HelloWorldDataSet", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void HelloWorldDataSetAsync() {
+            this.HelloWorldDataSetAsync(null);
+        }
+        
+        /// <remarks/>
+        public void HelloWorldDataSetAsync(object userState) {
+            if ((this.HelloWorldDataSetOperationCompleted == null)) {
+                this.HelloWorldDataSetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHelloWorldDataSetOperationCompleted);
+            }
+            this.InvokeAsync("HelloWorldDataSet", new object[0], this.HelloWorldDataSetOperationCompleted, userState);
+        }
+        
+        private void OnHelloWorldDataSetOperationCompleted(object arg) {
+            if ((this.HelloWorldDataSetCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.HelloWorldDataSetCompleted(this, new HelloWorldDataSetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -151,12 +255,219 @@ namespace WBSupportCenter.WSsupport1 {
         }
     }
     
+    /// <comentarios/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Articulos {
+        
+        private int idarticuloField;
+        
+        private string nombreArticuloField;
+        
+        private string autorField;
+        
+        private string contenidoField;
+        
+        private int idEstatusArticuloField;
+        
+        private string versionField;
+        
+        private string fechaCreacionField;
+        
+        /// <comentarios/>
+        public int idarticulo {
+            get {
+                return this.idarticuloField;
+            }
+            set {
+                this.idarticuloField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string nombreArticulo {
+            get {
+                return this.nombreArticuloField;
+            }
+            set {
+                this.nombreArticuloField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string autor {
+            get {
+                return this.autorField;
+            }
+            set {
+                this.autorField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string contenido {
+            get {
+                return this.contenidoField;
+            }
+            set {
+                this.contenidoField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public int idEstatusArticulo {
+            get {
+                return this.idEstatusArticuloField;
+            }
+            set {
+                this.idEstatusArticuloField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string fechaCreacion {
+            get {
+                return this.fechaCreacionField;
+            }
+            set {
+                this.fechaCreacionField = value;
+            }
+        }
+    }
+    
+    /// <comentarios/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class BusquedaTitulo {
+        
+        private int idarticuloField;
+        
+        private string nombreArticuloField;
+        
+        /// <comentarios/>
+        public int idarticulo {
+            get {
+                return this.idarticuloField;
+            }
+            set {
+                this.idarticuloField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string nombreArticulo {
+            get {
+                return this.nombreArticuloField;
+            }
+            set {
+                this.nombreArticuloField = value;
+            }
+        }
+    }
+    
+    /// <comentarios/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class CategoriasxSubcategorias {
+        
+        private int idCategoriasField;
+        
+        private int idPadreField;
+        
+        private int idHijoField;
+        
+        private string nombreCategoriaField;
+        
+        private string descripcionCategoriaField;
+        
+        private int estatusField;
+        
+        /// <comentarios/>
+        public int idCategorias {
+            get {
+                return this.idCategoriasField;
+            }
+            set {
+                this.idCategoriasField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public int idPadre {
+            get {
+                return this.idPadreField;
+            }
+            set {
+                this.idPadreField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public int idHijo {
+            get {
+                return this.idHijoField;
+            }
+            set {
+                this.idHijoField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string nombreCategoria {
+            get {
+                return this.nombreCategoriaField;
+            }
+            set {
+                this.nombreCategoriaField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string descripcionCategoria {
+            get {
+                return this.descripcionCategoriaField;
+            }
+            set {
+                this.descripcionCategoriaField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public int estatus {
+            get {
+                return this.estatusField;
+            }
+            set {
+                this.estatusField = value;
+            }
+        }
+    }
+    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void WSOptenerArtCompletedEventHandler(object sender, WSOptenerArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -169,20 +480,20 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public System.Data.DataTable Result {
+        public Articulos[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
+                return ((Articulos[])(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void WSOptenerCatgCompletedEventHandler(object sender, WSOptenerCatgCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerCatgCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -190,6 +501,84 @@ namespace WBSupportCenter.WSsupport1 {
         private object[] results;
         
         internal WSOptenerCatgCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CategoriasxSubcategorias[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CategoriasxSubcategorias[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void WSBusquedaTituloCompletedEventHandler(object sender, WSBusquedaTituloCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSBusquedaTituloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSBusquedaTituloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public BusquedaTitulo[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((BusquedaTitulo[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void WSOpregistrarArtCompletedEventHandler(object sender, WSOpregistrarArtCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOpregistrarArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOpregistrarArtCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void HelloWorldDataSetCompletedEventHandler(object sender, HelloWorldDataSetCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HelloWorldDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HelloWorldDataSetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
