@@ -38,6 +38,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSOpregistrarArtOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSOpconsultarArtxValidarOperationCompleted;
+        
         private System.Threading.SendOrPostCallback HelloWorldDataSetOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -89,6 +91,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSOpregistrarArtCompletedEventHandler WSOpregistrarArtCompleted;
+        
+        /// <remarks/>
+        public event WSOpconsultarArtxValidarCompletedEventHandler WSOpconsultarArtxValidarCompleted;
         
         /// <remarks/>
         public event HelloWorldDataSetCompletedEventHandler HelloWorldDataSetCompleted;
@@ -206,6 +211,33 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSOpregistrarArtCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSOpregistrarArtCompleted(this, new WSOpregistrarArtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOpconsultarArtxValidar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSOpconsultarArtxValidar() {
+            object[] results = this.Invoke("WSOpconsultarArtxValidar", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOpconsultarArtxValidarAsync() {
+            this.WSOpconsultarArtxValidarAsync(null);
+        }
+        
+        /// <remarks/>
+        public void WSOpconsultarArtxValidarAsync(object userState) {
+            if ((this.WSOpconsultarArtxValidarOperationCompleted == null)) {
+                this.WSOpconsultarArtxValidarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOpconsultarArtxValidarOperationCompleted);
+            }
+            this.InvokeAsync("WSOpconsultarArtxValidar", new object[0], this.WSOpconsultarArtxValidarOperationCompleted, userState);
+        }
+        
+        private void OnWSOpconsultarArtxValidarOperationCompleted(object arg) {
+            if ((this.WSOpconsultarArtxValidarCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOpconsultarArtxValidarCompleted(this, new WSOpconsultarArtxValidarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -562,6 +594,32 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSOpconsultarArtxValidarCompletedEventHandler(object sender, WSOpconsultarArtxValidarCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOpconsultarArtxValidarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOpconsultarArtxValidarCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

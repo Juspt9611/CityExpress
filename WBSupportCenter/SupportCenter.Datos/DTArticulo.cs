@@ -48,11 +48,12 @@ namespace SupportCenter.Datos
         }
 
 
-        public DataTable DT_ConsultarArxtxValidar()
+        public DataSet DT_ConsultarArxtxValidar()
         {
 
             SqlConnection connection = null;
             DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
             try
             {
                 using (connection = Conexion.ObtieneConexion("ConexionBD"))
@@ -65,6 +66,8 @@ namespace SupportCenter.Datos
                     dt.Load(consulta);
                     connection.Close();
 
+                    ds.Tables.Add(dt);
+
                 }
 
             }
@@ -74,7 +77,7 @@ namespace SupportCenter.Datos
                 Console.WriteLine(ex);
             }
 
-            return dt;
+            return ds;
         }
 
     }

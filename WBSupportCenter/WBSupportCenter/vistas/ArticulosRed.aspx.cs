@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,10 +19,17 @@ namespace WBSupportCenter.vistas
         }
 
         [WebMethod]
-        public static DataTable articulosxValidar()
+        public static string articulosxValidar()
         {
+            String daresult = "";
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.HelloWorldDataSet();
+            daresult = DataSetToJSON(metodo.WSOpconsultarArtxValidar().Tables[0]);
+            return daresult;
+        }
+
+        public static string DataSetToJSON(DataTable dt)
+        {
+             return JsonConvert.SerializeObject(dt.AsEnumerable().Select(r => r.ItemArray));
         }
     }
 }

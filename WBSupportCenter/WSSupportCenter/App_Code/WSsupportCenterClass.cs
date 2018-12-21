@@ -40,12 +40,12 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
     }
 
-    //[WebMethod]
-    //public DataSet WSOpconsultarArtxValidar()
-    //{
-    //    NGArticulos Articulos = new NGArticulos();
-    //    return Articulos.NG_ConsultarArtxValidar();
-    //}
+    [WebMethod]
+    public DataSet WSOpconsultarArtxValidar()
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtxValidar();
+    }
 
     [WebMethod]
     public DataTable HelloWorldDataSet()

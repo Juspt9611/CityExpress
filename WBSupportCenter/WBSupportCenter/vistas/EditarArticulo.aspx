@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="CrearArticulo.aspx.cs" Inherits="WBSupportCenter.vistas.CrearArticulo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="EditarArticulo.aspx.cs" Inherits="WBSupportCenter.vistas.EditarArticulo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../scripts/ckeditor/ckeditor.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <div class="container">
+        <div class="container">
 
         <div class="box_table_container">
             <div class="row">
@@ -214,6 +213,10 @@
                 treeData: data
             }
         });
+
+        var myParam = location.search.substring(1);
+        console.log(myParam);
+
     </script>
 
     <script>

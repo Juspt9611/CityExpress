@@ -16,10 +16,10 @@ namespace SupportCenter.Negocio
             return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias);
         }
 
-        //public DataSet NG_ConsultarArtxValidar()
-        //{
-        //    DTArticulo Objeto = new DTArticulo();
-        //    return Objeto.DT_ConsultarArxtxValidar();
-        //}
+        public DataSet NG_ConsultarArtxValidar()
+        {
+            DTArticulo Objeto = new DTArticulo();
+            return Objeto.DT_ConsultarArxtxValidar();
+        }
     }
 }
