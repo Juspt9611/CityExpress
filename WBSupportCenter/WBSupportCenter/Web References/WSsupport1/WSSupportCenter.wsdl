@@ -116,17 +116,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="HelloWorldDataSet">
-        <s:complexType />
-      </s:element>
-      <s:element name="HelloWorldDataSetResponse">
+      <s:element name="WSConsultarArtEdicion">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldDataSetResult">
+            <s:element minOccurs="1" maxOccurs="1" name="idArt" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtEdicionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArtEdicionResult">
               <s:complexType>
                 <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                  <s:element ref="s:schema" />
+                  <s:any />
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -142,14 +146,6 @@
           <s:sequence>
             <s:element ref="s:schema" />
             <s:any />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="DataTable" nillable="true">
-        <s:complexType>
-          <s:sequence>
-            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -197,11 +193,11 @@
   <wsdl:message name="WSOpconsultarArtxValidarSoapOut">
     <wsdl:part name="parameters" element="tns:WSOpconsultarArtxValidarResponse" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetSoapIn">
-    <wsdl:part name="parameters" element="tns:HelloWorldDataSet" />
+  <wsdl:message name="WSConsultarArtEdicionSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtEdicion" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetSoapOut">
-    <wsdl:part name="parameters" element="tns:HelloWorldDataSetResponse" />
+  <wsdl:message name="WSConsultarArtEdicionSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtEdicionResponse" />
   </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpGetIn" />
   <wsdl:message name="WSOptenerArtHttpGetOut">
@@ -229,9 +225,11 @@
   <wsdl:message name="WSOpconsultarArtxValidarHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetHttpGetIn" />
-  <wsdl:message name="HelloWorldDataSetHttpGetOut">
-    <wsdl:part name="Body" element="tns:DataTable" />
+  <wsdl:message name="WSConsultarArtEdicionHttpGetIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpPostIn" />
   <wsdl:message name="WSOptenerArtHttpPostOut">
@@ -259,9 +257,11 @@
   <wsdl:message name="WSOpconsultarArtxValidarHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetHttpPostIn" />
-  <wsdl:message name="HelloWorldDataSetHttpPostOut">
-    <wsdl:part name="Body" element="tns:DataTable" />
+  <wsdl:message name="WSConsultarArtEdicionHttpPostIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:portType name="WSsupportCenterClassSoap">
     <wsdl:operation name="WSOptenerArt">
@@ -284,9 +284,9 @@
       <wsdl:input message="tns:WSOpconsultarArtxValidarSoapIn" />
       <wsdl:output message="tns:WSOpconsultarArtxValidarSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetSoapIn" />
-      <wsdl:output message="tns:HelloWorldDataSetSoapOut" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionSoapIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpGet">
@@ -310,9 +310,9 @@
       <wsdl:input message="tns:WSOpconsultarArtxValidarHttpGetIn" />
       <wsdl:output message="tns:WSOpconsultarArtxValidarHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetHttpGetIn" />
-      <wsdl:output message="tns:HelloWorldDataSetHttpGetOut" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpPost">
@@ -336,9 +336,9 @@
       <wsdl:input message="tns:WSOpconsultarArtxValidarHttpPostIn" />
       <wsdl:output message="tns:WSOpconsultarArtxValidarHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetHttpPostIn" />
-      <wsdl:output message="tns:HelloWorldDataSetHttpPostOut" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
@@ -388,8 +388,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <soap:operation soapAction="http://tempuri.org/HelloWorldDataSet" style="document" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArtEdicion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -445,8 +445,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <soap12:operation soapAction="http://tempuri.org/HelloWorldDataSet" style="document" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArtEdicion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -502,8 +502,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <http:operation location="/HelloWorldDataSet" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <http:operation location="/WSConsultarArtEdicion" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -559,8 +559,8 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <http:operation location="/HelloWorldDataSet" />
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <http:operation location="/WSConsultarArtEdicion" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

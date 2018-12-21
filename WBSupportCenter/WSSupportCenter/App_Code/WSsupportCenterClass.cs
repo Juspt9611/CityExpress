@@ -32,39 +32,26 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_BusquedaTitulo(palabra);
     }
 
-
+    //Registrar articulo
     [WebMethod]
     public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias)
     {
         NGArticulos Articulos = new NGArticulos();
         return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
     }
-
+    //Consultar articulos por validar
     [WebMethod]
     public DataSet WSOpconsultarArtxValidar()
     {
         NGArticulos Articulos = new NGArticulos();
         return Articulos.NG_ConsultarArtxValidar();
     }
-
+    //Consultar articulos para edicion
     [WebMethod]
-    public DataTable HelloWorldDataSet()
+    public DataSet WSConsultarArtEdicion(int idArt)
     {
-        DataTable dt = new DataTable("MyDataTable");
-        dt.Columns.Add("column1", typeof(System.String));
-        dt.Columns.Add("column2", typeof(System.String));
-
-        DataRow dr = dt.NewRow();
-        dr["column1"] = "Your Data";
-        dr["column2"] = "Your Data";
-        dt.Rows.Add(dr);
-
-        dr = dt.NewRow();
-        dr["column1"] = "Your Data";
-        dr["column2"] = "Your Data";
-        dt.Rows.Add(dr);
-
-        return dt;
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtEdicion(idArt);
     }
 }
 

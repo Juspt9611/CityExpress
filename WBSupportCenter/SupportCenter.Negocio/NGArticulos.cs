@@ -21,5 +21,11 @@ namespace SupportCenter.Negocio
             DTArticulo Objeto = new DTArticulo();
             return Objeto.DT_ConsultarArxtxValidar();
         }
+
+        public DataSet NG_ConsultarArtEdicion(int idArt)
+        {
+            DTArticulo Objeto = new DTArticulo();
+            return Objeto.DT_ConsultarArtEdicion(idArt);
+        }
     }
 }

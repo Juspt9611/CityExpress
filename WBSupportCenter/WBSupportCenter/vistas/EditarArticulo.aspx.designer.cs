@@ -11,5 +11,23 @@ namespace WBSupportCenter.vistas {
     
     
     public partial class EditarArticulo {
+        
+        /// <summary>
+        /// Control hiddenTituloArt.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hiddenTituloArt;
+        
+        /// <summary>
+        /// Control hiddenContenido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden hiddenContenido;
     }
 }

@@ -80,5 +80,42 @@ namespace SupportCenter.Datos
             return ds;
         }
 
+        public DataSet DT_ConsultarArtEdicion(int idArt)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArt , ParameterDirection.Input)
+                    };
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ReplaceContenidoArticulos", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    ds.Tables.Add(dt);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return ds;
+        }
+
     }
 }

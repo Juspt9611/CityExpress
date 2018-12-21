@@ -61,10 +61,22 @@
                     <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar</button>
                 </div>
             </div>
+            <input id="hiddenTituloArt" type="hidden" runat="server" />  
+            <input id="hiddenContenido" type="hidden" runat="server" />  
      </div>
     </div>
 
     <script>
+
+        function cargarContenido() {
+            var hiddenTituloArt = $('#<%=hiddenTituloArt.ClientID %>').val();
+            var hiddenContenido = $('#<%=hiddenContenido.ClientID %>').val();
+            $('#nombre_box_form_crearart').val(hiddenTituloArt);
+            $("#editor1").html(hiddenContenido);
+        }
+
+        cargarContenido();
+
         document.querySelector('#submit').addEventListener('click', () => {
 
             //Variables
@@ -215,7 +227,6 @@
         });
 
         var myParam = location.search.substring(1);
-        console.log(myParam);
 
     </script>
 

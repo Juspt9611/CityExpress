@@ -40,7 +40,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSOpconsultarArtxValidarOperationCompleted;
         
-        private System.Threading.SendOrPostCallback HelloWorldDataSetOperationCompleted;
+        private System.Threading.SendOrPostCallback WSConsultarArtEdicionOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -96,7 +96,7 @@ namespace WBSupportCenter.WSsupport1 {
         public event WSOpconsultarArtxValidarCompletedEventHandler WSOpconsultarArtxValidarCompleted;
         
         /// <remarks/>
-        public event HelloWorldDataSetCompletedEventHandler HelloWorldDataSetCompleted;
+        public event WSConsultarArtEdicionCompletedEventHandler WSConsultarArtEdicionCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -242,29 +242,31 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorldDataSet", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataTable HelloWorldDataSet() {
-            object[] results = this.Invoke("HelloWorldDataSet", new object[0]);
-            return ((System.Data.DataTable)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArtEdicion", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSConsultarArtEdicion(int idArt) {
+            object[] results = this.Invoke("WSConsultarArtEdicion", new object[] {
+                        idArt});
+            return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void HelloWorldDataSetAsync() {
-            this.HelloWorldDataSetAsync(null);
+        public void WSConsultarArtEdicionAsync(int idArt) {
+            this.WSConsultarArtEdicionAsync(idArt, null);
         }
         
         /// <remarks/>
-        public void HelloWorldDataSetAsync(object userState) {
-            if ((this.HelloWorldDataSetOperationCompleted == null)) {
-                this.HelloWorldDataSetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHelloWorldDataSetOperationCompleted);
+        public void WSConsultarArtEdicionAsync(int idArt, object userState) {
+            if ((this.WSConsultarArtEdicionOperationCompleted == null)) {
+                this.WSConsultarArtEdicionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarArtEdicionOperationCompleted);
             }
-            this.InvokeAsync("HelloWorldDataSet", new object[0], this.HelloWorldDataSetOperationCompleted, userState);
+            this.InvokeAsync("WSConsultarArtEdicion", new object[] {
+                        idArt}, this.WSConsultarArtEdicionOperationCompleted, userState);
         }
         
-        private void OnHelloWorldDataSetOperationCompleted(object arg) {
-            if ((this.HelloWorldDataSetCompleted != null)) {
+        private void OnWSConsultarArtEdicionOperationCompleted(object arg) {
+            if ((this.WSConsultarArtEdicionCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.HelloWorldDataSetCompleted(this, new HelloWorldDataSetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.WSConsultarArtEdicionCompleted(this, new WSConsultarArtEdicionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -626,26 +628,26 @@ namespace WBSupportCenter.WSsupport1 {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
-    public delegate void HelloWorldDataSetCompletedEventHandler(object sender, HelloWorldDataSetCompletedEventArgs e);
+    public delegate void WSConsultarArtEdicionCompletedEventHandler(object sender, WSConsultarArtEdicionCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class HelloWorldDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class WSConsultarArtEdicionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal HelloWorldDataSetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal WSConsultarArtEdicionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public System.Data.DataTable Result {
+        public System.Data.DataSet Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((System.Data.DataTable)(this.results[0]));
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }
