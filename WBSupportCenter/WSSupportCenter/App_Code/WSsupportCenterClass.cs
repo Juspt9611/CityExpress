@@ -32,5 +32,19 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_BusquedaTitulo(palabra);
     }
 
+
+    [WebMethod]
+    public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
+    }
+
+    //[WebMethod]
+    //public DataSet WSOpconsultarArtxValidar()
+    //{
+    //    NGArticulos Articulos = new NGArticulos();
+    //    return Articulos.NG_ConsultarArtxValidar();
+    //}
 }
 
