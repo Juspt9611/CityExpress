@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="ArticulosRed.aspx.cs" Inherits="WBSupportCenter.vistas.ArticulosRed" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script src="../recursos/js/blog/jquery-3.2.1.min.js"></script>
-    <script src="../recursos/js/datatables.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
