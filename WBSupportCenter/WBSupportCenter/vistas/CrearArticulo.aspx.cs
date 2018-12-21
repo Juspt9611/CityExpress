@@ -5,27 +5,24 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using WBSupportCenter.WSsupport1;
 
 namespace WBSupportCenter.vistas
 {
     public partial class CrearArticulo : System.Web.UI.Page
     {
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
         [WebMethod]
-        public static string OnSubmit()
+        public static int registrarArticulo(string nombreArticulo, string contenido, int[] categorias)
         {
-            return "it worked";
-        }
-
-        [WebMethod]
-        public static string registrarArticulo(string nombreArticulo, string contenido)
-        {
-            System.Diagnostics.Debug.WriteLine(contenido);
-            return "it worked";
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            return metodo.WSOpregistrarArt(nombreArticulo, contenido, categorias);
         }
 
     }

@@ -67,6 +67,7 @@
     </div>
 
     <script>
+
         document.querySelector('#submit').addEventListener('click', () => {
 
             //Variables
@@ -86,18 +87,31 @@
             //Se valida campo del titulo de articulo
             if (tituloArt.length == 0 || tituloArt.length > 51) {
                 $("#nombre_box_form_crearart").addClass('form-control-error');
+                $.notify('Revisar formato', {
+                    className: "error",
+                    globalPosition: 'right middle'
+                });
             } else {
                 $.ajax({
                     type: "POST",
                     url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "'}",
+                    data: "{'nombreArticulo':'"+tituloArt+"', 'contenido':'"+data+"','categorias':"+JSON.stringify(categorias)+"}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        alert(response.d);
+
+                        $.notify('Se ha registrado el artículo', {
+                            className: "success",
+                            globalPosition: 'right middle'
+                        });
+
+
                     },
                     failure: function (response) {
-                        alert(response.d);
+                        $.notify('No se ha registrado el artículo', {
+                            className: "error",
+                            globalPosition: 'right middle'
+                        });
                     }
                 });
             }
