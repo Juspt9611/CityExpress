@@ -24,7 +24,7 @@ namespace WBSupportCenter.WSsupport1 {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WSsupportCenterClassSoap", Namespace="http://tempuri.org/")]
@@ -255,8 +255,8 @@ namespace WBSupportCenter.WSsupport1 {
         }
     }
     
-    /// <comentarios/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -277,7 +277,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         private string fechaCreacionField;
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idarticulo {
             get {
                 return this.idarticuloField;
@@ -287,7 +287,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string nombreArticulo {
             get {
                 return this.nombreArticuloField;
@@ -297,7 +297,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string autor {
             get {
                 return this.autorField;
@@ -307,7 +307,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string contenido {
             get {
                 return this.contenidoField;
@@ -317,7 +317,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idEstatusArticulo {
             get {
                 return this.idEstatusArticuloField;
@@ -327,7 +327,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string version {
             get {
                 return this.versionField;
@@ -337,7 +337,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string fechaCreacion {
             get {
                 return this.fechaCreacionField;
@@ -348,8 +348,8 @@ namespace WBSupportCenter.WSsupport1 {
         }
     }
     
-    /// <comentarios/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -360,7 +360,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         private string nombreArticuloField;
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idarticulo {
             get {
                 return this.idarticuloField;
@@ -370,7 +370,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string nombreArticulo {
             get {
                 return this.nombreArticuloField;
@@ -381,8 +381,8 @@ namespace WBSupportCenter.WSsupport1 {
         }
     }
     
-    /// <comentarios/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2046.0")]
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -401,7 +401,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         private int estatusField;
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idCategorias {
             get {
                 return this.idCategoriasField;
@@ -411,7 +411,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idPadre {
             get {
                 return this.idPadreField;
@@ -421,7 +421,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public int idHijo {
             get {
                 return this.idHijoField;
@@ -431,7 +431,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string nombreCategoria {
             get {
                 return this.nombreCategoriaField;
@@ -441,7 +441,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public string descripcionCategoria {
             get {
                 return this.descripcionCategoriaField;
@@ -451,7 +451,7 @@ namespace WBSupportCenter.WSsupport1 {
             }
         }
         
-        /// <comentarios/>
+        /// <remarks/>
         public int estatus {
             get {
                 return this.estatusField;
@@ -463,11 +463,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerArtCompletedEventHandler(object sender, WSOptenerArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -489,11 +489,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerCatgCompletedEventHandler(object sender, WSOptenerCatgCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerCatgCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -515,11 +515,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSBusquedaTituloCompletedEventHandler(object sender, WSBusquedaTituloCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSBusquedaTituloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -541,11 +541,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOpregistrarArtCompletedEventHandler(object sender, WSOpregistrarArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOpregistrarArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -567,11 +567,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void HelloWorldDataSetCompletedEventHandler(object sender, HelloWorldDataSetCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class HelloWorldDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
