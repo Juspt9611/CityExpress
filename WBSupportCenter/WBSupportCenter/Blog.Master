@@ -2,11 +2,23 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es-mx">
+<html lang="es-mx">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>City Express | Support Center</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    <%--Se cargan primero los script--%>
+    <script src="../scripts/jquery-1.7.min.js"></script>
+
+    <script src="../recursos/css/bootstrap-4.1.2/popper.js"></script>
+    <script src="../recursos/js/plugin/greensock/TweenMax.min.js"></script>
+    <script src="../recursos/js/plugin/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
+    <script src="../recursos/js/blog/blog.js"></script>
+    <script src="../scripts/select2.min.js"></script>
+    <script src="../scripts/i18n/es.js"></script>
 
     <!-- CSS -->
     <%--<link rel="stylesheet" type="text/css" href="recursos/"/>--%>
@@ -46,6 +58,7 @@
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
+        
     </asp:ContentPlaceHolder>
 </head>
 <body>
@@ -279,20 +292,10 @@
         
     </div>
 
-    <!-- Scripts JS -->
-    <script src="../recursos/js/blog/jquery-3.2.1.min.js"></script>
-    <script src="../recursos/css/bootstrap-4.1.2/popper.js"></script>
-    <script src="../recursos/css/bootstrap-4.1.2/bootstrap.min.js"></script>
-    <script src="../recursos/js/plugin/greensock/TweenMax.min.js"></script>
-    <script src="../recursos/js/plugin/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
-    <script src="../recursos/js/blog/blog.js"></script>
-
-    <script src="../recursos/js/datatables.min.js"></script>
     <script type="text/javascript" class="init">
 	
         $(document).ready(function() {
-            $('#example').DataTable();
+            //$('#example').DataTable();
 
             $("#menu-toggle").click(function (e) {
                 e.preventDefault();
@@ -304,6 +307,7 @@
 
 
 	</script>
+
 
 </body>
 </html>
