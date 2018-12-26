@@ -36,7 +36,7 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
         //Registrar articulo
         [WebMethod]
-        public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias)
+        public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias)
         {
             NGArticulos Articulos = new NGArticulos();
             return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
