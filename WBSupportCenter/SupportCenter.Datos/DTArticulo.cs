@@ -11,7 +11,7 @@ namespace SupportCenter.Datos
 {
     public class DTArticulo
     {
-        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, int[] categorias)
+        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, string categorias, string tags)
         {
             int error = 0;
             SqlConnection connection = null;
@@ -27,7 +27,9 @@ namespace SupportCenter.Datos
                     var parametros = new[]
                     {
                         ParametroAcceso.CrearParametro("@nombreArticulo", SqlDbType.VarChar, nombreArticulo , ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input)
                     };
 
 
@@ -100,6 +102,43 @@ namespace SupportCenter.Datos
                     connection.Open();
 
                     consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ReplaceContenidoArticulos", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    ds.Tables.Add(dt);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return ds;
+        }
+
+        public DataSet DT_ConsultarCategorias(int idPadreCat)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idPadre", SqlDbType.Int, idPadreCat , ParameterDirection.Input)
+                    };
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraCategorias", parametros);
                     dt.Load(consulta);
                     connection.Close();
 
