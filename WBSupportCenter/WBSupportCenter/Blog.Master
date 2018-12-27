@@ -24,6 +24,8 @@
     <%--    DataTable--%>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <!-- Notificaciones -->
+        <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
 
 
 
@@ -42,15 +44,9 @@
     <%--<script src="../recursos/js/blog/notify.min.js"></script>--%>
 
     <%-- Notificaciones --%>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script>
-        if (!window.jQuery.ui) {
-            document.write('<script src="../recursos/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-        }
-    </script>
-    <script src="../recursos/js/app.config.js"></script>
-    <script src="../recursos/js/notification/SmartNotification.min.js"></script>
-    <script src="../recursos/js/app.min.js"></script>
+        <script src="../recursos/js/notification/jquery.gritter.js"></script>
+        <script src="../recursos/js/notification/sweetalert.min.js"></script>
+        <script src="../recursos/js/notification/ui-modal-notification.demo.min.js"></script>
 
     <%--    DataTable--%>
     <script src="../recursos/js/datatables.min.js"></script>
