@@ -27,5 +27,9 @@ namespace SupportCenter.Negocio
             DTArticulo Objeto = new DTArticulo();
             return Objeto.DT_ConsultarArtEdicion(idArt);
         }
+        public DataSet NG_OptenerCat(int idArt) {
+            DTArticulo Objeto = new DTArticulo();
+            return Objeto.DT_ConsultarArtEdicion(idArt);
+        }
     }
 }

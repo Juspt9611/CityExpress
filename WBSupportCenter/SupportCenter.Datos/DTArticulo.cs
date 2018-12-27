@@ -117,5 +117,31 @@ namespace SupportCenter.Datos
             return ds;
         }
 
+        public DataSet DT_optenerCat() {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            try {
+                using (connection = Conexion.ObtieneConexion("ConexionBD")) {
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultaArticulosPendientesxValidar");
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    ds.Tables.Add(dt);
+
+                }
+
+            } catch (Exception ex) {
+
+                Console.WriteLine(ex);
+            }
+
+            return ds;
+        }
     }
 }
