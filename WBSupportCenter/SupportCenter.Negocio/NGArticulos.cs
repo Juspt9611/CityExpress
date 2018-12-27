@@ -10,26 +10,27 @@ namespace SupportCenter.Negocio
 {
     public class NGArticulos
     {
-        public int NG_RegistrarArt(string nombreArticulo, string contenido, int[] categorias)
+        DTArticulo Objeto = new DTArticulo();
+
+        public int NG_RegistrarArt(string nombreArticulo, string contenido, string categorias, string tags)
         {
-            DTArticulo Objeto = new DTArticulo();
-            return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias);
+            return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias, tags);
         }
 
         public DataSet NG_ConsultarArtxValidar()
         {
-            DTArticulo Objeto = new DTArticulo();
             return Objeto.DT_ConsultarArxtxValidar();
         }
 
         public DataSet NG_ConsultarArtEdicion(int idArt)
         {
-            DTArticulo Objeto = new DTArticulo();
             return Objeto.DT_ConsultarArtEdicion(idArt);
         }
-        public DataSet NG_OptenerCat(int idArt) {
-            DTArticulo Objeto = new DTArticulo();
-            return Objeto.DT_ConsultarArtEdicion(idArt);
+
+        public DataSet NG_ConsultarCategorias(int idPadreCat)
+        {
+            return Objeto.DT_ConsultarCategorias(idPadreCat);
         }
     }
 }
+

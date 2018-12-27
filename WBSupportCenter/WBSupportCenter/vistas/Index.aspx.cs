@@ -152,7 +152,7 @@ namespace SupportCenter {
 
         public void cargaCAt() {
 
-            DDLCategorias.DataSource = dt;
+            //DDLCategorias.DataSource = dt;
             DDLCategorias.DataTextField = "Name";
             DDLCategorias.DataValueField = "ID";
             DDLCategorias.DataBind();

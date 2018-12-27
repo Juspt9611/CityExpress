@@ -13,7 +13,7 @@ namespace WBSupportCenter.vistas
 {
     public partial class CrearArticulo : System.Web.UI.Page
     {
-        
+
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -32,12 +32,14 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_BusquedaTitulo(palabra);
     }
 
+    #region Articulos
+
     //Registrar articulo
     [WebMethod]
-    public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias)
+    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
+        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags);
     }
     //Consultar articulos por validar
     [WebMethod]
@@ -53,5 +55,15 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         NGArticulos Articulos = new NGArticulos();
         return Articulos.NG_ConsultarArtEdicion(idArt);
     }
+
+    //Consulta categorías
+    [WebMethod]
+    public DataSet WSConsultarCategorias(int idPadreCat)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarCategorias(idPadreCat);
+    }
+
+    #endregion
 }
 
