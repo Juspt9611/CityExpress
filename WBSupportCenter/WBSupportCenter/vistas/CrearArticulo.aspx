@@ -17,7 +17,7 @@
                             <label for="nombre_box_form_crearart" class="col-form-label">Título del artículo:</label>
                             <input id="nombre_box_form_crearart"  type="text" class="form-control" />
                             <div class="invalid-feedback">
-                                Agregar un título entre 0 y 50 caracteres.
+                                Agregar un título entre 1 y 50 caracteres.
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                       <button id="tags_box_form_crearartButton" type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                     <div id="tag-invalid-form" class="invalid-feedback">
-                        Agregar un tag entre 0 y 50 caracteres.
+                        Agregar un tag entre 1 y 50 caracteres.
                     </div>
                   </div>
                 </div>
@@ -146,24 +146,35 @@
                     dataType: "json",
                     success: function (response) {
 
-                        $.smallBox({
-                            title: "James Simmons liked your comment",
-                            content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                            color: "#296191",
-                            iconSmall: "fa fa-thumbs-up bounce animated",
-                            timeout: 4000
+                        swal("Aritículo registrado", {
+                            icon: "success",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                        $(".swal-button").click(function () {
+                            closeSite();
                         });
 
+                        //Se limpian campos de formulario
                         $('#nombre_box_form_crearart').val("");
                         cat.length = 0;
                         initCategorias(0);
                         $("#catSpan_box_form_crearart").empty();
                         tags.length = 0;
                         $('#tags_box_form_crearart').val("");
-                        $("#tagcontainer_box_form_crearart").empty();
+                        $('#tagcontainer_box_form_crearart').empty();
+                        CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
 
                     },
                     failure: function (response) {
+                        swal("Hubo un error con el registro", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                        $(".swal-button").click(function () {
+                            closeSite();
+                        });
                     }
                 });
             }
@@ -214,7 +225,7 @@
 
             if (tag.length == 0 || tag.length > 51) {  //Se valida campo del titulo de articulo
                 $("#tag-invalid-form").empty();
-                $("#tag-invalid-form").append("Agregar un tag entre 0 y 50 caracteres");
+                $("#tag-invalid-form").append("Agregar un tag entre 1 y 50 caracteres");
                 $("#tags_box_form_crearart").addClass('is-invalid');
 
             } else {

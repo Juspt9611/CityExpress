@@ -15,16 +15,19 @@
                         <div class="form-group">
                             <label for="nombre_box_form_crearart" class="col-form-label">Título del artículo:</label>
                             <input id="nombre_box_form_crearart"  type="text" class="form-control" />
+                            <div class="invalid-feedback">
+                                Agregar un título entre 1 y 50 caracteres.
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div id="tree">
-                            <ul id="demo">
-                              <item
-                                class="item col-form-label"
-                                :model="treeData">
-                              </item>
-                            </ul>
+                        <div class="form-group">
+                            <label for="cat_box_form_crearart" class="col-form-label">Categorías</label>
+                            <select class="form-control" id="cat_box_form_crearart">
+                            </select>
+                            <div class="invalid-feedback">
+                                Registrar una categoría.
+                            </div>
                         </div>
                     </div>
                 </form> 
