@@ -3,6 +3,7 @@
     <script src="../scripts/ckeditor/ckeditor.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form id="form1" runat="server">
         <div class="container">
 
         <div class="box_table_container">
@@ -92,7 +93,7 @@
             <input id="hiddenCategorias" type="hidden" runat="server" />   
      </div>
     </div>
-
+    </form>
     <script>
 
         var cat = [];
