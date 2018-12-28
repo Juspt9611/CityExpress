@@ -118,7 +118,6 @@
 
     //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
-
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
@@ -146,15 +145,6 @@
                     dataType: "json",
                     success: function (response) {
 
-                        swal("Aritículo registrado", {
-                            icon: "success",
-                            allowOutsideClick: false,
-                            closeOnClickOutside: false
-                        });
-                        $(".swal-button").click(function () {
-                            closeSite();
-                        });
-
                         //Se limpian campos de formulario
                         $('#nombre_box_form_crearart').val("");
                         cat.length = 0;
@@ -165,6 +155,27 @@
                         $('#tagcontainer_box_form_crearart').empty();
                         CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
 
+                        if (response.d==0) {
+                            swal("Aritículo registrado", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                //closeSite();
+                            });
+
+                        } else {
+                            swal("Hubo un error con el registro", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                //closeSite();
+                            });
+                        }
+
                     },
                     failure: function (response) {
                         swal("Hubo un error con el registro", {
@@ -173,7 +184,7 @@
                             closeOnClickOutside: false
                         });
                         $(".swal-button").click(function () {
-                            closeSite();
+                            //closeSite();
                         });
                     }
                 });

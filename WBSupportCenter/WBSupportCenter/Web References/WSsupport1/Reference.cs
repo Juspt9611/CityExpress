@@ -44,6 +44,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSConsultarCategoriasOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSEditarArtOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -102,6 +104,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSConsultarCategoriasCompletedEventHandler WSConsultarCategoriasCompleted;
+        
+        /// <remarks/>
+        public event WSEditarArtCompletedEventHandler WSEditarArtCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -303,6 +308,43 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSConsultarCategoriasCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSConsultarCategoriasCompleted(this, new WSConsultarCategoriasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEditarArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags) {
+            object[] results = this.Invoke("WSEditarArt", new object[] {
+                        idArticulo,
+                        nombreArticulo,
+                        contenido,
+                        categorias,
+                        tags});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags) {
+            this.WSEditarArtAsync(idArticulo, nombreArticulo, contenido, categorias, tags, null);
+        }
+        
+        /// <remarks/>
+        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, object userState) {
+            if ((this.WSEditarArtOperationCompleted == null)) {
+                this.WSEditarArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEditarArtOperationCompleted);
+            }
+            this.InvokeAsync("WSEditarArt", new object[] {
+                        idArticulo,
+                        nombreArticulo,
+                        contenido,
+                        categorias,
+                        tags}, this.WSEditarArtOperationCompleted, userState);
+        }
+        
+        private void OnWSEditarArtOperationCompleted(object arg) {
+            if ((this.WSEditarArtCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSEditarArtCompleted(this, new WSEditarArtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -710,6 +752,32 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSEditarArtCompletedEventHandler(object sender, WSEditarArtCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSEditarArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSEditarArtCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }
