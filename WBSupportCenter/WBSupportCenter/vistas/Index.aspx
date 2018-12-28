@@ -1,14 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="SupportCenter.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        #result {
+            position: absolute;
+            margin-top: 37px;
+            width: 88%;
+            max-width: 870px;
+            cursor: pointer;
+            overflow-y: auto;
+            max-height: 200px;
+            box-sizing: border-box;
+            z-index: 1001;
+            overflow: auto;
+        }
 
-    <%--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />--%>
+        #result::-webkit-scrollbar {
+            width: 12px;
+            background-color: transparent;
+        }
 
-    <%--<script src="../scripts/jquery-1.7.min.js"></script>--%>
+        #result::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+            background-color: transparent;
+        }
+
+        .link-class:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-   
+
     <div class="news">
         <div class="container">
             <div class="row">
@@ -16,12 +42,32 @@
                     <br />
                 </div>
                 <div class="col-lg-6" style="text-align: center">
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search" id="txtsearch" autocomplete="off">
+                        <ul class="list-group" id="result"></ul>
+
+                        <div class="input-group-append">
+                            <button type="button"  class="btn btn-primary"id="btnBuscar"><span class="fa fa-search"></span></button>
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                            </button>
+                            <div class="dropdown-menu" id="DDLCategorias">
+
+                                <a class="dropdown-item" href="#">Link 1</a>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
                     <%--<input type="text" class="js-example-basic-multiple js-states form-control" id="Buscador"/>--%>
-                    <select class="js-example-basic-multiple js-states form-control" id="txtBuscador"></select>
-                    <asp:DropDownList ID="DDLCategorias" runat="server">
-                    </asp:DropDownList>
-
-
+                    <%--<select class="js-example-basic-multiple js-states form-control" id="txtBuscador"></select>
+                    <asp:DropDownList ID="DDLCategorias" runat="server" class="form-control">
+                    </asp:DropDownList>--%>
                 </div>
                 <div class="col-lg-3"></div>
             </div>
@@ -125,16 +171,90 @@
 
 
 
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({ cache: false });
+            $('#txtsearch').keyup(function () {
+                $('#result').html('');
+                $('#state').val('');
+                var searchField = $('#txtsearch').val();
+                var expression = new RegExp(searchField);
+
+                //solicitud datos
+                if ($('#txtsearch').val() != "") {
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "Index.aspx/articulosxValidar",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: "{'palabra':'" + $('#txtsearch').val() + "'}",
+                        success: function (response) {
+
+                            if (response.d != "") {
+                                $.each(response, function (item, index) {
+                                    $.each(jQuery.parseJSON(index), function (item, index) {
+                                        $('#result').append('<li class="list-group-item link-class"><span class="l">' + index.nombreArticulo + '</span></li>');
+                                    });
+
+                                });
+
+
+                            }
 
 
 
-    <script type="text/javascript">
+
+                            //do somthing here
+                        }
+                    });
+                }
+
+
+            });
+
+            //evento al seleccionar
+            $('#result').on('click', 'li', function () {
+
+                //console.log($(this).val());
+                $('#txtsearch').val($(this).text());
+                $("#result").html('');
+
+            });
+
+            //evento al dar enter
+            $('#search').on('keydown', function (e) {
+                if (e.which == 13) {
+                    console.log($('#txtsearch').val());
+                    //e.preventDefault();
+                }
+            });
+
+            //evento boton 
+
+            $("#btnBuscar").click(function () {
+                console.log($('#txtsearch').val());
+
+
+
+
+
+
+            });
+
+
+        });
+    </script>
+
+
+
+    <%--<script type="text/javascript">
         $(document).ready(function () {
             var data = [];
-            var arreglo=[];
+            var arreglo = [];
 
             $.ajax({
-                async:false,
+                async: false,
                 type: "POST",
                 url: "Index.aspx/articulosxValidar",
                 contentType: "application/json; charset=utf-8",
@@ -143,7 +263,7 @@
                 success: function (response) {
 
                     $.each(response, function (item, index) {
-                        
+
                         //arreglo.push(index)
                         //console.log(jQuery.parseJSON(index));
                         $.each(jQuery.parseJSON(index), function (item, index) {
@@ -152,14 +272,14 @@
                                 text: index.text
                             })
 
-                            
+
                         });
 
-                        
+
 
                     });
 
-                    
+
                     //do somthing here
                 }
             });
@@ -171,13 +291,5 @@
                 data: data
             });
         });
-
-
-
-
-    </script>
-
-
-
-
+    </script>--%>
 </asp:Content>
