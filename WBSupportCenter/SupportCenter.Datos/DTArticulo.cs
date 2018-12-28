@@ -49,6 +49,45 @@ namespace SupportCenter.Datos
             return error;
         }
 
+        public int DT_EditarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
+        {
+            int error = 0;
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArticulo , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@nombreArticulo", SqlDbType.VarChar, nombreArticulo , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input)
+                    };
+
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_EditarArticulos", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                error = 1;
+                Console.WriteLine(ex);
+            }
+
+            return error;
+        }
+
 
         public DataSet DT_ConsultarArxtxValidar()
         {

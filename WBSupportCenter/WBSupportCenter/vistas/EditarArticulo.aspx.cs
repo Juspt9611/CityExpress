@@ -36,6 +36,13 @@ namespace WBSupportCenter.vistas
         }
 
         [WebMethod]
+        public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, int[] categorias, string tags)
+        {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, string.Join(",", categorias), tags);
+        }
+
+        [WebMethod]
         public static string consultarCat(int idPadreCat)
         {
             string dataResult = "";

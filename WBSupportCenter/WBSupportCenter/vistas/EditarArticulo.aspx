@@ -184,7 +184,6 @@
             var hiddenContenido = $('#<%=hiddenContenido.ClientID %>').val();
             var hiddenTags = ($.parseJSON($('#<%=hiddenTags.ClientID %>').val()));
             var hiddenCat = ($.parseJSON($('#<%=hiddenCategorias.ClientID %>').val()));
-
             $('#nombre_box_form_crearart').val(hiddenTituloArt);
             $("#editor1").html(hiddenContenido);
 
@@ -208,8 +207,6 @@
 
         //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
-            console.log(cat);
-            console.log(tags);
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
@@ -231,21 +228,13 @@
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
+                    url: "EditarArticulo.aspx/editarArticulo",
+                    data: "{'idArticulo':'" + (window.location.search.substring(1).split('=')[1]) + "','nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
                         if (response.d == 0) {
-                            swal("Aritículo registrado", {
-                                icon: "success",
-                                allowOutsideClick: false,
-                                closeOnClickOutside: false
-                            });
-                            $(".swal-button").click(function () {
-                                closeSite();
-                            });
 
                             //Se limpian campos de formulario
                             $('#nombre_box_form_crearart').val("");
@@ -257,6 +246,16 @@
                             $('#tagcontainer_box_form_crearart').empty();
                             CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
 
+                            swal("Aritículo editado", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                //closeSite();
+                                window.location.href = 'ArticulosRed.aspx';
+                            });
+
                         } else {
                             swal("Hubo un error con el registro", {
                                 icon: "error",
@@ -264,7 +263,7 @@
                                 closeOnClickOutside: false
                             });
                             $(".swal-button").click(function () {
-                                closeSite();
+                                //closeSite();
                             });
                         }
 
@@ -276,7 +275,7 @@
                             closeOnClickOutside: false
                         });
                         $(".swal-button").click(function () {
-                            closeSite();
+                            //closeSite();
                         });
                     }
                 });
