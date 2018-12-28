@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/smartadmin-production-plugins.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/smartadmin-skins.min.css">
+    <!-- Bootstrapvalidator -->
+	<link rel="stylesheet" type="text/css" media="screen" href="recursos/bootstrapvalidator/bootstrapvalidator.css">
     <!-- BLOG -->
     <link href="recursos/css/blog.css" rel="stylesheet" />
     <link href="recursos/css/blog_responsive.css" rel="stylesheet" />
@@ -44,12 +46,19 @@
     <%--<script src="../recursos/js/blog/notify.min.js"></script>--%>
 
     <%-- Notificaciones --%>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script>
+			if (!window.jQuery.ui) {
+			    document.write('<script src="../recursos/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+			}
+		</script>
         <script src="../recursos/js/notification/jquery.gritter.js"></script>
         <script src="../recursos/js/notification/sweetalert.min.js"></script>
         <script src="../recursos/js/notification/ui-modal-notification.demo.min.js"></script>
 
     <%--    DataTable--%>
     <script src="../recursos/js/datatables.min.js"></script>
+    <script src="../recursos/bootstrapvalidator/bootstrapValidator.min.js"></script>
 
 
     <style>
@@ -97,13 +106,10 @@
                     <a href="/vistas/index.aspx">Buscador</a>
                 </li>
                 <li>
-                    <a href="/vistas/CrearArticulo.aspx">Artículo</a>
-                </li>
-                <li>
                     <a href="/vistas/ArticulosRed.aspx">Redactor</a>
                 </li>
                 <li>
-                    <a href="/vistas/ArticulosAut.aspx">Autorizar Artículos</a>
+                    <a href="/vistas/AprobacionArticulos.aspx">Autorizar Artículos</a>
                 </li>
             </ul>
         </div>

@@ -19,8 +19,8 @@
                     <tr>
                         <th>Código</th>
                         <th>Fecha</th>
+                        <th>Título</th>
                         <th>Estatus</th>
-                        <th>Detalles</th>
                         <th>Comentarios</th>
                         <th>Editar</th>
                     </tr>

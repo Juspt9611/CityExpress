@@ -16,7 +16,7 @@
 				<table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable" width="100%">
 					<thead>
 						<tr>
-							<th>#Codigo</th>
+							<th>Codigo</th>
 							<th>Nombre</th> 
 							<th>Contenido</th>
 							<th>Estatus</th> 
@@ -265,7 +265,7 @@
 						fixedHeader: true,
 						"lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
 						columns: [
-							{ title: "#Codigo" },
+							{ title: "Codigo" },
 							{ title: "Nombre" },
 							{ title: "Contenido", "visible": false},
 							{ title: "EstatusArticulo", "visible": false },
