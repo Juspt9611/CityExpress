@@ -268,5 +268,70 @@ namespace SupportCenter.Datos
             return ds;
         }
 
+        public DataSet DT_ConsultarArtPorValidar()
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarArtiPorValidar");
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    ds.Tables.Add(dt);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return ds;
+        }
+
+        public String DT_guardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario)
+        {
+            String error = "Success";
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+                    connection.Open();
+                    var parametros = new[]
+                    { ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArticulo , ParameterDirection.Input),
+                      ParametroAcceso.CrearParametro("@estatus", SqlDbType.Int, estatus , ParameterDirection.Input),
+                      ParametroAcceso.CrearParametro("@comentario", SqlDbType.VarChar, comentario , ParameterDirection.Input)};
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_EditarEstArtiValidar", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                error = "Error" + ex;
+                Console.WriteLine(ex);
+            }
+
+            return error;
+        }
+
     }
 }

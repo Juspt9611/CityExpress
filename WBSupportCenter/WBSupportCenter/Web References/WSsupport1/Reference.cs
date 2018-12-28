@@ -46,6 +46,10 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSEditarArtOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSConsultarArtPorValidarOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSOguardarEstatusArticuloAprobarOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -107,6 +111,12 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSEditarArtCompletedEventHandler WSEditarArtCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarArtPorValidarCompletedEventHandler WSConsultarArtPorValidarCompleted;
+        
+        /// <remarks/>
+        public event WSOguardarEstatusArticuloAprobarCompletedEventHandler WSOguardarEstatusArticuloAprobarCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -345,6 +355,66 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSEditarArtCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSEditarArtCompleted(this, new WSEditarArtCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArtPorValidar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSConsultarArtPorValidar() {
+            object[] results = this.Invoke("WSConsultarArtPorValidar", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArtPorValidarAsync() {
+            this.WSConsultarArtPorValidarAsync(null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArtPorValidarAsync(object userState) {
+            if ((this.WSConsultarArtPorValidarOperationCompleted == null)) {
+                this.WSConsultarArtPorValidarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarArtPorValidarOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarArtPorValidar", new object[0], this.WSConsultarArtPorValidarOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarArtPorValidarOperationCompleted(object arg) {
+            if ((this.WSConsultarArtPorValidarCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarArtPorValidarCompleted(this, new WSConsultarArtPorValidarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOguardarEstatusArticuloAprobar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string WSOguardarEstatusArticuloAprobar(int idArticulo, int estatus, string comentario) {
+            object[] results = this.Invoke("WSOguardarEstatusArticuloAprobar", new object[] {
+                        idArticulo,
+                        estatus,
+                        comentario});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOguardarEstatusArticuloAprobarAsync(int idArticulo, int estatus, string comentario) {
+            this.WSOguardarEstatusArticuloAprobarAsync(idArticulo, estatus, comentario, null);
+        }
+        
+        /// <remarks/>
+        public void WSOguardarEstatusArticuloAprobarAsync(int idArticulo, int estatus, string comentario, object userState) {
+            if ((this.WSOguardarEstatusArticuloAprobarOperationCompleted == null)) {
+                this.WSOguardarEstatusArticuloAprobarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOguardarEstatusArticuloAprobarOperationCompleted);
+            }
+            this.InvokeAsync("WSOguardarEstatusArticuloAprobar", new object[] {
+                        idArticulo,
+                        estatus,
+                        comentario}, this.WSOguardarEstatusArticuloAprobarOperationCompleted, userState);
+        }
+        
+        private void OnWSOguardarEstatusArticuloAprobarOperationCompleted(object arg) {
+            if ((this.WSOguardarEstatusArticuloAprobarCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOguardarEstatusArticuloAprobarCompleted(this, new WSOguardarEstatusArticuloAprobarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -778,6 +848,58 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSConsultarArtPorValidarCompletedEventHandler(object sender, WSConsultarArtPorValidarCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarArtPorValidarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarArtPorValidarCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSOguardarEstatusArticuloAprobarCompletedEventHandler(object sender, WSOguardarEstatusArticuloAprobarCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOguardarEstatusArticuloAprobarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOguardarEstatusArticuloAprobarCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }

@@ -36,6 +36,19 @@ namespace SupportCenter.Negocio
         {
             return Objeto.DT_ConsultarCategorias(idPadreCat);
         }
+
+        public DataSet NG_ConsultarArtPorValidar()
+        {
+            DTArticulo Objeto = new DTArticulo();
+            return Objeto.DT_ConsultarArtPorValidar();
+        }
+
+        public String NG_guardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario)
+        {
+            DTArticulo Objeto = new DTArticulo();
+            Console.WriteLine(comentario);
+            return Objeto.DT_guardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
+        }
     }
 }
 

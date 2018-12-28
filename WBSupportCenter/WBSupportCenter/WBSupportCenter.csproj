@@ -236,6 +236,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="vistas\AprobacionArticulos.aspx" />
     <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="Web References\WSsupport1\BusquedaTitulo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -991,6 +992,13 @@
     </Compile>
     <Compile Include="Sesion.Master.designer.cs">
       <DependentUpon>Sesion.Master</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\AprobacionArticulos.aspx.cs">
+      <DependentUpon>AprobacionArticulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\AprobacionArticulos.aspx.designer.cs">
+      <DependentUpon>AprobacionArticulos.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\ArticulosAut.aspx.cs">
       <DependentUpon>ArticulosAut.aspx</DependentUpon>

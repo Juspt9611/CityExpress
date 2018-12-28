@@ -32,6 +32,7 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_BusquedaTitulo(palabra);
     }
 
+
     #region Articulos
 
     //Registrar articulo
@@ -64,11 +65,28 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Articulos.NG_ConsultarCategorias(idPadreCat);
     }
 
+    //EditarArticulo 
     [WebMethod]
     public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
     {
         NGArticulos Articulos = new NGArticulos();
         return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags);
+    }
+
+    //Consultar articulos por validar
+    [WebMethod]
+    public DataSet WSConsultarArtPorValidar()
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtPorValidar();
+    }
+
+    //Registrar estatus articulo aprobado
+    [WebMethod]
+    public String WSOguardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_guardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
     }
 
     #endregion
