@@ -19,31 +19,32 @@ namespace SupportCenter {
             OptenerArt();
             OptenerCatg();
             ArtiFrec();
+            cargaCAt();
         }
 
 
         public void OptenerArt() {
-            //DataTable tblArti = new DataTable();
-            //lstArt.InnerText = "";
-            
-            //tblArti = ConvertToDataTable(metodo.WSOptenerArt());
-            ////ejemplo = metodo.WSOptenerArt();
-            //lstArt.InnerHtml += "<ul>";
-            ////Forech para ver Articulos
+            DataTable tblArti = new DataTable();
+            lstArt.InnerText = "";
 
-            //foreach (DataRow item in tblArti.Rows) {
-            //    lstArt.InnerHtml += "<li>";
-            //    lstArt.InnerHtml += "<a href='#' class='d-flex flex-row align-items-start justify-content-start'>";
-            //    lstArt.InnerHtml += "<div class='sidebar_dot d-flex flex-row align-items-center justify-content-start'>";
-            //    lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
-            //    lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
-            //    lstArt.InnerHtml += "</div>";
-            //    lstArt.InnerHtml += "<div>" + item["nombreArticulo"] + "</div>";
-            //    lstArt.InnerHtml += "</a>";
-            //    lstArt.InnerHtml += "</li>";
+            tblArti = ConvertToDataTable(metodo.WSOptenerArt());
+            //ejemplo = metodo.WSOptenerArt();
+            lstArt.InnerHtml += "<ul>";
+            //Forech para ver Articulos
 
-            //}
-            //lstArt.InnerHtml += "</ul>";
+            foreach (DataRow item in tblArti.Rows) {
+                lstArt.InnerHtml += "<li>";
+                lstArt.InnerHtml += "<a href='#' class='d-flex flex-row align-items-start justify-content-start'>";
+                lstArt.InnerHtml += "<div class='sidebar_dot d-flex flex-row align-items-center justify-content-start'>";
+                lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
+                lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
+                lstArt.InnerHtml += "</div>";
+                lstArt.InnerHtml += "<div>" + item["nombreArticulo"] + "</div>";
+                lstArt.InnerHtml += "</a>";
+                lstArt.InnerHtml += "</li>";
+
+            }
+            lstArt.InnerHtml += "</ul>";
 
         }
         public void OptenerCatg() {
@@ -99,11 +100,10 @@ namespace SupportCenter {
         public static string articulosxValidar(string palabra) {
             DataTable dtTitulo = new DataTable();
             dtTitulo = ConvertToDataTable(metodo.WSBusquedaTitulo(palabra));
-            dtTitulo.Columns["idarticulo"].ColumnName = "id";
-            dtTitulo.Columns["nombreArticulo"].ColumnName = "text";
-
             return DataTableToJSONWithStringBuilder(dtTitulo);;
         }
+
+
 
         public static DataTable ConvertToDataTable<T>(IList<T> data) {
             PropertyDescriptorCollection properties =
@@ -120,6 +120,17 @@ namespace SupportCenter {
             return table;
 
         }
+
+
+        public void cargaCAt() {
+
+            //DDLCategorias.DataSource = metodo.WSConsultarCategorias(0).Tables["Table1"]; ;
+            //DDLCategorias.DataTextField = "nombreCategoria";
+            //DDLCategorias.DataValueField = "idCategoria";
+            //DDLCategorias.DataBind();
+        }
+
+
 
         public static string DataSetToJSON(DataTable dt) {
             return JsonConvert.SerializeObject(dt.AsEnumerable().Select(r => r.ItemArray));
@@ -150,13 +161,7 @@ namespace SupportCenter {
         }
 
 
-        public void cargaCAt() {
-
-            //DDLCategorias.DataSource = dt;
-            DDLCategorias.DataTextField = "Name";
-            DDLCategorias.DataValueField = "ID";
-            DDLCategorias.DataBind();
-        }
+        
 
 
     }
