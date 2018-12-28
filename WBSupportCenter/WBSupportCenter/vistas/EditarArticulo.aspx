@@ -31,6 +31,28 @@
                         </div>
                     </div>
                 </form> 
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <label for="tags_box_form_crearart">Tags:</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="tags_box_form_crearart" aria-describedby="tags_box_form_crearartButton" required>
+                    <div class="input-group-prepend">
+                      <button id="tags_box_form_crearartButton" type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </div>
+                    <div id="tag-invalid-form" class="invalid-feedback">
+                        Agregar un tag entre 1 y 50 caracteres.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="tagcontainer_box_form_crearart"></div>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
+                </div>
             </div>      
             <form method="post">
                 <textarea name="editor1" id="editor1">
@@ -65,176 +87,202 @@
                 </div>
             </div>
             <input id="hiddenTituloArt" type="hidden" runat="server" />  
-            <input id="hiddenContenido" type="hidden" runat="server" />  
+            <input id="hiddenContenido" type="hidden" runat="server" />
+            <input id="hiddenTags" type="hidden" runat="server" />  
+            <input id="hiddenCategorias" type="hidden" runat="server" />   
      </div>
     </div>
 
     <script>
 
+        var cat = [];
+        var tags = [];
+
+    //Metodo para actualizar select           
+        $("#cat_box_form_crearart").change(function () {
+
+            var valCatSelect = $(this).find('option:selected').val();
+            var textCatSelect = $(this).find('option:selected').text();
+            $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + valCatSelect + ");'> >> <i style='cursor: pointer;'> " + textCatSelect + "</i></span>");
+            initCategorias(valCatSelect);
+            cat.push(valCatSelect);
+        });
+
+    //Cargar categorias a select
+        function initCategorias(idPAdreCat) {
+            $("#cat_box_form_crearart").empty();
+            $("#cat_box_form_crearart").append('<option value="cat">Selecciona una categoría</option>');
+            $.ajax({
+                type: "POST",
+                url: "EditarArticulo.aspx/consultarCat",
+                data: "{ 'idPadreCat': '" + idPAdreCat + "' }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var opts = $.parseJSON(data.d);
+                    $.each(opts, function (i, d) {
+                        $("#cat_box_form_crearart").append('<option value="' + d[0] + '">' + d[1] + '</option>');
+                    });
+                }
+            });
+        }
+
+    //Metodo para eliminar elementos del select
+        function spanClickCat(id) {
+            if (cat.indexOf(id.toString()) == 0) {
+                initCategorias(0);
+            } else {
+                initCategorias(cat[cat.indexOf(id.toString()) - 1]);
+            }
+
+            for (i = 0; i < (cat.length - cat.indexOf(id.toString())) ; i++) {
+                $("#catSpan_box_form_crearart span:last-child").remove()
+            }
+            cat.splice(cat.indexOf(id.toString()), cat.length);
+
+        }
+
+    //Funcion para eliminar tags
+        function borrarTag(stTag) {
+            var id = "#idTag" + stTag;
+            $(id).remove();
+            tags.splice(tags.indexOf(stTag), 1);
+        }
+
+    //Accion para agregar Tags a la lista
+        $("#tags_box_form_crearartButton").click(function () {
+
+            var tag = $("#tags_box_form_crearart").val().trim().toUpperCase().replace(/\s/g, '');
+
+            if ($("#tags_box_form_crearart").hasClass("is-invalid")) {
+                $("#tags_box_form_crearart").removeClass('is-invalid');
+            }
+
+            if (tag.length == 0 || tag.length > 51) {  //Se valida campo del titulo de articulo
+                $("#tag-invalid-form").empty();
+                $("#tag-invalid-form").append("Agregar un tag entre 1 y 50 caracteres");
+                $("#tags_box_form_crearart").addClass('is-invalid');
+
+            } else {
+
+                if (tags.indexOf(tag.toString()) >= 0) {
+                    $("#tag-invalid-form").empty();
+                    $("#tag-invalid-form").append("El tag ya esta registrado.");
+                    $("#tags_box_form_crearart").addClass('is-invalid');
+                } else {
+
+                    tags.push(tag);
+                    $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + tag + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + tag.toString() + "\");'>" + tag + "</button>");
+                    $('#tags_box_form_crearart').val("");
+                }
+            }
+
+        });
+
         function cargarContenido() {
             var hiddenTituloArt = $('#<%=hiddenTituloArt.ClientID %>').val();
             var hiddenContenido = $('#<%=hiddenContenido.ClientID %>').val();
+            var hiddenTags = ($.parseJSON($('#<%=hiddenTags.ClientID %>').val()));
+            var hiddenCat = ($.parseJSON($('#<%=hiddenCategorias.ClientID %>').val()));
+
             $('#nombre_box_form_crearart').val(hiddenTituloArt);
             $("#editor1").html(hiddenContenido);
+
+            //Se cargan Tags
+            hiddenTags.forEach(function (element) {
+                $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + element[1] + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + (element[1]).toString() + "\");'>" + element[1] + "</button>");
+                tags.push((element[1]).toString());
+            });
+
+            //Se cargan Categorias
+            var intCatPadre = 0;
+            hiddenCat.forEach(function (element) {
+                $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + element[0] + ");'> >> <i style='cursor: pointer;'> " + element[1] + "</i></span>");
+                intCatPadre = element[0];
+                cat.push((element[0]).toString());
+            });
+            initCategorias(intCatPadre);
         }
 
         cargarContenido();
 
-        document.querySelector('#submit').addEventListener('click', () => {
-
+        //Evento para boton de enviar
+        document.querySelector('#submit').addEventListener('click', function () {
+            console.log(cat);
+            console.log(tags);
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
-            const categorias = [];
 
-            if ($("#nombre_box_form_crearart").hasClass("form-control-error"))
-            {
-                $("#nombre_box_form_crearart").removeClass('form-control-error');
+            if ($("#nombre_box_form_crearart").hasClass("is-invalid")) {
+                $("#nombre_box_form_crearart").removeClass('is-invalid');
             }
 
-            $("input[type='checkbox']:checked").each(function () {
-                categorias.push($(this).val());
-            });
-            
-            //Se valida campo del titulo de articulo
-            if (tituloArt.length == 0 || tituloArt.length > 51) {
-                $("#nombre_box_form_crearart").addClass('form-control-error');
-                $.notify('Revisar formato', {
-                    className: "error",
-                    globalPosition: 'right middle'
-                });
+            if ($("#cat_box_form_crearart").hasClass("is-invalid")) {
+                $("#cat_box_form_crearart").removeClass('is-invalid');
+            }
+
+            if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
+
+                $("#nombre_box_form_crearart").addClass('is-invalid');
+
+            } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
+                $("#cat_box_form_crearart").addClass('is-invalid');
             } else {
                 $.ajax({
                     type: "POST",
                     url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'"+tituloArt+"', 'contenido':'"+data+"','categorias':"+JSON.stringify(categorias)+"}",
+                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
-                        //$.notify('Se ha registrado el artículo', {
-                        //    className: "success",
-                        //    globalPosition: 'right middle'
-                        //});
+                        if (response.d == 0) {
+                            swal("Aritículo registrado", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                closeSite();
+                            });
 
-                        $.smallBox({
-                            title: "James Simmons liked your comment",
-                            content: "<i class='fa fa-clock-o'></i> <i>2 seconds ago...</i>",
-                            color: "#296191",
-                            iconSmall: "fa fa-thumbs-up bounce animated",
-                            timeout: 4000
-                        });
+                            //Se limpian campos de formulario
+                            $('#nombre_box_form_crearart').val("");
+                            cat.length = 0;
+                            initCategorias(0);
+                            $("#catSpan_box_form_crearart").empty();
+                            tags.length = 0;
+                            $('#tags_box_form_crearart').val("");
+                            $('#tagcontainer_box_form_crearart').empty();
+                            CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
 
-                        console.log("Ya notifique");
+                        } else {
+                            swal("Hubo un error con el registro", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                closeSite();
+                            });
+                        }
 
                     },
                     failure: function (response) {
-                        //$.notify('No se ha registrado el artículo', {
-                        //    className: "error",
-                        //    globalPosition: 'right middle'
-                        //});
+                        swal("Hubo un error con el registro", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                        $(".swal-button").click(function () {
+                            closeSite();
+                        });
                     }
                 });
             }
-     
-        });        
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>  
-    <!-- item template -->
-    <script type="text/x-template" id="item-template">
-        <li>
-        <div
-            :class="{bold: isFolder}">
-            {{ model.name }}
-            <input type="checkbox" :value="model.value">
-            <span v-if="isFolder"
-             @click="toggle"
-            @dblclick="changeType">[{{ open ? '-' : '+' }}]</span>
-        </div>
-        <ul v-show="open" v-if="isFolder">
-            <item
-            class="item"
-            v-for="(model, index) in model.children"
-            :key="index"
-            :model="model">
-            </item>
-        </ul>
-        </li>
-    </script>
-
-
-    <script>
-
-        // demo data
-        var data = {
-            name: 'Categorias', value: 'cat',
-            children: [
-              {
-                  name: 'Pago Express de Comisiones', value: 1,
-                  children: [
-                    { name: 'Atención a hoteles', value: 2},
-                    { name: 'Atención a agencias mayoristas y minoristas', value: 3 },
-                    {
-                        name: 'Atención a OTAs', value: 4,
-                        children: [
-                          { name: 'Booking', value: 5 },
-                          { name: 'Expedia', value: 6 },
-                          { name: 'Despegar', value: 7 },
-                          { name: 'Best Day', value: 8 }
-                        ]
-                    }
-                  ]
-              },
-              { name: 'Canales (Atención a agencias y hoteles)', value: 9 }
-            ]
-        };
-
-        // define the item component
-        Vue.component('item', {
-            template: '#item-template',
-            props: {
-                model: Object
-            },
-            data: function () {
-                return {
-                    open: false
-                }
-            },
-            computed: {
-                isFolder: function () {
-                    return this.model.children && this.model.children.length
-                }
-            },
-            methods: {
-                toggle: function () {
-                    if (this.isFolder) {
-                        this.open = !this.open
-                    }
-                },
-                changeType: function () {
-                    if (!this.isFolder) {
-                        Vue.set(this.model, 'children', [])
-                        this.open = true
-                    }
-                }
-            }
         });
-
-        // boot up the demo
-        var demo = new Vue({
-            el: '#demo',
-            data: {
-                treeData: data
-            }
-        });
-
-        var myParam = location.search.substring(1);
-
-    </script>
-
-    <script>
-        $("input[value='cat']").remove();
     </script>
 
 </asp:Content>

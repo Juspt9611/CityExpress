@@ -99,13 +99,16 @@ namespace SupportCenter.Datos
                     };
 
                     SqlDataReader consulta;
+                    
+                    //Contenido articulo
                     connection.Open();
-
                     consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ReplaceContenidoArticulos", parametros);
                     dt.Load(consulta);
                     connection.Close();
 
                     ds.Tables.Add(dt);
+                    ds.Tables.Add(DT_ConsultarCategoriasxArt(idArt));
+                    ds.Tables.Add(DT_ConsultarTagsxArt(idArt));
 
                 }
 
@@ -117,6 +120,76 @@ namespace SupportCenter.Datos
             }
 
             return ds;
+        }
+
+        public static DataTable DT_ConsultarCategoriasxArt(int idArt)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+
+                    var paramCat = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArt , ParameterDirection.Input)
+                    };
+
+                    //Categorias
+                    connection.Open();
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraCategoriasxArticulo", paramCat);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return dt;
+        }
+
+        public static DataTable DT_ConsultarTagsxArt(int idArt)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+
+                    var paramCat = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArt , ParameterDirection.Input)
+                    };
+
+                    //Tags
+                    connection.Open();
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraTagsxArticulo", paramCat);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return dt;
         }
 
         public DataSet DT_ConsultarCategorias(int idPadreCat)

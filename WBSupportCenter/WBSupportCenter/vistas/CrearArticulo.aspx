@@ -118,7 +118,6 @@
 
     //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
-
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
@@ -146,24 +145,36 @@
                     dataType: "json",
                     success: function (response) {
 
-                        swal("Aritículo registrado", {
-                            icon: "success",
-                            allowOutsideClick: false,
-                            closeOnClickOutside: false
-                        });
-                        $(".swal-button").click(function () {
-                            closeSite();
-                        });
+                        if (response.d==0) {
+                            swal("Aritículo registrado", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                closeSite();
+                            });
 
-                        //Se limpian campos de formulario
-                        $('#nombre_box_form_crearart').val("");
-                        cat.length = 0;
-                        initCategorias(0);
-                        $("#catSpan_box_form_crearart").empty();
-                        tags.length = 0;
-                        $('#tags_box_form_crearart').val("");
-                        $('#tagcontainer_box_form_crearart').empty();
-                        CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
+                            //Se limpian campos de formulario
+                            $('#nombre_box_form_crearart').val("");
+                            cat.length = 0;
+                            initCategorias(0);
+                            $("#catSpan_box_form_crearart").empty();
+                            tags.length = 0;
+                            $('#tags_box_form_crearart').val("");
+                            $('#tagcontainer_box_form_crearart').empty();
+                            CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
+
+                        } else {
+                            swal("Hubo un error con el registro", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                closeSite();
+                            });
+                        }
 
                     },
                     failure: function (response) {
