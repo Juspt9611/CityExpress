@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="WSOptenerArt">
@@ -83,15 +83,11 @@
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="nombreArticulo" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="contenido" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="categorias" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="categorias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tags" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfInt">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="WSOpregistrarArtResponse">
         <s:complexType>
           <s:sequence>
@@ -99,20 +95,113 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="HelloWorldDataSet">
+      <s:element name="WSOpconsultarArtxValidar">
         <s:complexType />
       </s:element>
-      <s:element name="HelloWorldDataSetResponse">
+      <s:element name="WSOpconsultarArtxValidarResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldDataSetResult">
+            <s:element minOccurs="0" maxOccurs="1" name="WSOpconsultarArtxValidarResult">
               <s:complexType>
                 <s:sequence>
-                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                  <s:element ref="s:schema" />
+                  <s:any />
                 </s:sequence>
               </s:complexType>
             </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtEdicion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArt" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtEdicionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArtEdicionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarCategorias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPadreCat" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarCategoriasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEditarArt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreArticulo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contenido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="categorias" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tags" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEditarArtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSEditarArtResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtPorValidar">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSConsultarArtPorValidarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArtPorValidarResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSOguardarEstatusArticuloAprobar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="estatus" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSOguardarEstatusArticuloAprobarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSOguardarEstatusArticuloAprobarResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -120,26 +209,15 @@
       <s:element name="ArrayOfCategoriasxSubcategorias" nillable="true" type="tns:ArrayOfCategoriasxSubcategorias" />
       <s:element name="ArrayOfBusquedaTitulo" nillable="true" type="tns:ArrayOfBusquedaTitulo" />
       <s:element name="int" type="s:int" />
-      <s:element name="DataTable" nillable="true">
+      <s:element name="DataSet" nillable="true">
         <s:complexType>
           <s:sequence>
-            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            <s:element ref="s:schema" />
+            <s:any />
           </s:sequence>
         </s:complexType>
       </s:element>
-    </s:schema>
-    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
-      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
-      <s:complexType name="StringArray">
-        <s:complexContent mixed="false">
-          <s:restriction base="soapenc:Array">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
-            </s:sequence>
-          </s:restriction>
-        </s:complexContent>
-      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="WSOptenerArtSoapIn">
@@ -166,11 +244,41 @@
   <wsdl:message name="WSOpregistrarArtSoapOut">
     <wsdl:part name="parameters" element="tns:WSOpregistrarArtResponse" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetSoapIn">
-    <wsdl:part name="parameters" element="tns:HelloWorldDataSet" />
+  <wsdl:message name="WSOpconsultarArtxValidarSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOpconsultarArtxValidar" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetSoapOut">
-    <wsdl:part name="parameters" element="tns:HelloWorldDataSetResponse" />
+  <wsdl:message name="WSOpconsultarArtxValidarSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOpconsultarArtxValidarResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtEdicion" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtEdicionResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtSoapIn">
+    <wsdl:part name="parameters" element="tns:WSEditarArt" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtSoapOut">
+    <wsdl:part name="parameters" element="tns:WSEditarArtResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtPorValidarSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtPorValidar" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtPorValidarSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtPorValidarResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOguardarEstatusArticuloAprobar" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOguardarEstatusArticuloAprobarResponse" />
   </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpGetIn" />
   <wsdl:message name="WSOptenerArtHttpGetOut">
@@ -189,14 +297,49 @@
   <wsdl:message name="WSOpregistrarArtHttpGetIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
-    <wsdl:part name="categorias" type="s1:StringArray" />
+    <wsdl:part name="categorias" type="s:string" />
+    <wsdl:part name="tags" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetHttpGetIn" />
-  <wsdl:message name="HelloWorldDataSetHttpGetOut">
-    <wsdl:part name="Body" element="tns:DataTable" />
+  <wsdl:message name="WSOpconsultarArtxValidarHttpGetIn" />
+  <wsdl:message name="WSOpconsultarArtxValidarHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpGetIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasHttpGetIn">
+    <wsdl:part name="idPadreCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtHttpGetIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="nombreArticulo" type="s:string" />
+    <wsdl:part name="contenido" type="s:string" />
+    <wsdl:part name="categorias" type="s:string" />
+    <wsdl:part name="tags" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtPorValidarHttpGetIn" />
+  <wsdl:message name="WSConsultarArtPorValidarHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpGetIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="estatus" type="s:string" />
+    <wsdl:part name="comentario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpPostIn" />
   <wsdl:message name="WSOptenerArtHttpPostOut">
@@ -215,14 +358,49 @@
   <wsdl:message name="WSOpregistrarArtHttpPostIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
-    <wsdl:part name="categorias" type="s1:StringArray" />
+    <wsdl:part name="categorias" type="s:string" />
+    <wsdl:part name="tags" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
-  <wsdl:message name="HelloWorldDataSetHttpPostIn" />
-  <wsdl:message name="HelloWorldDataSetHttpPostOut">
-    <wsdl:part name="Body" element="tns:DataTable" />
+  <wsdl:message name="WSOpconsultarArtxValidarHttpPostIn" />
+  <wsdl:message name="WSOpconsultarArtxValidarHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpPostIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtEdicionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasHttpPostIn">
+    <wsdl:part name="idPadreCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtHttpPostIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="nombreArticulo" type="s:string" />
+    <wsdl:part name="contenido" type="s:string" />
+    <wsdl:part name="categorias" type="s:string" />
+    <wsdl:part name="tags" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarArtHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtPorValidarHttpPostIn" />
+  <wsdl:message name="WSConsultarArtPorValidarHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpPostIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="estatus" type="s:string" />
+    <wsdl:part name="comentario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:portType name="WSsupportCenterClassSoap">
     <wsdl:operation name="WSOptenerArt">
@@ -241,9 +419,29 @@
       <wsdl:input message="tns:WSOpregistrarArtSoapIn" />
       <wsdl:output message="tns:WSOpregistrarArtSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetSoapIn" />
-      <wsdl:output message="tns:HelloWorldDataSetSoapOut" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <wsdl:input message="tns:WSOpconsultarArtxValidarSoapIn" />
+      <wsdl:output message="tns:WSOpconsultarArtxValidarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionSoapIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <wsdl:input message="tns:WSConsultarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSConsultarCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <wsdl:input message="tns:WSEditarArtSoapIn" />
+      <wsdl:output message="tns:WSEditarArtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <wsdl:input message="tns:WSConsultarArtPorValidarSoapIn" />
+      <wsdl:output message="tns:WSConsultarArtPorValidarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarSoapIn" />
+      <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpGet">
@@ -263,9 +461,29 @@
       <wsdl:input message="tns:WSOpregistrarArtHttpGetIn" />
       <wsdl:output message="tns:WSOpregistrarArtHttpGetOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetHttpGetIn" />
-      <wsdl:output message="tns:HelloWorldDataSetHttpGetOut" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <wsdl:input message="tns:WSOpconsultarArtxValidarHttpGetIn" />
+      <wsdl:output message="tns:WSOpconsultarArtxValidarHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <wsdl:input message="tns:WSConsultarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarCategoriasHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <wsdl:input message="tns:WSEditarArtHttpGetIn" />
+      <wsdl:output message="tns:WSEditarArtHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <wsdl:input message="tns:WSConsultarArtPorValidarHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArtPorValidarHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarHttpGetIn" />
+      <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpPost">
@@ -285,9 +503,29 @@
       <wsdl:input message="tns:WSOpregistrarArtHttpPostIn" />
       <wsdl:output message="tns:WSOpregistrarArtHttpPostOut" />
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <wsdl:input message="tns:HelloWorldDataSetHttpPostIn" />
-      <wsdl:output message="tns:HelloWorldDataSetHttpPostOut" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <wsdl:input message="tns:WSOpconsultarArtxValidarHttpPostIn" />
+      <wsdl:output message="tns:WSOpconsultarArtxValidarHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <wsdl:input message="tns:WSConsultarArtEdicionHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArtEdicionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <wsdl:input message="tns:WSConsultarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarCategoriasHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <wsdl:input message="tns:WSEditarArtHttpPostIn" />
+      <wsdl:output message="tns:WSEditarArtHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <wsdl:input message="tns:WSConsultarArtPorValidarHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArtPorValidarHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarHttpPostIn" />
+      <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
@@ -328,8 +566,53 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <soap:operation soapAction="http://tempuri.org/HelloWorldDataSet" style="document" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <soap:operation soapAction="http://tempuri.org/WSOpconsultarArtxValidar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArtEdicion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <soap:operation soapAction="http://tempuri.org/WSEditarArt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArtPorValidar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <soap:operation soapAction="http://tempuri.org/WSOguardarEstatusArticuloAprobar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -376,8 +659,53 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <soap12:operation soapAction="http://tempuri.org/HelloWorldDataSet" style="document" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <soap12:operation soapAction="http://tempuri.org/WSOpconsultarArtxValidar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArtEdicion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <soap12:operation soapAction="http://tempuri.org/WSEditarArt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArtPorValidar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <soap12:operation soapAction="http://tempuri.org/WSOguardarEstatusArticuloAprobar" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -424,8 +752,53 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <http:operation location="/HelloWorldDataSet" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <http:operation location="/WSOpconsultarArtxValidar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <http:operation location="/WSConsultarArtEdicion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <http:operation location="/WSConsultarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <http:operation location="/WSEditarArt" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <http:operation location="/WSConsultarArtPorValidar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <http:operation location="/WSOguardarEstatusArticuloAprobar" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -472,8 +845,53 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="HelloWorldDataSet">
-      <http:operation location="/HelloWorldDataSet" />
+    <wsdl:operation name="WSOpconsultarArtxValidar">
+      <http:operation location="/WSOpconsultarArtxValidar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtEdicion">
+      <http:operation location="/WSConsultarArtEdicion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarCategorias">
+      <http:operation location="/WSConsultarCategorias" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarArt">
+      <http:operation location="/WSEditarArt" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtPorValidar">
+      <http:operation location="/WSConsultarArtPorValidar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
+      <http:operation location="/WSOguardarEstatusArticuloAprobar" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

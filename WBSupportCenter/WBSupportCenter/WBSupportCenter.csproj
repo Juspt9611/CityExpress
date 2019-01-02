@@ -76,6 +76,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -101,6 +105,7 @@
     <Content Include="recursos\ajax\demowidget.php" />
     <Content Include="recursos\css\blog.css" />
     <Content Include="recursos\css\blog_responsive.css" />
+    <Content Include="recursos\css\jquery.gritter.css" />
     <Content Include="recursos\css\personal.css" />
     <Content Include="recursos\data\dataList.json" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.eot" />
@@ -131,6 +136,9 @@
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
     <Content Include="recursos\js\blog\notify.min.js" />
     <Content Include="recursos\js\libs\jquery-2.1.1.min.map" />
+    <Content Include="recursos\js\notification\jquery.gritter.js" />
+    <Content Include="recursos\js\notification\sweetalert.min.js" />
+    <Content Include="recursos\js\notification\ui-modal-notification.demo.min.js" />
     <Content Include="recursos\js\plugin\bootstrap-tags\dist\bootstrap-tagsinput.min.js.map" />
     <Content Include="recursos\js\plugin\ckeditor\CHANGES.md" />
     <Content Include="recursos\js\plugin\ckeditor\LICENSE.md" />
@@ -228,6 +236,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="vistas\AprobacionArticulos.aspx" />
+    <Content Include="vistas\EditarArticulo.aspx" />
     <Content Include="Web References\WSsupport1\BusquedaTitulo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -983,6 +993,13 @@
     <Compile Include="Sesion.Master.designer.cs">
       <DependentUpon>Sesion.Master</DependentUpon>
     </Compile>
+    <Compile Include="vistas\AprobacionArticulos.aspx.cs">
+      <DependentUpon>AprobacionArticulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\AprobacionArticulos.aspx.designer.cs">
+      <DependentUpon>AprobacionArticulos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="vistas\ArticulosAut.aspx.cs">
       <DependentUpon>ArticulosAut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1010,6 +1027,13 @@
     </Compile>
     <Compile Include="vistas\CrearArticulo.aspx.designer.cs">
       <DependentUpon>CrearArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\EditarArticulo.aspx.cs">
+      <DependentUpon>EditarArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\EditarArticulo.aspx.designer.cs">
+      <DependentUpon>EditarArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

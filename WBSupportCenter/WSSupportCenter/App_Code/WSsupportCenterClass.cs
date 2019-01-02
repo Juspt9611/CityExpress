@@ -33,38 +33,62 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
 
+    #region Articulos
+
+    //Registrar articulo
     [WebMethod]
-    public int WSOpregistrarArt(string nombreArticulo, string contenido, int[] categorias)
+    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias);
+        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags);
     }
-
-    //[WebMethod]
-    //public DataSet WSOpconsultarArtxValidar()
-    //{
-    //    NGArticulos Articulos = new NGArticulos();
-    //    return Articulos.NG_ConsultarArtxValidar();
-    //}
-
+    //Consultar articulos por validar
     [WebMethod]
-    public DataTable HelloWorldDataSet()
+    public DataSet WSOpconsultarArtxValidar()
     {
-        DataTable dt = new DataTable("MyDataTable");
-        dt.Columns.Add("column1", typeof(System.String));
-        dt.Columns.Add("column2", typeof(System.String));
-
-        DataRow dr = dt.NewRow();
-        dr["column1"] = "Your Data";
-        dr["column2"] = "Your Data";
-        dt.Rows.Add(dr);
-
-        dr = dt.NewRow();
-        dr["column1"] = "Your Data";
-        dr["column2"] = "Your Data";
-        dt.Rows.Add(dr);
-
-        return dt;
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtxValidar();
     }
+    //Consultar articulos para edicion
+    [WebMethod]
+    public DataSet WSConsultarArtEdicion(int idArt)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtEdicion(idArt);
+    }
+
+    //Consulta categorías
+    [WebMethod]
+    public DataSet WSConsultarCategorias(int idPadreCat)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarCategorias(idPadreCat);
+    }
+
+    //EditarArticulo 
+    [WebMethod]
+    public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags);
+    }
+
+    //Consultar articulos por validar
+    [WebMethod]
+    public DataSet WSConsultarArtPorValidar()
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtPorValidar();
+    }
+
+    //Registrar estatus articulo aprobado
+    [WebMethod]
+    public String WSOguardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_guardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
+    }
+
+    #endregion
 }
 

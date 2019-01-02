@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="CrearArticulo.aspx.cs" Inherits="WBSupportCenter.vistas.CrearArticulo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="EditarArticulo.aspx.cs" Inherits="WBSupportCenter.vistas.EditarArticulo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../scripts/ckeditor/ckeditor.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="form1" runat="server">
-    <div class="container">
+        <div class="container">
 
         <div class="box_table_container">
             <div class="row">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </form> 
-            </div>   
+            </div>
             <div class="row">
                 <div class="col-lg-6 mb-3">
                   <label for="tags_box_form_crearart">Tags:</label>
@@ -54,7 +54,7 @@
                 <div class="col-lg-12">
                     <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
                 </div>
-            </div>  
+            </div>      
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
@@ -87,15 +87,27 @@
                     <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Cancelar</button>
                 </div>
             </div>
+            <input id="hiddenTituloArt" type="hidden" runat="server" />  
+            <input id="hiddenContenido" type="hidden" runat="server" />
+            <input id="hiddenTags" type="hidden" runat="server" />  
+            <input id="hiddenCategorias" type="hidden" runat="server" />   
      </div>
     </div>
     </form>
     <script>
+
         var cat = [];
         var tags = [];
 
-        /********** JS functions 
-        ************************/
+    //Metodo para actualizar select           
+        $("#cat_box_form_crearart").change(function () {
+
+            var valCatSelect = $(this).find('option:selected').val();
+            var textCatSelect = $(this).find('option:selected').text();
+            $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + valCatSelect + ");'> >> <i style='cursor: pointer;'> " + textCatSelect + "</i></span>");
+            initCategorias(valCatSelect);
+            cat.push(valCatSelect);
+        });
 
     //Cargar categorias a select
         function initCategorias(idPAdreCat) {
@@ -103,7 +115,7 @@
             $("#cat_box_form_crearart").append('<option value="cat">Selecciona una categoría</option>');
             $.ajax({
                 type: "POST",
-                url: "CrearArticulo.aspx/consultarCat",
+                url: "EditarArticulo.aspx/consultarCat",
                 data: "{ 'idPadreCat': '" + idPAdreCat + "' }",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -116,7 +128,85 @@
             });
         }
 
-    //Evento para boton de enviar
+    //Metodo para eliminar elementos del select
+        function spanClickCat(id) {
+            if (cat.indexOf(id.toString()) == 0) {
+                initCategorias(0);
+            } else {
+                initCategorias(cat[cat.indexOf(id.toString()) - 1]);
+            }
+
+            for (i = 0; i < (cat.length - cat.indexOf(id.toString())) ; i++) {
+                $("#catSpan_box_form_crearart span:last-child").remove()
+            }
+            cat.splice(cat.indexOf(id.toString()), cat.length);
+
+        }
+
+    //Funcion para eliminar tags
+        function borrarTag(stTag) {
+            var id = "#idTag" + stTag;
+            $(id).remove();
+            tags.splice(tags.indexOf(stTag), 1);
+        }
+
+    //Accion para agregar Tags a la lista
+        $("#tags_box_form_crearartButton").click(function () {
+
+            var tag = $("#tags_box_form_crearart").val().trim().toUpperCase().replace(/\s/g, '');
+
+            if ($("#tags_box_form_crearart").hasClass("is-invalid")) {
+                $("#tags_box_form_crearart").removeClass('is-invalid');
+            }
+
+            if (tag.length == 0 || tag.length > 51) {  //Se valida campo del titulo de articulo
+                $("#tag-invalid-form").empty();
+                $("#tag-invalid-form").append("Agregar un tag entre 1 y 50 caracteres");
+                $("#tags_box_form_crearart").addClass('is-invalid');
+
+            } else {
+
+                if (tags.indexOf(tag.toString()) >= 0) {
+                    $("#tag-invalid-form").empty();
+                    $("#tag-invalid-form").append("El tag ya esta registrado.");
+                    $("#tags_box_form_crearart").addClass('is-invalid');
+                } else {
+
+                    tags.push(tag);
+                    $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + tag + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + tag.toString() + "\");'>" + tag + "</button>");
+                    $('#tags_box_form_crearart').val("");
+                }
+            }
+
+        });
+
+        function cargarContenido() {
+            var hiddenTituloArt = $('#<%=hiddenTituloArt.ClientID %>').val();
+            var hiddenContenido = $('#<%=hiddenContenido.ClientID %>').val();
+            var hiddenTags = ($.parseJSON($('#<%=hiddenTags.ClientID %>').val()));
+            var hiddenCat = ($.parseJSON($('#<%=hiddenCategorias.ClientID %>').val()));
+            $('#nombre_box_form_crearart').val(hiddenTituloArt);
+            $("#editor1").html(hiddenContenido);
+
+            //Se cargan Tags
+            hiddenTags.forEach(function (element) {
+                $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + element[1] + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + (element[1]).toString() + "\");'>" + element[1] + "</button>");
+                tags.push((element[1]).toString());
+            });
+
+            //Se cargan Categorias
+            var intCatPadre = 0;
+            hiddenCat.forEach(function (element) {
+                $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + element[0] + ");'> >> <i style='cursor: pointer;'> " + element[1] + "</i></span>");
+                intCatPadre = element[0];
+                cat.push((element[0]).toString());
+            });
+            initCategorias(intCatPadre);
+        }
+
+        cargarContenido();
+
+        //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
@@ -129,40 +219,42 @@
             if ($("#cat_box_form_crearart").hasClass("is-invalid")) {
                 $("#cat_box_form_crearart").removeClass('is-invalid');
             }
-            
+
             if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
 
                 $("#nombre_box_form_crearart").addClass('is-invalid');
-                
+
             } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
                 $("#cat_box_form_crearart").addClass('is-invalid');
-            }else {
+            } else {
                 $.ajax({
                     type: "POST",
-                    url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
+                    url: "EditarArticulo.aspx/editarArticulo",
+                    data: "{'idArticulo':'" + (window.location.search.substring(1).split('=')[1]) + "','nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
-                        //Se limpian campos de formulario
-                        $('#nombre_box_form_crearart').val("");
-                        cat.length = 0;
-                        initCategorias(0);
-                        $("#catSpan_box_form_crearart").empty();
-                        tags.length = 0;
-                        $('#tags_box_form_crearart').val("");
-                        $('#tagcontainer_box_form_crearart').empty();
-                        CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
+                        if (response.d == 0) {
 
-                        if (response.d==0) {
-                            swal("Aritículo registrado", {
+                            //Se limpian campos de formulario
+                            $('#nombre_box_form_crearart').val("");
+                            cat.length = 0;
+                            initCategorias(0);
+                            $("#catSpan_box_form_crearart").empty();
+                            tags.length = 0;
+                            $('#tags_box_form_crearart').val("");
+                            $('#tagcontainer_box_form_crearart').empty();
+                            CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
+
+                            swal("Aritículo editado", {
                                 icon: "success",
                                 allowOutsideClick: false,
                                 closeOnClickOutside: false
                             });
                             $(".swal-button").click(function () {
                                 //closeSite();
+                                window.location.href = 'ArticulosRed.aspx';
                             });
 
                         } else {
@@ -191,75 +283,6 @@
             }
 
         });
-    
-    //Metodo para actualizar select           
-        $("#cat_box_form_crearart").change(function () {
-
-            var valCatSelect = $(this).find('option:selected').val();
-            var textCatSelect = $(this).find('option:selected').text();
-            $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + valCatSelect + ");'> >> <i style='cursor: pointer;'> " + textCatSelect + "</i></span>");
-            initCategorias(valCatSelect);
-            cat.push(valCatSelect);
-        });
-    
-    //Metodo para eliminar elementos del select
-        function spanClickCat(id) {
-
-            if(cat.indexOf(id.toString()) == 0){
-                initCategorias(0);
-            } else {
-                initCategorias( cat[ cat.indexOf( id.toString() ) - 1 ] );
-            }
-
-            for (i = 0; i < (cat.length - cat.indexOf(id.toString())) ; i++) {
-                $("#catSpan_box_form_crearart span:last-child").remove()
-            }
-            cat.splice(cat.indexOf(id.toString()), cat.length);
-
-        }
-    
-    //Funcion para eliminar tags
-        function borrarTag(stTag) {
-            var id = "#idTag" + stTag;
-            $(id).remove();
-            tags.splice(tags.indexOf(stTag), 1);
-        }
-
-    //Accion para agregar Tags a la lista
-        $("#tags_box_form_crearartButton").click(function () {
-
-            var tag = $("#tags_box_form_crearart").val().trim().toUpperCase().replace(/\s/g, '');
-
-            if ($("#tags_box_form_crearart").hasClass("is-invalid")) {
-                $("#tags_box_form_crearart").removeClass('is-invalid');
-            }
-
-            if (tag.length == 0 || tag.length > 51) {  //Se valida campo del titulo de articulo
-                $("#tag-invalid-form").empty();
-                $("#tag-invalid-form").append("Agregar un tag entre 1 y 50 caracteres");
-                $("#tags_box_form_crearart").addClass('is-invalid');
-
-            } else {
-
-                if (tags.indexOf(tag.toString()) >= 0) {
-                    $("#tag-invalid-form").empty();
-                    $("#tag-invalid-form").append("El tag ya esta registrado.");
-                    $("#tags_box_form_crearart").addClass('is-invalid');
-                }else{
-
-                    tags.push(tag);
-                    $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + tag + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + tag.toString() + "\");'>" + tag + "</button>");
-                    $('#tags_box_form_crearart').val("");
-                }
-            }
-            
-        });
-
-        /*********** JS init
-        *********************/
-        $("input[value='cat']").remove();
-        initCategorias(0);
- 
     </script>
 
 </asp:Content>
