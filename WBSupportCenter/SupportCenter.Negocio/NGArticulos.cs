@@ -12,9 +12,9 @@ namespace SupportCenter.Negocio
     {
         DTArticulo Objeto = new DTArticulo();
 
-        public int NG_RegistrarArt(string nombreArticulo, string contenido, string categorias, string tags)
+        public int NG_RegistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
-            return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias, tags);
+            return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias, tags, grupos);
         }
 
         public int NG_EditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
@@ -48,6 +48,12 @@ namespace SupportCenter.Negocio
             DTArticulo Objeto = new DTArticulo();
             Console.WriteLine(comentario);
             return Objeto.DT_guardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
+        }
+
+        public DataSet NG_ConsultarGruposxUsuario(int idUsuario)
+        {
+            DTArticulo Objeto = new DTArticulo();
+            return Objeto.DT_ConsultarGruposxUsuario(idUsuario);
         }
     }
 }

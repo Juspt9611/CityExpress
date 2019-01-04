@@ -11,7 +11,7 @@ namespace SupportCenter.Datos
 {
     public class DTArticulo
     {
-        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, string categorias, string tags)
+        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
             int error = 0;
             SqlConnection connection = null;
@@ -29,7 +29,8 @@ namespace SupportCenter.Datos
                         ParametroAcceso.CrearParametro("@nombreArticulo", SqlDbType.VarChar, nombreArticulo , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input)
                     };
 
 
@@ -331,6 +332,44 @@ namespace SupportCenter.Datos
             }
 
             return error;
+        }
+
+        public DataSet DT_ConsultarGruposxUsuario(int idUsuario)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            DataSet ds = new DataSet();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
+                    };
+
+                    SqlDataReader consulta;
+
+                    //Contenido articulo
+                    connection.Open();
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraGruposxUsuario", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    ds.Tables.Add(dt);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return ds;
         }
 
     }

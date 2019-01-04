@@ -50,7 +50,7 @@ namespace WBSupportCenter.vistas {
             idGrupo = idGrupo.TrimEnd('|');
             idRol = idRol.TrimEnd('|');
 
-            metodo.WSRegistrarPer(nombre, apPaterno, apMaterno, idGrupo, nombreUsuario, contrasena, idRol);
+            //metodo.WSRegistrarPer(nombre, apPaterno, apMaterno, idGrupo, nombreUsuario, contrasena, idRol);
         }
 
         [WebMethod]
@@ -58,7 +58,7 @@ namespace WBSupportCenter.vistas {
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             String result = "";
-            result = DataSetToJSON(metodo.WSConsultarPersonal().Tables[0]); 
+            //result = DataSetToJSON(metodo.WSConsultarPersonal().Tables[0]); 
             return result;
         }
 

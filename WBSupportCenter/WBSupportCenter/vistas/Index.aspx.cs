@@ -100,10 +100,37 @@ namespace SupportCenter {
         public static string articulosxValidar(string palabra) {
             DataTable dtTitulo = new DataTable();
             dtTitulo = ConvertToDataTable(metodo.WSBusquedaTitulo(palabra));
-            return DataTableToJSONWithStringBuilder(dtTitulo);;
+            return DataTableToJSONWithStringBuilder(dtTitulo);
         }
 
+        [WebMethod]
+        public static string articuloxId(int idArt)
+        {
+            DataTable dtTitulo = new DataTable();
+            dtTitulo = ConvertToDataTable(metodo.WSConsultarArticuloxId(idArt));
+            string Conten = ""; 
+            foreach (DataRow item in dtTitulo.Rows)
+            {
+                Conten = item["nombreArticulo"].ToString()+"||"+ item["contenido"].ToString();
 
+            }
+
+            return Conten;
+        }
+
+        [WebMethod]
+        public static void insertaPalabra(string palabra)
+        {
+            metodo.WSGuardarPalabraBuscada(palabra);
+        }
+
+        [WebMethod]
+        public static string articulosxClick(string palabra)
+        {
+            DataTable dtPalabra = new DataTable();
+            dtPalabra = ConvertToDataTable(metodo.WSBusquedaArticulosxClick(palabra));
+            return DataTableToJSONWithStringBuilder(dtPalabra);
+        }
 
         public static DataTable ConvertToDataTable<T>(IList<T> data) {
             PropertyDescriptorCollection properties =

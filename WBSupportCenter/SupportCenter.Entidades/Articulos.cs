@@ -14,6 +14,7 @@ namespace SupportCenter.Entidades {
         public int idEstatusArticulo { get; set; }
         public string version { get; set; }
         public string fechaCreacion { get; set; }
-        
+        public string nombreCategoria { get; set; }
+
     }
 }

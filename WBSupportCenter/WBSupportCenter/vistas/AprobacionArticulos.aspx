@@ -4,11 +4,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+	<style>
+		table.dataTable thead th, table.dataTable thead td {
+			border-bottom: 1px solid #ddd !important;
+		}
+		body {
+			color: #000000 !important;
+		}
+	</style>
 	<div class="container" id="contenidoTabla">
 		<br>
 		<div class="row">
-			<div class="col-sm-12 col-md-3 col-lg-3 col-xlg-3">
-				<h5>Filtros</h5>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+				<h3>Aprobación articulos</h3>
 			</div>
 		</div>	 
 		<div class="row">
@@ -16,7 +24,7 @@
 				<table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable" width="100%">
 					<thead>
 						<tr>
-							<th>Codigo</th>
+							<th>#Codigo</th>
 							<th>Nombre</th> 
 							<th>Contenido</th>
 							<th>Estatus</th> 
@@ -71,7 +79,7 @@
 		
 		<form id="formComentario">
 			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12 form-control">
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12 div">
 					<textarea id="comentario" name="comentario" style="resize: none;"  class="form-control"></textarea>
 				</div>
 			</div>
@@ -229,13 +237,12 @@
 
 
 		function bootsVal() {
-			console.log("entra");
 			$('#formComentario').bootstrapValidator({
 				submitButtons: 'button[id="guardarComentario"]',
 				fields: {
 					comentario: {
 						selector: '#comentario',
-						group: '.form-control',
+						group: '.div',
 						validators: {
 							notEmpty: {
 								message: 'Comentario obligatorio'
@@ -258,12 +265,13 @@
 				success: function (response) {
 					datos = response.d;
 					var json = $.parseJSON(datos);
-					console.log(json);
 					dataTable = $('#tablaAprobacionArticulos').DataTable({
 						data: json,
+						"dom": '<"toolbar">frtip',
+						"data": json,
 						orderCellsTop: true,
 						fixedHeader: true,
-						"lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
+						pageLength: 10,
 						columns: [
 							{ title: "Codigo" },
 							{ title: "Nombre" },
@@ -290,7 +298,7 @@
 								"mData": null,
 								"bSortable": false,
 								"mRender": function (data, type, full) {
-									return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Ver' + '</a>';
+									return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Revisar' + '</a>';
 								}
 							}
 
@@ -298,8 +306,6 @@
 					});
 					$('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
 						var data_row = dataTable.row($(this).closest('tr')).data();
-						console.log(data_row[2]);
-						console.log("###");
 						$("#contenidoTabla").hide();
 						$('#contenidoArticulo').removeAttr('hidden').fadeIn(2000);
 						addDataCard(data_row);
@@ -334,7 +340,6 @@
 				dataType: "json",
 				data: "{'idArticulo': '"+idArticulo+"', 'estatus': '"+estatus+"','comentario': '"+comentario+"' }",
 				success: function (response) {
-					console.log(response);
 					if (response = "success") {
 						swal("Operación exitosa", {
 							icon: "success",

@@ -21,9 +21,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                </form> 
+            </div> 
+            <div class="row">
+                <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="cat_box_form_crearart" class="col-form-label">Categorías</label>
+                            <label for="cat_box_form_crearart" class="col-form-label">Categorías: </label>
                             <select class="form-control" id="cat_box_form_crearart">
                             </select>
                             <div class="invalid-feedback">
@@ -31,8 +34,10 @@
                             </div>
                         </div>
                     </div>
-                </form> 
-            </div>   
+                <div class="col-lg-6">
+                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
+                </div>
+            </div>  
             <div class="row">
                 <div class="col-lg-6 mb-3">
                   <label for="tags_box_form_crearart">Tags:</label>
@@ -50,11 +55,17 @@
                     <div id="tagcontainer_box_form_crearart"></div>
                 </div>
             </div>  
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
+            <div class="form-group row" style="margin-bottom:1em;">
+                <div class="col-lg-2">Grupos: </div>
+                <input type="text" class="form-control" id="inGrupos-form-crearart" style="display: none;" />
+                <div class="col-lg-10" id="Grupos-form-crearart">
+                    
                 </div>
-            </div>  
+                <div class="invalid-feedback">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignar uno o más grupos.
+                </div>
+            </div>
+             
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
@@ -118,6 +129,15 @@
 
     //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
+
+            var grupos = [];
+
+            var i = 0;
+            $("input[type='checkbox']:checked").each(function () {
+                grupos.push(this.value);
+                i++;
+            });
+
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
@@ -129,6 +149,14 @@
             if ($("#cat_box_form_crearart").hasClass("is-invalid")) {
                 $("#cat_box_form_crearart").removeClass('is-invalid');
             }
+
+            if ($("#inGrupos-form-crearart").hasClass("is-invalid")) {
+                $("#inGrupos-form-crearart").removeClass('is-invalid');
+            }
+
+            if ($("#tags_box_form_crearart").hasClass("is-invalid")) {
+                $("#tags_box_form_crearart").removeClass('is-invalid'); ///////////////////////////////
+            }
             
             if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
 
@@ -136,11 +164,13 @@
                 
             } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
                 $("#cat_box_form_crearart").addClass('is-invalid');
-            }else {
+            } else if (i == 0) {
+                $("#inGrupos-form-crearart").addClass('is-invalid');
+            } else {
                 $.ajax({
                     type: "POST",
                     url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
+                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "','grupos':" + JSON.stringify(grupos) + "}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -177,7 +207,7 @@
                         }
 
                     },
-                    failure: function (response) {
+                    error: function (response) {
                         swal("Hubo un error con el registro", {
                             icon: "error",
                             allowOutsideClick: false,
@@ -194,7 +224,6 @@
     
     //Metodo para actualizar select           
         $("#cat_box_form_crearart").change(function () {
-
             var valCatSelect = $(this).find('option:selected').val();
             var textCatSelect = $(this).find('option:selected').text();
             $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + valCatSelect + ");'> >> <i style='cursor: pointer;'> " + textCatSelect + "</i></span>");
@@ -259,6 +288,28 @@
         *********************/
         $("input[value='cat']").remove();
         initCategorias(0);
+
+        function cargarGrupos() {
+            $.ajax({
+                type: "POST",
+                url: "CrearArticulo.aspx/consultarGruposxUsuario",
+                data: "{ 'idUsuario': " + 1 + " }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var opts = $.parseJSON(data.d);
+                    $.each(opts, function (i, d) {
+                        $("#Grupos-form-crearart").append('<div class="form-check">' +
+                            '<input class="form-check-input" type="checkbox" id="gridCheck1" value='+ d[0] +'>' +
+                            '<label class="form-check-label" for="gridCheck1">' +
+                                d[1] +
+                            '</label></div>');
+                    });
+                }
+            });
+        }
+
+        cargarGrupos();
  
     </script>
 

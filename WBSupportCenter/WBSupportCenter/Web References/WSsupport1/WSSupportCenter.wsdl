@@ -26,6 +26,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="idEstatusArticulo" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="WSOptenerCatg">
@@ -78,6 +79,48 @@
           <s:element minOccurs="0" maxOccurs="1" name="nombreArticulo" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="WSConsultarArticuloxId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArt" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArticuloxIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArticuloxIdResult" type="tns:ArrayOfArticulos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSBusquedaArticulosxClick">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="palabra" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSBusquedaArticulosxClickResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSBusquedaArticulosxClickResult" type="tns:ArrayOfArticulos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSGuardarPalabraBuscada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="palabra" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSGuardarPalabraBuscadaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSGuardarPalabraBuscadaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSOpregistrarArt">
         <s:complexType>
           <s:sequence>
@@ -85,6 +128,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="contenido" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="categorias" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="tags" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="grupos" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -205,6 +249,183 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="WSConsultarGruposxUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarGruposxUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarGruposxUsuarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSconsultarCategorias">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSconsultarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSconsultarCategoriasResult" type="tns:ArrayOfCategoriasxSubcategorias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetSinHijos">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSgetSinHijosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSgetSinHijosResult" type="tns:ArrayOfCategoriasxSubcategorias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetSinPadres">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPadre" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetSinPadresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSgetSinPadresResult" type="tns:ArrayOfCategoriasxSubcategorias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetSize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetSizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSgetSizeResult" type="tns:ArrayOfCategoriasxSubcategorias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSgetListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSgetListResult" type="tns:ArrayOfCategoriasxSubcategorias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarCategorias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSguardarCategoriasResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarCategoriasEdit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarCategoriasEditResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSguardarCategoriasEditResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarRelacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSguardarRelacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSguardarRelacionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSeliminarCategorias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCategoria" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSeliminarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSeliminarCategoriasResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSObtenerArticulo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fechaInicial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fechaFinal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="valReporte" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSObtenerArticuloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSObtenerArticuloResult" type="tns:ArrayOfReporte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReporte">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Reporte" nillable="true" type="tns:Reporte" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Reporte">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombreArticulo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="categoria" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="visitas" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="palabraBuscada" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="numeroDeBusquedas" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="promedioCalificacion" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="calificacionTotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="categoriaMasVista" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="ArrayOfArticulos" nillable="true" type="tns:ArrayOfArticulos" />
       <s:element name="ArrayOfCategoriasxSubcategorias" nillable="true" type="tns:ArrayOfCategoriasxSubcategorias" />
       <s:element name="ArrayOfBusquedaTitulo" nillable="true" type="tns:ArrayOfBusquedaTitulo" />
@@ -218,6 +439,7 @@
         </s:complexType>
       </s:element>
       <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfReporte" nillable="true" type="tns:ArrayOfReporte" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="WSOptenerArtSoapIn">
@@ -237,6 +459,24 @@
   </wsdl:message>
   <wsdl:message name="WSBusquedaTituloSoapOut">
     <wsdl:part name="parameters" element="tns:WSBusquedaTituloResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArticuloxId" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArticuloxIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickSoapIn">
+    <wsdl:part name="parameters" element="tns:WSBusquedaArticulosxClick" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickSoapOut">
+    <wsdl:part name="parameters" element="tns:WSBusquedaArticulosxClickResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaSoapIn">
+    <wsdl:part name="parameters" element="tns:WSGuardarPalabraBuscada" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaSoapOut">
+    <wsdl:part name="parameters" element="tns:WSGuardarPalabraBuscadaResponse" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtSoapIn">
     <wsdl:part name="parameters" element="tns:WSOpregistrarArt" />
@@ -280,6 +520,72 @@
   <wsdl:message name="WSOguardarEstatusArticuloAprobarSoapOut">
     <wsdl:part name="parameters" element="tns:WSOguardarEstatusArticuloAprobarResponse" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarGruposxUsuario" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarGruposxUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSconsultarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSconsultarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinHijosSoapIn">
+    <wsdl:part name="parameters" element="tns:WSgetSinHijos" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinHijosSoapOut">
+    <wsdl:part name="parameters" element="tns:WSgetSinHijosResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresSoapIn">
+    <wsdl:part name="parameters" element="tns:WSgetSinPadres" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresSoapOut">
+    <wsdl:part name="parameters" element="tns:WSgetSinPadresResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeSoapIn">
+    <wsdl:part name="parameters" element="tns:WSgetSize" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeSoapOut">
+    <wsdl:part name="parameters" element="tns:WSgetSizeResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListSoapIn">
+    <wsdl:part name="parameters" element="tns:WSgetList" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListSoapOut">
+    <wsdl:part name="parameters" element="tns:WSgetListResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSguardarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSguardarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditSoapIn">
+    <wsdl:part name="parameters" element="tns:WSguardarCategoriasEdit" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditSoapOut">
+    <wsdl:part name="parameters" element="tns:WSguardarCategoriasEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionSoapIn">
+    <wsdl:part name="parameters" element="tns:WSguardarRelacion" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionSoapOut">
+    <wsdl:part name="parameters" element="tns:WSguardarRelacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSeliminarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSeliminarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloSoapIn">
+    <wsdl:part name="parameters" element="tns:WSObtenerArticulo" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloSoapOut">
+    <wsdl:part name="parameters" element="tns:WSObtenerArticuloResponse" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpGetIn" />
   <wsdl:message name="WSOptenerArtHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
@@ -294,11 +600,30 @@
   <wsdl:message name="WSBusquedaTituloHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfBusquedaTitulo" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdHttpGetIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickHttpGetIn">
+    <wsdl:part name="palabra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaHttpGetIn">
+    <wsdl:part name="palabra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpGetIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -341,6 +666,74 @@
   <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarCategoriasHttpGetIn" />
+  <wsdl:message name="WSconsultarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinHijosHttpGetIn" />
+  <wsdl:message name="WSgetSinHijosHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresHttpGetIn">
+    <wsdl:part name="idPadre" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeHttpGetIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListHttpGetIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasHttpGetIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="descripcion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditHttpGetIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="descripcion" type="s:string" />
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionHttpGetIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasHttpGetIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloHttpGetIn">
+    <wsdl:part name="fechaInicial" type="s:string" />
+    <wsdl:part name="fechaFinal" type="s:string" />
+    <wsdl:part name="valReporte" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfReporte" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpPostIn" />
   <wsdl:message name="WSOptenerArtHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
@@ -355,11 +748,30 @@
   <wsdl:message name="WSBusquedaTituloHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfBusquedaTitulo" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdHttpPostIn">
+    <wsdl:part name="idArt" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickHttpPostIn">
+    <wsdl:part name="palabra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSBusquedaArticulosxClickHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaHttpPostIn">
+    <wsdl:part name="palabra" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSGuardarPalabraBuscadaHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpPostIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -402,6 +814,74 @@
   <wsdl:message name="WSOguardarEstatusArticuloAprobarHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarGruposxUsuarioHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarCategoriasHttpPostIn" />
+  <wsdl:message name="WSconsultarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinHijosHttpPostIn" />
+  <wsdl:message name="WSgetSinHijosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresHttpPostIn">
+    <wsdl:part name="idPadre" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSinPadresHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeHttpPostIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetSizeHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListHttpPostIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSgetListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasHttpPostIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="descripcion" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditHttpPostIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="descripcion" type="s:string" />
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarCategoriasEditHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionHttpPostIn">
+    <wsdl:part name="nombreCategoria" type="s:string" />
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSguardarRelacionHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasHttpPostIn">
+    <wsdl:part name="idCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSeliminarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloHttpPostIn">
+    <wsdl:part name="fechaInicial" type="s:string" />
+    <wsdl:part name="fechaFinal" type="s:string" />
+    <wsdl:part name="valReporte" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSObtenerArticuloHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfReporte" />
+  </wsdl:message>
   <wsdl:portType name="WSsupportCenterClassSoap">
     <wsdl:operation name="WSOptenerArt">
       <wsdl:input message="tns:WSOptenerArtSoapIn" />
@@ -414,6 +894,18 @@
     <wsdl:operation name="WSBusquedaTitulo">
       <wsdl:input message="tns:WSBusquedaTituloSoapIn" />
       <wsdl:output message="tns:WSBusquedaTituloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <wsdl:input message="tns:WSConsultarArticuloxIdSoapIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <wsdl:input message="tns:WSBusquedaArticulosxClickSoapIn" />
+      <wsdl:output message="tns:WSBusquedaArticulosxClickSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <wsdl:input message="tns:WSGuardarPalabraBuscadaSoapIn" />
+      <wsdl:output message="tns:WSGuardarPalabraBuscadaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtSoapIn" />
@@ -443,6 +935,50 @@
       <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarSoapIn" />
       <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <wsdl:input message="tns:WSConsultarGruposxUsuarioSoapIn" />
+      <wsdl:output message="tns:WSConsultarGruposxUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <wsdl:input message="tns:WSconsultarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSconsultarCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <wsdl:input message="tns:WSgetSinHijosSoapIn" />
+      <wsdl:output message="tns:WSgetSinHijosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <wsdl:input message="tns:WSgetSinPadresSoapIn" />
+      <wsdl:output message="tns:WSgetSinPadresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <wsdl:input message="tns:WSgetSizeSoapIn" />
+      <wsdl:output message="tns:WSgetSizeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <wsdl:input message="tns:WSgetListSoapIn" />
+      <wsdl:output message="tns:WSgetListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <wsdl:input message="tns:WSguardarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSguardarCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <wsdl:input message="tns:WSguardarCategoriasEditSoapIn" />
+      <wsdl:output message="tns:WSguardarCategoriasEditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <wsdl:input message="tns:WSguardarRelacionSoapIn" />
+      <wsdl:output message="tns:WSguardarRelacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <wsdl:input message="tns:WSeliminarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSeliminarCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <wsdl:input message="tns:WSObtenerArticuloSoapIn" />
+      <wsdl:output message="tns:WSObtenerArticuloSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpGet">
     <wsdl:operation name="WSOptenerArt">
@@ -456,6 +992,18 @@
     <wsdl:operation name="WSBusquedaTitulo">
       <wsdl:input message="tns:WSBusquedaTituloHttpGetIn" />
       <wsdl:output message="tns:WSBusquedaTituloHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <wsdl:input message="tns:WSConsultarArticuloxIdHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <wsdl:input message="tns:WSBusquedaArticulosxClickHttpGetIn" />
+      <wsdl:output message="tns:WSBusquedaArticulosxClickHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <wsdl:input message="tns:WSGuardarPalabraBuscadaHttpGetIn" />
+      <wsdl:output message="tns:WSGuardarPalabraBuscadaHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpGetIn" />
@@ -485,6 +1033,50 @@
       <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarHttpGetIn" />
       <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <wsdl:input message="tns:WSConsultarGruposxUsuarioHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarGruposxUsuarioHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <wsdl:input message="tns:WSconsultarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSconsultarCategoriasHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <wsdl:input message="tns:WSgetSinHijosHttpGetIn" />
+      <wsdl:output message="tns:WSgetSinHijosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <wsdl:input message="tns:WSgetSinPadresHttpGetIn" />
+      <wsdl:output message="tns:WSgetSinPadresHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <wsdl:input message="tns:WSgetSizeHttpGetIn" />
+      <wsdl:output message="tns:WSgetSizeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <wsdl:input message="tns:WSgetListHttpGetIn" />
+      <wsdl:output message="tns:WSgetListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <wsdl:input message="tns:WSguardarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSguardarCategoriasHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <wsdl:input message="tns:WSguardarCategoriasEditHttpGetIn" />
+      <wsdl:output message="tns:WSguardarCategoriasEditHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <wsdl:input message="tns:WSguardarRelacionHttpGetIn" />
+      <wsdl:output message="tns:WSguardarRelacionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <wsdl:input message="tns:WSeliminarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSeliminarCategoriasHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <wsdl:input message="tns:WSObtenerArticuloHttpGetIn" />
+      <wsdl:output message="tns:WSObtenerArticuloHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpPost">
     <wsdl:operation name="WSOptenerArt">
@@ -498,6 +1090,18 @@
     <wsdl:operation name="WSBusquedaTitulo">
       <wsdl:input message="tns:WSBusquedaTituloHttpPostIn" />
       <wsdl:output message="tns:WSBusquedaTituloHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <wsdl:input message="tns:WSConsultarArticuloxIdHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <wsdl:input message="tns:WSBusquedaArticulosxClickHttpPostIn" />
+      <wsdl:output message="tns:WSBusquedaArticulosxClickHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <wsdl:input message="tns:WSGuardarPalabraBuscadaHttpPostIn" />
+      <wsdl:output message="tns:WSGuardarPalabraBuscadaHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpPostIn" />
@@ -527,6 +1131,50 @@
       <wsdl:input message="tns:WSOguardarEstatusArticuloAprobarHttpPostIn" />
       <wsdl:output message="tns:WSOguardarEstatusArticuloAprobarHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <wsdl:input message="tns:WSConsultarGruposxUsuarioHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarGruposxUsuarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <wsdl:input message="tns:WSconsultarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSconsultarCategoriasHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <wsdl:input message="tns:WSgetSinHijosHttpPostIn" />
+      <wsdl:output message="tns:WSgetSinHijosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <wsdl:input message="tns:WSgetSinPadresHttpPostIn" />
+      <wsdl:output message="tns:WSgetSinPadresHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <wsdl:input message="tns:WSgetSizeHttpPostIn" />
+      <wsdl:output message="tns:WSgetSizeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <wsdl:input message="tns:WSgetListHttpPostIn" />
+      <wsdl:output message="tns:WSgetListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <wsdl:input message="tns:WSguardarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSguardarCategoriasHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <wsdl:input message="tns:WSguardarCategoriasEditHttpPostIn" />
+      <wsdl:output message="tns:WSguardarCategoriasEditHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <wsdl:input message="tns:WSguardarRelacionHttpPostIn" />
+      <wsdl:output message="tns:WSguardarRelacionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <wsdl:input message="tns:WSeliminarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSeliminarCategoriasHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <wsdl:input message="tns:WSObtenerArticuloHttpPostIn" />
+      <wsdl:output message="tns:WSObtenerArticuloHttpPostOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -550,6 +1198,33 @@
     </wsdl:operation>
     <wsdl:operation name="WSBusquedaTitulo">
       <soap:operation soapAction="http://tempuri.org/WSBusquedaTitulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArticuloxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <soap:operation soapAction="http://tempuri.org/WSBusquedaArticulosxClick" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <soap:operation soapAction="http://tempuri.org/WSGuardarPalabraBuscada" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -620,6 +1295,105 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarGruposxUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSconsultarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <soap:operation soapAction="http://tempuri.org/WSgetSinHijos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <soap:operation soapAction="http://tempuri.org/WSgetSinPadres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <soap:operation soapAction="http://tempuri.org/WSgetSize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <soap:operation soapAction="http://tempuri.org/WSgetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSguardarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <soap:operation soapAction="http://tempuri.org/WSguardarCategoriasEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <soap:operation soapAction="http://tempuri.org/WSguardarRelacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSeliminarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <soap:operation soapAction="http://tempuri.org/WSObtenerArticulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassSoap12" type="tns:WSsupportCenterClassSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -643,6 +1417,33 @@
     </wsdl:operation>
     <wsdl:operation name="WSBusquedaTitulo">
       <soap12:operation soapAction="http://tempuri.org/WSBusquedaTitulo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArticuloxId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <soap12:operation soapAction="http://tempuri.org/WSBusquedaArticulosxClick" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <soap12:operation soapAction="http://tempuri.org/WSGuardarPalabraBuscada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -713,6 +1514,105 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarGruposxUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSconsultarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <soap12:operation soapAction="http://tempuri.org/WSgetSinHijos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <soap12:operation soapAction="http://tempuri.org/WSgetSinPadres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <soap12:operation soapAction="http://tempuri.org/WSgetSize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <soap12:operation soapAction="http://tempuri.org/WSgetList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSguardarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <soap12:operation soapAction="http://tempuri.org/WSguardarCategoriasEdit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <soap12:operation soapAction="http://tempuri.org/WSguardarRelacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSeliminarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <soap12:operation soapAction="http://tempuri.org/WSObtenerArticulo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassHttpGet" type="tns:WSsupportCenterClassHttpGet">
     <http:binding verb="GET" />
@@ -736,6 +1636,33 @@
     </wsdl:operation>
     <wsdl:operation name="WSBusquedaTitulo">
       <http:operation location="/WSBusquedaTitulo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <http:operation location="/WSConsultarArticuloxId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <http:operation location="/WSBusquedaArticulosxClick" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <http:operation location="/WSGuardarPalabraBuscada" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -799,6 +1726,105 @@
     </wsdl:operation>
     <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
       <http:operation location="/WSOguardarEstatusArticuloAprobar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <http:operation location="/WSConsultarGruposxUsuario" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <http:operation location="/WSconsultarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <http:operation location="/WSgetSinHijos" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <http:operation location="/WSgetSinPadres" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <http:operation location="/WSgetSize" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <http:operation location="/WSgetList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <http:operation location="/WSguardarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <http:operation location="/WSguardarCategoriasEdit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <http:operation location="/WSguardarRelacion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <http:operation location="/WSeliminarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <http:operation location="/WSObtenerArticulo" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -836,6 +1862,33 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxId">
+      <http:operation location="/WSConsultarArticuloxId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBusquedaArticulosxClick">
+      <http:operation location="/WSBusquedaArticulosxClick" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSGuardarPalabraBuscada">
+      <http:operation location="/WSGuardarPalabraBuscada" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <http:operation location="/WSOpregistrarArt" />
       <wsdl:input>
@@ -892,6 +1945,105 @@
     </wsdl:operation>
     <wsdl:operation name="WSOguardarEstatusArticuloAprobar">
       <http:operation location="/WSOguardarEstatusArticuloAprobar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarGruposxUsuario">
+      <http:operation location="/WSConsultarGruposxUsuario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarCategorias">
+      <http:operation location="/WSconsultarCategorias" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinHijos">
+      <http:operation location="/WSgetSinHijos" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSinPadres">
+      <http:operation location="/WSgetSinPadres" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetSize">
+      <http:operation location="/WSgetSize" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSgetList">
+      <http:operation location="/WSgetList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategorias">
+      <http:operation location="/WSguardarCategorias" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarCategoriasEdit">
+      <http:operation location="/WSguardarCategoriasEdit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSguardarRelacion">
+      <http:operation location="/WSguardarRelacion" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSeliminarCategorias">
+      <http:operation location="/WSeliminarCategorias" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSObtenerArticulo">
+      <http:operation location="/WSObtenerArticulo" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

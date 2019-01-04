@@ -21,10 +21,10 @@ namespace WBSupportCenter.vistas
         }
 
         [WebMethod]
-        public static int registrarArticulo(string nombreArticulo, string contenido, int[] categorias, string tags)
+        public static int registrarArticulo(string nombreArticulo, string contenido, int[] categorias, string tags, int[] grupos)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSOpregistrarArt(nombreArticulo, contenido, string.Join(",", categorias), tags);
+            return metodo.WSOpregistrarArt(nombreArticulo, contenido, string.Join(",", categorias), tags, string.Join(",", grupos));
         }
 
         [WebMethod]
@@ -33,6 +33,15 @@ namespace WBSupportCenter.vistas
             string dataResult = "";
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             dataResult = DataSetToJSON(metodo.WSConsultarCategorias(idPadreCat).Tables[0]);
+            return dataResult;
+        }
+
+        [WebMethod]
+        public static string consultarGruposxUsuario(int idUsuario)
+        {
+            string dataResult = "";
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            dataResult = DataSetToJSON(metodo.WSConsultarGruposxUsuario(idUsuario).Tables[0]);
             return dataResult;
         }
 

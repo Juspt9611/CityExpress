@@ -34,8 +34,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-    <div class="news">
+  
+        <div class="news">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -44,7 +44,7 @@
                 <div class="col-lg-6" style="text-align: center">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search" id="txtsearch" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Buscar" id="txtsearch" autocomplete="off">
                         <ul class="list-group" id="result"></ul>
 
                         <div class="input-group-append">
@@ -59,25 +59,16 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-                    <%--<input type="text" class="js-example-basic-multiple js-states form-control" id="Buscador"/>--%>
-                    <%--<select class="js-example-basic-multiple js-states form-control" id="txtBuscador"></select>
-                    <asp:DropDownList ID="DDLCategorias" runat="server" class="form-control">
-                    </asp:DropDownList>--%>
                 </div>
                 <div class="col-lg-3"></div>
             </div>
             <div class="row">
-                <div class="col-lg-2 sidebar_col">
+                <div id="sidebarArticulo" class="col-lg-2 sidebar_col">
                     <div class="sidebar listasOcultar">
                         <!-- Recent Posts -->
                         <div class="recent_posts sidebar_section magic_fade_in">
                             <div class="sidebar_title_container">
-                                <div>Artículos recientes</div>
+                                <div>Artículos más vistos</div>
                             </div>
                             <div class="sidebar_list" runat="server" id="lstArt">
                             </div>
@@ -85,7 +76,7 @@
                     </div>
                 </div>
                 <!-- News Content -->
-                <div class="col-lg-8">
+                <div id="listArticulos" class="col-lg-8">
                     <div class="news_posts">
                         <!-- News Post -->
                         <div class="news_post magic_fade_in">
@@ -151,29 +142,48 @@
                     </div>
                 </div>
                 <!-- News Sidebar -->
-                <div class="col-lg-2 sidebar_col pull-right">
+                <div id="sidebarCategoria" class="col-lg-2 sidebar_col pull-right">
                     <div class="sidebar listasOcultar">
                         <!-- Recent Comments -->
                         <div class="recent_posts sidebar_section magic_fade_in">
                             <div class="sidebar_title_container">
-                                <div>Categorías</div>
+                                <div>Categorías más vistas</div>
                             </div>
                             <div class="sidebar_list" runat="server" id="lstCatg">
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="contentArticulo" class="container contentArticulo" runat="server">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 id="titleCard"></h5>
+                                </div>
+			                    <div class="card-body">
+                                    <div id="cuerpoCard"></div>
+			                    </div>
+                                <div class="card-footer text-muted"></div>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div id="tableIndex" class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <table id="tableArticulos" class="table table-striped table-bordered dt-responsive nowrap text-dark table-light"></table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
-
     <script>
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
+            $('.contentArticulo').hide();
+            $('#tablaArticulos').hide();
             $('#txtsearch').keyup(function () {
                 $('#result').html('');
                 $('#state').val('');
@@ -190,106 +200,211 @@
                         dataType: "json",
                         data: "{'palabra':'" + $('#txtsearch').val() + "'}",
                         success: function (response) {
-
                             if (response.d != "") {
                                 $.each(response, function (item, index) {
                                     $.each(jQuery.parseJSON(index), function (item, index) {
-                                        $('#result').append('<li class="list-group-item link-class"><span class="l">' + index.nombreArticulo + '</span></li>');
+                                        $('#result').append('<li class="list-group-item link-class" value="' + index.idarticulo + '"><span class="l"><a href="javascript:void(0)">' + index.nombreArticulo + '</a></span></li>');
                                     });
-
                                 });
-
-
                             }
-
-
-
-
-                            //do somthing here
                         }
                     });
                 }
-
-
             });
-
+        
             //evento al seleccionar
             $('#result').on('click', 'li', function () {
-
-                //console.log($(this).val());
                 $('#txtsearch').val($(this).text());
+                var palabra = $('#txtsearch').val();
+                showArticle($(this).val());
+                savePalabra(palabra);
                 $("#result").html('');
-
+                $('#sidebarArticulo').hide();
+                $('#sidebarCategoria').hide();
+                $('#listArticulos').hide();
+                $('.contentArticulo').show();
+                $('#tableIndex').hide();
             });
 
             //evento al dar enter
-            $('#search').on('keydown', function (e) {
-                if (e.which == 13) {
-                    console.log($('#txtsearch').val());
-                    //e.preventDefault();
+            $('#txtsearch').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    var palabra = $('#txtsearch').val();
+
+                    if (palabra != "") {
+                        $('#sidebarArticulo').hide();
+                        $('#sidebarCategoria').hide();
+                        $('#listArticulos').hide();
+                        $('#tableIndex').show();
+                        $('#txtsearch').val('');
+                        $("#result").html('');
+                        $('.contentArticulo').hide();
+
+                        if (bandera == true) {
+                            $('#tableArticulos').DataTable().destroy();
+                            showTableNews(palabra);
+                            savePalabra(palabra);
+                        } else {
+                            showTableNews(palabra);
+                            savePalabra(palabra);
+                            bandera = true;
+                        }
+                    }
                 }
             });
 
+            var bandera = false;
+
             //evento boton 
-
             $("#btnBuscar").click(function () {
-                console.log($('#txtsearch').val());
+                var palabra = $('#txtsearch').val();
 
+                if (palabra != "") {
+                    $('#sidebarArticulo').hide();
+                    $('#sidebarCategoria').hide();
+                    $('#listArticulos').hide();
+                    $('#tableIndex').show();
+                    $('#txtsearch').val('');
+                    $("#result").html('');
+                    $('.contentArticulo').hide();
 
-
-
-
-
+                    if (bandera == true) {
+                        $('#tableArticulos').DataTable().destroy();
+                        showTableNews(palabra);
+                        savePalabra(palabra);
+                    } else {
+                        showTableNews(palabra);
+                        savePalabra(palabra);
+                        bandera = true;
+                    }
+                } else {
+                    swal("Favor de ingresar un criterio de búsqueda", {
+                        icon: "warning",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+                
             });
-
-
         });
-    </script>
 
-
-
-    <%--<script type="text/javascript">
-        $(document).ready(function () {
-            var data = [];
-            var arreglo = [];
+        function showArticle(id) {
+            $('#titleCard').html('');
+            $('#cuerpoCard').html('');
 
             $.ajax({
                 async: false,
                 type: "POST",
-                url: "Index.aspx/articulosxValidar",
+                url: "Index.aspx/articuloxId",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                data: "{'palabra':'" + txtBuscador + "'}",
+                data: "{'idArt':'" + id + "'}",
                 success: function (response) {
-
-                    $.each(response, function (item, index) {
-
-                        //arreglo.push(index)
-                        //console.log(jQuery.parseJSON(index));
-                        $.each(jQuery.parseJSON(index), function (item, index) {
-                            data.push({
-                                id: index.id,
-                                text: index.text
-                            })
-
-
-                        });
-
-
-
+                    var valNew = response.d.split('||');
+                    $('#titleCard').html(valNew[0]);
+                    $('#cuerpoCard').html(valNew[1]);
+                },
+                error: function (response) {
+                    swal("Hubo un error con esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
                     });
-
-
-                    //do somthing here
                 }
             });
+        }
 
-            console.log(data);
-            $("#txtBuscador").select2({
-                placeholder: "Buscar...",
-                minimumInputLength: 1,
-                data: data
+        function showTableNews(palabra) {
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "Index.aspx/articulosxClick",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'palabra':'" + palabra + "'}",
+                success: function (response) {
+                    var jsonReporte = $.parseJSON(response.d);
+                    $('#tableArticulos').DataTable({
+                        data: jsonReporte,
+                        lengthChange: false,
+                        columns: [
+                            { data: "idarticulo", visible: false },
+                            { data: "nombreArticulo", title: 'Artículo' },
+                            { data: "autor", visible: false },
+                            { data: "contenido", visible: false },
+                            { data: "idEstatusArticulo", visible: false },
+                            { data: "version", visible: false },
+                            { data: "fechaCreacion", visible: false },
+                            { data: "nombreCategoria", title: "Categoría" },
+                            {
+                                title: "Acción",
+                                data: null,
+                                sortable: false,
+                                render: function (data, type, row) {
+                                    return '<center><a id="btnVer" class="btn btn-primary" href="javascript:void(0)" onclick="showArticleByTable(' + row.idarticulo + ');" role="button">Ver</a></center>';
+                                }
+                            },
+                            {
+                                title: "Acción",
+                                data: null,
+                                sortable: false,
+                                render: function (data, type, row) {
+                                    return '<center><a id="btnHistorial" class="btn btn-warning" href="javascript:void(0)" role="button">Historial</a></center>';
+                                }
+                            }
+					    ]
+                    });
+
+                },
+                error: function (response) {
+                    swal("Hubo un error en esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
             });
-        });
-    </script>--%>
+        }
+
+        function showArticleByTable(id) {
+            $('#titleCard').html('');
+            $('#cuerpoCard').html('');
+            $('#tableIndex').hide();
+            $('.contentArticulo').show();
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "Index.aspx/articuloxId",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArt':'" + id + "'}",
+                success: function (response) {
+                    var valNew = response.d.split('||');
+                    $('#titleCard').html(valNew[0]);
+                    $('#cuerpoCard').html(valNew[1]);
+                },
+                error: function (response) {
+                    swal("Hubo un error en esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
+        }
+
+        function savePalabra(palabra) {
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "Index.aspx/insertaPalabra",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'palabra':'" + palabra + "'}",
+                success: function (response) {
+                }
+            });
+        }
+    </script>
 </asp:Content>

@@ -9,7 +9,9 @@ using System.Web.Script.Services;
 [System.Web.Script.Services.ScriptService]
 
 public class WSsupportCenterClass : System.Web.Services.WebService {
-    
+
+    #region Busqueda
+
     readonly NGBusqueda Busqueda = new NGBusqueda();
 
     [WebMethod]
@@ -32,15 +34,34 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_BusquedaTitulo(palabra);
     }
 
+    [WebMethod]
+    public List<Articulos> WSConsultarArticuloxId(int idArt)
+    {
+        return Busqueda.NG_ConsultaArticuloxId(idArt);
+    }
+
+    [WebMethod]
+    public List<Articulos> WSBusquedaArticulosxClick(string palabra)
+    {
+        return Busqueda.NG_BusquedaArticulosxClick(palabra);
+    }
+
+    [WebMethod]
+    public int WSGuardarPalabraBuscada(string palabra)
+    {
+        return Busqueda.NG_GuardarPalabraBuscada(palabra);
+    }
+
+    #endregion 
 
     #region Articulos
 
     //Registrar articulo
     [WebMethod]
-    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags)
+    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags);
+        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags, grupos);
     }
     //Consultar articulos por validar
     [WebMethod]
@@ -89,6 +110,101 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Articulos.NG_guardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
     }
 
+    [WebMethod]
+    public DataSet WSConsultarGruposxUsuario(int idUsuario)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarGruposxUsuario(idUsuario);
+    }
+
+    #endregion
+
+    #region Categorias
+
+    //Consultar las categorias
+    [WebMethod]
+    public List<CategoriasxSubcategorias> WSconsultarCategorias()
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_consultarCategorias();
+    }
+
+    //Consultar las categorias
+    [WebMethod]
+    public List<CategoriasxSubcategorias> WSgetSinHijos()
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_getSinHijos();
+    }
+
+    //Consultar las categorias
+    [WebMethod]
+    public List<CategoriasxSubcategorias> WSgetSinPadres(int idPadre)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_getSinPadres(idPadre);
+    }
+
+    //Consultar las categorias
+    [WebMethod]
+    public List<CategoriasxSubcategorias> WSgetSize(int idCategoria)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_getSize(idCategoria);
+    }
+
+    //Consultar las categorias
+    [WebMethod]
+    public List<CategoriasxSubcategorias> WSgetList(int idCategoria)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_getList(idCategoria);
+    }
+
+    //Guardar las categorias
+    [WebMethod]
+    public String WSguardarCategorias(String nombreCategoria, String descripcion)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_guardarCategorias(nombreCategoria, descripcion);
+    }
+
+    //Guardar las categorias
+    [WebMethod]
+    public String WSguardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_guardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
+    }
+
+    //Guardar las categorias
+    [WebMethod]
+    public String WSguardarRelacion(String nombreCategoria, int idCategoria)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_guardarRelacion(nombreCategoria, idCategoria);
+    }
+
+
+    //Eliminar las categorias
+    [WebMethod]
+    public String WSeliminarCategorias(int idCategoria)
+    {
+        NGCategorias Categorias = new NGCategorias();
+        return Categorias.NG_eliminarCategorias(idCategoria);
+    }
+
+    #endregion
+
+
+    #region Reporte
+    [WebMethod]
+    public List<Reporte> WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte)
+    {
+        NGReporte ObjetoNG = new NGReporte();
+
+        return ObjetoNG.NGConsultaReportes(fechaInicial, fechaFinal, valReporte);
+    }
     #endregion
 }
 

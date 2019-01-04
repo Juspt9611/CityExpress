@@ -23,6 +23,21 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_BusquedaTitulo(palabra);
         }
 
+        public List<Articulos> NG_ConsultaArticuloxId(int idArt)
+        {
+            return Obejeto.DT_ConsultarArticuloxId(idArt);
+        }
+
+        public List<Articulos> NG_BusquedaArticulosxClick(string palabra)
+        {
+            return Obejeto.DT_BusquedaArticulosxClick(palabra);
+        }
+
+        public int NG_GuardarPalabraBuscada(string palabra)
+        {
+            return Obejeto.DT_GuardarPalabraBuscada(palabra);
+        }
+
 
     }
 }

@@ -7,36 +7,27 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SupportCenter {
+namespace WBSupportCenter.vistas {
     
     
-    public partial class Index {
+    public partial class Reporte {
         
         /// <summary>
-        /// Control lstArt.
+        /// Control fechaInicial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstArt;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText fechaInicial;
         
         /// <summary>
-        /// Control lstCatg.
+        /// Control fechaFinal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lstCatg;
-        
-        /// <summary>
-        /// Control contentArticulo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl contentArticulo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText fechaFinal;
     }
 }

@@ -237,7 +237,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="vistas\AprobacionArticulos.aspx" />
+    <Content Include="vistas\Categoria.aspx" />
     <Content Include="vistas\EditarArticulo.aspx" />
+    <Content Include="vistas\Index.aspx" />
+    <Content Include="vistas\Reporte.aspx" />
     <Content Include="Web References\WSsupport1\BusquedaTitulo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
@@ -251,6 +254,9 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Web References\WSsupport1\Reporte.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\WSsupport1\WSSupportCenter.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -959,7 +965,6 @@
     <Content Include="vistas\ArticulosRed.aspx" />
     <Content Include="vistas\BlogMuestra.aspx" />
     <Content Include="vistas\CrearArticulo.aspx" />
-    <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Personal.aspx" />
     <Content Include="vistas\Sesion.aspx" />
     <None Include="Web References\WSsupport1\WSSupportCenter.disco" />
@@ -1021,6 +1026,13 @@
     <Compile Include="vistas\BlogMuestra.aspx.designer.cs">
       <DependentUpon>BlogMuestra.aspx</DependentUpon>
     </Compile>
+    <Compile Include="vistas\Categoria.aspx.cs">
+      <DependentUpon>Categoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\Categoria.aspx.designer.cs">
+      <DependentUpon>Categoria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="vistas\CrearArticulo.aspx.cs">
       <DependentUpon>CrearArticulo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1048,6 +1060,13 @@
     </Compile>
     <Compile Include="vistas\Personal.aspx.designer.cs">
       <DependentUpon>Personal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\Reporte.aspx.cs">
+      <DependentUpon>Reporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\Reporte.aspx.designer.cs">
+      <DependentUpon>Reporte.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Sesion.aspx.cs">
       <DependentUpon>Sesion.aspx</DependentUpon>
@@ -1086,6 +1105,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SupportCenter.Entidades\SupportCenter.Entidades.csproj">
+      <Project>{9af0c326-cccb-47d2-ac87-457e9a0629a1}</Project>
+      <Name>SupportCenter.Entidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

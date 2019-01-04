@@ -27,8 +27,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <!-- Notificaciones -->
-        <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
-
+    <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
+    <!-- Reportes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 
     <%-- SCRIPTS --%>
@@ -59,7 +61,12 @@
     <%--    DataTable--%>
     <script src="../recursos/js/datatables.min.js"></script>
     <script src="../recursos/bootstrapvalidator/bootstrapValidator.min.js"></script>
-
+    <!-- Reportes -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
     <style>
         .circulo {
@@ -79,6 +86,10 @@
             color: #fcea1d !important;
             font-size: 20px !important;
             font-weight: bold;
+        }
+
+        .text-Cir:hover{
+            cursor:auto;
         }
 
         @media screen and (max-width: 600px) {
@@ -103,13 +114,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/vistas/index.aspx">Buscador</a>
+                    <a href="/vistas/index.aspx">Buscar artículos</a>
                 </li>
                 <li>
-                    <a href="/vistas/ArticulosRed.aspx">Redactor</a>
+                    <a href="/vistas/ArticulosRed.aspx">Crear y editar artículos</a>
                 </li>
                 <li>
-                    <a href="/vistas/AprobacionArticulos.aspx">Autorizar Artículos</a>
+                    <a href="/vistas/AprobacionArticulos.aspx">Autorizar artículos</a>
+                </li>
+                <li>
+                    <a href="/vistas/Categoria.aspx">Categorías</a>
+                </li>
+                <li>
+                    <a href="/vistas/Reporte.aspx">Reportes</a>
                 </li>
             </ul>
         </div>
@@ -124,12 +141,12 @@
                             <div id="header-blog-master" class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
                                 <div style="padding-top: 2px;">
 
-                                    <a>
+                                    <a href="/vistas/index.aspx">
                                         <h2 style="color: #FFF;">Support<span style="color: #fcea1d;">Center</span></h2>
                                     </a>
                                     <%--<span> <img src="../recursos/img/city/logo.png" alt="SmartAdmin" style="width:50%;height:4rem;"> </span>--%>
                                 </div>
-                                <div class="log_reg_text circulo ml-auto" data-toggle="modal" data-target="#modalLoginCity"><a class="text-Cir">MD</a></div>
+                                <div class="log_reg_text circulo ml-auto" <%--data-toggle="modal" data-target="#modalLoginCity"--%>><a class="text-Cir">MD</a></div>
                                 <div id="menu-toggle" class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
                             </div>
                         </div>
@@ -197,7 +214,7 @@
 
             <%--<form id="form1" runat="server">--%>
 
-                <div>
+                <div id="ContendorMaster">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -326,6 +343,8 @@
 
     <script type="text/javascript" class="init">
 
+        var toogleMenu = 0;
+
         $(document).ready(function () {
             //$('#example').DataTable();
 
@@ -333,8 +352,17 @@
                 e.preventDefault();
                 $("#header-blog-master").toggleClass("toggled");
                 $("#wrapper").toggleClass("toggled");
-
+                toogleMenu = !toogleMenu;
             });
+
+            $("#ContendorMaster").click(function (e) {
+                if (toogleMenu) {
+                    $("#header-blog-master").toggleClass("toggled");
+                    $("#wrapper").toggleClass("toggled");
+                    toogleMenu = !toogleMenu;
+                }
+            });
+
         });
 
 
