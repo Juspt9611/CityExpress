@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
     <!-- Reportes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">--%>
 
 
     <%-- SCRIPTS --%>
@@ -123,7 +123,7 @@
                     <a href="/vistas/AprobacionArticulos.aspx">Autorizar artículos</a>
                 </li>
                 <li>
-                    <a href="/vistas/Categoria.aspx">Categorías</a>
+                    <a href="/vistas/Categoria.aspx">Crear y editar categorías</a>
                 </li>
                 <li>
                     <a href="/vistas/Reporte.aspx">Reportes</a>

@@ -21,17 +21,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="cat_box_form_crearart" class="col-form-label">Categorías</label>
-                            <select class="form-control" id="cat_box_form_crearart">
-                            </select>
-                            <div class="invalid-feedback">
-                                Registrar una categoría.
-                            </div>
+                </form> 
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="cat_box_form_crearart" class="col-form-label">Categorías: </label>
+                        <select class="form-control" id="cat_box_form_crearart">
+                        </select>
+                        <div class="invalid-feedback">
+                            Registrar una categoría.
                         </div>
                     </div>
-                </form> 
+                </div>
+                <div class="col-lg-6">
+                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-6 mb-3">
@@ -49,12 +54,7 @@
                 <div class="col-lg-6">
                     <div id="tagcontainer_box_form_crearart"></div>
                 </div>
-            </div>  
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
-                </div>
-            </div>      
+            </div>       
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
