@@ -1084,6 +1084,7 @@
   <ItemGroup>
     <Folder Include="assets\img\" />
     <Folder Include="recursos\blog\" />
+    <Folder Include="recursos\imgBlog\" />
     <Folder Include="recursos\img\realestate\thumbs\" />
     <Folder Include="scripts\ckeditor\" />
   </ItemGroup>

@@ -27,19 +27,21 @@ namespace WBSupportCenter.vistas
             string contenido = (string)ds.Tables[0].Rows[0][2];
             string categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
             string tags = JsonConvert.SerializeObject(ds.Tables[2].AsEnumerable().Select(r => r.ItemArray));
+            string grupos = JsonConvert.SerializeObject(ds.Tables[3].AsEnumerable().Select(r => r.ItemArray));
 
             this.hiddenTituloArt.Value = tituloArt;
             this.hiddenContenido.Value = contenido;
             this.hiddenCategorias.Value = categorias;
             this.hiddenTags.Value = tags;
+            this.hiddenGrupos.Value = grupos;
 
         }
 
         [WebMethod]
-        public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, int[] categorias, string tags)
+        public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, int[] categorias, string tags, int[] grupos)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, string.Join(",", categorias), tags);
+            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, string.Join(",", categorias), tags, string.Join(",", grupos));
         }
 
         [WebMethod]

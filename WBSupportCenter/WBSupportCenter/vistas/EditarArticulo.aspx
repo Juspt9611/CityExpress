@@ -54,7 +54,17 @@
                 <div class="col-lg-6">
                     <div id="tagcontainer_box_form_crearart"></div>
                 </div>
-            </div>       
+            </div>      
+            <div class="form-group row" style="margin-bottom:1em;">
+                <div class="col-lg-2">Grupos: </div>
+                <input type="text" class="form-control" id="inGrupos-form-crearart" style="display: none;" />
+                <div class="col-lg-10" id="Grupos-form-crearart">
+                    
+                </div>
+                <div class="invalid-feedback">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignar uno o más grupos.
+                </div>
+            </div> 
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
@@ -91,13 +101,37 @@
             <input id="hiddenContenido" type="hidden" runat="server" />
             <input id="hiddenTags" type="hidden" runat="server" />  
             <input id="hiddenCategorias" type="hidden" runat="server" />   
+            <input id="hiddenGrupos" type="hidden" runat="server" /> 
      </div>
     </div>
     </form>
     <script>
 
         var cat = [];
-        var tags = [];
+        var tags = [];  
+
+        //Funcion para cargar grupos
+        function initGrupos(chekaRegistros) {
+            $.ajax({
+                type: "POST",
+                url: "CrearArticulo.aspx/consultarGruposxUsuario",
+                data: "{ 'idUsuario': " + 1 + " }",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var opts = $.parseJSON(data.d);
+                    $.each(opts, function (i, d) {
+                        $("#Grupos-form-crearart").append('<div class="form-check">' +
+                            '<input class="form-check-input" type="checkbox" id="gridCheck1" value=' + d[0] + '>' +
+                            '<label class="form-check-label" for="gridCheck1">' +
+                                d[1] +
+                            '</label></div>');
+                    });
+
+                    chekaRegistros();
+                }
+            });
+        }
 
     //Metodo para actualizar select           
         $("#cat_box_form_crearart").change(function () {
@@ -185,8 +219,16 @@
             var hiddenContenido = $('#<%=hiddenContenido.ClientID %>').val();
             var hiddenTags = ($.parseJSON($('#<%=hiddenTags.ClientID %>').val()));
             var hiddenCat = ($.parseJSON($('#<%=hiddenCategorias.ClientID %>').val()));
+            var hiddenGrupos = ($.parseJSON($('#<%=hiddenGrupos.ClientID %>').val()));
+
             $('#nombre_box_form_crearart').val(hiddenTituloArt);
             $("#editor1").html(hiddenContenido);
+            initGrupos(function () {
+                //Se cargan los grupos asociados al artículo
+                hiddenGrupos.forEach(function (element) {
+                    $(":checkbox[value=" + element[0] + "]").prop("checked", "true");
+                });
+            });
 
             //Se cargan Tags
             hiddenTags.forEach(function (element) {
@@ -202,15 +244,26 @@
                 cat.push((element[0]).toString());
             });
             initCategorias(intCatPadre);
+
         }
 
         cargarContenido();
 
         //Evento para boton de enviar
         document.querySelector('#submit').addEventListener('click', function () {
+
             //Variables
             var data = CKEDITOR.instances.editor1.getData();
             var tituloArt = $('#nombre_box_form_crearart').val().trim();
+            var grupos = [];
+            var i = 0;
+
+            $("input[type='checkbox']:checked").each(function () {
+                grupos.push(this.value);
+                i++;
+            });
+
+            console.log(grupos);
 
             if ($("#nombre_box_form_crearart").hasClass("is-invalid")) {
                 $("#nombre_box_form_crearart").removeClass('is-invalid');
@@ -220,17 +273,23 @@
                 $("#cat_box_form_crearart").removeClass('is-invalid');
             }
 
+            if ($("#inGrupos-form-crearart").hasClass("is-invalid")) {
+                $("#inGrupos-form-crearart").removeClass('is-invalid');
+            }
+
             if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
 
                 $("#nombre_box_form_crearart").addClass('is-invalid');
 
             } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
                 $("#cat_box_form_crearart").addClass('is-invalid');
+            } else if (i == 0) {
+                $("#inGrupos-form-crearart").addClass('is-invalid');
             } else {
                 $.ajax({
                     type: "POST",
                     url: "EditarArticulo.aspx/editarArticulo",
-                    data: "{'idArticulo':'" + (window.location.search.substring(1).split('=')[1]) + "','nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "'}",
+                    data: "{'idArticulo':'" + (window.location.search.substring(1).split('=')[1]) + "','nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "','grupos':" + JSON.stringify(grupos) + "}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

@@ -72,6 +72,11 @@
                 </textarea>
                 <script>
                     CKEDITOR.replace('editor1', {
+                        uploadUrl: '../recursos/imgBlog',
+                        filebrowserBrowseUrl : '../recursos/imgBlog',
+                        filebrowserImageBrowseUrl: '../recursos/imgBlog',
+                        filebrowserUploadUrl: '../recursos/imgBlog',
+                        filebrowserImageUploadUrl: '../recursos/imgBlog',
                         on: {
                             loaded: function (e) {
                                 var rules = {

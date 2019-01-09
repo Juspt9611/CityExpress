@@ -50,7 +50,7 @@ namespace SupportCenter.Datos
             return error;
         }
 
-        public int DT_EditarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
+        public int DT_EditarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
             int error = 0;
             SqlConnection connection = null;
@@ -69,7 +69,8 @@ namespace SupportCenter.Datos
                         ParametroAcceso.CrearParametro("@nombreArticulo", SqlDbType.VarChar, nombreArticulo , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input)
                     };
 
 
@@ -149,6 +150,7 @@ namespace SupportCenter.Datos
                     ds.Tables.Add(dt);
                     ds.Tables.Add(DT_ConsultarCategoriasxArt(idArt));
                     ds.Tables.Add(DT_ConsultarTagsxArt(idArt));
+                    ds.Tables.Add(DT_ConsultarGrupossxArt(idArt));
 
                 }
 
@@ -182,6 +184,41 @@ namespace SupportCenter.Datos
                     //Categorias
                     connection.Open();
                     consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraCategoriasxArticulo", paramCat);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return dt;
+        }
+
+        public static DataTable DT_ConsultarGrupossxArt(int idArt)
+        {
+
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+
+                    var paramCat = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArt , ParameterDirection.Input)
+                    };
+
+                    //Categorias
+                    connection.Open();
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_MuestraGruposxArticulo", paramCat);
                     dt.Load(consulta);
                     connection.Close();
 

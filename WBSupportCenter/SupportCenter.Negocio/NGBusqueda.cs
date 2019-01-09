@@ -38,6 +38,26 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_GuardarPalabraBuscada(palabra);
         }
 
+        public DataSet NG_BuscarArtMasVistos(int top)
+        {
+            return Obejeto.DT_BuscarArtMasVistos(top);
+        }
+
+        public int NG_RegistrarVisita(int idUsuario, int idArticulo)
+        {
+            return Obejeto.DT_RegistrarVisita(idUsuario, idArticulo);
+        }
+
+        public DataSet NG_ConsultarComentariosxArt(int idArticulo)
+        {
+            return Obejeto.DT_ConsultarComentariosxArt(idArticulo);
+        }
+
+        public int NG_RegistraValoracionxArticulo(int estrellas, int idArticulo, string comentario, int idUsuario)
+        {
+            return Obejeto.DT_RegistraValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
+        }
+
 
     }
 }

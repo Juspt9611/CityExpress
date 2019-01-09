@@ -52,6 +52,30 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_GuardarPalabraBuscada(palabra);
     }
 
+    [WebMethod]
+    public DataSet WSBuscarArtMasVistor(int top)
+    {
+        return Busqueda.NG_BuscarArtMasVistos(top);
+    }
+
+    [WebMethod]
+    public int WSregistrarVisita(int idUsuario, int idArticulo)
+    {
+        return Busqueda.NG_RegistrarVisita(idUsuario, idArticulo);
+    }
+
+    [WebMethod]
+    public DataSet WSconsultarComentariosxArt(int idArticulo)
+    {
+        return Busqueda.NG_ConsultarComentariosxArt(idArticulo);
+    }
+
+    [WebMethod]
+    public int WSregistrarValoracionxArticulo(int estrellas, int idArticulo, string comentario, int idUsuario)
+    {
+        return Busqueda.NG_RegistraValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
+    }
+
     #endregion 
 
     #region Articulos
@@ -88,10 +112,10 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     //EditarArticulo 
     [WebMethod]
-    public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags)
+    public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags);
+        return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
     }
 
     //Consultar articulos por validar

@@ -188,8 +188,29 @@ namespace SupportCenter {
         }
 
 
-        
+        [WebMethod]
+        public static string buscarArtMasVistos(int top)
+        {
+            return DataSetToJSON(metodo.WSBuscarArtMasVistor(top).Tables[0]);
+        }
 
+        [WebMethod]
+        public static int registrarVisita(int idUsuario, int idArticulo)
+        {
+            return metodo.WSregistrarVisita(idUsuario, idArticulo);
+        }
+
+        [WebMethod]
+        public static string consultarComentariosxArt(int idArticulo)
+        {
+            return DataSetToJSON(metodo.WSconsultarComentariosxArt(idArticulo).Tables[0]);
+        }
+
+        [WebMethod]
+        public static int registrarValoracionArticulo(int estrellas, int idArticulo, string comentario, int idUsuario)
+        {
+            return metodo.WSregistrarValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
+        }
 
     }
 }

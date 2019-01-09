@@ -121,6 +121,80 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="WSBuscarArtMasVistor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="top" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSBuscarArtMasVistorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSBuscarArtMasVistorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSregistrarVisita">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSregistrarVisitaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSregistrarVisitaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSconsultarComentariosxArt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSconsultarComentariosxArtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSconsultarComentariosxArtResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSregistrarValoracionxArticulo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="estrellas" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="comentario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSregistrarValoracionxArticuloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSregistrarValoracionxArticuloResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSOpregistrarArt">
         <s:complexType>
           <s:sequence>
@@ -206,6 +280,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="contenido" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="categorias" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="tags" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="grupos" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -478,6 +553,30 @@
   <wsdl:message name="WSGuardarPalabraBuscadaSoapOut">
     <wsdl:part name="parameters" element="tns:WSGuardarPalabraBuscadaResponse" />
   </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorSoapIn">
+    <wsdl:part name="parameters" element="tns:WSBuscarArtMasVistor" />
+  </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorSoapOut">
+    <wsdl:part name="parameters" element="tns:WSBuscarArtMasVistorResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaSoapIn">
+    <wsdl:part name="parameters" element="tns:WSregistrarVisita" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaSoapOut">
+    <wsdl:part name="parameters" element="tns:WSregistrarVisitaResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtSoapIn">
+    <wsdl:part name="parameters" element="tns:WSconsultarComentariosxArt" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtSoapOut">
+    <wsdl:part name="parameters" element="tns:WSconsultarComentariosxArtResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloSoapIn">
+    <wsdl:part name="parameters" element="tns:WSregistrarValoracionxArticulo" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloSoapOut">
+    <wsdl:part name="parameters" element="tns:WSregistrarValoracionxArticuloResponse" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtSoapIn">
     <wsdl:part name="parameters" element="tns:WSOpregistrarArt" />
   </wsdl:message>
@@ -618,6 +717,34 @@
   <wsdl:message name="WSGuardarPalabraBuscadaHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorHttpGetIn">
+    <wsdl:part name="top" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtHttpGetIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloHttpGetIn">
+    <wsdl:part name="estrellas" type="s:string" />
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="comentario" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpGetIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
@@ -650,6 +777,7 @@
     <wsdl:part name="contenido" type="s:string" />
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSEditarArtHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -766,6 +894,34 @@
   <wsdl:message name="WSGuardarPalabraBuscadaHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorHttpPostIn">
+    <wsdl:part name="top" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSBuscarArtMasVistorHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarVisitaHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtHttpPostIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSconsultarComentariosxArtHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloHttpPostIn">
+    <wsdl:part name="estrellas" type="s:string" />
+    <wsdl:part name="idArticulo" type="s:string" />
+    <wsdl:part name="comentario" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarValoracionxArticuloHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpPostIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
@@ -798,6 +954,7 @@
     <wsdl:part name="contenido" type="s:string" />
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSEditarArtHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -907,6 +1064,22 @@
       <wsdl:input message="tns:WSGuardarPalabraBuscadaSoapIn" />
       <wsdl:output message="tns:WSGuardarPalabraBuscadaSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <wsdl:input message="tns:WSBuscarArtMasVistorSoapIn" />
+      <wsdl:output message="tns:WSBuscarArtMasVistorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <wsdl:input message="tns:WSregistrarVisitaSoapIn" />
+      <wsdl:output message="tns:WSregistrarVisitaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <wsdl:input message="tns:WSconsultarComentariosxArtSoapIn" />
+      <wsdl:output message="tns:WSconsultarComentariosxArtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <wsdl:input message="tns:WSregistrarValoracionxArticuloSoapIn" />
+      <wsdl:output message="tns:WSregistrarValoracionxArticuloSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtSoapIn" />
       <wsdl:output message="tns:WSOpregistrarArtSoapOut" />
@@ -1005,6 +1178,22 @@
       <wsdl:input message="tns:WSGuardarPalabraBuscadaHttpGetIn" />
       <wsdl:output message="tns:WSGuardarPalabraBuscadaHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <wsdl:input message="tns:WSBuscarArtMasVistorHttpGetIn" />
+      <wsdl:output message="tns:WSBuscarArtMasVistorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <wsdl:input message="tns:WSregistrarVisitaHttpGetIn" />
+      <wsdl:output message="tns:WSregistrarVisitaHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <wsdl:input message="tns:WSconsultarComentariosxArtHttpGetIn" />
+      <wsdl:output message="tns:WSconsultarComentariosxArtHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <wsdl:input message="tns:WSregistrarValoracionxArticuloHttpGetIn" />
+      <wsdl:output message="tns:WSregistrarValoracionxArticuloHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpGetIn" />
       <wsdl:output message="tns:WSOpregistrarArtHttpGetOut" />
@@ -1102,6 +1291,22 @@
     <wsdl:operation name="WSGuardarPalabraBuscada">
       <wsdl:input message="tns:WSGuardarPalabraBuscadaHttpPostIn" />
       <wsdl:output message="tns:WSGuardarPalabraBuscadaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <wsdl:input message="tns:WSBuscarArtMasVistorHttpPostIn" />
+      <wsdl:output message="tns:WSBuscarArtMasVistorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <wsdl:input message="tns:WSregistrarVisitaHttpPostIn" />
+      <wsdl:output message="tns:WSregistrarVisitaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <wsdl:input message="tns:WSconsultarComentariosxArtHttpPostIn" />
+      <wsdl:output message="tns:WSconsultarComentariosxArtHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <wsdl:input message="tns:WSregistrarValoracionxArticuloHttpPostIn" />
+      <wsdl:output message="tns:WSregistrarValoracionxArticuloHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpPostIn" />
@@ -1225,6 +1430,42 @@
     </wsdl:operation>
     <wsdl:operation name="WSGuardarPalabraBuscada">
       <soap:operation soapAction="http://tempuri.org/WSGuardarPalabraBuscada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <soap:operation soapAction="http://tempuri.org/WSBuscarArtMasVistor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <soap:operation soapAction="http://tempuri.org/WSregistrarVisita" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <soap:operation soapAction="http://tempuri.org/WSconsultarComentariosxArt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <soap:operation soapAction="http://tempuri.org/WSregistrarValoracionxArticulo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1451,6 +1692,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <soap12:operation soapAction="http://tempuri.org/WSBuscarArtMasVistor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <soap12:operation soapAction="http://tempuri.org/WSregistrarVisita" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <soap12:operation soapAction="http://tempuri.org/WSconsultarComentariosxArt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <soap12:operation soapAction="http://tempuri.org/WSregistrarValoracionxArticulo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <soap12:operation soapAction="http://tempuri.org/WSOpregistrarArt" style="document" />
       <wsdl:input>
@@ -1670,6 +1947,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <http:operation location="/WSBuscarArtMasVistor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <http:operation location="/WSregistrarVisita" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <http:operation location="/WSconsultarComentariosxArt" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <http:operation location="/WSregistrarValoracionxArticulo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <http:operation location="/WSOpregistrarArt" />
       <wsdl:input>
@@ -1882,6 +2195,42 @@
     </wsdl:operation>
     <wsdl:operation name="WSGuardarPalabraBuscada">
       <http:operation location="/WSGuardarPalabraBuscada" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSBuscarArtMasVistor">
+      <http:operation location="/WSBuscarArtMasVistor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarVisita">
+      <http:operation location="/WSregistrarVisita" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSconsultarComentariosxArt">
+      <http:operation location="/WSconsultarComentariosxArt" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarValoracionxArticulo">
+      <http:operation location="/WSregistrarValoracionxArticulo" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
