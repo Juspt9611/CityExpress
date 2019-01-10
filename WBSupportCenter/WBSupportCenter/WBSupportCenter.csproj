@@ -136,6 +136,7 @@
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
     <Content Include="recursos\js\blog\jquery.easyPaginate.js" />
     <Content Include="recursos\js\blog\notify.min.js" />
+    <Content Include="recursos\js\bootstrap-datepicker.es.js" />
     <Content Include="recursos\js\libs\jquery-2.1.1.min.map" />
     <Content Include="recursos\js\notification\jquery.gritter.js" />
     <Content Include="recursos\js\notification\sweetalert.min.js" />
@@ -240,6 +241,7 @@
     <Content Include="vistas\AprobacionArticulos.aspx" />
     <Content Include="vistas\Categoria.aspx" />
     <Content Include="vistas\EditarArticulo.aspx" />
+    <Content Include="vistas\Historial.aspx" />
     <Content Include="vistas\Index.aspx" />
     <Content Include="vistas\Reporte.aspx" />
     <Content Include="Web References\WSsupport1\BusquedaTitulo.datasource">
@@ -249,6 +251,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\WSsupport1\CategoriasxSubcategorias.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\WSsupport1\Historial.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\WSsupport1\Reference.map">
@@ -1047,6 +1052,13 @@
     </Compile>
     <Compile Include="vistas\EditarArticulo.aspx.designer.cs">
       <DependentUpon>EditarArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\Historial.aspx.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vistas\Historial.aspx.designer.cs">
+      <DependentUpon>Historial.aspx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

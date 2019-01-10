@@ -86,6 +86,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSObtenerArticuloOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSConsultarHistorialArticuloOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -207,6 +209,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSObtenerArticuloCompletedEventHandler WSObtenerArticuloCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarHistorialArticuloCompletedEventHandler WSConsultarHistorialArticuloCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -1019,34 +1024,65 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSObtenerArticulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Reporte[] WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte) {
+        public Reporte[] WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop) {
             object[] results = this.Invoke("WSObtenerArticulo", new object[] {
                         fechaInicial,
                         fechaFinal,
-                        valReporte});
+                        valReporte,
+                        valTop});
             return ((Reporte[])(results[0]));
         }
         
         /// <remarks/>
-        public void WSObtenerArticuloAsync(string fechaInicial, string fechaFinal, string valReporte) {
-            this.WSObtenerArticuloAsync(fechaInicial, fechaFinal, valReporte, null);
+        public void WSObtenerArticuloAsync(string fechaInicial, string fechaFinal, string valReporte, string valTop) {
+            this.WSObtenerArticuloAsync(fechaInicial, fechaFinal, valReporte, valTop, null);
         }
         
         /// <remarks/>
-        public void WSObtenerArticuloAsync(string fechaInicial, string fechaFinal, string valReporte, object userState) {
+        public void WSObtenerArticuloAsync(string fechaInicial, string fechaFinal, string valReporte, string valTop, object userState) {
             if ((this.WSObtenerArticuloOperationCompleted == null)) {
                 this.WSObtenerArticuloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSObtenerArticuloOperationCompleted);
             }
             this.InvokeAsync("WSObtenerArticulo", new object[] {
                         fechaInicial,
                         fechaFinal,
-                        valReporte}, this.WSObtenerArticuloOperationCompleted, userState);
+                        valReporte,
+                        valTop}, this.WSObtenerArticuloOperationCompleted, userState);
         }
         
         private void OnWSObtenerArticuloOperationCompleted(object arg) {
             if ((this.WSObtenerArticuloCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSObtenerArticuloCompleted(this, new WSObtenerArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarHistorialArticulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Historial[] WSConsultarHistorialArticulo(int idArt) {
+            object[] results = this.Invoke("WSConsultarHistorialArticulo", new object[] {
+                        idArt});
+            return ((Historial[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarHistorialArticuloAsync(int idArt) {
+            this.WSConsultarHistorialArticuloAsync(idArt, null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarHistorialArticuloAsync(int idArt, object userState) {
+            if ((this.WSConsultarHistorialArticuloOperationCompleted == null)) {
+                this.WSConsultarHistorialArticuloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarHistorialArticuloOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarHistorialArticulo", new object[] {
+                        idArt}, this.WSConsultarHistorialArticuloOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarHistorialArticuloOperationCompleted(object arg) {
+            if ((this.WSConsultarHistorialArticuloCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarHistorialArticuloCompleted(this, new WSConsultarHistorialArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1170,6 +1206,99 @@ namespace WBSupportCenter.WSsupport1 {
             }
             set {
                 this.nombreCategoriaField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class Historial {
+        
+        private int idArticuloField;
+        
+        private string nombreArticuloField;
+        
+        private int versionField;
+        
+        private string contenidoField;
+        
+        private string fechaCreacionField;
+        
+        private string fechaModificacionField;
+        
+        private string nombreField;
+        
+        /// <remarks/>
+        public int idArticulo {
+            get {
+                return this.idArticuloField;
+            }
+            set {
+                this.idArticuloField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombreArticulo {
+            get {
+                return this.nombreArticuloField;
+            }
+            set {
+                this.nombreArticuloField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string contenido {
+            get {
+                return this.contenidoField;
+            }
+            set {
+                this.contenidoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fechaCreacion {
+            get {
+                return this.fechaCreacionField;
+            }
+            set {
+                this.fechaCreacionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fechaModificacion {
+            get {
+                return this.fechaModificacionField;
+            }
+            set {
+                this.fechaModificacionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
             }
         }
     }
@@ -2129,6 +2258,32 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Reporte[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSConsultarHistorialArticuloCompletedEventHandler(object sender, WSConsultarHistorialArticuloCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarHistorialArticuloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarHistorialArticuloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Historial[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Historial[])(this.results[0]));
             }
         }
     }

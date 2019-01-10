@@ -18,8 +18,6 @@ namespace SupportCenter {
         protected void Page_Load(object sender, EventArgs e) {
             OptenerArt();
             OptenerCatg();
-            ArtiFrec();
-            cargaCAt();
         }
 
 
@@ -47,6 +45,7 @@ namespace SupportCenter {
             lstArt.InnerHtml += "</ul>";
 
         }
+
         public void OptenerCatg() {
             DataTable DTCateg = new DataTable();
             lstCatg.InnerText="";
@@ -71,28 +70,6 @@ namespace SupportCenter {
             }
             lstCatg.InnerHtml += "</ul>";
 
-        }
-
-        public void ArtiFrec() {
-            DataTable DTartic = new DataTable();
-        //    artiMasVi.InnerHtml = "";
-
-        //    //DTartic = ConvertToDataTable(metodo.WSOptenerCatg());
-        //    artiMasVi.InnerHtml += " <div class='news_post magic_fade_in'> ";
-        //    artiMasVi.InnerHtml += " <div class='news_post_content'>";
-        //    artiMasVi.InnerHtml += " <div class='news_post_title'><a href = '#'> Título de artículo</a></div>";
-        //    artiMasVi.InnerHtml += " <div class='news_post_text'> ";
-        //    artiMasVi.InnerHtml += " <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.Rem, mollitia libero! Quam iste excepturi veniam unde a, sed quis possimus recusandae maxime obcaecati veritatis vero deserunt ipsa officiis, nisi blanditiis?</p>";
-        //    artiMasVi.InnerHtml += " </div>";
-        //    artiMasVi.InnerHtml += " <div class='news_post_meta'> ";
-        //    artiMasVi.InnerHtml += " <ul class='d-flex flex-row align-items-start justify-content-start'> ";
-        //    artiMasVi.InnerHtml += " <li><i class='fa fa-user'></i> <a href ='#'> Autor </ a ></ li>";
-        //    artiMasVi.InnerHtml += " <li><i class='fa fa-star'></i> <a href ='#' > 5 </ a ></ li>";
-        //    artiMasVi.InnerHtml += " <li><i class='fa fa-comment'></i><a href ='#'> 3 Comentarios</a></li>";
-        //    artiMasVi.InnerHtml += " </ul>";
-        //    artiMasVi.InnerHtml += " </div>";
-        //    artiMasVi.InnerHtml += " </div>";
-        //    artiMasVi.InnerHtml += " </div>";
         }
 
 
@@ -137,16 +114,6 @@ namespace SupportCenter {
             return table;
 
         }
-
-
-        public void cargaCAt() {
-
-            //DDLCategorias.DataSource = metodo.WSConsultarCategorias(0).Tables["Table1"]; ;
-            //DDLCategorias.DataTextField = "nombreCategoria";
-            //DDLCategorias.DataValueField = "idCategoria";
-            //DDLCategorias.DataBind();
-        }
-
 
 
         public static string DataSetToJSON(DataTable dt) {
@@ -200,6 +167,23 @@ namespace SupportCenter {
         public static int registrarValoracionArticulo(int estrellas, int idArticulo, string comentario, int idUsuario)
         {
             return metodo.WSregistrarValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
+        }
+
+        [WebMethod]
+        public static string historialxIdArticulo(int idArt)
+        {
+            DataTable dtHistorial = new DataTable();
+            dtHistorial = ConvertToDataTable(metodo.WSConsultarHistorialArticulo(idArt));
+            string contentJSON = "";
+
+            foreach (DataRow item in dtHistorial.Rows)
+            {
+                contentJSON += item["idArticulo"] + "||" + item["nombreArticulo"].ToString() +
+                    "||" + item["version"].ToString() + "||" + item["contenido"].ToString() +
+                    "||" + item["fechaCreacion"] + "||" + item["fechaModificacion"] +
+                    "||" + item["nombre"] + "$$";
+            }
+            return contentJSON;
         }
 
     }

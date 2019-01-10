@@ -43,43 +43,161 @@
 
         #chartdiv {
             width: 100%;
-            height: 400px;
+            height: 500px;
+        }
+
+        /*estilos param los botones de exportar*/
+        /*:after, :before {
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        i {
+            margin-bottom: 4px;
+        }*/
+
+        .btn {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-app {
+            color: white;
+            box-shadow: none;
+            border-radius: 3px;
+            position: relative;
+            padding: 10px 15px;
+            margin: 0;
+            min-width: 60px;
+            max-width: 80px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            font-size: 12px;
+            transition: all .2s;
+            background-color: steelblue !important;
+        }
+
+            .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+                font-size: 20px;
+                display: block;
+            }
+
+            .btn-app:hover {
+                border-color: #aaa;
+                transform: scale(1.1);
+            }
+
+        .pdf {
+            color: white !important;
+            background: #dc2f2f !important;
+        }
+
+        .excel {
+            color: white !important;
+            background: #3ca23c !important;
+        }
+
+
+        /*Esto es opcional pero sirve para que todos los botones de exportacion se distribuyan de manera equitativa usando flexbox*/
+
+        /*.flexcontent {
+            display: flex;
+            justify-content: space-around;
+        }*/
+
+        /*Estilos param las estrellas*/
+
+        .stars-outer {
+            display: inline-block;
+            position: relative;
+            font-family: FontAwesome;
+        }
+
+            .stars-outer::before {
+                content: "\f006 \f006 \f006 \f006 \f006";
+            }
+
+        .stars-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            /*width: 50%;*/
+        }
+
+            .stars-inner::before {
+                content: "\f005 \f005 \f005 \f005 \f005";
+                color: #f8ce0b;
+            }
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
-    <br />
-    <div class="panel panel-default col-12" id="contenido">
-        <div class="panel-heading">Articulos mas vistos</div>
-        <div class="panel-body" style="border-color: #000 !important;">
-            Seleccionar Fecha:
+
+    <div class="container" id="contenidoTabla">
+        <div class="box_table_container">
             <div class="row">
-                <div class="col-4">
-                    <select class="form-control" id="tipoReporte">
-                        <option value="palabras">Palabras Mas Buscadas</option>
-                        <option value="valorados">Articulos Mas Valorados</option>
-                        <option value="vistos">Articulos Mas Vistos</option>
-                        <option value="vistas">Categorias Mas Vistas</option>
-                    </select>
-                </div>
-                <div class="col-4">
-                    <div class="input-group input-daterange">
-                        <div class="input-group-addon">De: &nbsp;</div>
-                        <input type="text" class="form-control" id="fechaInicial" placeholder="Fecha de Inicio" runat="server">
-                        <div class="input-group-addon">a: &nbsp;</div>
-                        <input type="text" class="form-control" id="fechaFinal" placeholder="Fecha Final" runat="server">
+                <span class="box_table_title">Reportes</span>
+            </div>
+            <div class="panel-body" style="border-color: #000 !important;">
+                <div class="row">
+                    <div class="col-3">
+                        <select class="form-control" id="tipoReporte">
+                            <option value="palabras">Palabras más buscadas</option>
+                            <option value="valorados">Artículos más valorados</option>
+                            <option value="vistos">Artículos más vistos</option>
+                            <option value="vistas">Categorías más vistas</option>
+                        </select>
                     </div>
-                </div>
-                <div class="col-4">
-                    <button type="button" class="btn btn-success" id="buttonBuscar">Buscar</button>
+                    <div class="col-4">
+                        <div class="input-group input-daterange">
+                            <div class="input-group-addon">De: &nbsp;</div>
+                            <input type="text" class="form-control" id="fechaInicial" placeholder="Fecha de inicio" runat="server">
+                            <div class="input-group-addon">a: &nbsp;</div>
+                            <input type="text" class="form-control" id="fechaFinal" placeholder="Fecha final" runat="server">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <input type="number" class="form-control" min="1" id="numberTop" placeholder="Top resultados">
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-success" id="buttonBuscar"><i class="fa fa-search" aria-hidden="true"></i>&nbsp Buscar</button>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <%--<span class="box_table_title"></span>--%>
                 </div>
             </div>
+            <table id="tableArticulos" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
+            <br />
+            <br />
+            <br />
+            <div id="chartdiv"></div>
         </div>
-        <table id="tableArticulos" class="table table-striped table-bordered dt-responsive nowrap text-dark table-light"></table>
-
-        <div id="chartdiv"></div>
-
     </div>
 
     <script type="text/javascript">
@@ -87,8 +205,10 @@
 
         var arrayGrafic = new Array();
         var reporteSelect = "palabras";
+        var reporteGrafica = "Búsquedas";
         var repetirBusqueda = false;
         var successResp;
+        var topResult;
 
         var date = new Date();
 
@@ -120,58 +240,19 @@
         $(document).ready(function () {
             $('#ContentPlaceHolder1_fechaInicial').val(formatDateI());
             $('#ContentPlaceHolder1_fechaFinal').val(formatDateF());
+            // Select your input element.
+            var number = document.getElementById('numberTop');
+
+            // Listen for input event on numInput.
+            number.onkeydown = function (e) {
+                if (!((e.keyCode > 95 && e.keyCode < 106)
+                    || (e.keyCode > 47 && e.keyCode < 58)
+                    || e.keyCode == 8)) {
+                    return false;
+                }
+            }
+
             $('#chartdiv').hide();
-
-            //$.datepicker.regional['es'] = {
-            //    closeText: 'Cerrar',
-            //    prevText: '< Ant',
-            //    nextText: 'Sig >',
-            //    currentText: 'Hoy',
-            //    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            //    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            //    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            //    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-            //    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-            //    weekHeader: 'Sm',
-            //    dateFormat: 'dd/mm/yy',
-            //    firstDay: 1,
-            //    isRTL: false,
-            //    showMonthAfterYear: false,
-            //    yearSuffix: ''
-            //};
-            //$.datepicker.setDefaults($.datepicker.regional['es']);
-
-
-            //$('.datepicker').datepicker({
-            //    duration: '',
-            //    changeMonth: false,
-            //    changeYear: false,
-            //    yearRange: '2010:2020',
-            //    showTime: false,
-            //    time24h: true
-            //});
-
-            //$.datepicker.regional['cs'] = {
-            //    closeText: 'Zavřít',
-            //    prevText: '&#x3c;Dříve',
-            //    nextText: 'Později&#x3e;',
-            //    currentText: 'Nyní',
-            //    monthNames: ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen',
-            //        'září', 'říjen', 'listopad', 'prosinec'
-            //    ],
-            //    monthNamesShort: ['led', 'úno', 'bře', 'dub', 'kvě', 'čer', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'],
-            //    dayNames: ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'],
-            //    dayNamesShort: ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
-            //    dayNamesMin: ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
-            //    weekHeader: 'Týd',
-            //    dateFormat: 'dd/mm/yy',
-            //    firstDay: 1,
-            //    isRTL: false,
-            //    showMonthAfterYear: false,
-            //    yearSuffix: ''
-            //};
-
-            //$.datepicker.setDefaults($.datepicker.regional['cs']);
 
             $('.input-daterange input').datepicker({
                 format: "dd/mm/yyyy",
@@ -202,26 +283,56 @@
                 function () {
                     var selectedOption = this.options[select.selectedIndex];
                     reporteSelect = selectedOption.value;
+
+                    if (reporteSelect == "palabras") {
+                        reporteGrafica = "Búsquedas";
+                    }
+                    else if (reporteSelect == "valorados") {
+                        reporteGrafica = "Calificación total";
+                    }
+                    else if (reporteSelect == "vistos") {
+                        reporteGrafica = "Visitas";
+                    }
+                    else if (reporteSelect == "vistas") {
+                        reporteGrafica = "Número de vistas";
+                    }
                     console.log(selectedOption.value);
+
+                    if (repetirBusqueda == true) {
+
+                        if (arrayGrafic.length != 0) {
+                            $('#ContentPlaceHolder1_fechaInicial').val(formatDateI());
+                            $('#ContentPlaceHolder1_fechaFinal').val(formatDateF());
+                            $('#numberTop').val("");
+                            $('#tableArticulos').DataTable().destroy();
+                            $('#tableArticulos').empty();
+                            arrayGrafic = [];
+                            $('#chartdiv').hide();
+                        }
+                    }
                 });
 
             $('#buttonBuscar').click(function () {
                 if (repetirBusqueda == true) {
-                    $('#tableArticulos').DataTable().destroy();
-                    $('#tableArticulos').empty();
-                    arrayGrafic = [];
-                    $('#chartdiv').hide();
+                    if (arrayGrafic.length != 0) {
+                        $('#tableArticulos').DataTable().destroy();
+                        $('#tableArticulos').empty();
+                        arrayGrafic = [];
+                        $('#chartdiv').hide();
+                    }
                 }
+                topResult = $('#numberTop').val();
+                if ($('#numberTop').val() == null) {
+                    topResult = 0;
+                }
+
                 dataTableData();
                 if (successResp != null) {
                     showChart();
                 }
-                
-
             });
 
         });
-
 
         function dataTableData() {
             $.ajax({
@@ -229,7 +340,7 @@
                 type: 'POST',
                 url: 'Reporte.aspx/ObtenerDatos',
                 //data: "{'fechaInicial': '" + moment($('#ContentPlaceHolder1_fechaInicial').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "', 'fechaFinal': '" + moment($('#ContentPlaceHolder1_fechaFinal').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "' }",
-                data: "{'fechaInicial': '" + moment($('#ContentPlaceHolder1_fechaInicial').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "', 'fechaFinal': '" + moment($('#ContentPlaceHolder1_fechaFinal').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "' , 'valReporte': '" + reporteSelect + "' }",
+                data: "{'fechaInicial': '" + moment($('#ContentPlaceHolder1_fechaInicial').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "', 'fechaFinal': '" + moment($('#ContentPlaceHolder1_fechaFinal').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + "', 'valReporte': '" + reporteSelect + "' , 'valTop': '" + topResult + "'}",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
@@ -247,17 +358,47 @@
                                     visits: parseInt(index.numeroDeBusquedas, 10)
                                 })
                             });
-
                             console.log(arrayGrafic);
-
                             $('#tableArticulos').DataTable({
                                 data: jsonReporte,
                                 orderCellsTop: true,
                                 fixedHeader: true,
                                 destroy: true,
+                                paging: true,
+                                dom: '<"pull-left"B><"pull-right">tip',
+                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                //dom: 'Bfrt<"col-md-6 inline"i> <"col-md-6 inline"p>',
+                                buttons: {
+                                    dom: {
+                                        container: {
+                                            tag: 'div',
+                                            className: 'flexcontent'
+                                        },
+                                        buttonLiner: {
+                                            tag: null
+                                        }
+                                    },
+                                    buttons: [
+                                        {
+                                            extend: 'excelHtml5',
+                                            text: '<i class="fa fa-file-excel-o"></i>',
+                                            titleAttr: 'Exportar Excel',
+                                            className: 'btn btn-app export excel',
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            text: '<i class="fa fa-file-pdf-o"></i>',
+                                            titleAttr: 'Exportar PDF',
+                                            className: 'btn btn-app export pdf',
+                                            //exportOptions: {
+                                            //    columns: [0, 1]
+                                            //},
+                                        },
+                                    ]
+                                },
                                 columns: [
-                                    { data: "palabraBuscada", title: 'Palabra Buscada' },
-                                    { data: "numeroDeBusquedas", title: 'Numero De Busquedas' }
+                                    { data: "palabraBuscada", title: 'Palabra buscada' },
+                                    { data: "numeroDeBusquedas", title: 'Número de búsquedas' }
                                 ]
                             });
                         }
@@ -274,12 +415,49 @@
                                 orderCellsTop: true,
                                 fixedHeader: true,
                                 destroy: true,
+                                paging: true,
+                                dom: '<"pull-left"B><"pull-right">tip',
+                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                buttons: {
+                                    dom: {
+                                        container: {
+                                            tag: 'div',
+                                            className: 'flexcontent'
+                                        },
+                                        buttonLiner: {
+                                            tag: null
+                                        }
+                                    },
+                                    buttons: [
+                                        {
+                                            extend: 'excelHtml5',
+                                            text: '<i class="fa fa-file-excel-o"></i>',
+                                            titleAttr: 'Exportar Excel',
+                                            className: 'btn btn-app export excel',
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            text: '<i class="fa fa-file-pdf-o"></i>',
+                                            titleAttr: 'Exportar PDF',
+                                            className: 'btn btn-app export pdf',
+                                            //exportOptions: {
+                                            //    columns: [0, 1]
+                                            //},
+                                        },
+                                    ]
+                                },
                                 columns: [
-                                    { data: "idArticulo", title: 'Id del Articulo', visible: false },
-                                    { data: "nombreArticulo", title: 'Nombre del Articulo' },
-                                    { data: "categoria", title: 'Categoria' },
-                                    { data: "promedioCalificacion", title: 'Promedio de Calificación' },
-                                    { data: "calificacionTotal", title: 'Calificación Total' }
+                                    { data: "idArticulo", title: 'Id del artículo' },
+                                    { data: "nombreArticulo", title: 'Nombre del artículo' },
+                                    { data: "categoria", title: 'Categoría' },
+                                    {
+                                        data: "promedioCalificacion", title: 'Promedio de calificación', render: function (data, type, row) {
+                                            var starPercentage = data / 5 * 100;
+                                            var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
+                                            return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
+                                        }
+                                    },
+                                    { data: "calificacionTotal", title: 'Calificación total' }
                                 ]
                             });
                         }
@@ -296,10 +474,41 @@
                                 orderCellsTop: true,
                                 fixedHeader: true,
                                 destroy: true,
+                                paging: true,
+                                dom: '<"pull-left"B><"pull-right">tip',
+                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                buttons: {
+                                    dom: {
+                                        container: {
+                                            tag: 'div',
+                                            className: 'flexcontent'
+                                        },
+                                        buttonLiner: {
+                                            tag: null
+                                        }
+                                    },
+                                    buttons: [
+                                        {
+                                            extend: 'excelHtml5',
+                                            text: '<i class="fa fa-file-excel-o"></i>',
+                                            titleAttr: 'Exportar Excel',
+                                            className: 'btn btn-app export excel',
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            text: '<i class="fa fa-file-pdf-o"></i>',
+                                            titleAttr: 'Exportar PDF',
+                                            className: 'btn btn-app export pdf',
+                                            //exportOptions: {
+                                            //    columns: [0, 1]
+                                            //},
+                                        },
+                                    ]
+                                },
                                 columns: [
-                                    { data: "idArticulo", title: 'Id del Articulo', visible: false },
-                                    { data: "nombreArticulo", title: 'Nombre del articulo' },
-                                    { data: "categoria", title: 'Categoria' },
+                                    { data: "idArticulo", title: 'Id del artículo' },
+                                    { data: "nombreArticulo", title: 'Nombre del artículo' },
+                                    { data: "categoria", title: 'Categoría' },
                                     { data: "visitas", title: 'Visitas' }
                                 ]
                             });
@@ -317,9 +526,40 @@
                                 orderCellsTop: true,
                                 fixedHeader: true,
                                 destroy: true,
+                                paging: true,
+                                dom: '<"pull-left"B><"pull-right">tip',
+                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                buttons: {
+                                    dom: {
+                                        container: {
+                                            tag: 'div',
+                                            className: 'flexcontent'
+                                        },
+                                        buttonLiner: {
+                                            tag: null
+                                        }
+                                    },
+                                    buttons: [
+                                        {
+                                            extend: 'excelHtml5',
+                                            text: '<i class="fa fa-file-excel-o"></i>',
+                                            titleAttr: 'Exportar Excel',
+                                            className: 'btn btn-app export excel',
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            text: '<i class="fa fa-file-pdf-o"></i>',
+                                            titleAttr: 'Exportar PDF',
+                                            className: 'btn btn-app export pdf',
+                                            //exportOptions: {
+                                            //    columns: [0, 1]
+                                            //},
+                                        },
+                                    ]
+                                },
                                 columns: [
-                                    { data: "categoria", title: 'Categoria' },
-                                    { data: "categoriaMasVista", title: 'Categoria Mas Vista' }
+                                    { data: "categoria", title: 'Categoría' },
+                                    { data: "categoriaMasVista", title: 'Número de vistas' }
                                 ]
                             });
                         }
@@ -328,8 +568,9 @@
                         jsonReporte = [];
 
                     } else {
-                        swal("No se encontraron datos para esta busqueda.", {
-                            icon: "success",
+                        swal("No se encontraron datos para esta búsqueda.", {
+                            icon: "error",
+                            button: "Aceptar",
                             allowOutsideClick: false,
                             closeOnClickOutside: false
                         });
@@ -338,7 +579,7 @@
                         });
                         repetirBusqueda = false;
                     }
-                    
+
                 },
                 failure: function (response) {
                     console.log(response);
@@ -360,7 +601,6 @@
             // Add data
             chart.data = arrayGrafic;
 
-
             // Create axes
             let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
             categoryAxis.dataFields.category = "country";
@@ -374,7 +614,7 @@
             categoryAxis.tooltip.label.verticalCenter = "middle";
 
             let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-            valueAxis.title.text = "Visitas";
+            valueAxis.title.text = reporteGrafica;
             valueAxis.title.fontWeight = "bold";
 
             // Create series

@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WBSupportCenter.WSsupport1;
-using System.Web.Services;
-using Newtonsoft.Json;
-using System.Text;
-using System.ComponentModel;
 
 namespace WBSupportCenter.vistas
 {
-    public partial class Reporte : System.Web.UI.Page
+    public partial class Historial : System.Web.UI.Page
     {
-
-
+        static WSsupportCenterClass metodo = new WSsupportCenterClass();
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
 
         }
 
         [WebMethod]
-        public static string ObtenerDatos(string fechaInicial, string fechaFinal, string valReporte, string valTop)
+        public static string historialxIdArticulo(int idArt)
         {
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dtTitulo = new DataTable();
-            dtTitulo = ConvertToDataTable(metodo.WSObtenerArticulo(fechaInicial, fechaFinal, valReporte, valTop));
-            return DataTableToJSONWithStringBuilder(dtTitulo);
-          
-        }
+            DataTable dtHistorial = new DataTable();
+            dtHistorial = ConvertToDataTable(metodo.WSConsultarHistorialArticulo(idArt));
+            string contentJSON = "";
 
-        public static string DataSetToJSON(DataTable dt)
-        {
-            return JsonConvert.SerializeObject(dt.AsEnumerable().Select(r => r.ItemArray));
+            foreach (DataRow item in dtHistorial.Rows)
+            {
+                contentJSON += item["idArticulo"] + "||" + item["nombreArticulo"].ToString() + 
+                    "||" + item["version"].ToString() + "||" + item["contenido"].ToString() + 
+                    "||" + item["fechaCreacion"] + "||" + item["fechaModificacion"] + 
+                    "||" + item["nombre"] + "$$";
+            }
+            return contentJSON;
         }
 
         public static DataTable ConvertToDataTable<T>(IList<T> data)

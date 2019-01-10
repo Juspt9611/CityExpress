@@ -1,5 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="ArticulosRed.aspx.cs" Inherits="WBSupportCenter.vistas.ArticulosRed" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -11,10 +21,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 box_table_buttons">
-                    <button type="button" class="btn btn-success float-right" onclick="window.location.href = 'CrearArticulo.aspx'"><i class="fa fa-plus" aria-hidden="true"></i> Crear</button>        
+                    <%--<button type="button" class="btn btn-success float-right" onclick="window.location.href = 'CrearArticulo.aspx'"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp Crear</button>--%>
                 </div>
             </div>
-            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -26,7 +36,8 @@
                     </tr>
                 </thead>
             </table>
-     </div>
+            <br />
+        </div>
     </div>
 
     <script>
@@ -53,12 +64,19 @@
         var table = $('#example').DataTable({
             data: $.parseJSON(infoDatatable),
             lengthChange: false,
-            columnDefs: [ {
+            dom: '<"pull-left"f><"pull-right">tip',
+            columnDefs: [{
                 "targets": -1,
                 "data": null,
                 "className": "text-center",
                 "defaultContent": "<button type='button' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>"
-            } ]
+            }]
+        });
+
+        $("<button type='button' class='btn btn-success float-right' onclick=\"window.location.href = 'CrearArticulo.aspx'\" id='crear'><i class='fa fa-plus' aria-hidden='true'></i>&nbsp Crear</button>").appendTo('div.pull-right'); 
+
+        $('#crear').on('click', 'button', function () {
+            window.location.href = 'CrearArticulo.aspx';
         });
 
         $('#example tbody').on('click', 'button', function () {

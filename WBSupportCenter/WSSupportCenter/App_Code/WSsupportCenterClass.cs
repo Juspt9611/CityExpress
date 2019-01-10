@@ -223,12 +223,23 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     #region Reporte
     [WebMethod]
-    public List<Reporte> WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte)
+    public List<Reporte> WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop)
     {
         NGReporte ObjetoNG = new NGReporte();
 
-        return ObjetoNG.NGConsultaReportes(fechaInicial, fechaFinal, valReporte);
+        return ObjetoNG.NGConsultaReportes(fechaInicial, fechaFinal, valReporte, valTop);
     }
+    #endregion
+
+    #region Historial
+
+    [WebMethod]
+    public List<Historial> WSConsultarHistorialArticulo(int idArt)
+    {
+        NGHistorial Historial = new NGHistorial();
+        return Historial.NG_ConsultarHistorialArticulo(idArt);
+    }
+
     #endregion
 }
 

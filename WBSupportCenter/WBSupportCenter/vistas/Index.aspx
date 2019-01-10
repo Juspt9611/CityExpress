@@ -100,6 +100,12 @@
                             <div id="box-contenido-blog">
 
                             </div>
+                            <div id="box-historial-blog">
+
+                            </div>
+                            <div id="box-historial-detalleArticulo">
+
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 box_table_buttons">
@@ -136,7 +142,8 @@
                         </div>
                         <div class="row">
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i> Comentar</button>        
+                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i> Comentar</button>  
+                                <button type="button" class="btn btn-warning float-right"s onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i> Historial</button>     
                                 <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
                             </div>
                         </div>
@@ -194,6 +201,8 @@
             $('.contentArticulo').hide();
             $('#tablaArticulos').hide();
             $('#box-blog').hide();
+            $('#box-historial-blog').hide();
+            $('#box-historial-detalleArticulo').hide();
             $('#txtsearch').keyup(function () {
                 $('#result').html('');
                 $('#state').val('');
@@ -494,6 +503,7 @@
                     registrarVisita(1, idArt);
                     consultarComentarios(idArt);
                     idArticuloActual = idArt;
+                    showHistorial(idArt);
                 },
                 error: function (response) {
                     swal("Hubo un error al cargar el artículo.", {
@@ -619,6 +629,92 @@
             }
 
             registrarValoracionArticulo(calificacionEstrella, idArticuloActual, comentario, 1, type);
+        }
+
+        //Cambia contenido del blog por el historial o viceversa
+        function verHistorial() {
+            if ($("#box-contenido-blog").is(":visible")) {
+                $("#box-contenido-blog").hide();
+                $("#box-historial-blog").show();
+            } else {
+                $("#box-historial-blog").hide();
+                $("#box-contenido-blog").show();
+            }
+        }
+
+        //Carga el historial
+        function showHistorial(id) {
+            var html = '';
+            $('#box-historial-blog').html('');
+            $('#box-historial-detalleArticulo').hide();
+
+            $.ajax({
+                type: "POST",
+                url: "Historial.aspx/historialxIdArticulo",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArt':'" + id + "'}",
+                success: function (response) {
+                    console.log(response);
+                    var valNew = response.d.split('$$');
+                    var val = [];
+
+                    for (var i = 0; valNew.length; i++) {
+                        if (valNew[i] != "" && valNew[i] <= valNew[i] + 1) {
+                            val[i] = valNew[i].split('||');
+                        } else {
+                            break;
+                        }
+                        window.responseGlobal = valNew[i];
+
+                        html += '<li><label class="text-primary font-weight-bold">Fecha de Creación: </label>';
+                        var fechaCreacion = moment(val[i][4], 'DD-MM-YYYY').format('DD-MM-YYYY');
+                        html += '<label class="font-italic">' + fechaCreacion + '&nbsp;&nbsp;</label>';
+                        html += '<label class="text-primary font-weight-bold">Fecha de Modificación: </label>';
+                        var fechaModificacion = moment(val[i][5], 'DD-MM-YYYY').format('DD-MM-YYYY');
+                        html += '<label class="font-italic">' + fechaModificacion + '&nbsp;&nbsp;</label>';
+                        html += '<label class="text-primary font-weight-bold">Autor: </label>';
+                        html += '<label class="font-italic">' + val[i][6] + '&nbsp;&nbsp;</label>';
+                        html += '<label class="text-primary font-weight-bold">Versión: </label>';
+                        html += '<label class="font-italic">' + val[i][2] + '&nbsp;&nbsp;</label>';
+                        html += '<a id="btnVer" class="btn btn-link font-weight-bold" href="javascript:void(0)" onclick="showArticuloHistorial(responseGlobal);" role="button">Ver Artículo</a></li><br>';
+
+                        $('#box-historial-blog').html(html);
+                    }
+                },
+                error: function (response) {
+                    swal("Hubo un error con esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
+
+        }
+
+        function showArticuloHistorial(objeto) {
+            $('#box-historial-blog').hide();
+            var valNew = objeto.split('||');
+            var html = '';
+            $('#box-historial-detalleArticulo').html('');
+
+            html += '<div class="box_table_container">';
+            html += '   <a id="btnAtras" class="btn btn-warning pull-right" href="javascript:void(0)" onclick="returnHistorial();" role="button">Atrás</a>';
+            html += '   <div class="row">';
+            html += '       <span class="box_table_title">' + valNew[1] + '</span>';
+            html += '   </div>';
+            html += '   <br>';
+            html += '   <div class="container">' + valNew[3] + '</div>';
+            html += '</div>';
+
+            $('#box-historial-detalleArticulo').show();
+            $('#box-historial-detalleArticulo').html(html);
+        }
+
+        function returnHistorial() {
+            $('#box-historial-detalleArticulo').hide();
+            $('#box-historial-blog').show();
         }
 
     </script>

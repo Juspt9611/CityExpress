@@ -46,7 +46,7 @@ namespace SupportCenter.Datos
         //    return dt;
         //}
 
-        public List<Reporte> DT_ConsultaReporte(string fechaInicial, string fechaFinal, string valReporte)
+        public List<Reporte> DT_ConsultaReporte(string fechaInicial, string fechaFinal, string valReporte, string valTop)
         {
             SqlConnection connection = null;
             DataTable dt = new DataTable();
@@ -63,6 +63,7 @@ namespace SupportCenter.Datos
                     {
                         ParametroAcceso.CrearParametro("@fechaInicio", SqlDbType.VarChar, fechaInicial, ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@fechaFin", SqlDbType.VarChar, fechaFinal, ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@top", SqlDbType.VarChar, valTop, ParameterDirection.Input)
 
                     };
 
