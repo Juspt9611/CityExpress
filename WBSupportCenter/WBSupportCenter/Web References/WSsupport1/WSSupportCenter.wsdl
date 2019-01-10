@@ -89,7 +89,14 @@
       <s:element name="WSConsultarArticuloxIdResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArticuloxIdResult" type="tns:ArrayOfArticulos" />
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArticuloxIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -103,7 +110,14 @@
       <s:element name="WSBusquedaArticulosxClickResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="WSBusquedaArticulosxClickResult" type="tns:ArrayOfArticulos" />
+            <s:element minOccurs="0" maxOccurs="1" name="WSBusquedaArticulosxClickResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -504,7 +518,6 @@
       <s:element name="ArrayOfArticulos" nillable="true" type="tns:ArrayOfArticulos" />
       <s:element name="ArrayOfCategoriasxSubcategorias" nillable="true" type="tns:ArrayOfCategoriasxSubcategorias" />
       <s:element name="ArrayOfBusquedaTitulo" nillable="true" type="tns:ArrayOfBusquedaTitulo" />
-      <s:element name="int" type="s:int" />
       <s:element name="DataSet" nillable="true">
         <s:complexType>
           <s:sequence>
@@ -513,6 +526,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="int" type="s:int" />
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="ArrayOfReporte" nillable="true" type="tns:ArrayOfReporte" />
     </s:schema>
@@ -703,13 +717,13 @@
     <wsdl:part name="idArt" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSConsultarArticuloxIdHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpGetIn">
     <wsdl:part name="palabra" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSGuardarPalabraBuscadaHttpGetIn">
     <wsdl:part name="palabra" type="s:string" />
@@ -880,13 +894,13 @@
     <wsdl:part name="idArt" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSConsultarArticuloxIdHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpPostIn">
     <wsdl:part name="palabra" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSGuardarPalabraBuscadaHttpPostIn">
     <wsdl:part name="palabra" type="s:string" />

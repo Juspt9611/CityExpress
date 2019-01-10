@@ -23,12 +23,12 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_BusquedaTitulo(palabra);
         }
 
-        public List<Articulos> NG_ConsultaArticuloxId(int idArt)
+        public DataSet NG_ConsultaArticuloxId(int idArt)
         {
             return Obejeto.DT_ConsultarArticuloxId(idArt);
         }
 
-        public List<Articulos> NG_BusquedaArticulosxClick(string palabra)
+        public DataSet NG_BusquedaArticulosxClick(string palabra)
         {
             return Obejeto.DT_BusquedaArticulosxClick(palabra);
         }

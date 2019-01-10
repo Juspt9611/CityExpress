@@ -35,13 +35,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public List<Articulos> WSConsultarArticuloxId(int idArt)
+    public DataSet WSConsultarArticuloxId(int idArt)
     {
         return Busqueda.NG_ConsultaArticuloxId(idArt);
     }
 
     [WebMethod]
-    public List<Articulos> WSBusquedaArticulosxClick(string palabra)
+    public DataSet WSBusquedaArticulosxClick(string palabra)
     {
         return Busqueda.NG_BusquedaArticulosxClick(palabra);
     }

@@ -761,7 +761,9 @@ section {
 	border-radius: 5px;
 	padding: 1rem 2rem;
 	margin: 2rem 1.5rem;
+    overflow-wrap: break-word;
 }
+
 .news_post_title a {
 	font-size: 30px;
 	font-weight: 700;

@@ -39,7 +39,7 @@ namespace SupportCenter {
                 lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
                 lstArt.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
                 lstArt.InnerHtml += "</div>";
-                lstArt.InnerHtml += "<div>" + item["nombreArticulo"] + "</div>";
+                lstArt.InnerHtml += "<div onclick='loadArticulo(" + item["idArticulo"] + ")'>" + item["nombreArticulo"] + "</div>";
                 lstArt.InnerHtml += "</a>";
                 lstArt.InnerHtml += "</li>";
 
@@ -106,16 +106,7 @@ namespace SupportCenter {
         [WebMethod]
         public static string articuloxId(int idArt)
         {
-            DataTable dtTitulo = new DataTable();
-            dtTitulo = ConvertToDataTable(metodo.WSConsultarArticuloxId(idArt));
-            string Conten = ""; 
-            foreach (DataRow item in dtTitulo.Rows)
-            {
-                Conten = item["nombreArticulo"].ToString()+"||"+ item["contenido"].ToString();
-
-            }
-
-            return Conten;
+            return DataSetToJSON(metodo.WSConsultarArticuloxId(idArt).Tables[0]);
         }
 
         [WebMethod]
@@ -127,9 +118,8 @@ namespace SupportCenter {
         [WebMethod]
         public static string articulosxClick(string palabra)
         {
-            DataTable dtPalabra = new DataTable();
-            dtPalabra = ConvertToDataTable(metodo.WSBusquedaArticulosxClick(palabra));
-            return DataTableToJSONWithStringBuilder(dtPalabra);
+            string res = DataSetToJSON(metodo.WSBusquedaArticulosxClick(palabra).Tables[0]);
+            return res;
         }
 
         public static DataTable ConvertToDataTable<T>(IList<T> data) {

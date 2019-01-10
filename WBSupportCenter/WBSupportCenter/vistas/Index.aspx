@@ -137,7 +137,7 @@
                         <div class="row">
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
                                 <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i> Comentar</button>        
-                                <button type="button" class="btn btn-danger float-right" onclick="regresarIndex()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
+                                <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
                             </div>
                         </div>
                         <div class="row">
@@ -225,15 +225,9 @@
             //evento al seleccionar
             $('#result').on('click', 'li', function () {
                 $('#txtsearch').val($(this).text());
-                var palabra = $('#txtsearch').val();
-                showArticle($(this).val());
-                savePalabra(palabra);
-                $("#result").html('');
-                $('#sidebarArticulo').hide();
-                $('#sidebarCategoria').hide();
-                $('#listArticulos').hide();
-                $('.contentArticulo').show();
-                $('#tableIndex').hide();
+                loadArticulo($(this).val());
+                $('#txtsearch').val('');
+                $('#result').empty();
             });
 
             //evento al dar enter
@@ -264,29 +258,57 @@
             });
 
             var bandera = false;
-
-            //evento boton 
+            //evento boton  /////////////////////////////////////AQUI INSERTA PALABRA
             $("#btnBuscar").click(function () {
                 var palabra = $('#txtsearch').val();
-
                 if (palabra != "") {
-                    $('#sidebarArticulo').hide();
-                    $('#sidebarCategoria').hide();
-                    $('#listArticulos').hide();
-                    $('#tableIndex').show();
-                    $('#txtsearch').val('');
-                    $("#result").html('');
-                    $('.contentArticulo').hide();
-
-                    if (bandera == true) {
-                        $('#tableArticulos').DataTable().destroy();
-                        showTableNews(palabra);
-                        savePalabra(palabra);
-                    } else {
-                        showTableNews(palabra);
-                        savePalabra(palabra);
-                        bandera = true;
+                    $("#idPostMasVistos").empty();
+                    $(".easyPaginateNav").remove();
+                    if ($("#box-blog").is(":visible")) {
+                        $("#box-blog").hide();
+                        $("#idPostMasVistos").show();
                     }
+                    $.ajax({
+                        type: "POST",
+                        url: "Index.aspx/articulosxClick",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: "{'palabra':'" + palabra + "'}",
+                        success: function (response) {
+                            var posts = $.parseJSON(response.d);
+                            $.each(posts, function (i, d) {
+                                $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                                                                '<div class="news_post_content">' +
+                                                                    '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
+                                                                    '<div class="news_post_text">' +
+                                                                       d[2] +
+                                                                    '</div>' +
+                                                                    '<div class="news_post_meta">' +
+                                                                        '<ul class="d-flex flex-row align-items-start justify-content-start">' +
+                                                                            '<li><i class="fa fa-user"></i><a href="#"> ' + d[3] + '</a></li>' +
+                                                                            '<li><i class="fa fa-star"></i><a href="#"> ' + d[6] + '</a></li>' +
+                                                                            '<li><i class="fa fa-comment"></i><a href="#"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                        '</ul></div></div></div>');
+                            });
+
+                            //artMasVistos = posts;
+                            $('#txtsearch').val('');
+                            $("#result").empty('');
+                            $('#idPostMasVistos').easyPaginate({
+                                paginateElement: '.news_post',
+                                elementsPerPage: 5,
+                                effect: 'climb'
+                            });
+                        },
+                        error: function (response) {
+                            swal("Hubo un error en esta búsqueda", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                        }
+                    });
+
                 } else {
                     swal("Favor de ingresar un criterio de búsqueda", {
                         icon: "warning",
@@ -345,7 +367,6 @@
                             { data: "idEstatusArticulo", visible: false },
                             { data: "version", visible: false },
                             { data: "fechaCreacion", visible: false },
-                            { data: "nombreCategoria", title: "Categoría" },
                             {
                                 title: "Acción",
                                 data: null,
@@ -435,7 +456,7 @@
                                                         '<div class="news_post_content">'+
                                                             '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
                                                             '<div class="news_post_text">'+
-                                                                d[2] + 
+                                                               d[2].substring(d[2].indexOf('<p>'), d[2].indexOf('</p>') + 4) +
                                                             '</div>'+
                                                             '<div class="news_post_meta">'+
                                                                 '<ul class="d-flex flex-row align-items-start justify-content-start">'+
@@ -451,29 +472,42 @@
         }
         initArtMasVistos();
 
+        //Metodo para cargar un artículo por ID
         var idArticuloActual;
         function loadArticulo(idArt) {
             idArticuloActual = 0;
             $("#idPostMasVistos").hide();
+            $(".easyPaginateNav").remove();
             $("#box-blog").show();
-            $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario").empty();
-            $.each(artMasVistos, function (i, d) {
-                if (d[0] == idArt) {
-                    $("#box-titulo-blog").append(d[1]);
-                    $("#box-contenido-blog").append(d[2]);
-                    $("#box-Botones-blog-autor").append(" " + d[3]);
-                    $("#box-Botones-blog-estrella").append(" " + d[6]);
-                    $("#box-Botones-blog-comentario").append(" " + d[5] + " Comentarios");
+            $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario").empty();
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/articuloxId",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArt':" + idArt + "}",
+                success: function (response) {
+                    var posts = $.parseJSON(response.d);
+                    $.each(posts, function (i, d) {
+                        $("#box-titulo-blog").append(d[1]);
+                        $("#box-contenido-blog").append(d[2]);
+                        $("#box-Botones-blog-autor").append(" " + d[3]);
+                        $("#box-Botones-blog-estrella").append(" " + d[5]);
+                        $("#box-Botones-blog-comentario").append(" " + d[4] + " Comentarios");
+                    });
+                    registrarVisita(1, idArt);
+                    consultarComentarios(idArt);
+                    idArticuloActual = idArt;
+                },
+                error: function (response) {
+                    swal("Hubo un error al cargar el artículo.", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
                 }
             });
-            registrarVisita(1, idArt);
-            consultarComentarios(idArt);
-            idArticuloActual = idArt;
-        }
-
-        function regresarIndex() {
-            $("#box-blog").hide();
-            $("#idPostMasVistos").show();
+       
         }
 
         function registrarVisita(idUsuario, idArticulo) {
@@ -589,7 +623,6 @@
             }
 
             registrarValoracionArticulo(calificacionEstrella, idArticuloActual, comentario, 1, type);
-            regresarIndex();
         }
 
     </script>

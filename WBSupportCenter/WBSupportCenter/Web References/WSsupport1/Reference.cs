@@ -293,10 +293,10 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArticuloxId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Articulos[] WSConsultarArticuloxId(int idArt) {
+        public System.Data.DataSet WSConsultarArticuloxId(int idArt) {
             object[] results = this.Invoke("WSConsultarArticuloxId", new object[] {
                         idArt});
-            return ((Articulos[])(results[0]));
+            return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
@@ -322,10 +322,10 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSBusquedaArticulosxClick", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Articulos[] WSBusquedaArticulosxClick(string palabra) {
+        public System.Data.DataSet WSBusquedaArticulosxClick(string palabra) {
             object[] results = this.Invoke("WSBusquedaArticulosxClick", new object[] {
                         palabra});
-            return ((Articulos[])(results[0]));
+            return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
@@ -1501,10 +1501,10 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public Articulos[] Result {
+        public System.Data.DataSet Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Articulos[])(this.results[0]));
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }
@@ -1527,10 +1527,10 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public Articulos[] Result {
+        public System.Data.DataSet Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Articulos[])(this.results[0]));
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }
