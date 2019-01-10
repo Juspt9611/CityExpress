@@ -225,6 +225,7 @@
             //evento al seleccionar
             $('#result').on('click', 'li', function () {
                 $('#txtsearch').val($(this).text());
+                savePalabra($(this).text());
                 loadArticulo($(this).val());
                 $('#txtsearch').val('');
                 $('#result').empty();
@@ -236,79 +237,73 @@
                     var palabra = $('#txtsearch').val();
 
                     if (palabra != "") {
-                        $('#sidebarArticulo').hide();
-                        $('#sidebarCategoria').hide();
-                        $('#listArticulos').hide();
-                        $('#tableIndex').show();
-                        $('#txtsearch').val('');
-                        $("#result").html('');
-                        $('.contentArticulo').hide();
-
-                        if (bandera == true) {
-                            $('#tableArticulos').DataTable().destroy();
-                            showTableNews(palabra);
-                            savePalabra(palabra);
-                        } else {
-                            showTableNews(palabra);
-                            savePalabra(palabra);
-                            bandera = true;
-                        }
+                        loadListaArticulosxPalabra(palabra);
                     }
                 }
             });
 
+            //Carga lista de articulos en base a una palabra
+            function loadListaArticulosxPalabra(palabra) {
+                savePalabra(palabra);
+                $("#idPostMasVistos").empty();
+                $(".easyPaginateNav").remove();
+                if ($("#box-blog").is(":visible")) {
+                    $("#box-blog").hide();
+                    $("#idPostMasVistos").show();
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "Index.aspx/articulosxClick",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'palabra':'" + palabra + "'}",
+                    success: function (response) {
+                        var posts = $.parseJSON(response.d);
+                        var countPosts = 0;
+                        $.each(posts, function (i, d) {
+                            $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                                                            '<div class="news_post_content">' +
+                                                                '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
+                                                                '<div class="news_post_text">' +
+                                                                   d[2] +
+                                                                '</div>' +
+                                                                '<div class="news_post_meta">' +
+                                                                    '<ul class="d-flex flex-row align-items-start justify-content-start">' +
+                                                                        '<li><i class="fa fa-user"></i><a href="#"> ' + d[3] + '</a></li>' +
+                                                                        '<li><i class="fa fa-star"></i><a href="#"> ' + d[6] + '</a></li>' +
+                                                                        '<li><i class="fa fa-comment"></i><a href="#"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                    '</ul></div></div></div>');
+                            countPosts++;
+                        });
+
+                        if (countPosts == 0) {
+                            $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para este criterio de busqueda. </div> </div>');
+                        }
+
+                        $('#txtsearch').val('');
+                        $("#result").empty('');
+                        $('#idPostMasVistos').easyPaginate({
+                            paginateElement: '.news_post',
+                            elementsPerPage: 5,
+                            effect: 'climb'
+                        });
+                    },
+                    error: function (response) {
+                        swal("Hubo un error en esta búsqueda", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    }
+                });
+            }
+
             var bandera = false;
-            //evento boton  /////////////////////////////////////AQUI INSERTA PALABRA
+            //evento boton buscar
             $("#btnBuscar").click(function () {
                 var palabra = $('#txtsearch').val();
                 if (palabra != "") {
-                    $("#idPostMasVistos").empty();
-                    $(".easyPaginateNav").remove();
-                    if ($("#box-blog").is(":visible")) {
-                        $("#box-blog").hide();
-                        $("#idPostMasVistos").show();
-                    }
-                    $.ajax({
-                        type: "POST",
-                        url: "Index.aspx/articulosxClick",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: "{'palabra':'" + palabra + "'}",
-                        success: function (response) {
-                            var posts = $.parseJSON(response.d);
-                            $.each(posts, function (i, d) {
-                                $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
-                                                                '<div class="news_post_content">' +
-                                                                    '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
-                                                                    '<div class="news_post_text">' +
-                                                                       d[2] +
-                                                                    '</div>' +
-                                                                    '<div class="news_post_meta">' +
-                                                                        '<ul class="d-flex flex-row align-items-start justify-content-start">' +
-                                                                            '<li><i class="fa fa-user"></i><a href="#"> ' + d[3] + '</a></li>' +
-                                                                            '<li><i class="fa fa-star"></i><a href="#"> ' + d[6] + '</a></li>' +
-                                                                            '<li><i class="fa fa-comment"></i><a href="#"> ' + d[5] + ' Comentarios</a></li>' +
-                                                                        '</ul></div></div></div>');
-                            });
-
-                            //artMasVistos = posts;
-                            $('#txtsearch').val('');
-                            $("#result").empty('');
-                            $('#idPostMasVistos').easyPaginate({
-                                paginateElement: '.news_post',
-                                elementsPerPage: 5,
-                                effect: 'climb'
-                            });
-                        },
-                        error: function (response) {
-                            swal("Hubo un error en esta búsqueda", {
-                                icon: "error",
-                                allowOutsideClick: false,
-                                closeOnClickOutside: false
-                            });
-                        }
-                    });
-
+                    loadListaArticulosxPalabra(palabra);
                 } else {
                     swal("Favor de ingresar un criterio de búsqueda", {
                         icon: "warning",
@@ -438,8 +433,6 @@
             });
         }
 
-        var artMasVistos = [];
-
         //Carga de Artículos
         function initArtMasVistos() {
             $.ajax({
@@ -451,6 +444,7 @@
                 data: "{'top':" + 5 + "}",
                 success: function (response) {
                     var posts = $.parseJSON(response.d);
+                    var countPostMasvistos = 0;
                     $.each(posts, function (i, d) {
                         $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
                                                         '<div class="news_post_content">'+
@@ -464,9 +458,11 @@
                                                                     '<li><i class="fa fa-star"></i><a href="#"> '+d[6]+'</a></li>'+
                                                                     '<li><i class="fa fa-comment"></i><a href="#"> '+d[5]+' Comentarios</a></li>'+
                                                                 '</ul></div></div></div>');
+                        countPostMasvistos++;
                     });
-
-                    artMasVistos = posts;
+                    if (countPostMasvistos == 0) {
+                        $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No hay artículos registrados. </div> </div>');
+                    }
                 }
             });
         }
