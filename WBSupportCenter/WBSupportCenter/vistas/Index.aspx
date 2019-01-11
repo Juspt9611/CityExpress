@@ -591,6 +591,8 @@
                 data: "{'estrellas':" + estrellas + ", 'idArticulo':" + idArticulo + ", 'comentario':'" + comentario + "', 'idUsuario':" + idUsuario + "}",
                 success: function (response) {
                     if (response.d == 0) {
+                        $("#box-blog-txtComentario").val('');
+                        consultarComentarios(idArticulo);
                         swal(txt, {
                             icon: "success",
                             allowOutsideClick: false,
@@ -638,6 +640,7 @@
                 $("#box-historial-blog").show();
             } else {
                 $("#box-historial-blog").hide();
+                $('#box-historial-detalleArticulo').hide();
                 $("#box-contenido-blog").show();
             }
         }

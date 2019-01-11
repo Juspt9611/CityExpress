@@ -172,10 +172,18 @@
             } else if (i == 0) {
                 $("#inGrupos-form-crearart").addClass('is-invalid');
             } else {
+
+                var articuloNuevo = {};
+                articuloNuevo.nombreArticulo = tituloArt;
+                articuloNuevo.contenido = data;
+                articuloNuevo.categorias = cat.join();
+                articuloNuevo.tags = (tags.length == 0 ? "" : tags.join());
+                articuloNuevo.grupos = grupos.join();
+
                 $.ajax({
                     type: "POST",
                     url: "CrearArticulo.aspx/registrarArticulo",
-                    data: "{'nombreArticulo':'" + tituloArt + "', 'contenido':'" + data + "','categorias':" + JSON.stringify(cat) + ",'tags':'" + (tags.length == 0 ? "" : tags.join()) + "','grupos':" + JSON.stringify(grupos) + "}",
+                    data: JSON.stringify(articuloNuevo),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -201,6 +209,7 @@
                             });
 
                         } else {
+
                             swal("Hubo un error con el registro", {
                                 icon: "error",
                                 allowOutsideClick: false,
@@ -213,6 +222,7 @@
 
                     },
                     error: function (response) {
+
                         swal("Hubo un error con el registro", {
                             icon: "error",
                             allowOutsideClick: false,

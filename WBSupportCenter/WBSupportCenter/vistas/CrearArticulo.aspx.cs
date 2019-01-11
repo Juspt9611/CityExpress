@@ -21,10 +21,10 @@ namespace WBSupportCenter.vistas
         }
 
         [WebMethod]
-        public static int registrarArticulo(string nombreArticulo, string contenido, int[] categorias, string tags, int[] grupos)
+        public static int registrarArticulo(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSOpregistrarArt(nombreArticulo, contenido, string.Join(",", categorias), tags, string.Join(",", grupos));
+            return metodo.WSOpregistrarArt(nombreArticulo, contenido, categorias, tags, grupos);
         }
 
         [WebMethod]

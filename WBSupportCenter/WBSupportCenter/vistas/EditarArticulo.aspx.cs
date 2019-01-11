@@ -25,6 +25,7 @@ namespace WBSupportCenter.vistas
 
             string tituloArt = (string)ds.Tables[0].Rows[0][0];
             string contenido = (string)ds.Tables[0].Rows[0][2];
+            int estatus = (Int32)ds.Tables[0].Rows[0][3];
             string categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
             string tags = JsonConvert.SerializeObject(ds.Tables[2].AsEnumerable().Select(r => r.ItemArray));
             string grupos = JsonConvert.SerializeObject(ds.Tables[3].AsEnumerable().Select(r => r.ItemArray));
@@ -34,14 +35,15 @@ namespace WBSupportCenter.vistas
             this.hiddenCategorias.Value = categorias;
             this.hiddenTags.Value = tags;
             this.hiddenGrupos.Value = grupos;
+            this.hiddenEstatus.Value = estatus.ToString();
 
         }
 
         [WebMethod]
-        public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, int[] categorias, string tags, int[] grupos)
+        public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, string.Join(",", categorias), tags, string.Join(",", grupos));
+            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
         }
 
         [WebMethod]
