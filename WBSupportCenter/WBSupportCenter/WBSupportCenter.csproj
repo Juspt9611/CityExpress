@@ -256,6 +256,7 @@
     <Content Include="Web References\WSsupport1\Historial.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="vistas\fileUploader.ashx" />
     <None Include="Web References\WSsupport1\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -1052,6 +1053,9 @@
     </Compile>
     <Compile Include="vistas\EditarArticulo.aspx.designer.cs">
       <DependentUpon>EditarArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vistas\fileUploader.ashx.cs">
+      <DependentUpon>fileUploader.ashx</DependentUpon>
     </Compile>
     <Compile Include="vistas\Historial.aspx.cs">
       <DependentUpon>Historial.aspx</DependentUpon>

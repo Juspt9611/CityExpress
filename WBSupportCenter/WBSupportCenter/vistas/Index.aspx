@@ -49,8 +49,7 @@
 
                         <div class="input-group-append">
                             <button type="button"  class="btn btn-primary"id="btnBuscar"><span class="fa fa-search"></span></button>
-                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-                            </button>
+<%--                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"> </button>--%> 
                             <div class="dropdown-menu" id="DDLCategorias">
 
                                 <a class="dropdown-item" href="#">Link 1</a>
@@ -196,6 +195,10 @@
         </div>
     </div>
     <script>
+
+        //Variables
+        var estrellaArticulo = 6;
+
         $(document).ready(function () {
             $.ajaxSetup({ cache: false });
             $('.contentArticulo').hide();
@@ -253,7 +256,6 @@
 
             //Carga lista de articulos en base a una palabra
             function loadListaArticulosxPalabra(palabra) {
-                savePalabra(palabra);
                 $("#idPostMasVistos").empty();
                 $(".easyPaginateNav").remove();
                 if ($("#box-blog").is(":visible")) {
@@ -286,9 +288,10 @@
                         });
 
                         if (countPosts == 0) {
-                            $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para este criterio de busqueda. </div> </div>');
+                            $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para el criterio de busqueda <strong>"' + palabra + '"</strong>. </div> </div>');
                         }
 
+                        savePalabra(palabra);
                         $('#txtsearch').val('');
                         $("#result").empty('');
                         $('#idPostMasVistos').easyPaginate({
@@ -323,111 +326,6 @@
                 
             });
         });
-
-        function showArticle(id) {
-            $('#titleCard').html('');
-            $('#cuerpoCard').html('');
-
-            $.ajax({
-                async: false,
-                type: "POST",
-                url: "Index.aspx/articuloxId",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "{'idArt':'" + id + "'}",
-                success: function (response) {
-                    var valNew = response.d.split('||');
-                    $('#titleCard').html(valNew[0]);
-                    $('#cuerpoCard').html(valNew[1]);
-                },
-                error: function (response) {
-                    swal("Hubo un error con esta búsqueda", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
-                }
-            });
-        }
-
-        function showTableNews(palabra) {
-            $.ajax({
-                async: false,
-                type: "POST",
-                url: "Index.aspx/articulosxClick",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "{'palabra':'" + palabra + "'}",
-                success: function (response) {
-                    var jsonReporte = $.parseJSON(response.d);
-                    $('#tableArticulos').DataTable({
-                        data: jsonReporte,
-                        lengthChange: false,
-                        columns: [
-                            { data: "idarticulo", visible: false },
-                            { data: "nombreArticulo", title: 'Artículo' },
-                            { data: "autor", visible: false },
-                            { data: "contenido", visible: false },
-                            { data: "idEstatusArticulo", visible: false },
-                            { data: "version", visible: false },
-                            { data: "fechaCreacion", visible: false },
-                            {
-                                title: "Acción",
-                                data: null,
-                                sortable: false,
-                                render: function (data, type, row) {
-                                    return '<center><a id="btnVer" class="btn btn-primary" href="javascript:void(0)" onclick="showArticleByTable(' + row.idarticulo + ');" role="button">Ver</a></center>';
-                                }
-                            },
-                            {
-                                title: "Acción",
-                                data: null,
-                                sortable: false,
-                                render: function (data, type, row) {
-                                    return '<center><a id="btnHistorial" class="btn btn-warning" href="javascript:void(0)" role="button">Historial</a></center>';
-                                }
-                            }
-					    ]
-                    });
-
-                },
-                error: function (response) {
-                    swal("Hubo un error en esta búsqueda", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
-                }
-            });
-        }
-
-        function showArticleByTable(id) {
-            $('#titleCard').html('');
-            $('#cuerpoCard').html('');
-            $('#tableIndex').hide();
-            $('.contentArticulo').show();
-
-            $.ajax({
-                async: false,
-                type: "POST",
-                url: "Index.aspx/articuloxId",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "{'idArt':'" + id + "'}",
-                success: function (response) {
-                    var valNew = response.d.split('||');
-                    $('#titleCard').html(valNew[0]);
-                    $('#cuerpoCard').html(valNew[1]);
-                },
-                error: function (response) {
-                    swal("Hubo un error en esta búsqueda", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
-                }
-            });
-        }
 
         function savePalabra(palabra) {
             $.ajax({
@@ -499,11 +397,14 @@
                         $("#box-Botones-blog-autor").append(" " + d[3]);
                         $("#box-Botones-blog-estrella").append(" " + d[5]);
                         $("#box-Botones-blog-comentario").append(" " + d[4] + " Comentarios");
+                        estrellas(d[6]);
                     });
+                    estrellaArticulo = 6;
                     registrarVisita(1, idArt);
                     consultarComentarios(idArt);
                     idArticuloActual = idArt;
                     showHistorial(idArt);
+                    console.log("estrellaArticulo: " + estrellaArticulo);
                 },
                 error: function (response) {
                     swal("Hubo un error al cargar el artículo.", {
@@ -516,6 +417,7 @@
        
         }
 
+        //Registro de visitas por artículo
         function registrarVisita(idUsuario, idArticulo) {
             $.ajax({
                 async: false,
@@ -532,7 +434,7 @@
             });
         }
 
-        var estrellaArticulo = 6;
+        
         function estrellas(num) {
             var estrellaArray = ["star1", "star2", "star3", "star4", "star5"];
             $.each(estrellaArray, function (i, d) {
@@ -542,9 +444,10 @@
                     $("#" + d).removeClass("starSelected");
                 }
             });
-            //estrellaArticulo = num;
+            estrellaArticulo = num;
         }
 
+        //Consulta de comentario por id del artículo
         function consultarComentarios(idArticulo) {
             $("#box-blog-listas-comentarios").empty();
             $.ajax({
@@ -574,13 +477,7 @@
             });
         }
 
-        function registrarValoracionArticulo(estrellas, idArticulo, comentario, idUsuario, tipo) {
-            var txt = '';
-            if (tipo) {
-                txt = 'Comentario registrado.';
-            } else {
-                txt = 'Valoración registrada';
-            }
+        function registrarValoracionArticulo(estrellas, idArticulo, comentario, idUsuario) {
 
             $.ajax({
                 async: false,
@@ -593,7 +490,7 @@
                     if (response.d == 0) {
                         $("#box-blog-txtComentario").val('');
                         consultarComentarios(idArticulo);
-                        swal(txt, {
+                        swal('Valoración registrada.', {
                             icon: "success",
                             allowOutsideClick: false,
                             closeOnClickOutside: false
@@ -619,19 +516,14 @@
         function registrarValoracionxArt() {
 
             var comentario = $("#box-blog-txtComentario").val();
-            var calificacionEstrella = estrellaArticulo;
-            var type = 0;
+            registrarValoracionArticulo(estrellaArticulo, idArticuloActual, comentario, 1);
 
-            //console.log(idArticuloActual);
-            //console.log(comentario);
-            //console.log(calificacionEstrella);
-
-            if (comentario.length > 3) {
-                type = 1;
-            }
-
-            registrarValoracionArticulo(calificacionEstrella, idArticuloActual, comentario, 1, type);
         }
+
+
+        /**********************
+                                                                HISTORIAL
+        **********************/
 
         //Cambia contenido del blog por el historial o viceversa
         function verHistorial() {
@@ -658,7 +550,6 @@
                 dataType: "json",
                 data: "{'idArt':'" + id + "'}",
                 success: function (response) {
-                    console.log(response);
                     var valNew = response.d.split('$$');
                     var val = [];
 

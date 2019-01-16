@@ -83,7 +83,8 @@ namespace SupportCenter {
         [WebMethod]
         public static string articuloxId(int idArt)
         {
-            return DataSetToJSON(metodo.WSConsultarArticuloxId(idArt).Tables[0]);
+            int idUsuarioConsulta = 1; //Este usuario debe ser obtenido de la sesion
+            return DataSetToJSON(metodo.WSConsultarArticuloxId(idArt, idUsuarioConsulta).Tables[0]);
         }
 
         [WebMethod]

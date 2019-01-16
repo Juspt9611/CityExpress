@@ -35,9 +35,9 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public DataSet WSConsultarArticuloxId(int idArt)
+    public DataSet WSConsultarArticuloxId(int idArt, int idUsuarioConsulta)
     {
-        return Busqueda.NG_ConsultaArticuloxId(idArt);
+        return Busqueda.NG_ConsultaArticuloxId(idArt, idUsuarioConsulta);
     }
 
     [WebMethod]
@@ -145,78 +145,106 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     #region Categorias
 
-    //Consultar las categorias
     [WebMethod]
-    public List<CategoriasxSubcategorias> WSconsultarCategorias()
+    public int WSRegistrarCategoria(string nombreCategoria, string descripcionCategoria)
     {
         NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_consultarCategorias();
+        return Categorias.NG_RegistrarCategoria(nombreCategoria, descripcionCategoria);
     }
 
-    //Consultar las categorias
     [WebMethod]
-    public List<CategoriasxSubcategorias> WSgetSinHijos()
+    public int WSRegistrarSubcategoria(int idPadre, string nombreCategoria, string descripcionCategoria)
     {
         NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_getSinHijos();
+        return Categorias.NG_RegistrarSubCategoria(idPadre, nombreCategoria, descripcionCategoria);
     }
 
-    //Consultar las categorias
     [WebMethod]
-    public List<CategoriasxSubcategorias> WSgetSinPadres(int idPadre)
+    public List<CategoriasxSubcategorias> WSConsultarCategoriasSub()
     {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_getSinPadres(idPadre);
+        NGCategorias categorias = new NGCategorias();
+        return categorias.NG_ConsultarCategorias();
     }
 
-    //Consultar las categorias
     [WebMethod]
-    public List<CategoriasxSubcategorias> WSgetSize(int idCategoria)
+    public List<CategoriasxSubcategorias> WSConsultarSubcategorias(int idCat)
     {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_getSize(idCategoria);
+        NGCategorias categorias = new NGCategorias();
+        return categorias.NG_ConsultarSubcategorias(idCat);
     }
 
-    //Consultar las categorias
-    [WebMethod]
-    public List<CategoriasxSubcategorias> WSgetList(int idCategoria)
-    {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_getList(idCategoria);
-    }
+    ////Consultar las categorias
+    //[WebMethod]
+    //public List<CategoriasxSubcategorias> WSconsultarCategorias()
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_consultarCategorias();
+    //}
 
-    //Guardar las categorias
-    [WebMethod]
-    public String WSguardarCategorias(String nombreCategoria, String descripcion)
-    {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_guardarCategorias(nombreCategoria, descripcion);
-    }
+    ////Consultar las categorias
+    //[WebMethod]
+    //public List<CategoriasxSubcategorias> WSgetSinHijos()
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_getSinHijos();
+    //}
 
-    //Guardar las categorias
-    [WebMethod]
-    public String WSguardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria)
-    {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_guardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
-    }
+    ////Consultar las categorias
+    //[WebMethod]
+    //public List<CategoriasxSubcategorias> WSgetSinPadres(int idPadre)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_getSinPadres(idPadre);
+    //}
 
-    //Guardar las categorias
-    [WebMethod]
-    public String WSguardarRelacion(String nombreCategoria, int idCategoria)
-    {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_guardarRelacion(nombreCategoria, idCategoria);
-    }
+    ////Consultar las categorias
+    //[WebMethod]
+    //public List<CategoriasxSubcategorias> WSgetSize(int idCategoria)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_getSize(idCategoria);
+    //}
+
+    ////Consultar las categorias
+    //[WebMethod]
+    //public List<CategoriasxSubcategorias> WSgetList(int idCategoria)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_getList(idCategoria);
+    //}
+
+    ////Guardar las categorias
+    //[WebMethod]
+    //public String WSguardarCategorias(String nombreCategoria, String descripcion)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_guardarCategorias(nombreCategoria, descripcion);
+    //}
+
+    ////Guardar las categorias
+    //[WebMethod]
+    //public String WSguardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_guardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
+    //}
+
+    ////Guardar las categorias
+    //[WebMethod]
+    //public String WSguardarRelacion(String nombreCategoria, int idCategoria)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_guardarRelacion(nombreCategoria, idCategoria);
+    //}
 
 
-    //Eliminar las categorias
-    [WebMethod]
-    public String WSeliminarCategorias(int idCategoria)
-    {
-        NGCategorias Categorias = new NGCategorias();
-        return Categorias.NG_eliminarCategorias(idCategoria);
-    }
+    ////Eliminar las categorias
+    //[WebMethod]
+    //public String WSeliminarCategorias(int idCategoria)
+    //{
+    //    NGCategorias Categorias = new NGCategorias();
+    //    return Categorias.NG_eliminarCategorias(idCategoria);
+    //}
 
     #endregion
 

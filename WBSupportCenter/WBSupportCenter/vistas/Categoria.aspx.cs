@@ -11,99 +11,130 @@ using System.ComponentModel;
 
 namespace WBSupportCenter.vistas {
     public partial class WebForm1 : System.Web.UI.Page {
+        static WSsupportCenterClass metodo = new WSsupportCenterClass();
         protected void Page_Load(object sender, EventArgs e) {
 
         }
 
         [WebMethod]
-        public static String consultarCategorias() {
-            String daresult = "";
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dt = new DataTable();
-            dt = ConvertToDataTable(metodo.WSconsultarCategorias());
-            daresult = DataTableToJSONWithStringBuilder(dt);
-            return daresult;
-
-        }
-
-
-
-        [WebMethod]
-        public static String getSinHijos() {
-            String daresult = "";
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dt = new DataTable();
-            dt = ConvertToDataTable(metodo.WSgetSinHijos());
-            daresult = DataTableToJSONWithStringBuilder(dt);
-            return daresult;
+        public static void registrarCategoria(string nombreCategoria, string descripcionCategoria)
+        {
+            metodo.WSRegistrarCategoria(nombreCategoria, descripcionCategoria);
         }
 
         [WebMethod]
-        public static String getSinPadres(int idPadre) {
-            String daresult = "";
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dt = new DataTable();
-            dt = ConvertToDataTable(metodo.WSgetSinPadres(idPadre));
-            daresult = DataTableToJSONWithStringBuilder(dt);
-            return daresult;
-        }
-
-
-        [WebMethod]
-        public static String getSize(int idCategoria) {
-            String daresult = "";
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dt = new DataTable();
-            dt = ConvertToDataTable(metodo.WSgetSize(idCategoria));
-            daresult = DataTableToJSONWithStringBuilder(dt);
-            return daresult;
-        }
-
-
-        [WebMethod]
-        public static String getList(int idCategoria) {
-            String daresult = "";
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataTable dt = new DataTable();
-            dt = ConvertToDataTable(metodo.WSgetList(idCategoria));
-            daresult = DataTableToJSONWithStringBuilder(dt);
-            return daresult;
+        public static void registrarSubcategoria(int idPadre, string nombreSubcategoria, string descripcionSubcategoria)
+        {
+            metodo.WSRegistrarSubcategoria(idPadre, nombreSubcategoria, descripcionSubcategoria);
         }
 
         [WebMethod]
-        public static String guardarCategorias(String nombreCategoria, String descripcion) {
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSguardarCategorias(nombreCategoria, descripcion);
+        public static string consultarSubcategoria(int idCat)
+        {
+            DataTable dtTitulo = new DataTable();
+            dtTitulo = ConvertToDataTable(metodo.WSConsultarSubcategorias(idCat));
+            return DataTableToJSONWithStringBuilder(dtTitulo);
         }
 
         [WebMethod]
-        public static String guardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria) {
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSguardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
+        public static string consultarCategoria()
+        {
+            DataTable dtTitulo = new DataTable();
+            dtTitulo = ConvertToDataTable(metodo.WSConsultarCategoriasSub());
+            return DataTableToJSONWithStringBuilder(dtTitulo);
         }
 
+        //[WebMethod]
+        //public static String consultarCategorias() {
+        //    String daresult = "";
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    DataTable dt = new DataTable();
+        //    dt = ConvertToDataTable(metodo.WSconsultarCategorias());
+        //    daresult = DataTableToJSONWithStringBuilder(dt);
+        //    return daresult;
 
-        [WebMethod]
-        public static String guardarRelacion(String nombreCategoria, int idCategoria) {
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSguardarRelacion(nombreCategoria, idCategoria);
-        }
+        //}
 
 
 
-        [WebMethod]
-        public static String eliminarCategorias(int idCategoria) {
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSeliminarCategorias(idCategoria);
-        }
+        //[WebMethod]
+        //public static String getSinHijos() {
+        //    String daresult = "";
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    DataTable dt = new DataTable();
+        //    dt = ConvertToDataTable(metodo.WSgetSinHijos());
+        //    daresult = DataTableToJSONWithStringBuilder(dt);
+        //    return daresult;
+        //}
 
-        public static DataTable ConvertToDataTable<T>(IList<T> data) {
+        //[WebMethod]
+        //public static String getSinPadres(int idPadre) {
+        //    String daresult = "";
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    DataTable dt = new DataTable();
+        //    dt = ConvertToDataTable(metodo.WSgetSinPadres(idPadre));
+        //    daresult = DataTableToJSONWithStringBuilder(dt);
+        //    return daresult;
+        //}
+
+
+        //[WebMethod]
+        //public static String getSize(int idCategoria) {
+        //    String daresult = "";
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    DataTable dt = new DataTable();
+        //    dt = ConvertToDataTable(metodo.WSgetSize(idCategoria));
+        //    daresult = DataTableToJSONWithStringBuilder(dt);
+        //    return daresult;
+        //}
+
+
+        //[WebMethod]
+        //public static String getList(int idCategoria) {
+        //    String daresult = "";
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    DataTable dt = new DataTable();
+        //    dt = ConvertToDataTable(metodo.WSgetList(idCategoria));
+        //    daresult = DataTableToJSONWithStringBuilder(dt);
+        //    return daresult;
+        //}
+
+        //[WebMethod]
+        //public static String guardarCategorias(String nombreCategoria, String descripcion) {
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    return metodo.WSguardarCategorias(nombreCategoria, descripcion);
+        //}
+
+        //[WebMethod]
+        //public static String guardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria) {
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    return metodo.WSguardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
+        //}
+
+
+        //[WebMethod]
+        //public static String guardarRelacion(String nombreCategoria, int idCategoria) {
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    return metodo.WSguardarRelacion(nombreCategoria, idCategoria);
+        //}
+
+
+
+        //[WebMethod]
+        //public static String eliminarCategorias(int idCategoria) {
+        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
+        //    return metodo.WSeliminarCategorias(idCategoria);
+        //}
+
+        public static DataTable ConvertToDataTable<T>(IList<T> data)
+        {
             PropertyDescriptorCollection properties =
                TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
             foreach (PropertyDescriptor prop in properties)
                 table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-            foreach (T item in data) {
+            foreach (T item in data)
+            {
                 DataRow row = table.NewRow();
                 foreach (PropertyDescriptor prop in properties)
                     row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
@@ -112,22 +143,32 @@ namespace WBSupportCenter.vistas {
             return table;
 
         }
-        public static string DataTableToJSONWithStringBuilder(DataTable table) {
+        public static string DataTableToJSONWithStringBuilder(DataTable table)
+        {
             var JSONString = new StringBuilder();
-            if (table.Rows.Count > 0) {
+            if (table.Rows.Count > 0)
+            {
                 JSONString.Append("[");
-                for (int i = 0; i < table.Rows.Count; i++) {
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
                     JSONString.Append("{");
-                    for (int j = 0; j < table.Columns.Count; j++) {
-                        if (j < table.Columns.Count - 1) {
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        if (j < table.Columns.Count - 1)
+                        {
                             JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\",");
-                        } else if (j == table.Columns.Count - 1) {
+                        }
+                        else if (j == table.Columns.Count - 1)
+                        {
                             JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\"");
                         }
                     }
-                    if (i == table.Rows.Count - 1) {
+                    if (i == table.Rows.Count - 1)
+                    {
                         JSONString.Append("}");
-                    } else {
+                    }
+                    else
+                    {
                         JSONString.Append("},");
                     }
                 }

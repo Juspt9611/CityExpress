@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace SupportCenter.Entidades {
     public class CategoriasxSubcategorias {
 
-        public int idCategorias { get; set; }
+        public int idCategoria { get; set; }
         public int idPadre { get; set; }
         public int idHijo { get; set; }        
         public string nombreCategoria { get; set; }
         public string descripcionCategoria { get; set; }
-        public int estatus { get; set; }
     }
 }

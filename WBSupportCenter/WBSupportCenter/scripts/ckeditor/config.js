@@ -8,7 +8,7 @@ CKEDITOR.editorConfig = function (config) {
 	// For complete reference see:
 	// https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html
 
-	// The toolbar groups arrangement, optimized for a single toolbar row.
+    // The toolbar groups arrangement, optimized for a single toolbar row.
 	config.toolbarGroups = [
 		{ name: 'clipboard', groups: ['clipboard', 'undo'] },
 		{ name: 'styles' },
@@ -21,11 +21,11 @@ CKEDITOR.editorConfig = function (config) {
 		{ name: 'forms' },
 		{ name: 'insert' },
 		//{ name: 'tools' },
-		{ name: 'others' }
+		//{ name: 'others' }
 
 	];
-
-	config.extraPlugins = 'sourcearea,print';
+    config.extraPlugins = 'print';
+	
 
 	// The default plugins included in the basic setup define some buttons that
 	// are not needed in a basic editor. They are removed here.

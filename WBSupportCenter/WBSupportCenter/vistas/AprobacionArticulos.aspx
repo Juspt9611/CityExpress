@@ -56,23 +56,20 @@
     <br>
     <div class="container" id="contenidoArticulo" hidden>
 
-        <div class="card text-center">
-            <div class="card-header">
-                <h5 id="titleCard"></h5>
+        <div id="box-blog" class="box_table_container">
+            <div class="row">
+                <span id="titleCard" class="box_table_title" style="margin-bottom:1rem; font-weight:700; text-align:center !important; font-size:2rem;"></span>
             </div>
-            <div class="card-body">
-                <p id="cuerpoCard"></p>
-            </div>
-            <div class="card-footer text-muted">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
-                        <button class="btn btn-warning pull-left" style="color: #FFFFFF; border-right: 5px;" id="atras">Regresar</button>
-
-                        <button class="btn btn-success pull-right" style="color: #FFFFFF;" id="aceptar">Aceptar</button>
-                        <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="rechazar">Rechazar</button>
-                    </div>
+            <div class="row">
+                <div id="box-contenido-blog">
                 </div>
-
+            </div>
+            <div class="row">
+                <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
+                    <button class="btn btn-warning pull-left" style="border-right: 5px;" id="atras"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
+                    <button class="btn btn-success pull-right" style="color: #FFFFFF;" id="aceptar"><i class="fa fa-check" aria-hidden="true"></i> Aprobar</button>
+                    <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="rechazar"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button>
+                </div>
             </div>
         </div>
         <br>
@@ -140,7 +137,7 @@
 
             $("#aceptar").click(function (e) {
                 e.preventDefault(), swal({
-                    title: "¿Esta seguro que desea aceptar este articulo?",
+                    title: "¿Esta seguro que desea aprobar este articulo?",
                     text: "",
                     icon: "info",
                     closeOnClickOutside: false,
@@ -153,7 +150,7 @@
                             closeModal: !0
                         },
                         confirm: {
-                            text: "Aceptar",
+                            text: "Aprobar",
                             value: !0,
                             visible: !0,
                             className: "btn btn-info",
@@ -340,10 +337,10 @@
             idArticulo = null;
             idArticulo = data_row[0];
             $("#titleCard").empty();
-            $("#cuerpoCard").empty();
+            $("#box-contenido-blog").empty();
 
-            $("#titleCard").append("Nombre: " + data_row[1]);
-            $("#cuerpoCard").append(data_row[2]);
+            $("#titleCard").append(data_row[1]);
+            $("#box-contenido-blog").append(data_row[2]);
         }
 
         function saveEstatusArticulo(idArticulo, estatus, comentario) {

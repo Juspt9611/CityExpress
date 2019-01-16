@@ -11,49 +11,28 @@ using SupportCenter.Entidades;
 namespace SupportCenter.Negocio
 {
     public class NGCategorias {
-        public List<CategoriasxSubcategorias> NG_consultarCategorias() {
+        public int NG_RegistrarCategoria(string nombreCategoria, string descripcionCategoria)
+        {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_consultarCategorias();
-        }
-        public List<CategoriasxSubcategorias> NG_getSinHijos() {
-            DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_getSinHijos();
+            return Objeto.DT_RegistrarCategoria(nombreCategoria, descripcionCategoria);
         }
 
-        public List<CategoriasxSubcategorias> NG_getSinPadres(int idPadre) {
+        public int NG_RegistrarSubCategoria(int idPadre, string nombreSubcategoria, string descripcionSubcategoria)
+        {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_getSinPadres(idPadre);
+            return Objeto.DT_RegistrarSubCategoria(idPadre, nombreSubcategoria, descripcionSubcategoria);
         }
 
-        public List<CategoriasxSubcategorias> NG_getSize(int idCategoria) {
+        public List<CategoriasxSubcategorias> NG_ConsultarCategorias()
+        {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_getSize(idCategoria);
-        }
-        public List<CategoriasxSubcategorias> NG_getList(int idCategoria) {
-            DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_getList(idCategoria);
+            return Objeto.DT_ConsultarCategorias();
         }
 
-
-        public String NG_guardarRelacion(String nombreCategoria, int idCategoria) {
+        public List<CategoriasxSubcategorias> NG_ConsultarSubcategorias(int idCat)
+        {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_guardarRelacion(nombreCategoria, idCategoria);
+            return Objeto.DT_ConsultarSubcategorias(idCat);
         }
-
-        public String NG_guardarCategorias(String nombreCategoria, String descripcion) {
-            DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_guardarCategorias(nombreCategoria, descripcion);
-        }
-
-        public String NG_guardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria) {
-            DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_guardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
-        }
-
-        public String NG_eliminarCategorias(int idCategoria) {
-            DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_eliminarCategorias(idCategoria);
-        }
-
     }
 }

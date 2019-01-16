@@ -258,7 +258,7 @@
             if (hiddenEstatus == 3) {
 
                 swal("Este artículo debe ser verificado antes de su edición.", {
-                    icon: "success",
+                    icon: "info",
                     allowOutsideClick: false,
                     closeOnClickOutside: false
                 });

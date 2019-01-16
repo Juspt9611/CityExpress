@@ -6,7 +6,10 @@
     color:#232D3B;
     overflow-wrap: break-word;
 }
-
+#box-contenido-blog{
+    width:100%;
+    overflow:hidden;
+}
 .box_table_title{
     width:100%;
     font-size: 16px;

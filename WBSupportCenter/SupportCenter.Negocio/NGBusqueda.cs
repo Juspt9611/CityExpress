@@ -23,9 +23,9 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_BusquedaTitulo(palabra);
         }
 
-        public DataSet NG_ConsultaArticuloxId(int idArt)
+        public DataSet NG_ConsultaArticuloxId(int idArt, int idUsuarioConsulta)
         {
-            return Obejeto.DT_ConsultarArticuloxId(idArt);
+            return Obejeto.DT_ConsultarArticuloxId(idArt, idUsuarioConsulta);
         }
 
         public DataSet NG_BusquedaArticulosxClick(string palabra)

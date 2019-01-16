@@ -65,18 +65,24 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignar uno o más grupos.
                 </div>
             </div>
-             
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <label for="img-form-crearart">Agregar una imágen: </label>
+                    <div class="input-group">
+                        <input type="file" class="form-control-file" id="img-form-crearart" style="width:93.5%;">
+                        <div class="input-group-prepend">
+                            <button id="submit-img-form-crearart" type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form method="post">
                 <textarea name="editor1" id="editor1">
                     &lt;p&gt;Ingresar contenido.&lt;/p&gt;
                 </textarea>
                 <script>
                     CKEDITOR.replace('editor1', {
-                        uploadUrl: '../recursos/imgBlog',
-                        filebrowserBrowseUrl : '../recursos/imgBlog',
-                        filebrowserImageBrowseUrl: '../recursos/imgBlog',
-                        filebrowserUploadUrl: '../recursos/imgBlog',
-                        filebrowserImageUploadUrl: '../recursos/imgBlog',
+                        //filebrowserUploadUrl: 'upload.ashx',
                         on: {
                             loaded: function (e) {
                                 var rules = {
@@ -297,6 +303,44 @@
                 }
             }
             
+        });
+
+        //Cargar imagen
+        $("#submit-img-form-crearart").click(function () {
+
+            var fd = new FormData();
+            var files = $('#img-form-crearart')[0].files[0];
+            fd.append('file', files);
+
+            $.ajax({
+                type: 'POST',
+                url: 'fileUploader.ashx',
+                data: fd,
+                success: function (status) {
+                    if (status != 'error') {
+                        swal("Imagen cargada en " + status, {
+                            icon: "success",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    } else {
+                        swal("Error al subir imagen.", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    }
+                },
+                processData: false,
+                contentType: false,
+                error: function () {
+                    swal("Error al subir imagen.", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
         });
 
         /*********** JS init
