@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="Reporte" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>WBSupportCenter.WSsupport1.Reporte, WBSupportCenter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>WBSupportCenter.WSsupport1.Reporte</TypeInfo>
 </GenericObjectDataSource>
