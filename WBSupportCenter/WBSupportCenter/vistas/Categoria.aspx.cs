@@ -17,15 +17,29 @@ namespace WBSupportCenter.vistas {
         }
 
         [WebMethod]
-        public static void registrarCategoria(string nombreCategoria, string descripcionCategoria)
+        public static void registrarCategoria(string nombreCategoria)
         {
-            metodo.WSRegistrarCategoria(nombreCategoria, descripcionCategoria);
+            metodo.WSRegistrarCategoria(nombreCategoria);
         }
 
         [WebMethod]
-        public static void registrarSubcategoria(int idPadre, string nombreSubcategoria, string descripcionSubcategoria)
+        public static void registrarSubcategoria(int idPadre, string nombreSubcategoria)
         {
-            metodo.WSRegistrarSubcategoria(idPadre, nombreSubcategoria, descripcionSubcategoria);
+            metodo.WSRegistrarSubcategoria(idPadre, nombreSubcategoria);
+        }
+
+        [WebMethod]
+        public static void editarCategorias(int idCat, string nombreCategoria)
+        {
+            metodo.WSEditarCategorias(idCat, nombreCategoria);
+        }
+
+        [WebMethod]
+        public static string eliminarCategorias(int idCat)
+        {
+            DataTable dtTitulo = new DataTable();
+            dtTitulo = ConvertToDataTable(metodo.WSEliminarCategorias(idCat));
+            return DataTableToJSONWithStringBuilder(dtTitulo);
         }
 
         [WebMethod]
@@ -43,88 +57,6 @@ namespace WBSupportCenter.vistas {
             dtTitulo = ConvertToDataTable(metodo.WSConsultarCategoriasSub());
             return DataTableToJSONWithStringBuilder(dtTitulo);
         }
-
-        //[WebMethod]
-        //public static String consultarCategorias() {
-        //    String daresult = "";
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    DataTable dt = new DataTable();
-        //    dt = ConvertToDataTable(metodo.WSconsultarCategorias());
-        //    daresult = DataTableToJSONWithStringBuilder(dt);
-        //    return daresult;
-
-        //}
-
-
-
-        //[WebMethod]
-        //public static String getSinHijos() {
-        //    String daresult = "";
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    DataTable dt = new DataTable();
-        //    dt = ConvertToDataTable(metodo.WSgetSinHijos());
-        //    daresult = DataTableToJSONWithStringBuilder(dt);
-        //    return daresult;
-        //}
-
-        //[WebMethod]
-        //public static String getSinPadres(int idPadre) {
-        //    String daresult = "";
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    DataTable dt = new DataTable();
-        //    dt = ConvertToDataTable(metodo.WSgetSinPadres(idPadre));
-        //    daresult = DataTableToJSONWithStringBuilder(dt);
-        //    return daresult;
-        //}
-
-
-        //[WebMethod]
-        //public static String getSize(int idCategoria) {
-        //    String daresult = "";
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    DataTable dt = new DataTable();
-        //    dt = ConvertToDataTable(metodo.WSgetSize(idCategoria));
-        //    daresult = DataTableToJSONWithStringBuilder(dt);
-        //    return daresult;
-        //}
-
-
-        //[WebMethod]
-        //public static String getList(int idCategoria) {
-        //    String daresult = "";
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    DataTable dt = new DataTable();
-        //    dt = ConvertToDataTable(metodo.WSgetList(idCategoria));
-        //    daresult = DataTableToJSONWithStringBuilder(dt);
-        //    return daresult;
-        //}
-
-        //[WebMethod]
-        //public static String guardarCategorias(String nombreCategoria, String descripcion) {
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    return metodo.WSguardarCategorias(nombreCategoria, descripcion);
-        //}
-
-        //[WebMethod]
-        //public static String guardarCategoriasEdit(String nombreCategoria, String descripcion, int idCategoria) {
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    return metodo.WSguardarCategoriasEdit(nombreCategoria, descripcion, idCategoria);
-        //}
-
-
-        //[WebMethod]
-        //public static String guardarRelacion(String nombreCategoria, int idCategoria) {
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    return metodo.WSguardarRelacion(nombreCategoria, idCategoria);
-        //}
-
-
-
-        //[WebMethod]
-        //public static String eliminarCategorias(int idCategoria) {
-        //    WSsupportCenterClass metodo = new WSsupportCenterClass();
-        //    return metodo.WSeliminarCategorias(idCategoria);
-        //}
 
         public static DataTable ConvertToDataTable<T>(IList<T> data)
         {

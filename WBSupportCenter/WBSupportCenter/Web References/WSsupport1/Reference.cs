@@ -70,6 +70,10 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSRegistrarSubcategoriaOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSEditarCategoriasOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSEliminarCategoriasOperationCompleted;
+        
         private System.Threading.SendOrPostCallback WSConsultarCategoriasSubOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSConsultarSubcategoriasOperationCompleted;
@@ -175,6 +179,12 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSRegistrarSubcategoriaCompletedEventHandler WSRegistrarSubcategoriaCompleted;
+        
+        /// <remarks/>
+        public event WSEditarCategoriasCompletedEventHandler WSEditarCategoriasCompleted;
+        
+        /// <remarks/>
+        public event WSEliminarCategoriasCompletedEventHandler WSEliminarCategoriasCompleted;
         
         /// <remarks/>
         public event WSConsultarCategoriasSubCompletedEventHandler WSConsultarCategoriasSubCompleted;
@@ -736,26 +746,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSRegistrarCategoria", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int WSRegistrarCategoria(string nombreCategoria, string descripcionCategoria) {
+        public int WSRegistrarCategoria(string nombreCategoria) {
             object[] results = this.Invoke("WSRegistrarCategoria", new object[] {
-                        nombreCategoria,
-                        descripcionCategoria});
+                        nombreCategoria});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void WSRegistrarCategoriaAsync(string nombreCategoria, string descripcionCategoria) {
-            this.WSRegistrarCategoriaAsync(nombreCategoria, descripcionCategoria, null);
+        public void WSRegistrarCategoriaAsync(string nombreCategoria) {
+            this.WSRegistrarCategoriaAsync(nombreCategoria, null);
         }
         
         /// <remarks/>
-        public void WSRegistrarCategoriaAsync(string nombreCategoria, string descripcionCategoria, object userState) {
+        public void WSRegistrarCategoriaAsync(string nombreCategoria, object userState) {
             if ((this.WSRegistrarCategoriaOperationCompleted == null)) {
                 this.WSRegistrarCategoriaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSRegistrarCategoriaOperationCompleted);
             }
             this.InvokeAsync("WSRegistrarCategoria", new object[] {
-                        nombreCategoria,
-                        descripcionCategoria}, this.WSRegistrarCategoriaOperationCompleted, userState);
+                        nombreCategoria}, this.WSRegistrarCategoriaOperationCompleted, userState);
         }
         
         private void OnWSRegistrarCategoriaOperationCompleted(object arg) {
@@ -767,34 +775,92 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSRegistrarSubcategoria", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int WSRegistrarSubcategoria(int idPadre, string nombreCategoria, string descripcionCategoria) {
+        public int WSRegistrarSubcategoria(int idPadre, string nombreCategoria) {
             object[] results = this.Invoke("WSRegistrarSubcategoria", new object[] {
                         idPadre,
-                        nombreCategoria,
-                        descripcionCategoria});
+                        nombreCategoria});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void WSRegistrarSubcategoriaAsync(int idPadre, string nombreCategoria, string descripcionCategoria) {
-            this.WSRegistrarSubcategoriaAsync(idPadre, nombreCategoria, descripcionCategoria, null);
+        public void WSRegistrarSubcategoriaAsync(int idPadre, string nombreCategoria) {
+            this.WSRegistrarSubcategoriaAsync(idPadre, nombreCategoria, null);
         }
         
         /// <remarks/>
-        public void WSRegistrarSubcategoriaAsync(int idPadre, string nombreCategoria, string descripcionCategoria, object userState) {
+        public void WSRegistrarSubcategoriaAsync(int idPadre, string nombreCategoria, object userState) {
             if ((this.WSRegistrarSubcategoriaOperationCompleted == null)) {
                 this.WSRegistrarSubcategoriaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSRegistrarSubcategoriaOperationCompleted);
             }
             this.InvokeAsync("WSRegistrarSubcategoria", new object[] {
                         idPadre,
-                        nombreCategoria,
-                        descripcionCategoria}, this.WSRegistrarSubcategoriaOperationCompleted, userState);
+                        nombreCategoria}, this.WSRegistrarSubcategoriaOperationCompleted, userState);
         }
         
         private void OnWSRegistrarSubcategoriaOperationCompleted(object arg) {
             if ((this.WSRegistrarSubcategoriaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSRegistrarSubcategoriaCompleted(this, new WSRegistrarSubcategoriaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEditarCategorias", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WSEditarCategorias(int idCat, string nombreCategoria) {
+            object[] results = this.Invoke("WSEditarCategorias", new object[] {
+                        idCat,
+                        nombreCategoria});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSEditarCategoriasAsync(int idCat, string nombreCategoria) {
+            this.WSEditarCategoriasAsync(idCat, nombreCategoria, null);
+        }
+        
+        /// <remarks/>
+        public void WSEditarCategoriasAsync(int idCat, string nombreCategoria, object userState) {
+            if ((this.WSEditarCategoriasOperationCompleted == null)) {
+                this.WSEditarCategoriasOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEditarCategoriasOperationCompleted);
+            }
+            this.InvokeAsync("WSEditarCategorias", new object[] {
+                        idCat,
+                        nombreCategoria}, this.WSEditarCategoriasOperationCompleted, userState);
+        }
+        
+        private void OnWSEditarCategoriasOperationCompleted(object arg) {
+            if ((this.WSEditarCategoriasCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSEditarCategoriasCompleted(this, new WSEditarCategoriasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEliminarCategorias", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public CategoriasxSubcategorias[] WSEliminarCategorias(int idCat) {
+            object[] results = this.Invoke("WSEliminarCategorias", new object[] {
+                        idCat});
+            return ((CategoriasxSubcategorias[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSEliminarCategoriasAsync(int idCat) {
+            this.WSEliminarCategoriasAsync(idCat, null);
+        }
+        
+        /// <remarks/>
+        public void WSEliminarCategoriasAsync(int idCat, object userState) {
+            if ((this.WSEliminarCategoriasOperationCompleted == null)) {
+                this.WSEliminarCategoriasOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEliminarCategoriasOperationCompleted);
+            }
+            this.InvokeAsync("WSEliminarCategorias", new object[] {
+                        idCat}, this.WSEliminarCategoriasOperationCompleted, userState);
+        }
+        
+        private void OnWSEliminarCategoriasOperationCompleted(object arg) {
+            if ((this.WSEliminarCategoriasCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSEliminarCategoriasCompleted(this, new WSEliminarCategoriasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1301,7 +1367,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         private string nombreCategoriaField;
         
-        private string descripcionCategoriaField;
+        private int totalField;
         
         /// <remarks/>
         public int idCategoria {
@@ -1344,12 +1410,12 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public string descripcionCategoria {
+        public int total {
             get {
-                return this.descripcionCategoriaField;
+                return this.totalField;
             }
             set {
-                this.descripcionCategoriaField = value;
+                this.totalField = value;
             }
         }
     }
@@ -1870,6 +1936,58 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSEditarCategoriasCompletedEventHandler(object sender, WSEditarCategoriasCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSEditarCategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSEditarCategoriasCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSEliminarCategoriasCompletedEventHandler(object sender, WSEliminarCategoriasCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSEliminarCategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSEliminarCategoriasCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public CategoriasxSubcategorias[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((CategoriasxSubcategorias[])(this.results[0]));
             }
         }
     }

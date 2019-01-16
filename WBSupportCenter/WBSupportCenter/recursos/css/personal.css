@@ -6,6 +6,13 @@
     color:#232D3B;
     overflow-wrap: break-word;
 }
+.box_table_container_historial{
+    border: 1px solid rgba(35,45,59,0);
+    border-radius:5px;
+    padding: 2rem;
+    color:#232D3B;
+    overflow-wrap: break-word;
+}
 #box-contenido-blog{
     width:100%;
     overflow:hidden;
@@ -29,6 +36,15 @@
 
 .form-control-error{
     border:1px solid red;
+}
+
+.span-blog-categorias{
+
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #a5a5a5;
+    float:left;
 }
 
 /***************

@@ -11,16 +11,27 @@ using SupportCenter.Entidades;
 namespace SupportCenter.Negocio
 {
     public class NGCategorias {
-        public int NG_RegistrarCategoria(string nombreCategoria, string descripcionCategoria)
+        public int NG_RegistrarCategoria(string nombreCategoria)
         {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_RegistrarCategoria(nombreCategoria, descripcionCategoria);
+            return Objeto.DT_RegistrarCategoria(nombreCategoria);
         }
 
-        public int NG_RegistrarSubCategoria(int idPadre, string nombreSubcategoria, string descripcionSubcategoria)
+        public int NG_RegistrarSubCategoria(int idPadre, string nombreSubcategoria)
         {
             DTCategorias Objeto = new DTCategorias();
-            return Objeto.DT_RegistrarSubCategoria(idPadre, nombreSubcategoria, descripcionSubcategoria);
+            return Objeto.DT_RegistrarSubCategoria(idPadre, nombreSubcategoria);
+        }
+
+        public int NG_EditarCategorias(int idCat, string nombreCategoria)
+        {
+            DTCategorias Objeto = new DTCategorias();
+            return Objeto.DT_EditarCategorias(idCat, nombreCategoria);
+        }
+        public List<CategoriasxSubcategorias> NG_EliminarCategorias(int idCat)
+        {
+            DTCategorias Objeto = new DTCategorias();
+            return Objeto.DT_EliminarCategorias(idCat);
         }
 
         public List<CategoriasxSubcategorias> NG_ConsultarCategorias()

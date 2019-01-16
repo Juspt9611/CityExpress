@@ -50,7 +50,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="idPadre" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="idHijo" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="descripcionCategoria" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="total" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="WSBusquedaTitulo">
@@ -363,7 +363,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="descripcionCategoria" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -379,7 +378,6 @@
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="idPadre" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="descripcionCategoria" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -387,6 +385,35 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="WSRegistrarSubcategoriaResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEditarCategorias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCat" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEditarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSEditarCategoriasResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEliminarCategorias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCat" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEliminarCategoriasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSEliminarCategoriasResult" type="tns:ArrayOfCategoriasxSubcategorias" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -616,6 +643,18 @@
   <wsdl:message name="WSRegistrarSubcategoriaSoapOut">
     <wsdl:part name="parameters" element="tns:WSRegistrarSubcategoriaResponse" />
   </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSEditarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSEditarCategoriasResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasSoapIn">
+    <wsdl:part name="parameters" element="tns:WSEliminarCategorias" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasSoapOut">
+    <wsdl:part name="parameters" element="tns:WSEliminarCategoriasResponse" />
+  </wsdl:message>
   <wsdl:message name="WSConsultarCategoriasSubSoapIn">
     <wsdl:part name="parameters" element="tns:WSConsultarCategoriasSub" />
   </wsdl:message>
@@ -758,7 +797,6 @@
   </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpGetIn">
     <wsdl:part name="nombreCategoria" type="s:string" />
-    <wsdl:part name="descripcionCategoria" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -766,10 +804,22 @@
   <wsdl:message name="WSRegistrarSubcategoriaHttpGetIn">
     <wsdl:part name="idPadre" type="s:string" />
     <wsdl:part name="nombreCategoria" type="s:string" />
-    <wsdl:part name="descripcionCategoria" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSRegistrarSubcategoriaHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasHttpGetIn">
+    <wsdl:part name="idCat" type="s:string" />
+    <wsdl:part name="nombreCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasHttpGetIn">
+    <wsdl:part name="idCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
   </wsdl:message>
   <wsdl:message name="WSConsultarCategoriasSubHttpGetIn" />
   <wsdl:message name="WSConsultarCategoriasSubHttpGetOut">
@@ -914,7 +964,6 @@
   </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpPostIn">
     <wsdl:part name="nombreCategoria" type="s:string" />
-    <wsdl:part name="descripcionCategoria" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -922,10 +971,22 @@
   <wsdl:message name="WSRegistrarSubcategoriaHttpPostIn">
     <wsdl:part name="idPadre" type="s:string" />
     <wsdl:part name="nombreCategoria" type="s:string" />
-    <wsdl:part name="descripcionCategoria" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSRegistrarSubcategoriaHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasHttpPostIn">
+    <wsdl:part name="idCat" type="s:string" />
+    <wsdl:part name="nombreCategoria" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasHttpPostIn">
+    <wsdl:part name="idCat" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarCategoriasHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
   </wsdl:message>
   <wsdl:message name="WSConsultarCategoriasSubHttpPostIn" />
   <wsdl:message name="WSConsultarCategoriasSubHttpPostOut">
@@ -1033,6 +1094,14 @@
       <wsdl:input message="tns:WSRegistrarSubcategoriaSoapIn" />
       <wsdl:output message="tns:WSRegistrarSubcategoriaSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <wsdl:input message="tns:WSEditarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSEditarCategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <wsdl:input message="tns:WSEliminarCategoriasSoapIn" />
+      <wsdl:output message="tns:WSEliminarCategoriasSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarCategoriasSub">
       <wsdl:input message="tns:WSConsultarCategoriasSubSoapIn" />
       <wsdl:output message="tns:WSConsultarCategoriasSubSoapOut" />
@@ -1131,6 +1200,14 @@
       <wsdl:input message="tns:WSRegistrarSubcategoriaHttpGetIn" />
       <wsdl:output message="tns:WSRegistrarSubcategoriaHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <wsdl:input message="tns:WSEditarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSEditarCategoriasHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <wsdl:input message="tns:WSEliminarCategoriasHttpGetIn" />
+      <wsdl:output message="tns:WSEliminarCategoriasHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarCategoriasSub">
       <wsdl:input message="tns:WSConsultarCategoriasSubHttpGetIn" />
       <wsdl:output message="tns:WSConsultarCategoriasSubHttpGetOut" />
@@ -1228,6 +1305,14 @@
     <wsdl:operation name="WSRegistrarSubcategoria">
       <wsdl:input message="tns:WSRegistrarSubcategoriaHttpPostIn" />
       <wsdl:output message="tns:WSRegistrarSubcategoriaHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <wsdl:input message="tns:WSEditarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSEditarCategoriasHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <wsdl:input message="tns:WSEliminarCategoriasHttpPostIn" />
+      <wsdl:output message="tns:WSEliminarCategoriasHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSConsultarCategoriasSub">
       <wsdl:input message="tns:WSConsultarCategoriasSubHttpPostIn" />
@@ -1421,6 +1506,24 @@
     </wsdl:operation>
     <wsdl:operation name="WSRegistrarSubcategoria">
       <soap:operation soapAction="http://tempuri.org/WSRegistrarSubcategoria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSEditarCategorias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <soap:operation soapAction="http://tempuri.org/WSEliminarCategorias" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1647,6 +1750,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSEditarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <soap12:operation soapAction="http://tempuri.org/WSEliminarCategorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarCategoriasSub">
       <soap12:operation soapAction="http://tempuri.org/WSConsultarCategoriasSub" style="document" />
       <wsdl:input>
@@ -1866,6 +1987,24 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <http:operation location="/WSEditarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <http:operation location="/WSEliminarCategorias" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarCategoriasSub">
       <http:operation location="/WSConsultarCategoriasSub" />
       <wsdl:input>
@@ -2078,6 +2217,24 @@
     </wsdl:operation>
     <wsdl:operation name="WSRegistrarSubcategoria">
       <http:operation location="/WSRegistrarSubcategoria" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarCategorias">
+      <http:operation location="/WSEditarCategorias" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarCategorias">
+      <http:operation location="/WSEliminarCategorias" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

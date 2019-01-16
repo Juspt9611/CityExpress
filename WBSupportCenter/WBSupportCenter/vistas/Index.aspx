@@ -110,9 +110,10 @@
                             <div class="col-lg-12 box_table_buttons">
                                 <div class="news_post_meta">
                                     <ul class="d-flex flex-row align-items-start justify-content-start">
-                                        <li><i class="fa fa-user"></i><a id="box-Botones-blog-autor" href="#"></a></li>
-                                        <li><i class="fa fa-star"></i><a id="box-Botones-blog-estrella" href="#"></a></li>
-                                        <li><i class="fa fa-comment"></i><a id="box-Botones-blog-comentario" href="#"></a></li>
+                                        <li><i class="fa fa-user"></i><a id="box-Botones-blog-autor" href="javascript:void(0)"></a></li>
+                                        <li><i class="fa fa-star"></i><a id="box-Botones-blog-estrella" href="javascript:void(0)"></a></li>
+                                        <li><i class="fa fa-comment"></i><a id="box-Botones-blog-comentario" href="javascript:void(0)"></a></li>
+                                        <li><i class="fa fa-slack" style="display:none;"></i><a id="box-Botones-blog-tags" href="javascript:void(0)" style="cursor: default;"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -355,15 +356,16 @@
                     $.each(posts, function (i, d) {
                         $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
                                                         '<div class="news_post_content">'+
-                                                            '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
+                                                            '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br>' + d[8].replace(/,/g, ' >> ') + '</div>' +
                                                             '<div class="news_post_text">'+
                                                                d[2].substring(d[2].indexOf('<p>'), d[2].indexOf('</p>') + 4) +
                                                             '</div>'+
                                                             '<div class="news_post_meta">'+
                                                                 '<ul class="d-flex flex-row align-items-start justify-content-start">'+
-                                                                    '<li><i class="fa fa-user"></i><a href="#"> '+d[3]+'</a></li>'+
-                                                                    '<li><i class="fa fa-star"></i><a href="#"> '+d[6]+'</a></li>'+
-                                                                    '<li><i class="fa fa-comment"></i><a href="#"> '+d[5]+' Comentarios</a></li>'+
+                                                                    '<li><i class="fa fa-user"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[3] + '</a></li>' +
+                                                                    '<li><i class="fa fa-star"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[6] + '</a></li>' +
+                                                                    '<li><i class="fa fa-comment"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                    '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)" style="cursor: default;">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
                                                                 '</ul></div></div></div>');
                         countPostMasvistos++;
                     });
@@ -382,7 +384,7 @@
             $("#idPostMasVistos").hide();
             $(".easyPaginateNav").remove();
             $("#box-blog").show();
-            $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario").empty();
+            $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario, #box-Botones-blog-tags").empty();
             $.ajax({
                 type: "POST",
                 url: "Index.aspx/articuloxId",
@@ -392,11 +394,12 @@
                 success: function (response) {
                     var posts = $.parseJSON(response.d);
                     $.each(posts, function (i, d) {
-                        $("#box-titulo-blog").append(d[1]);
+                        $("#box-titulo-blog").append(d[1] + '<br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span>');
                         $("#box-contenido-blog").append(d[2]);
                         $("#box-Botones-blog-autor").append(" " + d[3]);
                         $("#box-Botones-blog-estrella").append(" " + d[5]);
                         $("#box-Botones-blog-comentario").append(" " + d[4] + " Comentarios");
+                        $("#box-Botones-blog-tags").append(d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>'));
                         estrellas(d[6]);
                     });
                     estrellaArticulo = 6;
@@ -593,13 +596,13 @@
             var html = '';
             $('#box-historial-detalleArticulo').html('');
 
-            html += '<div class="box_table_container">';
-            html += '   <a id="btnAtras" class="btn btn-warning pull-right" href="javascript:void(0)" onclick="returnHistorial();" role="button">Atrás</a>';
+            html += '<div class="box_table_container_historial">';
             html += '   <div class="row">';
-            html += '       <span class="box_table_title">' + valNew[1] + '</span>';
+            html += '       <span class="box_table_title"> Vista previa <a id="btnAtras" class="btn btn-warning pull-right" href="javascript:void(0)" onclick="returnHistorial();" role="button"> <i class="fa fa-minus-square" aria-hidden="true"></i> Ocultar vista previa</a></span>';
+           // html += '       ';
             html += '   </div>';
             html += '   <br>';
-            html += '   <div class="container">' + valNew[3] + '</div>';
+            html += '   <div id="box-contenido-blog">' + valNew[3] + '</div>';
             html += '</div>';
 
             $('#box-historial-detalleArticulo').show();
