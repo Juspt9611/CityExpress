@@ -105,6 +105,7 @@
     <Content Include="recursos\ajax\demowidget.php" />
     <Content Include="recursos\css\blog.css" />
     <Content Include="recursos\css\blog_responsive.css" />
+    <Content Include="recursos\css\footer.css" />
     <Content Include="recursos\css\jquery.gritter.css" />
     <Content Include="recursos\css\personal.css" />
     <Content Include="recursos\data\dataList.json" />

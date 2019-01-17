@@ -34,8 +34,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div id="catSpan_box_form_crearart" style="margin-bottom:1em;"></div>
+                <div class="col-lg-6 align-self-center">
+                    <div id="catSpan_box_form_crearart"></div>
                 </div>
             </div>
             <div class="row">

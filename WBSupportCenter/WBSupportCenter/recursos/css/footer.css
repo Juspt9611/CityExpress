@@ -1,0 +1,197 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/******************************
+
+[Table of Contents]
+
+1. Fonts
+2. Body and some general stuff
+3. Header
+4. Menu
+5. Home
+6. Domain Search
+7. News
+8. Sidebar
+9. Footer
+
+
+******************************/
+
+/***********
+1. Fonts
+***********/
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900");
+
+/*********************************
+2. Body and some general stuff
+*********************************/
+
+
+
+body {
+    font-family: "Raleway", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #a5a5a5;
+    overflow-x: hidden;
+}
+
+div {
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    color: #ffe877;
+    text-decoration: none
+}
+
+    a:hover {
+        color: #ffe877;
+        text-decoration: none
+    }
+
+
+
+/*********************************
+9. Footer
+*********************************/
+
+.footer {
+    width: 100%;
+    background: #28527a;
+    padding-top: 95px;
+    padding-bottom: 95px;
+}
+
+.footer_logo {
+    font-size: 47px;
+    color: #ffffff;
+    font-weight: 600;
+    line-height: 0.75;
+}
+
+    .footer_logo span {
+        color: #ffe877;
+    }
+
+.copyright {
+    font-size: 11px;
+    font-weight: 400;
+    color: #ffe877;
+    margin-top: 17px;
+}
+
+.footer_text {
+    margin-top: 33px;
+}
+
+    .footer_text p {
+        color: #ffffff;
+    }
+
+.contact_container {
+    margin-top: 38px;
+}
+
+.contact_form > div:not(:last-of-type) {
+    margin-bottom: 21px;
+}
+
+.contact_input {
+    width: 100%;
+    height: 49px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: #715691;
+    padding-left: 29px;
+    color: #ffffff;
+}
+
+.contact_textarea {
+    height: 142px;
+    padding-top: 15px;
+}
+
+.contact_input::-webkit-input-placeholder {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+}
+
+.contact_input:-moz-placeholder {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+}
+
+.contact_input::-moz-placeholder {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+}
+
+.contact_input:-ms-input-placeholder {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+}
+
+.contact_input::input-placeholder {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+}
+
+.contact_button {
+    width: 108px;
+    height: 52px;
+    background: #ffe877;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #35214d;
+    margin-top: 23px;
+}
+
+.footer_links {
+    padding-top: 13px;
+}
+
+.footer_list_col:not(:nth-child(n + 3)) {
+    margin-bottom: 45px;
+}
+
+.footer_list_title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffe877;
+}
+
+.footer_list {
+    margin-top: 36px;
+}
+
+    .footer_list li:not(:last-of-type) {
+        margin-bottom: 14px;
+    }
+
+    .footer_list li a {
+        font-size: 15px;
+        font-weight: 400;
+        color: #ffffff;
+    }
+
+        .footer_list li a:hover {
+            color: #f4d160;
+        }
+

@@ -275,15 +275,16 @@
                         $.each(posts, function (i, d) {
                             $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
                                                             '<div class="news_post_content">' +
-                                                                '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a></div>' +
+                                                                '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
                                                                 '<div class="news_post_text">' +
                                                                    d[2] +
                                                                 '</div>' +
                                                                 '<div class="news_post_meta">' +
                                                                     '<ul class="d-flex flex-row align-items-start justify-content-start">' +
-                                                                        '<li><i class="fa fa-user"></i><a href="#"> ' + d[3] + '</a></li>' +
-                                                                        '<li><i class="fa fa-star"></i><a href="#"> ' + d[6] + '</a></li>' +
-                                                                        '<li><i class="fa fa-comment"></i><a href="#"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                        '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
+                                                                        '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
+                                                                        '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                        '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)" style="cursor: default;">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
                                                                     '</ul></div></div></div>');
                             countPosts++;
                         });
@@ -356,7 +357,7 @@
                     $.each(posts, function (i, d) {
                         $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
                                                         '<div class="news_post_content">'+
-                                                            '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br>' + d[8].replace(/,/g, ' >> ') + '</div>' +
+                                                            '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
                                                             '<div class="news_post_text">'+
                                                                d[2].substring(d[2].indexOf('<p>'), d[2].indexOf('</p>') + 4) +
                                                             '</div>'+
