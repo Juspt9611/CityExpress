@@ -506,6 +506,79 @@
           <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="WSOptenerGrup">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSOptenerGrupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSOptenerGrupResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSOptenerRols">
+        <s:complexType />
+      </s:element>
+      <s:element name="WSOptenerRolsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSOptenerRolsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSInsertarPers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Nombres" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Apellido" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="grupos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rol" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSInsertarPersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSInsertarPersResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSOptenRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSOptenRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSOptenRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ArrayOfArticulos" nillable="true" type="tns:ArrayOfArticulos" />
       <s:element name="ArrayOfCategoriasxSubcategorias" nillable="true" type="tns:ArrayOfCategoriasxSubcategorias" />
       <s:element name="ArrayOfBusquedaTitulo" nillable="true" type="tns:ArrayOfBusquedaTitulo" />
@@ -521,6 +594,7 @@
       <s:element name="string" nillable="true" type="s:string" />
       <s:element name="ArrayOfReporte" nillable="true" type="tns:ArrayOfReporte" />
       <s:element name="ArrayOfHistorial" nillable="true" type="tns:ArrayOfHistorial" />
+      <s:element name="boolean" type="s:boolean" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="WSOptenerArtSoapIn">
@@ -678,6 +752,30 @@
   </wsdl:message>
   <wsdl:message name="WSConsultarHistorialArticuloSoapOut">
     <wsdl:part name="parameters" element="tns:WSConsultarHistorialArticuloResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerGrupSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOptenerGrup" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerGrupSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOptenerGrupResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerRolsSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOptenerRols" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerRolsSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOptenerRolsResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersSoapIn">
+    <wsdl:part name="parameters" element="tns:WSInsertarPers" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersSoapOut">
+    <wsdl:part name="parameters" element="tns:WSInsertarPersResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolSoapIn">
+    <wsdl:part name="parameters" element="tns:WSOptenRol" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolSoapOut">
+    <wsdl:part name="parameters" element="tns:WSOptenRolResponse" />
   </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpGetIn" />
   <wsdl:message name="WSOptenerArtHttpGetOut">
@@ -846,6 +944,30 @@
   <wsdl:message name="WSConsultarHistorialArticuloHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
+  <wsdl:message name="WSOptenerGrupHttpGetIn" />
+  <wsdl:message name="WSOptenerGrupHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerRolsHttpGetIn" />
+  <wsdl:message name="WSOptenerRolsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersHttpGetIn">
+    <wsdl:part name="Nombres" type="s:string" />
+    <wsdl:part name="Apellido" type="s:string" />
+    <wsdl:part name="Usuario" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
+    <wsdl:part name="rol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolHttpGetIn">
+    <wsdl:part name="Usuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpPostIn" />
   <wsdl:message name="WSOptenerArtHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
@@ -1013,6 +1135,30 @@
   <wsdl:message name="WSConsultarHistorialArticuloHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
+  <wsdl:message name="WSOptenerGrupHttpPostIn" />
+  <wsdl:message name="WSOptenerGrupHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenerRolsHttpPostIn" />
+  <wsdl:message name="WSOptenerRolsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersHttpPostIn">
+    <wsdl:part name="Nombres" type="s:string" />
+    <wsdl:part name="Apellido" type="s:string" />
+    <wsdl:part name="Usuario" type="s:string" />
+    <wsdl:part name="grupos" type="s:string" />
+    <wsdl:part name="rol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSInsertarPersHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolHttpPostIn">
+    <wsdl:part name="Usuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSOptenRolHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
   <wsdl:portType name="WSsupportCenterClassSoap">
     <wsdl:operation name="WSOptenerArt">
       <wsdl:input message="tns:WSOptenerArtSoapIn" />
@@ -1117,6 +1263,22 @@
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <wsdl:input message="tns:WSConsultarHistorialArticuloSoapIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <wsdl:input message="tns:WSOptenerGrupSoapIn" />
+      <wsdl:output message="tns:WSOptenerGrupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <wsdl:input message="tns:WSOptenerRolsSoapIn" />
+      <wsdl:output message="tns:WSOptenerRolsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <wsdl:input message="tns:WSInsertarPersSoapIn" />
+      <wsdl:output message="tns:WSInsertarPersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <wsdl:input message="tns:WSOptenRolSoapIn" />
+      <wsdl:output message="tns:WSOptenRolSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpGet">
@@ -1224,6 +1386,22 @@
       <wsdl:input message="tns:WSConsultarHistorialArticuloHttpGetIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <wsdl:input message="tns:WSOptenerGrupHttpGetIn" />
+      <wsdl:output message="tns:WSOptenerGrupHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <wsdl:input message="tns:WSOptenerRolsHttpGetIn" />
+      <wsdl:output message="tns:WSOptenerRolsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <wsdl:input message="tns:WSInsertarPersHttpGetIn" />
+      <wsdl:output message="tns:WSInsertarPersHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <wsdl:input message="tns:WSOptenRolHttpGetIn" />
+      <wsdl:output message="tns:WSOptenRolHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="WSsupportCenterClassHttpPost">
     <wsdl:operation name="WSOptenerArt">
@@ -1329,6 +1507,22 @@
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <wsdl:input message="tns:WSConsultarHistorialArticuloHttpPostIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <wsdl:input message="tns:WSOptenerGrupHttpPostIn" />
+      <wsdl:output message="tns:WSOptenerGrupHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <wsdl:input message="tns:WSOptenerRolsHttpPostIn" />
+      <wsdl:output message="tns:WSOptenerRolsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <wsdl:input message="tns:WSInsertarPersHttpPostIn" />
+      <wsdl:output message="tns:WSInsertarPersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <wsdl:input message="tns:WSOptenRolHttpPostIn" />
+      <wsdl:output message="tns:WSOptenRolHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSsupportCenterClassSoap" type="tns:WSsupportCenterClassSoap">
@@ -1560,6 +1754,42 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <soap:operation soapAction="http://tempuri.org/WSConsultarHistorialArticulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <soap:operation soapAction="http://tempuri.org/WSOptenerGrup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <soap:operation soapAction="http://tempuri.org/WSOptenerRols" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <soap:operation soapAction="http://tempuri.org/WSInsertarPers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <soap:operation soapAction="http://tempuri.org/WSOptenRol" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1804,6 +2034,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <soap12:operation soapAction="http://tempuri.org/WSOptenerGrup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <soap12:operation soapAction="http://tempuri.org/WSOptenerRols" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <soap12:operation soapAction="http://tempuri.org/WSInsertarPers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <soap12:operation soapAction="http://tempuri.org/WSOptenRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassHttpGet" type="tns:WSsupportCenterClassHttpGet">
     <http:binding verb="GET" />
@@ -2041,6 +2307,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <http:operation location="/WSOptenerGrup" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <http:operation location="/WSOptenerRols" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <http:operation location="/WSInsertarPers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <http:operation location="/WSOptenRol" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSsupportCenterClassHttpPost" type="tns:WSsupportCenterClassHttpPost">
     <http:binding verb="POST" />
@@ -2271,6 +2573,42 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <http:operation location="/WSConsultarHistorialArticulo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerGrup">
+      <http:operation location="/WSOptenerGrup" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenerRols">
+      <http:operation location="/WSOptenerRols" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSInsertarPers">
+      <http:operation location="/WSInsertarPers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSOptenRol">
+      <http:operation location="/WSOptenRol" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

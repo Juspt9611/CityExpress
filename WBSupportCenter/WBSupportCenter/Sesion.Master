@@ -31,23 +31,34 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>SupportCenter</title>
-
+    <%-- CSS --%>
     <link href="recursos/StyleLogin/StyleLogin.css" rel="stylesheet" />
-    <script src="recursos/StyleLogin/jquery-1.11.1.min.js"></script>
-    <script src="recursos/StyleLogin/bootstrap.min.js"></script>
     <link href="recursos/StyleLogin/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- BLOG -->
+        <!-- BLOG -->
     <link href="recursos/css/footer.css" rel="stylesheet" />
-    <%--<link href="recursos/css/blog.css" rel="stylesheet" />--%>
     <link href="recursos/css/blog_responsive.css" rel="stylesheet" />
     <link href="recursos/css/personal.css" rel="stylesheet" />
-    <!-- BLOG -->
+
+    <%--JS--%>
+        <!-- JQuery -->
+    <script src="../scripts/jquery-1.7.min.js"></script>
+        <!-- BLOG -->
+    <script src="recursos/StyleLogin/bootstrap.min.js"></script>
     <script src="../recursos/css/bootstrap-4.1.2/popper.js"></script>
     <script src="../recursos/js/plugin/greensock/TweenMax.min.js"></script>
     <script src="../recursos/js/plugin/scrollmagic/ScrollMagic.min.js"></script>
     <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
     <script src="../recursos/js/blog/blog.js"></script>
+    <%-- Notificaciones --%>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script>
+		if (!window.jQuery.ui) {
+			document.write('<script src="../recursos/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+		}
+	</script>
+    <script src="../recursos/js/notification/jquery.gritter.js"></script>
+    <script src="../recursos/js/notification/sweetalert.min.js"></script>
+    <script src="../recursos/js/notification/ui-modal-notification.demo.min.js"></script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

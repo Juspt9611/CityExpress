@@ -1,25 +1,31 @@
-﻿using SupportCenter.Datos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SupportCenter.Datos;
 
-namespace SupportCenter.Negocio
-{
+namespace SupportCenter.Negocio {
     public class NGPersonal
     {
-        public int NG_RegistrarPer(string nombre, string apPaterno, string apMaterno, string idGrupo, string nombreUsuario, string contrasena, string idRol)
+        DTPersonal Objeto = new DTPersonal();
+        public DataSet NGOptenerGrup()
         {
-            DTPersonal Objeto = new DTPersonal();
-            return Objeto.DT_RegistrarPersonal(nombre, apPaterno, apMaterno, idGrupo, nombreUsuario, contrasena, idRol);
+            return Objeto.DTLlenaGrupo();
         }
-
-        public DataSet NG_ConsultaPersonal()
+        public DataSet NGOptenerRol()
         {
-            DTPersonal Objeto = new DTPersonal();
-            return Objeto.DT_ConsultaPersonal();
+            return Objeto.DTLlenaRoles();
+        }
+        public bool NGInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol)
+        {
+
+            return Objeto.DTInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+        }
+        public DataSet NGRolUser(string Usuario)
+        {
+            return Objeto.DTRolUser(Usuario);
         }
     }
 }

@@ -82,6 +82,14 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSConsultarHistorialArticuloOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSOptenerGrupOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSOptenerRolsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSInsertarPersOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSOptenRolOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -197,6 +205,18 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSConsultarHistorialArticuloCompletedEventHandler WSConsultarHistorialArticuloCompleted;
+        
+        /// <remarks/>
+        public event WSOptenerGrupCompletedEventHandler WSOptenerGrupCompleted;
+        
+        /// <remarks/>
+        public event WSOptenerRolsCompletedEventHandler WSOptenerRolsCompleted;
+        
+        /// <remarks/>
+        public event WSInsertarPersCompletedEventHandler WSInsertarPersCompleted;
+        
+        /// <remarks/>
+        public event WSOptenRolCompletedEventHandler WSOptenRolCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -981,6 +1001,126 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSConsultarHistorialArticuloCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSConsultarHistorialArticuloCompleted(this, new WSConsultarHistorialArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerGrup", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSOptenerGrup() {
+            object[] results = this.Invoke("WSOptenerGrup", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOptenerGrupAsync() {
+            this.WSOptenerGrupAsync(null);
+        }
+        
+        /// <remarks/>
+        public void WSOptenerGrupAsync(object userState) {
+            if ((this.WSOptenerGrupOperationCompleted == null)) {
+                this.WSOptenerGrupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerGrupOperationCompleted);
+            }
+            this.InvokeAsync("WSOptenerGrup", new object[0], this.WSOptenerGrupOperationCompleted, userState);
+        }
+        
+        private void OnWSOptenerGrupOperationCompleted(object arg) {
+            if ((this.WSOptenerGrupCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOptenerGrupCompleted(this, new WSOptenerGrupCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerRols", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSOptenerRols() {
+            object[] results = this.Invoke("WSOptenerRols", new object[0]);
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOptenerRolsAsync() {
+            this.WSOptenerRolsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void WSOptenerRolsAsync(object userState) {
+            if ((this.WSOptenerRolsOperationCompleted == null)) {
+                this.WSOptenerRolsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerRolsOperationCompleted);
+            }
+            this.InvokeAsync("WSOptenerRols", new object[0], this.WSOptenerRolsOperationCompleted, userState);
+        }
+        
+        private void OnWSOptenerRolsOperationCompleted(object arg) {
+            if ((this.WSOptenerRolsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOptenerRolsCompleted(this, new WSOptenerRolsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSInsertarPers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool WSInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol) {
+            object[] results = this.Invoke("WSInsertarPers", new object[] {
+                        Nombres,
+                        Apellido,
+                        Usuario,
+                        grupos,
+                        rol});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSInsertarPersAsync(string Nombres, string Apellido, string Usuario, string grupos, string rol) {
+            this.WSInsertarPersAsync(Nombres, Apellido, Usuario, grupos, rol, null);
+        }
+        
+        /// <remarks/>
+        public void WSInsertarPersAsync(string Nombres, string Apellido, string Usuario, string grupos, string rol, object userState) {
+            if ((this.WSInsertarPersOperationCompleted == null)) {
+                this.WSInsertarPersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSInsertarPersOperationCompleted);
+            }
+            this.InvokeAsync("WSInsertarPers", new object[] {
+                        Nombres,
+                        Apellido,
+                        Usuario,
+                        grupos,
+                        rol}, this.WSInsertarPersOperationCompleted, userState);
+        }
+        
+        private void OnWSInsertarPersOperationCompleted(object arg) {
+            if ((this.WSInsertarPersCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSInsertarPersCompleted(this, new WSInsertarPersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenRol", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet WSOptenRol(string Usuario) {
+            object[] results = this.Invoke("WSOptenRol", new object[] {
+                        Usuario});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSOptenRolAsync(string Usuario) {
+            this.WSOptenRolAsync(Usuario, null);
+        }
+        
+        /// <remarks/>
+        public void WSOptenRolAsync(string Usuario, object userState) {
+            if ((this.WSOptenRolOperationCompleted == null)) {
+                this.WSOptenRolOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenRolOperationCompleted);
+            }
+            this.InvokeAsync("WSOptenRol", new object[] {
+                        Usuario}, this.WSOptenRolOperationCompleted, userState);
+        }
+        
+        private void OnWSOptenRolOperationCompleted(object arg) {
+            if ((this.WSOptenRolCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSOptenRolCompleted(this, new WSOptenRolCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2092,6 +2232,110 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Historial[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSOptenerGrupCompletedEventHandler(object sender, WSOptenerGrupCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOptenerGrupCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOptenerGrupCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSOptenerRolsCompletedEventHandler(object sender, WSOptenerRolsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOptenerRolsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOptenerRolsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSInsertarPersCompletedEventHandler(object sender, WSInsertarPersCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSInsertarPersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSInsertarPersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSOptenRolCompletedEventHandler(object sender, WSOptenRolCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSOptenRolCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSOptenRolCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

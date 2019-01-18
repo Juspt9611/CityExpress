@@ -788,14 +788,9 @@ section {
 .news_post_meta ul li,
 .news_post_meta ul li a {
 	font-size: 12px;
-	color: #b5b5b5;
-	font-weight: 600;
-}
-.news_post_meta ul li a {
 	color: #0181bb;
-}
-.news_post_meta ul li a:hover {
-	color: #f4d160;
+	font-weight: 600;
+    cursor: default;
 }
 .news_post_text {
 	margin-top: 29px;

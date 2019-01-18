@@ -110,7 +110,32 @@
                 </div>
             </div>
      </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+        <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
+</div>
+
+    </div>
+
     </form>
     <script>
         var cat = [];
@@ -312,35 +337,46 @@
             var files = $('#img-form-crearart')[0].files[0];
             fd.append('file', files);
 
-            $.ajax({
-                type: 'POST',
-                url: 'fileUploader.ashx',
-                data: fd,
-                success: function (status) {
-                    if (status != 'error') {
-                        swal("Imagen cargada en " + status, {
-                            icon: "success",
-                            allowOutsideClick: false,
-                            closeOnClickOutside: false
-                        });
-                    } else {
+            if (files != null) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'fileUploader.ashx',
+                    data: fd,
+                    success: function (status) {
+                        console.log('img' + status);
+                        if (status != 'error') {
+                            swal("Imagen cargada en " + status, {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                        } else {
+                            swal("Error al subir imagen.", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                        }
+                    },
+                    processData: false,
+                    contentType: false,
+                    error: function () {
                         swal("Error al subir imagen.", {
                             icon: "error",
                             allowOutsideClick: false,
                             closeOnClickOutside: false
                         });
                     }
-                },
-                processData: false,
-                contentType: false,
-                error: function () {
-                    swal("Error al subir imagen.", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
-                }
-            });
+                });
+
+            } else {
+                var cursorPosition = $('#editor1').prop("selectionStart");
+                console.log(cursorPosition);
+                console.log("No hay archivo");
+                $('#exampleModalCenter').modal('show');
+                //exampleModal
+            }
         });
 
         /*********** JS init

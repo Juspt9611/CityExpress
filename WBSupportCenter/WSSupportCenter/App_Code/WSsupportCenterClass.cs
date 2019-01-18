@@ -211,5 +211,36 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     #endregion
+
+    #region Personal
+    [WebMethod]
+    public DataSet WSOptenerGrup()
+    {
+        NGPersonal WSPersonal = new NGPersonal();
+        return WSPersonal.NGOptenerGrup();
+    }
+    [WebMethod]
+    public DataSet WSOptenerRols()
+    {
+        NGPersonal WSPersonal = new NGPersonal();
+        return WSPersonal.NGOptenerRol();
+    }
+
+    [WebMethod]
+    public bool WSInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol)
+    {
+        NGPersonal WSPersonal = new NGPersonal();
+        return WSPersonal.NGInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+    }
+    #endregion
+
+    #region Sesion
+    [WebMethod]
+    public DataSet WSOptenRol(string Usuario)
+    {
+        NGPersonal WSPersonal = new NGPersonal();
+        return WSPersonal.NGRolUser(Usuario);
+    }
+    #endregion
 }
 

@@ -113,7 +113,7 @@
                                         <li><i class="fa fa-user"></i><a id="box-Botones-blog-autor" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-star"></i><a id="box-Botones-blog-estrella" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-comment"></i><a id="box-Botones-blog-comentario" href="javascript:void(0)"></a></li>
-                                        <li><i class="fa fa-slack" style="display:none;"></i><a id="box-Botones-blog-tags" href="javascript:void(0)" style="cursor: default;"></a></li>
+                                        <li><i class="fa fa-slack" style="display:none;"></i><a id="box-Botones-blog-tags" href="javascript:void(0)"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
                                                                         '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
                                                                         '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
                                                                         '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                                                                        '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)" style="cursor: default;">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
+                                                                        '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
                                                                     '</ul></div></div></div>');
                             countPosts++;
                         });
@@ -363,10 +363,10 @@
                                                             '</div>'+
                                                             '<div class="news_post_meta">'+
                                                                 '<ul class="d-flex flex-row align-items-start justify-content-start">'+
-                                                                    '<li><i class="fa fa-user"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[3] + '</a></li>' +
-                                                                    '<li><i class="fa fa-star"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[6] + '</a></li>' +
-                                                                    '<li><i class="fa fa-comment"></i><a href="javascript:void(0)" style="cursor: default;"> ' + d[5] + ' Comentarios</a></li>' +
-                                                                    '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)" style="cursor: default;">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
+                                                                    '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
+                                                                    '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
+                                                                    '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                    '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
                                                                 '</ul></div></div></div>');
                         countPostMasvistos++;
                     });

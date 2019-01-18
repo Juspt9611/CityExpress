@@ -45,7 +45,7 @@ namespace WBSupportCenter.vistas
             }
             catch (Exception ac)
             {
-
+                context.Response.Write("error");
             }
         }
 
