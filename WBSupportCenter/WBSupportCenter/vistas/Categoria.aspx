@@ -146,7 +146,8 @@
                 success: function (response) {
                     var jsonReporte = $.parseJSON(response.d);
                     $.each(jsonReporte, function (key, list) {
-                        $('#listCategoria').append('<a href="javascript:void(0)" onclick="showListSubcategoriaUno(' + list.idCategoria + ');cargarIdCategoria(' + list.idCategoria + ');" role="button" class="dblClickCat list-group-item list-group-item-action font-weight-bold textoCategorias"><button class="btn btn-warning" style="padding: 0px 5px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 1);"><i class="fa fa-edit" style="font-size:10px;"></i></button>&nbsp;<button class="btn btn-danger" style="padding: 0px 5px;" onclick="eliminarCategorias(' + list.idCategoria + ');refresh(1);"><i class="fa fa-times" style="font-size:10px;"></i></button>&nbsp;' + list.nombreCategoria + '</a>');
+                        $('#listCategoria').append('<a href="javascript:void(0)" onclick="showListSubcategoriaUno(' + list.idCategoria + ');cargarIdCategoria(' + list.idCategoria + ');" role="button" class="dblClickCat list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
+                        $('#listCategoria').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarCategorias(' + list.idCategoria + ');refresh(1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 1);">Editar</button></td></tr></table>');
                     });
                 }       
             });   
@@ -212,7 +213,8 @@
                     var jsonReporte = $.parseJSON(response.d);
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
-                            $('#listSubcategoria1').append('<a href="javascript:void(0)" onclick="showListSubcategoriaDos(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 1);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias"><button class="btn btn-warning" style="padding: 0px 5px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 2);"><i class="fa fa-edit" style="font-size:10px;"></i></button>&nbsp;<button class="btn btn-danger" style="padding: 0px 5px;" onclick="eliminarSubCat(2, ' + list.idCategoria + ');"><i class="fa fa-times" style="font-size:10px;"></i></button>&nbsp;' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria1').append('<a href="javascript:void(0)" onclick="showListSubcategoriaDos(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 1);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria1').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(2, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 2);">Editar</button></td></tr></table>');
                         });
                         $('#listSubcategoria1').show();
                         $('#listSubcategoria2').hide();
@@ -243,7 +245,8 @@
                     var jsonReporte = $.parseJSON(response.d);
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
-                            $('#listSubcategoria2').append('<a href="javascript:void(0)" onclick="showListSubcategoriaTres(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 2);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias"><button class="btn btn-warning" style="padding: 0px 5px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 3);"><i class="fa fa-edit" style="font-size:10px;"></i></button>&nbsp;<button class="btn btn-danger" style="padding: 0px 5px;" onclick="eliminarSubCat(3, ' + list.idCategoria + ');"><i class="fa fa-times" style="font-size:10px;"></i></button>&nbsp;' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria2').append('<a href="javascript:void(0)" onclick="showListSubcategoriaTres(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 2);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria2').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(3, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 3);">Editar</button></td></tr></table>');
                         });
                         $('#listSubcategoria2').show();
                         $('#listSubcategoria3').hide();
@@ -272,7 +275,8 @@
                     var jsonReporte = $.parseJSON(response.d);
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
-                            $('#listSubcategoria3').append('<a href="javascript:void(0)" onclick="showListSubcategoriaCuatro(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 3);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias"><button class="btn btn-warning" style="padding: 0px 5px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 4);"><i class="fa fa-edit" style="font-size:10px;"></i></button>&nbsp;<button class="btn btn-danger" style="padding: 0px 5px;" onclick="eliminarSubCat(4, ' + list.idCategoria + ');"><i class="fa fa-times" style="font-size:10px;"></i></button>&nbsp;' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria3').append('<a href="javascript:void(0)" onclick="showListSubcategoriaCuatro(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 3);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
+                            $('#listSubcategoria3').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(4, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 4);">Editar</button></td></tr></table>');
                         });
                         $('#listSubcategoria3').show();
                         $('#listSubcategoria4').hide();
@@ -298,7 +302,8 @@
                 success: function (response) {
                     var jsonReporte = $.parseJSON(response.d);
                     $.each(jsonReporte, function (key, list) {
-                        $('#listSubcategoria4').append('<a href="javascript:void(0)" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias"><button class="btn btn-warning" style="padding: 0px 5px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 5);"><i class="fa fa-edit" style="font-size:10px;"></i></button>&nbsp;<button class="btn btn-danger" style="padding: 0px 5px;" onclick="eliminarSubCat(5, ' + list.idCategoria + ');"><i class="fa fa-times" style="font-size:10px;"></i></button>&nbsp;' + list.nombreCategoria + '</a>');
+                        $('#listSubcategoria4').append('<a href="javascript:void(0)" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">&nbsp;&nbsp;' + list.nombreCategoria + '</a>');
+                        $('#listSubcategoria4').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(5, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 5);">Editar</button></td></tr></table>');
                     });
                     $('#listSubcategoria4').show();
                 }       

@@ -113,7 +113,7 @@
                                         <li><i class="fa fa-user"></i><a id="box-Botones-blog-autor" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-star"></i><a id="box-Botones-blog-estrella" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-comment"></i><a id="box-Botones-blog-comentario" href="javascript:void(0)"></a></li>
-                                        <li><i class="fa fa-slack" style="display:none;"></i><a id="box-Botones-blog-tags" href="javascript:void(0)"></a></li>
+                                        <li><i class="fa fa-hashtag"></i> Etiquetas: <a id="box-Botones-blog-tags" href="javascript:void(0)"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -366,7 +366,7 @@
                                                                     '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
                                                                     '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
                                                                     '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                                                                    '<li><i class="fa fa-slack" style="display:none;"></i><a href="javascript:void(0)">' + d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>') + '</a></li>' +
+                                                                    '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
                                                                 '</ul></div></div></div>');
                         countPostMasvistos++;
                     });
@@ -385,6 +385,9 @@
             $("#idPostMasVistos").hide();
             $(".easyPaginateNav").remove();
             $("#box-blog").show();
+            $("#box-historial-blog").hide();
+            $('#box-historial-detalleArticulo').hide();
+            $("#box-contenido-blog").show();
             $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario, #box-Botones-blog-tags").empty();
             $.ajax({
                 type: "POST",
@@ -400,7 +403,7 @@
                         $("#box-Botones-blog-autor").append(" " + d[3]);
                         $("#box-Botones-blog-estrella").append(" " + d[5]);
                         $("#box-Botones-blog-comentario").append(" " + d[4] + " Comentarios");
-                        $("#box-Botones-blog-tags").append(d[7].replace(/,/g, '  <i class="fa fa-hashtag"></i>'));
+                        $("#box-Botones-blog-tags").append(" " + d[7]);
                         estrellas(d[6]);
                     });
                     estrellaArticulo = 6;
@@ -408,7 +411,6 @@
                     consultarComentarios(idArt);
                     idArticuloActual = idArt;
                     showHistorial(idArt);
-                    console.log("estrellaArticulo: " + estrellaArticulo);
                 },
                 error: function (response) {
                     swal("Hubo un error al cargar el artículo.", {
@@ -477,6 +479,12 @@
                     if (countComent == 0) {
                         $("#box-blog-listas-comentarios").append('<div class="box-blog-coment-contenedor"> No hay comentarios para este artículo.</div>');
                     }
+
+                    $('#box-blog-listas-comentarios').easyPaginate({
+                        paginateElement: '.box-blog-coment-contenedor',
+                        elementsPerPage: 3,
+                        effect: 'climb'
+                    });
                 }
             });
         }
@@ -565,17 +573,17 @@
                         }
                         window.responseGlobal = valNew[i];
 
-                        html += '<li><label class="text-primary font-weight-bold">Fecha de Creación: </label>';
+                        html += '<li><label class="text-dark font-weight-bold">Fecha de Creación: </label>';
                         var fechaCreacion = moment(val[i][4], 'DD-MM-YYYY').format('DD-MM-YYYY');
                         html += '<label class="font-italic">' + fechaCreacion + '&nbsp;&nbsp;</label>';
-                        html += '<label class="text-primary font-weight-bold">Fecha de Modificación: </label>';
+                        html += '<label class="text-dark font-weight-bold">Fecha de Modificación: </label>';
                         var fechaModificacion = moment(val[i][5], 'DD-MM-YYYY').format('DD-MM-YYYY');
                         html += '<label class="font-italic">' + fechaModificacion + '&nbsp;&nbsp;</label>';
-                        html += '<label class="text-primary font-weight-bold">Autor: </label>';
+                        html += '<label class="text-dark font-weight-bold">Autor: </label>';
                         html += '<label class="font-italic">' + val[i][6] + '&nbsp;&nbsp;</label>';
-                        html += '<label class="text-primary font-weight-bold">Versión: </label>';
+                        html += '<label class="text-dark font-weight-bold">Versión: </label>';
                         html += '<label class="font-italic">' + val[i][2] + '&nbsp;&nbsp;</label>';
-                        html += '<a id="btnVer" class="btn btn-link font-weight-bold" href="javascript:void(0)" onclick="showArticuloHistorial(responseGlobal);" role="button">Ver Artículo</a></li><br>';
+                        html += '<a id="btnVer" class="btn btn-link font-weight-bold" href="javascript:void(0)" onclick="showArticuloHistorial(responseGlobal);" role="button">Ver versión</a></li><br>';
 
                         $('#box-historial-blog').html(html);
                     }

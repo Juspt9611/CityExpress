@@ -116,13 +116,13 @@
 
         #centrador {
             text-align: center !important;
-            width: 1200px !important;
+            width: 100% !important;
             /*background-color: red;*/
         }
 
         #imagen {
             position: absolute;
-            width: 700px;
+            width: 80%;
             top: 0;
             left: 0;
             right: 0;
@@ -143,7 +143,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">Support Center
+                    <a href="/vistas/index.aspx">Support Center
                     </a>
                 </li>
                 <li runat="server" id="index">
@@ -263,9 +263,8 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-6 footer_col magic_fade_in">
+                        <div class="col-lg-12 footer_col magic_fade_in">
                             <div class="footer_about">
-                                <div class="footer_logo">Support<span>Center</span></div>
                                 <br />
                                 <br />
                                 <div id="centrador">
@@ -273,11 +272,6 @@
                                 </div>
                                 <br />
                                 <br />
-                                <div class="copyright">
-                                    <%--<button type="button" id="eg7" class="btn btn-default"><i class="fa fa-thumbs-up"></i> Extra Small Alert</button>--%>
-                                    <a>Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                                        Todos los derechos reservados</a>
-                                </div>
                             </div>
                         </div>
 

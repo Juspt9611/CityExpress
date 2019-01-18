@@ -13,7 +13,6 @@ namespace WBSupportCenter
         {
 
             string id = Session["idRol"].ToString();
-
             if (id == "2")
             {
                 aprobacionArticulos.Attributes["class"] = "hidden";
