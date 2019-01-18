@@ -22,8 +22,9 @@ namespace WBSupportCenter.vistas
         public static string articulosxValidar()
         {
             String daresult = "";
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            daresult = DataSetToJSON(metodo.WSOpconsultarArtxValidar().Tables[0]);
+            daresult = DataSetToJSON(metodo.WSOpconsultarArtxValidar(idUsuario).Tables[0]);
             return daresult;
         }
 

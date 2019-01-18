@@ -82,17 +82,17 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     //Registrar articulo
     [WebMethod]
-    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
+    public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags, grupos);
+        return Articulos.NG_RegistrarArt(nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
     }
     //Consultar articulos por validar
     [WebMethod]
-    public DataSet WSOpconsultarArtxValidar()
+    public DataSet WSOpconsultarArtxValidar(int idUsuario)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_ConsultarArtxValidar();
+        return Articulos.NG_ConsultarArtxValidar(idUsuario);
     }
     //Consultar articulos para edicion
     [WebMethod]

@@ -407,7 +407,7 @@
                         estrellas(d[6]);
                     });
                     estrellaArticulo = 6;
-                    registrarVisita(1, idArt);
+                    registrarVisita(idArt);
                     consultarComentarios(idArt);
                     idArticuloActual = idArt;
                     showHistorial(idArt);
@@ -424,14 +424,14 @@
         }
 
         //Registro de visitas por artículo
-        function registrarVisita(idUsuario, idArticulo) {
+        function registrarVisita(idArticulo) {
             $.ajax({
                 async: false,
                 type: "POST",
                 url: "Index.aspx/registrarVisita",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                data: "{'idUsuario':" + idUsuario + ", 'idArticulo':" + idArticulo + " }",
+                data: "{'idArticulo':" + idArticulo + " }",
                 success: function (response) {
                     if (response.d < 0) {
 
@@ -489,7 +489,7 @@
             });
         }
 
-        function registrarValoracionArticulo(estrellas, idArticulo, comentario, idUsuario) {
+        function registrarValoracionArticulo(estrellas, idArticulo, comentario) {
 
             $.ajax({
                 async: false,
@@ -497,7 +497,7 @@
                 url: "Index.aspx/registrarValoracionArticulo",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                data: "{'estrellas':" + estrellas + ", 'idArticulo':" + idArticulo + ", 'comentario':'" + comentario + "', 'idUsuario':" + idUsuario + "}",
+                data: "{'estrellas':" + estrellas + ", 'idArticulo':" + idArticulo + ", 'comentario':'" + comentario + "'}",
                 success: function (response) {
                     if (response.d == 0) {
                         $("#box-blog-txtComentario").val('');
@@ -528,7 +528,7 @@
         function registrarValoracionxArt() {
 
             var comentario = $("#box-blog-txtComentario").val();
-            registrarValoracionArticulo(estrellaArticulo, idArticuloActual, comentario, 1);
+            registrarValoracionArticulo(estrellaArticulo, idArticuloActual, comentario);
 
         }
 

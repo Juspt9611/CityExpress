@@ -83,7 +83,7 @@ namespace SupportCenter {
         [WebMethod]
         public static string articuloxId(int idArt)
         {
-            int idUsuarioConsulta = 1; //Este usuario debe ser obtenido de la sesion
+            int idUsuarioConsulta = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             return DataSetToJSON(metodo.WSConsultarArticuloxId(idArt, idUsuarioConsulta).Tables[0]);
         }
 
@@ -153,8 +153,9 @@ namespace SupportCenter {
         }
 
         [WebMethod]
-        public static int registrarVisita(int idUsuario, int idArticulo)
+        public static int registrarVisita(int idArticulo)
         {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             return metodo.WSregistrarVisita(idUsuario, idArticulo);
         }
 
@@ -165,8 +166,9 @@ namespace SupportCenter {
         }
 
         [WebMethod]
-        public static int registrarValoracionArticulo(int estrellas, int idArticulo, string comentario, int idUsuario)
+        public static int registrarValoracionArticulo(int estrellas, int idArticulo, string comentario)
         {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             return metodo.WSregistrarValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
         }
 

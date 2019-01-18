@@ -388,7 +388,7 @@
             $.ajax({
                 type: "POST",
                 url: "CrearArticulo.aspx/consultarGruposxUsuario",
-                data: "{ 'idUsuario': " + 1 + " }",
+                //data: "{ 'idUsuario': " + 1 + " }",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {

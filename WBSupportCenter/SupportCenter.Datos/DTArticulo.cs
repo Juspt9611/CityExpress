@@ -11,7 +11,7 @@ namespace SupportCenter.Datos
 {
     public class DTArticulo
     {
-        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
+        public int DT_RegistrarArticulo(string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario)
         {
             int error = 0;
             SqlConnection connection = null;
@@ -30,7 +30,8 @@ namespace SupportCenter.Datos
                         ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@idUsu", SqlDbType.Int, idUsuario , ParameterDirection.Input)
                     };
 
 
@@ -91,7 +92,7 @@ namespace SupportCenter.Datos
         }
 
 
-        public DataSet DT_ConsultarArxtxValidar()
+        public DataSet DT_ConsultarArxtxValidar(int idUsuario)
         {
 
             SqlConnection connection = null;
@@ -101,11 +102,15 @@ namespace SupportCenter.Datos
             {
                 using (connection = Conexion.ObtieneConexion("ConexionBD"))
                 {
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
+                    };
 
                     SqlDataReader consulta;
                     connection.Open();
 
-                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultaArticulosPendientesxValidar");
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultaArticulosPendientesxValidar", parametros);
                     dt.Load(consulta);
                     connection.Close();
 

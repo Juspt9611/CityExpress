@@ -23,8 +23,9 @@ namespace WBSupportCenter.vistas
         [WebMethod]
         public static int registrarArticulo(string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSOpregistrarArt(nombreArticulo, contenido, categorias, tags, grupos);
+            return metodo.WSOpregistrarArt(nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
         }
 
         [WebMethod]
@@ -37,8 +38,9 @@ namespace WBSupportCenter.vistas
         }
 
         [WebMethod]
-        public static string consultarGruposxUsuario(int idUsuario)
+        public static string consultarGruposxUsuario()
         {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             string dataResult = "";
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             dataResult = DataSetToJSON(metodo.WSConsultarGruposxUsuario(idUsuario).Tables[0]);

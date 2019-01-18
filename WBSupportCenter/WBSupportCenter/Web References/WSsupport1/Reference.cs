@@ -516,23 +516,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOpregistrarArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos) {
+        public int WSOpregistrarArt(string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario) {
             object[] results = this.Invoke("WSOpregistrarArt", new object[] {
                         nombreArticulo,
                         contenido,
                         categorias,
                         tags,
-                        grupos});
+                        grupos,
+                        idUsuario});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, string categorias, string tags, string grupos) {
-            this.WSOpregistrarArtAsync(nombreArticulo, contenido, categorias, tags, grupos, null);
+        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario) {
+            this.WSOpregistrarArtAsync(nombreArticulo, contenido, categorias, tags, grupos, idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, string categorias, string tags, string grupos, object userState) {
+        public void WSOpregistrarArtAsync(string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario, object userState) {
             if ((this.WSOpregistrarArtOperationCompleted == null)) {
                 this.WSOpregistrarArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOpregistrarArtOperationCompleted);
             }
@@ -541,7 +542,8 @@ namespace WBSupportCenter.WSsupport1 {
                         contenido,
                         categorias,
                         tags,
-                        grupos}, this.WSOpregistrarArtOperationCompleted, userState);
+                        grupos,
+                        idUsuario}, this.WSOpregistrarArtOperationCompleted, userState);
         }
         
         private void OnWSOpregistrarArtOperationCompleted(object arg) {
@@ -553,22 +555,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOpconsultarArtxValidar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet WSOpconsultarArtxValidar() {
-            object[] results = this.Invoke("WSOpconsultarArtxValidar", new object[0]);
+        public System.Data.DataSet WSOpconsultarArtxValidar(int idUsuario) {
+            object[] results = this.Invoke("WSOpconsultarArtxValidar", new object[] {
+                        idUsuario});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void WSOpconsultarArtxValidarAsync() {
-            this.WSOpconsultarArtxValidarAsync(null);
+        public void WSOpconsultarArtxValidarAsync(int idUsuario) {
+            this.WSOpconsultarArtxValidarAsync(idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSOpconsultarArtxValidarAsync(object userState) {
+        public void WSOpconsultarArtxValidarAsync(int idUsuario, object userState) {
             if ((this.WSOpconsultarArtxValidarOperationCompleted == null)) {
                 this.WSOpconsultarArtxValidarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOpconsultarArtxValidarOperationCompleted);
             }
-            this.InvokeAsync("WSOpconsultarArtxValidar", new object[0], this.WSOpconsultarArtxValidarOperationCompleted, userState);
+            this.InvokeAsync("WSOpconsultarArtxValidar", new object[] {
+                        idUsuario}, this.WSOpconsultarArtxValidarOperationCompleted, userState);
         }
         
         private void OnWSOpconsultarArtxValidarOperationCompleted(object arg) {
