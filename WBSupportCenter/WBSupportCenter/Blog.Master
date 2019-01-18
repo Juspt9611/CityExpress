@@ -146,19 +146,22 @@
                     <a href="#">Support Center
                     </a>
                 </li>
-                <li>
+                <li runat="server" id="index">
                     <a href="/vistas/index.aspx">Buscar artículos</a>
                 </li>
-                <li>
+                <li runat="server" id="usuarios">
+                    <a href="/vistas/Usuario.aspx">Asignar Roles</a>
+                </li>
+                <li runat="server" id="articulosRed">
                     <a href="/vistas/ArticulosRed.aspx">Crear y editar artículos</a>
                 </li>
-                <li>
+                <li runat="server" id="aprobacionArticulos">
                     <a href="/vistas/AprobacionArticulos.aspx">Autorizar artículos</a>
                 </li>
-                <li>
+                <li runat="server" id="categorias">
                     <a href="/vistas/Categoria.aspx">Crear y editar categorías</a>
                 </li>
-                <li>
+                <li runat="server" id="reportes">
                     <a href="/vistas/Reporte.aspx">Reportes</a>
                 </li>
             </ul>
@@ -179,7 +182,8 @@
                                     </a>
                                     <%--<span> <img src="../recursos/img/city/logo.png" alt="SmartAdmin" style="width:50%;height:4rem;"> </span>--%>
                                 </div>
-                                <div class="log_reg_text circulo ml-auto" <%--data-toggle="modal" data-target="#modalLoginCity"--%>><a class="text-Cir">MD</a></div>
+                                <%--<div class="log_reg_text circulo ml-auto"><a class="text-Cir">MD</a></div>--%>
+                                <div class="log_reg_text circulo ml-auto" runat="server" id="session"></div>
                                 <div id="menu-toggle" class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
                             </div>
                         </div>

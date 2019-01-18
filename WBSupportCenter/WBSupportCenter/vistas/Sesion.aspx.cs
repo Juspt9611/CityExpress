@@ -53,27 +53,12 @@ namespace WBSupportCenter.vistas {
                         Session["Correo"] = listaPropiedades[4];
                         Session["idRol"] = idRol;
                         Session["nomRol"] = nomRol;
+                        Session["idUsuario"] = idUsuario;
 
                         Usuario.Text = "";
                         contrasena.Text = "";
-                        string id = Session["idRol"].ToString();
-
-                        if (id == "1")
-                        {
-                            Response.Redirect("Usuario.aspx");
-                        }
-                        else if (id == "2")
-                        {
-                            Response.Redirect("index.aspx");
-                        }
-                        else if (id == "3")
-                        {
-                            Response.Redirect("AprobacionArticulos.aspx");
-                        }
-                        else if (id == "4")
-                        {
-                            Response.Redirect("index.aspx");
-                        }
+                               
+                        Response.Redirect("index.aspx");
 
                     }
                     else
