@@ -164,6 +164,9 @@
                 <li runat="server" id="reportes">
                     <a href="/vistas/Reporte.aspx">Reportes</a>
                 </li>
+                <li runat="server" id="cerrarSesion" OnClick="CerrarSesion">
+                    <a href="/vistas/Sesion.aspx">Cerrar sesión</a>
+                </li>
             </ul>
         </div>
 

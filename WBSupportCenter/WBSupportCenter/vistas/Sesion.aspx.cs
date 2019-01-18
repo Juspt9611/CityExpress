@@ -50,7 +50,7 @@ namespace WBSupportCenter.vistas {
                         Session["nombres"] = listaPropiedades[1];
                         Session["Apellidos"] = listaPropiedades[2];
                         Session["usuario"] = listaPropiedades[3];
-                        Session["Correo"] = listaPropiedades[4];
+                        //Session["Correo"] = listaPropiedades[4];
                         Session["idRol"] = idRol;
                         Session["nomRol"] = nomRol;
                         Session["idUsuario"] = idUsuario;

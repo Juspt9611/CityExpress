@@ -40,5 +40,10 @@ namespace WBSupportCenter
             session.InnerHtml = "<a class='text-Cir'>" + varsesion + "</a>".ToString();
 
         }
+
+        public void DoMyOnClickCall(object sender, EventArgs e)
+        {
+            Session.Clear();
+        }
     }
 }
