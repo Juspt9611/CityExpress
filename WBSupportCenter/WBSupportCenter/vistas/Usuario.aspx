@@ -18,7 +18,7 @@
                     </table>
                 </div>
                 <div id="pnlCrearPer">
-                    <div class="row">
+                    <div class="row insertUser">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="nombre_box_form_crearart" class="col-form-label">Nombre Usuario:</label>
@@ -77,6 +77,7 @@
                             </div>
                         </div>
                     </div>
+                    <br />
                     <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
                 </div>
             </div>
@@ -95,6 +96,7 @@
             $("#camposActive").addClass('hidden');
             $("#divbtn").addClass('hidden');
             $("#btnAtras").addClass('hidden');
+            $(".insertUser").show();
             tablaUsuarios(usuarioAdmin);
         }
 
@@ -160,6 +162,8 @@
                                 $("#camposActive").removeClass('hidden');
                                 $("#divbtn").removeClass('hidden');
                                 $("#btnAtras").removeClass('hidden');
+                                $(".insertUser").hide();
+                                $("#UsuarioB").val('');
                                 $('#tablaUsuarios').DataTable().destroy();
                                 $('#tablaUsuarios').empty();
                             } else {
