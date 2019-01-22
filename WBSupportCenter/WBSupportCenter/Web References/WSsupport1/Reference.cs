@@ -88,6 +88,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSInsertarPersOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSConsultarUsuarioxAdminOperationCompleted;
+        
         private System.Threading.SendOrPostCallback WSOptenRolOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -214,6 +216,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSInsertarPersCompletedEventHandler WSInsertarPersCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarUsuarioxAdminCompletedEventHandler WSConsultarUsuarioxAdminCompleted;
         
         /// <remarks/>
         public event WSOptenRolCompletedEventHandler WSOptenRolCompleted;
@@ -1102,6 +1107,35 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarUsuarioxAdmin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioEntidades[] WSConsultarUsuarioxAdmin(string usuario) {
+            object[] results = this.Invoke("WSConsultarUsuarioxAdmin", new object[] {
+                        usuario});
+            return ((UsuarioEntidades[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarUsuarioxAdminAsync(string usuario) {
+            this.WSConsultarUsuarioxAdminAsync(usuario, null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarUsuarioxAdminAsync(string usuario, object userState) {
+            if ((this.WSConsultarUsuarioxAdminOperationCompleted == null)) {
+                this.WSConsultarUsuarioxAdminOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarUsuarioxAdminOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarUsuarioxAdmin", new object[] {
+                        usuario}, this.WSConsultarUsuarioxAdminOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarUsuarioxAdminOperationCompleted(object arg) {
+            if ((this.WSConsultarUsuarioxAdminCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarUsuarioxAdminCompleted(this, new WSConsultarUsuarioxAdminCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenRol", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataSet WSOptenRol(string Usuario) {
             object[] results = this.Invoke("WSOptenRol", new object[] {
@@ -1250,6 +1284,123 @@ namespace WBSupportCenter.WSsupport1 {
             }
             set {
                 this.nombreCategoriaField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UsuarioEntidades {
+        
+        private int idPersonalField;
+        
+        private string nombreField;
+        
+        private string apellidosField;
+        
+        private string nombreUsuarioField;
+        
+        private string nombreRolField;
+        
+        private string nombreGrupoField;
+        
+        private string fechaCreacionField;
+        
+        private string estatusField;
+        
+        private string idResponsableRegistroField;
+        
+        /// <remarks/>
+        public int idPersonal {
+            get {
+                return this.idPersonalField;
+            }
+            set {
+                this.idPersonalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombre {
+            get {
+                return this.nombreField;
+            }
+            set {
+                this.nombreField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string apellidos {
+            get {
+                return this.apellidosField;
+            }
+            set {
+                this.apellidosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombreUsuario {
+            get {
+                return this.nombreUsuarioField;
+            }
+            set {
+                this.nombreUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombreRol {
+            get {
+                return this.nombreRolField;
+            }
+            set {
+                this.nombreRolField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string nombreGrupo {
+            get {
+                return this.nombreGrupoField;
+            }
+            set {
+                this.nombreGrupoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fechaCreacion {
+            get {
+                return this.fechaCreacionField;
+            }
+            set {
+                this.fechaCreacionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string estatus {
+            get {
+                return this.estatusField;
+            }
+            set {
+                this.estatusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string idResponsableRegistro {
+            get {
+                return this.idResponsableRegistroField;
+            }
+            set {
+                this.idResponsableRegistroField = value;
             }
         }
     }
@@ -2316,6 +2467,32 @@ namespace WBSupportCenter.WSsupport1 {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSConsultarUsuarioxAdminCompletedEventHandler(object sender, WSConsultarUsuarioxAdminCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarUsuarioxAdminCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarUsuarioxAdminCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioEntidades[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioEntidades[])(this.results[0]));
             }
         }
     }

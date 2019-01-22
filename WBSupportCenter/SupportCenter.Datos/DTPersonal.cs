@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SupportCenter.Entidades;
 using SupportCenter.Framework.AccesoDatos;
 
 namespace SupportCenter.Datos {
@@ -113,6 +114,35 @@ namespace SupportCenter.Datos {
             }
 
             return ds;
+        }
+
+        public List<UsuarioEntidades> DT_ConsultarUsuariosxAdmin(string usuario)
+        {
+            SqlConnection connection = null;            DataTable dt = new DataTable();            List<UsuarioEntidades> listaUsuarios = new List<UsuarioEntidades>();
+
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+                    SqlDataReader consulta;
+
+                    var param = new[]                    {                        ParametroAcceso.CrearParametro("@nombreUsuario", SqlDbType.VarChar, usuario , ParameterDirection.Input)                    };
+
+                    connection.Open();
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarUsuariosSesiones", param);
+                    dt.Load(consulta);                    connection.Close();
+                }
+
+                foreach (DataRow item in dt.Rows)                {
+                   UsuarioEntidades obj = new UsuarioEntidades();
+                    obj = new UsuarioEntidades();                    obj.nombre = item["nombre"].ToString();                    obj.apellidos = item["apellidos"].ToString();                    obj.nombreUsuario = item["nombreUsuario"].ToString();                    obj.nombreRol = item["nombreRol"].ToString();                    obj.nombreGrupo = item["nombreGrupo"].ToString();                    listaUsuarios.Add(obj);                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return listaUsuarios;
         }
     }
 }

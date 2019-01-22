@@ -8,18 +8,15 @@
         <div class="container">
 
             <div class="box_table_container">
+                <a class="btn btn-warning btn-sm text-white hidden pull-right" id="btnAtras" onclick="atras();">Atrás</a>
                 <div class="row">
                     <h1 class="box_table_title" style="margin-bottom: 1rem;"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Usuario</h1>
                     <%--<span class="box_table_title" style="margin-bottom: 1rem;">Usuario</span>--%>
                 </div>
-
                 <div id="tblUser" class="hidden">
                     <table id="tblPers" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
                     </table>
                 </div>
-
-
-
                 <div id="pnlCrearPer">
                     <div class="row">
                         <div class="col-lg-4">
@@ -81,282 +78,103 @@
                         </div>
                     </div>
                     <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
-                    <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Usuario</th>
-                                <th>Rol</th>
-                                <th>Grupos</th>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>
     </form>
 
     <script>
+        var usuarioAdmin = $('#idAdmin').val();
         $(document).ready(function () {
             select2();
-            dataTableData();
+            //dataTableData();
+            tablaUsuarios(usuarioAdmin);
         });
 
-        function dataTableData() {
+        function atras() {
+            $("#camposActive").addClass('hidden');
+            $("#divbtn").addClass('hidden');
+            $("#btnAtras").addClass('hidden');
+            tablaUsuarios(usuarioAdmin);
+        }
+
+        function tablaUsuarios(usuario) {
             $.ajax({
                 async: false,
-                type: 'POST',
-                url: 'Reporte.aspx/ObtenerDatos',
-                data: "{'fechaInicial': '}",
+                type: "POST",
+                url: "Usuario.aspx/consultarUsuariosxAdmin",
+                data: "{'usuario': '"+ usuario +"' }",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
+                    console.log(response.d);
                     var jsonReporte = $.parseJSON(response.d);
-                    successResp = jsonReporte;
                     console.log(jsonReporte);
-                    console.log(reporteSelect);
-
-                    if (jsonReporte != null) {
-
-                        if (reporteSelect == "palabras") {
-                            $.each(jsonReporte, function (item, index) {
-                                arrayGrafic.push({
-                                    country: index.palabraBuscada,
-                                    visits: parseInt(index.numeroDeBusquedas, 10)
-                                })
-                            });
-                            console.log(arrayGrafic);
-                            $('#tableArticulos').DataTable({
-                                data: jsonReporte,
-                                orderCellsTop: true,
-                                fixedHeader: true,
-                                destroy: true,
-                                paging: true,
-                                dom: '<"pull-left"B><"pull-right">tip',
-                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
-                                //dom: 'Bfrt<"col-md-6 inline"i> <"col-md-6 inline"p>',
-                                buttons: {
-                                    dom: {
-                                        container: {
-                                            tag: 'div',
-                                            className: 'flexcontent'
-                                        },
-                                        buttonLiner: {
-                                            tag: null
-                                        }
-                                    },
-                                    buttons: [
-                                    {
-                                        extend: 'excelHtml5',
-                                        text: '<i class="fa fa-file-excel-o"></i>',
-                                        titleAttr: 'Exportar Excel',
-                                        className: 'btn btn-app export excel',
-                                    },
-                                    {
-                                        extend: 'pdfHtml5',
-                                        text: '<i class="fa fa-file-pdf-o"></i>',
-                                        titleAttr: 'Exportar PDF',
-                                        className: 'btn btn-app export pdf',
-                                        //exportOptions: {
-                                        // columns: [0, 1]
-                                        //},
-                                    },
-                                    ]
-                                },
-                                columns: [
-                                { data: "palabraBuscada", title: 'Palabra buscada' },
-                                { data: "numeroDeBusquedas", title: 'Número de búsquedas' }
-                                ]
-                            });
-                        }
-                        else if (reporteSelect == "valorados") {
-                            $.each(jsonReporte, function (item, index) {
-                                arrayGrafic.push({
-                                    country: index.nombreArticulo,
-                                    visits: parseInt(index.calificacionTotal, 10)
-                                })
-                            });
-                            console.log(arrayGrafic);
-                            $('#tableArticulos').DataTable({
-                                data: jsonReporte,
-                                orderCellsTop: true,
-                                fixedHeader: true,
-                                destroy: true,
-                                paging: true,
-                                dom: '<"pull-left"B><"pull-right">tip',
-                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
-                                buttons: {
-                                    dom: {
-                                        container: {
-                                            tag: 'div',
-                                            className: 'flexcontent'
-                                        },
-                                        buttonLiner: {
-                                            tag: null
-                                        }
-                                    },
-                                    buttons: [
-                                    {
-                                        extend: 'excelHtml5',
-                                        text: '<i class="fa fa-file-excel-o"></i>',
-                                        titleAttr: 'Exportar Excel',
-                                        className: 'btn btn-app export excel',
-                                    },
-                                    {
-                                        extend: 'pdfHtml5',
-                                        text: '<i class="fa fa-file-pdf-o"></i>',
-                                        titleAttr: 'Exportar PDF',
-                                        className: 'btn btn-app export pdf',
-                                        //exportOptions: {
-                                        // columns: [0, 1]
-                                        //},
-                                    },
-                                    ]
-                                },
-                                columns: [
-                                { data: "idArticulo", title: 'Id del artículo' },
-                                { data: "nombreArticulo", title: 'Nombre del artículo' },
-                                { data: "categoria", title: 'Categoría' },
-                                {
-                                    data: "promedioCalificacion", title: 'Promedio de calificación', render: function (data, type, row) {
-                                        var starPercentage = data / 5 * 100;
-                                        var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
-                                        return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
-                                    }
-                                },
-                                { data: "calificacionTotal", title: 'Calificación total' }
-                                ]
-                            });
-                        }
-                        else if (reporteSelect == "vistos") {
-                            $.each(jsonReporte, function (item, index) {
-                                arrayGrafic.push({
-                                    country: index.nombreArticulo,
-                                    visits: parseInt(index.visitas, 10)
-                                })
-                            });
-                            console.log(arrayGrafic);
-                            $('#tableArticulos').DataTable({
-                                data: jsonReporte,
-                                orderCellsTop: true,
-                                fixedHeader: true,
-                                destroy: true,
-                                paging: true,
-                                dom: '<"pull-left"B><"pull-right">tip',
-                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
-                                buttons: {
-                                    dom: {
-                                        container: {
-                                            tag: 'div',
-                                            className: 'flexcontent'
-                                        },
-                                        buttonLiner: {
-                                            tag: null
-                                        }
-                                    },
-                                    buttons: [
-                                    {
-                                        extend: 'excelHtml5',
-                                        text: '<i class="fa fa-file-excel-o"></i>',
-                                        titleAttr: 'Exportar Excel',
-                                        className: 'btn btn-app export excel',
-                                    },
-                                    {
-                                        extend: 'pdfHtml5',
-                                        text: '<i class="fa fa-file-pdf-o"></i>',
-                                        titleAttr: 'Exportar PDF',
-                                        className: 'btn btn-app export pdf',
-                                        //exportOptions: {
-                                        // columns: [0, 1]
-                                        //},
-                                    },
-                                    ]
-                                },
-                                columns: [
-                                { data: "idArticulo", title: 'Id del artículo' },
-                                { data: "nombreArticulo", title: 'Nombre del artículo' },
-                                { data: "categoria", title: 'Categoría' },
-                                { data: "visitas", title: 'Visitas' }
-                                ]
-                            });
-                        }
-                        else if (reporteSelect == "vistas") {
-                            $.each(jsonReporte, function (item, index) {
-                                arrayGrafic.push({
-                                    country: index.categoria,
-                                    visits: parseInt(index.categoriaMasVista, 10)
-                                })
-                            });
-                            console.log(arrayGrafic);
-                            $('#tableArticulos').DataTable({
-                                data: jsonReporte,
-                                orderCellsTop: true,
-                                fixedHeader: true,
-                                destroy: true,
-                                paging: true,
-                                dom: '<"pull-left"B><"pull-right">tip',
-                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
-                                buttons: {
-                                    dom: {
-                                        container: {
-                                            tag: 'div',
-                                            className: 'flexcontent'
-                                        },
-                                        buttonLiner: {
-                                            tag: null
-                                        }
-                                    },
-                                    buttons: [
-                                    {
-                                        extend: 'excelHtml5',
-                                        text: '<i class="fa fa-file-excel-o"></i>',
-                                        titleAttr: 'Exportar Excel',
-                                        className: 'btn btn-app export excel',
-                                    },
-                                    {
-                                        extend: 'pdfHtml5',
-                                        text: '<i class="fa fa-file-pdf-o"></i>',
-                                        titleAttr: 'Exportar PDF',
-                                        className: 'btn btn-app export pdf',
-                                        //exportOptions: {
-                                        // columns: [0, 1]
-                                        //},
-                                    },
-                                    ]
-                                },
-                                columns: [
-                                { data: "categoria", title: 'Categoría' },
-                                { data: "categoriaMasVista", title: 'Número de vistas' }
-                                ]
-                            });
-                        }
-
-                        repetirBusqueda = true;
-                        jsonReporte = [];
-
-                    } else {
-                        swal("No se encontraron datos para esta búsqueda.", {
-                            icon: "error",
-                            button: "Aceptar",
-                            allowOutsideClick: false,
-                            closeOnClickOutside: false
-                        });
-                        $(".swal-button").click(function () {
-                            //closeSite();
-                        });
-                        repetirBusqueda = false;
-                    }
-
-                },
-                failure: function (response) {
-                    console.log(response);
+                    $('#tablaUsuarios').DataTable({
+                        data: jsonReporte,
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        columns: [
+                            { title: 'Nombres', data: 'nombre' },
+                            { title: 'Apellidos', data: 'apellidos' },
+                            { title: 'Usuario', data: 'nombreUsuario' },
+                            { title: 'Rol', data: 'nombreRol' },
+                            { title: 'Grupos', data: 'nombreGrupo' },
+                            {
+                                title: 'Detalle',
+                                data: null,
+                                sortable: false,
+                                render: function (data, type, row) {
+                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\', \'Lun4-963$%\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>'
+                                }
+                            }
+                        ]
+                    });
                 }
             });
         }
 
-        function select2() {
+        function editarUsuario(admin, contra, usuario, rol, grupo) {
+            if (contra != "") {
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "Usuario.aspx/buscaDatos",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'Usuario':'" + admin + "','contrasena':'" + contra + "','UsuarioB':'" + usuario + "'}",
+                    success: function (response) {
+                        console.log(response.d);
+                        if (response.d != "ErrorContraseña") {
+                            if (response.d != "notuser") {
+                                select2(rol, grupo);
+                                $('#txtNombres').val(response.d[1])
+                                $('#txtApellidos').val(response.d[2])
+                                $("#txtuser").val(response.d[3])
+                                if (response.d.length == 5) {
+                                    $("#txtCorreo").val(response.d[4])
+                                } else {
+                                    $("#txtCorreo").val(response.d[3] + "@itesoluciones.com")
+                                }
+                                swal("Perfecto!", "Datos de " + response.d[1] + " encontrados", "success");
+                                $("#camposActive").removeClass('hidden');
+                                $("#divbtn").removeClass('hidden');
+                                $("#btnAtras").removeClass('hidden');
+                                $('#tablaUsuarios').DataTable().destroy();
+                                $('#tablaUsuarios').empty();
+                            } else {
+                                swal("Oh no!", "Usuario no encontrado", "error");
+                            }
+                        } else {
+                            swal("Oh no!", "Contraseña incorrecta", "error");
+                        }
+                    }
+                });
+                //swal('hola: '+'<%=Session["nombres"]%>');
+            }
+        }
+
+        function select2(rol, grupo) {
             $.ajax({
                 async: false,
                 type: "POST",
@@ -370,6 +188,14 @@
                     });
                     $('#drowGrupo').html(opciones);
                     $('#drowGrupo').select2({ placeholder: 'Selecciona...' });
+
+                    if (grupo == 'Support Center') {
+                        $('#drowGrupo').val('1').trigger('change.select2');
+                    } else if (grupo == 'Mejora') {
+                        $('#drowGrupo').val('2').trigger('change.select2');
+                    } else if (grupo == 'Marketing') {
+                        $('#drowGrupo').val('3').trigger('change.select2');
+                    }
                 }
             });
             $.ajax({
@@ -385,6 +211,15 @@
                     });
                     $('#drowRol').html(opciones);
                     $('#drowRol').select2({ placeholder: 'Selecciona...' });
+                    if (rol == 'Administrador') {
+                        $('#drowRol').val('1').trigger('change.select2');
+                    } else if (rol == 'Redactor') {
+                        $('#drowRol').val('2').trigger('change.select2');
+                    } else if (rol == 'Autorizador') {
+                        $('#drowRol').val('3').trigger('change.select2');
+                    } else if (rol == 'Lector') {
+                        $('#drowRol').val('4').trigger('change.select2');
+                    }
                 }
             });
         }
@@ -403,10 +238,11 @@
                 } else {
                     swal("Oh no!", "La contraseña es incorrecta", "error");
                 }
-                });
+            });
         }
     }
 
+    /*
     function dataTableData() {
         var datos = null;
         $.ajax({
@@ -454,7 +290,7 @@
             }
         });
     }
-
+    */
     $("#btnGuardar").click(function () {
 
         var varGrup = "";

@@ -13,6 +13,24 @@ using Newtonsoft.Json;
 namespace WBSupportCenter.vistas {
     public partial class articulosVistos : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
+            if (!Page.IsPostBack)
+            {
+                try
+                {
+                    string auth = HttpContext.Current.Session["Autenticacion"].ToString();
+                    string nombreRol = HttpContext.Current.Session["nomRol"].ToString();
+                    if (auth.Equals("false") || nombreRol != "Autorizador")
+                    {
+                        Response.Redirect("sesion.aspx");
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Response.Redirect("sesion.aspx");
+                }
+
+                return;
+            }
         }
 
         [WebMethod]

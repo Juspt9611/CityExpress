@@ -15,7 +15,8 @@ using WBSupportCenter.WSsupport1;
 namespace WBSupportCenter.vistas {
     public partial class prueba : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            if (!Page.IsPostBack) {
+            if (!Page.IsPostBack)
+            {
                 if (Session["nombres"] == null) { Response.Redirect("sesion.aspx"); }
             }
         }
@@ -53,6 +54,15 @@ namespace WBSupportCenter.vistas {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
 
             return metodo.WSInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+        }
+
+        [WebMethod]
+        public static string consultarUsuariosxAdmin(string usuario)
+        {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            DataTable dtUsuarios = new DataTable();
+            dtUsuarios = ConvertToDataTable(metodo.WSConsultarUsuarioxAdmin(usuario));
+            return DataTableToJSONWithStringBuilder(dtUsuarios);
         }
 
         public static DataTable ConvertToDataTable<T>(IList<T> data) {

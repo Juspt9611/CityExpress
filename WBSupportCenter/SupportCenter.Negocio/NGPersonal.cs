@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SupportCenter.Datos;
+using SupportCenter.Entidades;
 
 namespace SupportCenter.Negocio {
     public class NGPersonal
@@ -26,6 +27,11 @@ namespace SupportCenter.Negocio {
         public DataSet NGRolUser(string Usuario)
         {
             return Objeto.DTRolUser(Usuario);
+        }
+
+        public List<UsuarioEntidades> NG_ConsultarUsuarioxAdmin(string usuario)
+        {
+            return Objeto.DT_ConsultarUsuariosxAdmin(usuario);
         }
     }
 }

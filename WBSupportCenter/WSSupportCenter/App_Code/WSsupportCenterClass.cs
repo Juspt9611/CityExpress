@@ -232,6 +232,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         NGPersonal WSPersonal = new NGPersonal();
         return WSPersonal.NGInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
     }
+
+    [WebMethod]
+    public List<UsuarioEntidades> WSConsultarUsuarioxAdmin(string usuario)
+    {
+        NGPersonal Personal = new NGPersonal();
+        return Personal.NG_ConsultarUsuarioxAdmin(usuario);
+    }
     #endregion
 
     #region Sesion

@@ -6,21 +6,14 @@ using System.Threading.Tasks;
 
 namespace SupportCenter.Entidades {
     public class UsuarioEntidades {
-
-
-      public string nombre { get; set; }
-      public string apPaterno{ get; set; }
-      public string apMaterno{ get; set; }
-      public string RFC{ get; set; }
-      public string idPuesto{ get; set; }
-      public string c_CP{ get; set; }
-      public string idEstado{ get; set; }
-      public string email{ get; set; }
-      public string fecha_alta{ get; set; }
-      public string fecha_mod{ get; set; }
-      public string acceso_a_sistemas{ get; set; }
-      public string estatus{ get; set; }
-
-
+        public int idPersonal { get; set; }
+        public string nombre { get; set; }
+        public string apellidos{ get; set; }
+        public string nombreUsuario { get; set; }
+        public string nombreRol { get; set; }
+        public string nombreGrupo { get; set; }
+        public string fechaCreacion { get; set; }
+        public string estatus{ get; set; }
+        public string idResponsableRegistro { get; set; }
     }
 }

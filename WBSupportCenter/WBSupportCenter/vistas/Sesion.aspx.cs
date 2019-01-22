@@ -16,7 +16,7 @@ namespace WBSupportCenter.vistas {
 
         protected void Button1_Click(object sender, EventArgs e) {
 
-            Session["Autenticacion"] = false;
+            Session["Autenticacion"] = "false";
 
             LDAPA AutetiDA = new LDAPA();
 
@@ -46,11 +46,10 @@ namespace WBSupportCenter.vistas {
                             nomRol = item["nombreRol"].ToString();
                         }
 
-                        Session["Autenticacion"] = true;
+                        Session["Autenticacion"] = "true";
                         Session["nombres"] = listaPropiedades[1];
                         Session["Apellidos"] = listaPropiedades[2];
                         Session["usuario"] = listaPropiedades[3];
-                        //Session["Correo"] = listaPropiedades[4];
                         Session["idRol"] = idRol;
                         Session["nomRol"] = nomRol;
                         Session["idUsuario"] = idUsuario;
