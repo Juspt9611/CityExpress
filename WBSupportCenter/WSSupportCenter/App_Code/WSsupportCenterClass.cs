@@ -89,6 +89,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
     //Consultar articulos por validar
     [WebMethod]
+    public DataSet WSConsultarArtxCategoria(int idCategoria)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtxCategoria(idCategoria);
+    }
+    //Consultar articulos por validar
+    [WebMethod]
     public DataSet WSOpconsultarArtxValidar(int idUsuario)
     {
         NGArticulos Articulos = new NGArticulos();

@@ -84,7 +84,7 @@ namespace SupportCenter {
                 lstCatg.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
                 lstCatg.InnerHtml += "<i class='fa fa-chevron-right trans_200' aria-hidden='true' style='color:#77DAD5'></i>";
                 lstCatg.InnerHtml += "</div>";
-                lstCatg.InnerHtml += "<div>" + item["nombreCategoria"] + "</div>";
+                lstCatg.InnerHtml += "<div onclick='loadArticuloxCategoria(" + item["idCategoria"] + ")'>" + item["nombreCategoria"] + "</div>";
                 lstCatg.InnerHtml += "</a>";
                 lstCatg.InnerHtml += "</li>";
 
@@ -171,6 +171,12 @@ namespace SupportCenter {
         public static string buscarArtMasVistos(int top)
         {
             return DataSetToJSON(metodo.WSBuscarArtMasVistor(top).Tables[0]);
+        }
+
+        [WebMethod]
+        public static string buscarArtMasVistosxCategorias(int idCategorias)
+        {
+            return DataSetToJSON(metodo.WSConsultarArtxCategoria(idCategorias).Tables[0]);
         }
 
         [WebMethod]

@@ -342,6 +342,62 @@
             });
         }
 
+        //Carga articulos por categoria más vista
+        function loadArticuloxCategoria(idCategoriaMasVista)
+        {
+            $("#idPostMasVistos").empty();
+            $(".easyPaginateNav").remove();
+            if ($("#box-blog").is(":visible")) {
+                $("#box-blog").hide();
+                $("#idPostMasVistos").show();
+            }
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/buscarArtMasVistosxCategorias",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idCategorias':" + idCategoriaMasVista + "}",
+                success: function (response) {
+                    var posts = $.parseJSON(response.d);
+                    var countPosts = 0;
+                    $.each(posts, function (i, d) {
+                        $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                                                        '<div class="news_post_content">' +
+                                                            '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
+                                                            '<div class="news_post_text">' +
+                                                               d[2] +
+                                                            '</div>' +
+                                                            '<div class="news_post_meta">' +
+                                                                '<ul class="d-flex flex-row align-items-start justify-content-start">' +
+                                                                    '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
+                                                                    '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
+                                                                    '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
+                                                                    '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+                                                                '</ul></div></div></div>');
+                        countPosts++;
+                    });
+
+                    if (countPosts == 0) {
+                        $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para esta categoría. </div> </div>');
+                    }
+                    $('#txtsearch').val('');
+                    $("#result").empty('');
+                    $('#idPostMasVistos').easyPaginate({
+                        paginateElement: '.news_post',
+                        elementsPerPage: 5,
+                        effect: 'climb'
+                    });
+                },
+                error: function (response) {
+                    swal("Hubo un error en esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
+        }
+
         //Carga de Artículos
         function initArtMasVistos() {
             $.ajax({

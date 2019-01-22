@@ -17,6 +17,11 @@ namespace SupportCenter.Negocio
             return Objeto.DT_RegistrarArticulo(nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
         }
 
+        public DataSet NG_ConsultarArtxCategoria(int idCategoria)
+        {
+            return Objeto.DT_ConsultarArtxCategoria(idCategoria);
+        }
+
         public int NG_EditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
             return Objeto.DT_EditarArticulo(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
