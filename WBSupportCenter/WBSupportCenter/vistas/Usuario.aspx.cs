@@ -17,7 +17,24 @@ namespace WBSupportCenter.vistas {
         protected void Page_Load(object sender, EventArgs e) {
             if (!Page.IsPostBack)
             {
-                if (Session["nombres"] == null) { Response.Redirect("sesion.aspx"); }
+                try
+                {
+                    string usuariosValidos = "Administrador";
+                    string auth = HttpContext.Current.Session["Autenticacion"].ToString();
+                    string nombreRol = HttpContext.Current.Session["nomRol"].ToString();
+                    if (auth.Equals("false") || (usuariosValidos.IndexOf(nombreRol) < 0))
+                    {
+                        Session.Clear();
+                        Response.Redirect("sesion.aspx");
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Session.Clear();
+                    Response.Redirect("sesion.aspx");
+                }
+
+                return;
             }
         }
 

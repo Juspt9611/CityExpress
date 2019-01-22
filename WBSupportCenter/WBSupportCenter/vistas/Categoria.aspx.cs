@@ -8,11 +8,34 @@ using System.Web.Script.Services;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
+using System.Web;
 
 namespace WBSupportCenter.vistas {
     public partial class WebForm1 : System.Web.UI.Page {
         static WSsupportCenterClass metodo = new WSsupportCenterClass();
         protected void Page_Load(object sender, EventArgs e) {
+
+            if (!Page.IsPostBack)
+            {
+                try
+                {
+                    string usuariosValidos = "Administrador,Redactor,Autorizador";
+                    string auth = HttpContext.Current.Session["Autenticacion"].ToString();
+                    string nombreRol = HttpContext.Current.Session["nomRol"].ToString();
+                    if (auth.Equals("false") || (usuariosValidos.IndexOf(nombreRol) < 0))
+                    {
+                        Session.Clear();
+                        Response.Redirect("sesion.aspx");
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Session.Clear();
+                    Response.Redirect("sesion.aspx");
+                }
+
+                return;
+            }
 
         }
 
