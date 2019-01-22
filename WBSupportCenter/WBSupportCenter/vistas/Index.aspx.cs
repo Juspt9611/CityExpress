@@ -27,6 +27,12 @@ namespace SupportCenter {
                         Session.Clear();
                         Response.Redirect("sesion.aspx");
                     }
+                    else
+                    {
+                        OptenerArt();
+
+                        OptenerCatg();
+                    }
                 }
                 catch (Exception exp)
                 {

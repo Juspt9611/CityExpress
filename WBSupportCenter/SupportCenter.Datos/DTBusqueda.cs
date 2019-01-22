@@ -69,7 +69,7 @@ namespace SupportCenter.Datos {
 
                 foreach (DataRow item in dtCatg.Rows) {
                     CategoriasxSubcategorias obj = new CategoriasxSubcategorias();
-
+                    obj.idCategoria = Int32.Parse(item["idCategoria"].ToString());
                     obj.nombreCategoria = item["nombreCategoria"].ToString();
                     lstCat.Add(obj);
                 }

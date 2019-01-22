@@ -16,6 +16,15 @@ namespace WBSupportCenter.vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            DataSet ds = new DataSet();
+            string idArt = "";
+            string tituloArt = "";
+            string contenido = "";
+            int estatus = 0;
+            string categorias = "";
+            string tags = "";
+            string grupos = "";
 
             if (!Page.IsPostBack)
             {
@@ -29,6 +38,25 @@ namespace WBSupportCenter.vistas
                         Session.Clear();
                         Response.Redirect("sesion.aspx");
                     }
+                    else
+                    {
+                        idArt = Request["idArticulo"];
+                        ds = metodo.WSConsultarArtEdicion(Convert.ToInt32(idArt));
+
+                        tituloArt = (string)ds.Tables[0].Rows[0][0];
+                        contenido = (string)ds.Tables[0].Rows[0][2];
+                        estatus = (Int32)ds.Tables[0].Rows[0][3];
+                        categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
+                        tags = JsonConvert.SerializeObject(ds.Tables[2].AsEnumerable().Select(r => r.ItemArray));
+                        grupos = JsonConvert.SerializeObject(ds.Tables[3].AsEnumerable().Select(r => r.ItemArray));
+
+                        this.hiddenTituloArt.Value = tituloArt;
+                        this.hiddenContenido.Value = contenido;
+                        this.hiddenCategorias.Value = categorias;
+                        this.hiddenTags.Value = tags;
+                        this.hiddenGrupos.Value = grupos;
+                        this.hiddenEstatus.Value = estatus.ToString();
+                    }
                 }
                 catch (Exception exp)
                 {
@@ -39,19 +67,15 @@ namespace WBSupportCenter.vistas
                 return;
             }
 
-            string idArt = Request["idArticulo"];
-            System.Diagnostics.Debug.WriteLine("VALOR: " + idArt);
-
-            WSsupportCenterClass metodo = new WSsupportCenterClass();
-            DataSet ds = new DataSet();
+            idArt = Request["idArticulo"];
             ds = metodo.WSConsultarArtEdicion(Convert.ToInt32(idArt));
 
-            string tituloArt = (string)ds.Tables[0].Rows[0][0];
-            string contenido = (string)ds.Tables[0].Rows[0][2];
-            int estatus = (Int32)ds.Tables[0].Rows[0][3];
-            string categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
-            string tags = JsonConvert.SerializeObject(ds.Tables[2].AsEnumerable().Select(r => r.ItemArray));
-            string grupos = JsonConvert.SerializeObject(ds.Tables[3].AsEnumerable().Select(r => r.ItemArray));
+            tituloArt = (string)ds.Tables[0].Rows[0][0];
+            contenido = (string)ds.Tables[0].Rows[0][2];
+            estatus = (Int32)ds.Tables[0].Rows[0][3];
+            categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
+            tags = JsonConvert.SerializeObject(ds.Tables[2].AsEnumerable().Select(r => r.ItemArray));
+            grupos = JsonConvert.SerializeObject(ds.Tables[3].AsEnumerable().Select(r => r.ItemArray));
 
             this.hiddenTituloArt.Value = tituloArt;
             this.hiddenContenido.Value = contenido;
