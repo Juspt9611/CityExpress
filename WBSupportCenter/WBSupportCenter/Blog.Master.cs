@@ -39,6 +39,10 @@ namespace WBSupportCenter
             string varsesion = Nombre.Substring(0, 1) + Apellido.Substring(0, 1).ToString();
             session.InnerHtml = "<a class='text-Cir'>" + varsesion + "</a>".ToString();
 
+
+            string usuario = Session["usuario"].ToString();
+            idAdmin.Value = usuario;
+
         }
 
         public void DoMyOnClickCall(object sender, EventArgs e)

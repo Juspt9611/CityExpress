@@ -179,7 +179,7 @@
                         <div class="col-lg-12">
                             <div id="header-blog-master" class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
                                 <div style="padding-top: 2px;">
-
+                                    <input type="hidden" runat="server" id="idAdmin"  />
                                     <a href="/vistas/index.aspx">
                                         <h2 style="color: #FFF;">Support<span style="color: #fcea1d;">Center</span></h2>
                                     </a>
