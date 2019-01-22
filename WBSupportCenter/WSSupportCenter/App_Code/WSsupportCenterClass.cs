@@ -120,10 +120,10 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     //Consultar articulos por validar
     [WebMethod]
-    public DataSet WSConsultarArtPorValidar()
+    public DataSet WSConsultarArtPorValidar(int idUsuario)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_ConsultarArtPorValidar();
+        return Articulos.NG_ConsultarArtPorValidar(idUsuario);
     }
 
     //Registrar estatus articulo aprobado

@@ -681,22 +681,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArtPorValidar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet WSConsultarArtPorValidar() {
-            object[] results = this.Invoke("WSConsultarArtPorValidar", new object[0]);
+        public System.Data.DataSet WSConsultarArtPorValidar(int idUsuario) {
+            object[] results = this.Invoke("WSConsultarArtPorValidar", new object[] {
+                        idUsuario});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void WSConsultarArtPorValidarAsync() {
-            this.WSConsultarArtPorValidarAsync(null);
+        public void WSConsultarArtPorValidarAsync(int idUsuario) {
+            this.WSConsultarArtPorValidarAsync(idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSConsultarArtPorValidarAsync(object userState) {
+        public void WSConsultarArtPorValidarAsync(int idUsuario, object userState) {
             if ((this.WSConsultarArtPorValidarOperationCompleted == null)) {
                 this.WSConsultarArtPorValidarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarArtPorValidarOperationCompleted);
             }
-            this.InvokeAsync("WSConsultarArtPorValidar", new object[0], this.WSConsultarArtPorValidarOperationCompleted, userState);
+            this.InvokeAsync("WSConsultarArtPorValidar", new object[] {
+                        idUsuario}, this.WSConsultarArtPorValidarOperationCompleted, userState);
         }
         
         private void OnWSConsultarArtPorValidarOperationCompleted(object arg) {

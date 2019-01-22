@@ -37,10 +37,10 @@ namespace SupportCenter.Negocio
             return Objeto.DT_ConsultarCategorias(idPadreCat);
         }
 
-        public DataSet NG_ConsultarArtPorValidar()
+        public DataSet NG_ConsultarArtPorValidar(int idUsuario)
         {
             DTArticulo Objeto = new DTArticulo();
-            return Objeto.DT_ConsultarArtPorValidar();
+            return Objeto.DT_ConsultarArtPorValidar(idUsuario);
         }
 
         public String NG_guardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario)

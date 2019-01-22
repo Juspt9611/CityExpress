@@ -18,8 +18,9 @@ namespace WBSupportCenter.vistas {
         [WebMethod]
         public static String consultarArticuloAprobar() {
             String daresult = "";
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            daresult = DataSetToJSON(metodo.WSConsultarArtPorValidar().Tables[0]);
+            daresult = DataSetToJSON(metodo.WSConsultarArtPorValidar(idUsuario).Tables[0]);
             return daresult;
         }
 

@@ -311,7 +311,7 @@ namespace SupportCenter.Datos
             return ds;
         }
 
-        public DataSet DT_ConsultarArtPorValidar()
+        public DataSet DT_ConsultarArtPorValidar(int idUsuario)
         {
 
             SqlConnection connection = null;
@@ -322,10 +322,14 @@ namespace SupportCenter.Datos
                 using (connection = Conexion.ObtieneConexion("ConexionBD"))
                 {
 
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
+                    };
+
                     SqlDataReader consulta;
                     connection.Open();
-
-                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarArtiPorValidar");
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarArtiPorValidar", parametros);
                     dt.Load(consulta);
                     connection.Close();
 
