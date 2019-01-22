@@ -16,6 +16,27 @@ namespace SupportCenter {
         static WSsupportCenterClass metodo = new WSsupportCenterClass();
 
         protected void Page_Load(object sender, EventArgs e) {
+
+            if (!Page.IsPostBack)
+            {
+                try
+                {
+                    string auth = HttpContext.Current.Session["Autenticacion"].ToString();
+                    if (auth.Equals("false"))
+                    {
+                        Session.Clear();
+                        Response.Redirect("sesion.aspx");
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Session.Clear();
+                    Response.Redirect("sesion.aspx");
+                }
+
+                return;
+            }
+
             OptenerArt();
             OptenerCatg();
         }
