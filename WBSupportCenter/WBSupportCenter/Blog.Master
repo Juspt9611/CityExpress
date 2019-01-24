@@ -24,12 +24,12 @@
     <link href="recursos/css/blog_responsive.css" rel="stylesheet" />
     <link href="recursos/css/personal.css" rel="stylesheet" />
     <%--    DataTable--%>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="recursos/css/datatables.min.css" />
+    <link href="recursos/css/select2.min.css" rel="stylesheet" />
     <!-- Notificaciones -->
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
     <!-- Reportes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <link rel="stylesheet" href="recursos/css/bootstrap-datepicker3.css" />
 
 
     <%-- SCRIPTS --%>
@@ -42,16 +42,12 @@
     <script src="../recursos/js/plugin/greensock/animation.gsap.min.js"></script>
     <script src="../recursos/js/blog/blog.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="../recursos/js/blog/select2.min.js"></script>
     <script src="../scripts/i18n/es.js"></script>
 
     <%-- Notificaciones --%>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script>
-			if (!window.jQuery.ui) {
-			    document.write('<script src="../recursos/js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-			}
-		</script>
+        <%--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>--%>
+		<script src="../recursos/js/blog/jquery-ui.min.js"></script>
         <script src="../recursos/js/notification/jquery.gritter.js"></script>
         <script src="../recursos/js/notification/sweetalert.min.js"></script>
         <script src="../recursos/js/notification/ui-modal-notification.demo.min.js"></script>
@@ -61,25 +57,25 @@
     <script src="../recursos/bootstrapvalidator/bootstrapValidator.min.js"></script>
 
     <!-- Reportes -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script type="text/javascript" src="../recursos/js/blog/bootstrap-datepicker.min.js"></script>
+    <script src="../recursos/js/blog/moment.min.js"></script>
+    <script src="../recursos/js/blog/core.js"></script>
+    <script src="../recursos/js/blog/charts.js"></script>
+    <script src="../recursos/js/blog/animated.js"></script>
 
     <script src="../recursos/js/bootstrap-datepicker.es.js" charset="UTF-8"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="../recursos/js/blog/dataTables.buttons.min.js"></script>
+    <script src="../recursos/js/blog/buttons.flash.min.js"></script>
+    <script src="../recursos/js/blog/jszip.min.js"></script>
+    <script src="../recursos/js/blog/pdfmake.min.js"></script>
+    <script src="../recursos/js/blog/vfs_fonts.js"></script>
+    <script src="../recursos/js/blog/buttons.html5.min.js"></script>
+    <script src="../recursos/js/blog/buttons.print.min.js"></script>
 
     <link href="plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet"/>
     <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
     <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="recursos/css/buttons.dataTables.min.css">
 
     <!-- Paginacion -->
     <script src="../recursos/js/blog/jquery.easyPaginate.js"></script>

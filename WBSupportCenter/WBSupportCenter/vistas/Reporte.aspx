@@ -346,8 +346,9 @@
                 success: function (response) {
                     var jsonReporte = $.parseJSON(response.d);
                     successResp = jsonReporte;
-                    console.log(jsonReporte);
-                    console.log(reporteSelect);
+                    console.log('prueba' + response);
+                    console.log('prueba' + jsonReporte);
+                    console.log('prueba' +  reporteSelect);
 
                     if (jsonReporte != null) {
 
@@ -582,6 +583,9 @@
 
                 },
                 failure: function (response) {
+                    console.log(response);
+                },
+                error: function (response) {
                     console.log(response);
                 }
             });

@@ -3,7 +3,6 @@ using WBSupportCenter.WSsupport1;
 using System.Web.Services;
 using System.Data;
 using Newtonsoft.Json;
-using SupportCenter.Entidades;
 using System.Web.Script.Services;
 using System.Collections.Generic;
 using System.Text;

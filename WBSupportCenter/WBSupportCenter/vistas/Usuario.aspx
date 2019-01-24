@@ -53,7 +53,7 @@
                         <label for="nombre_box_form_crearart" class="col-form-label">Usuario:</label>
                         <input type="text" id="txtuser" class="form-control" disabled style="background-color: #ffffff !important; border-color: #fff !important;font-weight: bold 700 !important; " />
                         <%--<asp:TextBox ID="txtuser" runat="server" class="form-control" disabled></asp:TextBox>
-                    </div>--%>
+                        </div>--%>
                         <br />
                         <br />
                         <div class="col-lg-6">
@@ -127,7 +127,7 @@
                                 data: null,
                                 sortable: false,
                                 render: function (data, type, row) {
-                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\', \'Lun4-963$%\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>'
+                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + '<%=Session["usuario"]%>' + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>'
                                 }
                             }
                         ]
@@ -335,6 +335,7 @@
             content: "input"
         }).then(name => {
             if (name != "") {
+                name = name.trim();
                 $.ajax({
                     async: false,
                     type: "POST",

@@ -5,10 +5,16 @@
         .textoCategorias {
             font-size: 13px;
         }
+
+        .active {
+            background-color: #E0F2F7 !important;
+            color: #0404B4 !important;
+        }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container"  id="categoSub">
+    <div class="container" id="categoSub">
         <div class="box_table_container" id="idCategorias">
             <div class="row">
                 <span class="box_table_title">Categorías y subcategorías</span>
@@ -148,13 +154,18 @@
                     $.each(jsonReporte, function (key, list) {
                         $('#listCategoria').append('<a href="javascript:void(0)" onclick="showListSubcategoriaUno(' + list.idCategoria + ');cargarIdCategoria(' + list.idCategoria + ');" role="button" class="dblClickCat list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
                         $('#listCategoria').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarCategorias(' + list.idCategoria + ');refresh(1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 1);">Editar</button></td></tr></table>');
+                        $('#listCategoria a').on('click', function () {
+                            $('#listCategoria a').removeClass('active');
+                            $(this).addClass('active');
+                        });
                     });
-                }       
-            });   
+                }
+            });
 
             $('#listCategoria').html('');
             $('#listCategoria').html(html);
         }
+
 
         function cargarDatosEditar(idCat, nombre, typeExe) {
             if (typeExe == 1) {
@@ -215,6 +226,10 @@
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria1').append('<a href="javascript:void(0)" onclick="showListSubcategoriaDos(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 1);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
                             $('#listSubcategoria1').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(2, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 2);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria1 a').on('click', function () {
+                                $('#listSubcategoria1 a').removeClass('active');
+                                $(this).addClass('active');
+                            });
                         });
                         $('#listSubcategoria1').show();
                         $('#listSubcategoria2').hide();
@@ -226,8 +241,8 @@
                         $('#listSubcategoria3').hide();
                         $('#listSubcategoria4').hide();
                     }
-                }       
-            });   
+                }
+            });
 
             $('#listSubcategoria1').html('');
             $('#listSubcategoria1').html(html);
@@ -247,6 +262,10 @@
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria2').append('<a href="javascript:void(0)" onclick="showListSubcategoriaTres(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 2);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
                             $('#listSubcategoria2').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(3, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 3);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria2 a').on('click', function () {
+                                $('#listSubcategoria2 a').removeClass('active');
+                                $(this).addClass('active');
+                            });
                         });
                         $('#listSubcategoria2').show();
                         $('#listSubcategoria3').hide();
@@ -256,8 +275,8 @@
                         $('#listSubcategoria3').hide();
                         $('#listSubcategoria4').hide();
                     }
-                }       
-            });   
+                }
+            });
 
             $('#listSubcategoria2').html('');
             $('#listSubcategoria2').html(html);
@@ -277,6 +296,10 @@
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria3').append('<a href="javascript:void(0)" onclick="showListSubcategoriaCuatro(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 3);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
                             $('#listSubcategoria3').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(4, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 4);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria3 a').on('click', function () {
+                                $('#listSubcategoria3 a').removeClass('active');
+                                $(this).addClass('active');
+                            });
                         });
                         $('#listSubcategoria3').show();
                         $('#listSubcategoria4').hide();
@@ -284,8 +307,8 @@
                         $('#listSubcategoria3').hide();
                         $('#listSubcategoria4').hide();
                     }
-                }       
-            });   
+                }
+            });
 
             $('#listSubcategoria3').html('');
             $('#listSubcategoria3').html(html);
@@ -304,10 +327,14 @@
                     $.each(jsonReporte, function (key, list) {
                         $('#listSubcategoria4').append('<a href="javascript:void(0)" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">&nbsp;&nbsp;' + list.nombreCategoria + '</a>');
                         $('#listSubcategoria4').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(5, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 5);">Editar</button></td></tr></table>');
+                        $('#listSubcategoria4 a').on('click', function () {
+                            $('#listSubcategoria4 a').removeClass('active');
+                            $(this).addClass('active');
+                        });
                     });
                     $('#listSubcategoria4').show();
-                }       
-            });   
+                }
+            });
 
             $('#listSubcategoria4').html('');
             $('#listSubcategoria4').html(html);
@@ -342,9 +369,9 @@
                                 });
                                 refresh(1);
                             }
-                        }       
-                    });   
-                } 
+                        }
+                    });
+                }
             });
         }
 
@@ -376,9 +403,9 @@
                                 });
                                 refresh(typeExe);
                             }
-                        }       
-                    });   
-                } 
+                        }
+                    });
+                }
             });
         }
 

@@ -27,11 +27,11 @@ namespace WBSupportCenter {
                 SearchResultCollection sResults = null;
 
                 string acceso = dominio + @"\" + usuario;
-                DirectoryEntry entry = new DirectoryEntry("LDAP://ITE.COM", usuario, pass);
+                DirectoryEntry entry = new DirectoryEntry("LDAP://ITE.COM", usuario, pass);//cityexpress_dev.local
                 entry.AuthenticationType = AuthenticationTypes.Secure;
 
                 try {
-                    object obj = entry.NativeObject;
+                    //object obj = entry.NativeObject;
                     DirectorySearcher search = new DirectorySearcher(entry);
                     //search.Filter = "(samaccountname=" + usuario + ")";
                     search.Filter = "(samaccountname="+ usuario + ")";
@@ -150,7 +150,7 @@ namespace WBSupportCenter {
                 entry.AuthenticationType = AuthenticationTypes.Secure;
 
                 try {
-                    object obj = entry.NativeObject;
+                    //object obj = entry.NativeObject;
                     DirectorySearcher search = new DirectorySearcher(entry);
                     search.Filter = "(samaccountname=" + usuarioB + ")";
 

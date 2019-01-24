@@ -61,8 +61,8 @@ namespace SupportCenter.Datos
 
                     var parametros = new[]
                     {
-                        ParametroAcceso.CrearParametro("@fechaInicio", SqlDbType.VarChar, fechaInicial, ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@fechaFin", SqlDbType.VarChar, fechaFinal, ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@fechaInicio", SqlDbType.DateTime, fechaInicial, ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@fechaFin", SqlDbType.DateTime, fechaFinal, ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@top", SqlDbType.VarChar, valTop, ParameterDirection.Input)
 
                     };

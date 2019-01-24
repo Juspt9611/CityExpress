@@ -22,7 +22,7 @@ namespace SupportCenter.Negocio
 
         public List<Reporte> NGConsultaReportes(string fechaInicial, string fechaFinal, string valReporte, string valTop)
         {
-            DTReporte = Objeto = new DTReporte();
+            DTReporte Objeto = new DTReporte();
 
             return Objeto.DT_ConsultaReporte(fechaInicial, fechaFinal, valReporte, valTop) ;
 

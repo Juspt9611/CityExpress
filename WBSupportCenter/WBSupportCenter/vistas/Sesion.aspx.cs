@@ -53,7 +53,8 @@ namespace WBSupportCenter.vistas {
                         Session["idRol"] = idRol;
                         Session["nomRol"] = nomRol;
                         Session["idUsuario"] = idUsuario;
-
+                        Session["pass"] = contrasena.Text;
+                        
                         Usuario.Text = "";
                         contrasena.Text = "";
                                

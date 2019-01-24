@@ -82,6 +82,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.Protocols" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -107,9 +108,13 @@
     <Content Include="recursos\ajax\demowidget.php" />
     <Content Include="recursos\css\blog.css" />
     <Content Include="recursos\css\blog_responsive.css" />
+    <Content Include="recursos\css\bootstrap-datepicker3.css" />
+    <Content Include="recursos\css\buttons.dataTables.min.css" />
+    <Content Include="recursos\css\datatables.min.css" />
     <Content Include="recursos\css\footer.css" />
     <Content Include="recursos\css\jquery.gritter.css" />
     <Content Include="recursos\css\personal.css" />
+    <Content Include="recursos\css\select2.min.css" />
     <Content Include="recursos\data\dataList.json" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.eot" />
     <Content Include="recursos\fonts\font-awesome\fontawesome-webfont.ttf" />
@@ -135,10 +140,24 @@
     <Content Include="recursos\fonts\summernote.eot" />
     <Content Include="recursos\fonts\summernote.ttf" />
     <Content Include="recursos\fonts\summernote.woff" />
+    <Content Include="recursos\js\blog\animated.js" />
     <Content Include="recursos\js\blog\blog.js" />
+    <Content Include="recursos\js\blog\bootstrap-datepicker.min.js" />
+    <Content Include="recursos\js\blog\buttons.flash.min.js" />
+    <Content Include="recursos\js\blog\buttons.html5.min.js" />
+    <Content Include="recursos\js\blog\buttons.print.min.js" />
+    <Content Include="recursos\js\blog\charts.js" />
+    <Content Include="recursos\js\blog\core.js" />
+    <Content Include="recursos\js\blog\dataTables.buttons.min.js" />
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
+    <Content Include="recursos\js\blog\jquery-ui.min.js" />
     <Content Include="recursos\js\blog\jquery.easyPaginate.js" />
+    <Content Include="recursos\js\blog\jszip.min.js" />
+    <Content Include="recursos\js\blog\moment.min.js" />
     <Content Include="recursos\js\blog\notify.min.js" />
+    <Content Include="recursos\js\blog\pdfmake.min.js" />
+    <Content Include="recursos\js\blog\select2.min.js" />
+    <Content Include="recursos\js\blog\vfs_fonts.js" />
     <Content Include="recursos\js\bootstrap-datepicker.es.js" />
     <Content Include="recursos\js\libs\jquery-2.1.1.min.map" />
     <Content Include="recursos\js\notification\jquery.gritter.js" />
@@ -1139,12 +1158,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SupportCenter.Entidades\SupportCenter.Entidades.csproj">
-      <Project>{9af0c326-cccb-47d2-ac87-457e9a0629a1}</Project>
-      <Name>SupportCenter.Entidades</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
