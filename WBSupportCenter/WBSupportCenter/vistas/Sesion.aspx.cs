@@ -64,7 +64,7 @@ namespace WBSupportCenter.vistas {
                     else
                     {
 
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "swal('Oh no!', 'El usuario no esta registrado', 'error')", true);
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "swal('¡Lo sentimos!', 'Por favor verifica tus accesos o contacta a tu coordinador', 'error')", true);
                     }
 
 
@@ -73,7 +73,7 @@ namespace WBSupportCenter.vistas {
             else
             {
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "swal('Oh no!', 'Usuario o contraseña incorrectos', 'error')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "swal('¡Lo sentimos!', 'Por favor verifica tus accesos o contacta a tu coordinador', 'error')", true);
 
             }
         }
