@@ -276,11 +276,21 @@
                 if (keyEnter == 13) {
                     if (palabraSelect != "") {
                         savePalabra(palabraSelect);
+                        //loadArticulo(searchField);
+                        loadListaArticulosxPalabra(palabraSelect);
+                        $('#buscadorSel').val(null).trigger('change');
+                        $('#buscadorSel').select2("close");
+                        $(".select2-selection__placeholder").text(palabraSelect)
+                        palabraSelect = "";
+                    } else {
+                        swal("Favor de ingresar un criterio de búsqueda", {
+                            icon: "warning",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                        $('#buscadorSel').val(null).trigger('change');
                     }
-                    //loadArticulo(searchField);
-                    loadListaArticulosxPalabra(palabraSelect);
-                    palabraSelect = "";
-                    $('#buscadorSel').select2("close");
+
                 }
             });
 
