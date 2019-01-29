@@ -10,14 +10,11 @@
     <div class="col-lg-3"></div>
     <div class="card card-container col-lg-6">
 
-        <%--<a style="text-align:center;">--%>
         <div id="contenedorh1">
             <h1 style="color: #FFF;">Support<span style="color: #fcea1d; width: 200px;">Center</span></h1>
         </div>
-        <%--</a>--%>
 
         <br />
-        <%--<img id="profile-img" class="profile-img-card" src="../recursos/StyleLogin/img/Login.png" />--%>
         <p id="profile-name" class="profile-name-card"></p>
         <asp:TextBox type="text" ID="Usuario" runat="server" class="form-control" placeholder="Usuario" Style="background-color: rgba(0, 0, 0, 0.72); border-color: #77DAD5; color: #fff; font-size: 20px;" focus></asp:TextBox>
         <asp:Label ID="ErrUsu" runat="server" Text="" Style="color: red; font-size: 18px"></asp:Label>

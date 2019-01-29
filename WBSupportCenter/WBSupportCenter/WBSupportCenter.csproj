@@ -153,6 +153,7 @@
     <Content Include="recursos\js\blog\jquery-ui.min.js" />
     <Content Include="recursos\js\blog\jquery.easyPaginate.js" />
     <Content Include="recursos\js\blog\jszip.min.js" />
+    <Content Include="recursos\js\blog\lodash.js" />
     <Content Include="recursos\js\blog\moment.min.js" />
     <Content Include="recursos\js\blog\notify.min.js" />
     <Content Include="recursos\js\blog\pdfmake.min.js" />

@@ -80,6 +80,9 @@
     <!-- Paginacion -->
     <script src="../recursos/js/blog/jquery.easyPaginate.js"></script>
 
+    <!-- Select 2 -->
+    <script src="../recursos/js/blog/lodash.js"></script>
+
     <style>
         .circulo {
             border-radius: 50%;
@@ -118,7 +121,7 @@
 
         #imagen {
             position: absolute;
-            width: 80%;
+            width: 50%;
             top: 0;
             left: 0;
             right: 0;
@@ -161,7 +164,7 @@
                     <a href="/vistas/Reporte.aspx">Reportes</a>
                 </li>
                 <li runat="server" id="cerrarSesion" OnClick="CerrarSesion">
-                    <a href="/vistas/Sesion.aspx">Cerrar sesión</a>
+                    <a href="javascript:void(0)">Cerrar sesión</a>
                 </li>
             </ul>
         </div>
@@ -190,29 +193,6 @@
                 </div>
             </header>
 
-            <!-- Menu -->
-
-            <%--<div class="menu_overlay trans_400"></div>
-	        <div class="menu trans_400">
-		        <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
-		        <div class="log_reg">
-			        <div class="log_reg_content d-flex flex-row align-items-center justify-content-end">
-				        <div class="login log_reg_text"><a href="#">Login</a></div>
-				        <div class="register log_reg_text"><a href="#">Registrar</a></div>
-			        </div>
-		        </div>
-		        <nav class="menu_nav">
-			        <ul>
-					        <li><a href="index.html">Opción menú</a></li>
-					        <li><a href="index.html">Opción menú</a></li>
-					        <li><a href="index.html">Opción menú</a></li>
-					        <li><a href="index.html">Opción menú</a></li>
-			        </ul>
-		        </nav>
-	        </div>--%>
-
-            <!-- Home -->
-
             <div class="home">
                 <div class="home_background"></div>
                 <div class="background_image background_city" style="background-image: url(../recursos/img/city/city_42.png)"></div>
@@ -222,31 +202,7 @@
                     <img src="../recursos/img/city/cloud.png" alt="" /></div>
                 <div class="home_container">
                 </div>
-            </div>
-
-            <!-- Domain Search -->
-
-            <%--<div class="domain_search">
-		        <div class="container">
-			        <div class="row text-center">
-                        <div class="col-lg-2"></div>
-				        <div class="col-lg-8">
-					        <div class="domain_search_form_container d-flex flex-column align-items-center justify-content-center">
-						        <form action="#" id="domain_search_form" class="domain_search_form d-flex flex-md-row flex-column align-items-center justify-content-start">
-							        <div id="form_cent" class="d-flex flex-row align-items-center justify-content-start">
-								        <input type="text" class="domain_search_input" placeholder="Buscar un artículo" required="required">
-								        <div class="domain_search_dropdown d-flex flex-row align-items-center justify-content-start">
-										        <button class="sidebar_search_button d-flex flex-column align-items-center justify-content-center"><img src="../recursos/img/city/search_small.png" alt=""></button>
-								        </div>
-							        </div>
-						        </form>
-					        </div>
-				        </div>
-                        <div class="col-lg-2"></div>
-			        </div>
-		        </div>
-	        </div>--%>
-            
+            </div>            
 
             <%--<form id="form1" runat="server">--%>
 
@@ -258,11 +214,11 @@
 
             <!-- Footer -->
 
-            <footer class="footer magic_fade_in" style="background: #232D3B;">
+            <footer class="footer" style="background: #232D3B;">
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-12 footer_col magic_fade_in">
+                        <div class="col-lg-12 footer_col">
                             <div class="footer_about">
                                 <br />
                                 <br />
@@ -383,7 +339,6 @@
         var toogleMenu = 0;
 
         $(document).ready(function () {
-            //$('#example').DataTable();
 
             $("#menu-toggle").click(function (e) {
                 e.preventDefault();

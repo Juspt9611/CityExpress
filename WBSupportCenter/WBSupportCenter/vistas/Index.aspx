@@ -29,6 +29,17 @@
         .link-class:hover {
             background-color: #f1f1f1;
         }
+        .select2-selection__rendered {
+            line-height: 31px !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 35px !important;
+        }
+
+        .select2-selection__arrow {
+            height: 34px !important;
+        }
     </style>
 
 </asp:Content>
@@ -44,19 +55,19 @@
                 <div class="col-lg-6" style="text-align: center">
 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar" id="txtsearch" autocomplete="off">
-                        <ul class="list-group" id="result"></ul>
+                        <%--<input type="text" class="form-control" placeholder="Buscar" id="txtsearch" autocomplete="off">
+                        <ul class="list-group" id="result"></ul>--%>
 
-                        <div class="input-group-append">
+                            <select class="form-control js-data-example-ajax" id="buscadorSel" style="width: 90% !important;"></select>
                             <button type="button"  class="btn btn-primary"id="btnBuscar"><span class="fa fa-search"></span></button>
 <%--                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"> </button>--%> 
-                            <div class="dropdown-menu" id="DDLCategorias">
+<%--                            <div class="dropdown-menu" id="DDLCategorias">
 
                                 <a class="dropdown-item" href="#">Link 1</a>
                                 <a class="dropdown-item" href="#">Link 2</a>
                                 <a class="dropdown-item" href="#">Link 3</a>
-                            </div>
-                        </div>
+                            </div>--%>
+            
                     </div>
                 </div>
                 <div class="col-lg-3"></div>
@@ -195,63 +206,81 @@
             </div>
         </div>
     </div>
+
     <script>
 
         //Variables
         var estrellaArticulo = 6;
+        var palabraSelect;
 
         $(document).ready(function () {
+            $('.js-data-example-ajax').select2({
+                language: 'es',
+                placeholder: { id: '-1', text: 'Buscador...' },
+                allowClear: true,
+                ajax: {
+                    type: "POST",
+                    url: "Index.aspx/articulosxValidar",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    delay: 250,
+                    data: function (param) {
+                        palabraSelect = param.term;
+                        var palabra = "{'palabra':'" + param.term + "'}";
+                        return palabra
+                    },
+                    processResults: function (data) {
+                        $('.js-data-example-ajax').change();
+                        var datos = JSON.parse(data.d);
+                        return {
+                            results: $.map(datos, function (item) {
+                                return {
+                                    text: item.nombreArticulo,
+                                    id: item.idarticulo
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                minimumInputLength: 1,
+                minimumResultsForSearch: -1,
+                theme: 'adwitt'
+            });
+
+
             $.ajaxSetup({ cache: false });
             $('.contentArticulo').hide();
             $('#tablaArticulos').hide();
             $('#box-blog').hide();
             $('#box-historial-blog').hide();
             $('#box-historial-detalleArticulo').hide();
-            $('#txtsearch').keyup(function () {
-                $('#result').html('');
-                $('#state').val('');
-                var searchField = $('#txtsearch').val();
-                var expression = new RegExp(searchField);
 
-                //solicitud datos
-                if ($('#txtsearch').val() != "") {
-                    $.ajax({
-                        async: false,
-                        type: "POST",
-                        url: "Index.aspx/articulosxValidar",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: "{'palabra':'" + $('#txtsearch').val() + "'}",
-                        success: function (response) {
-                            if (response.d != "") {
-                                $.each(response, function (item, index) {
-                                    $.each(jQuery.parseJSON(index), function (item, index) {
-                                        $('#result').append('<li class="list-group-item link-class" value="' + index.idarticulo + '"><span class="l"><a href="javascript:void(0)">' + index.nombreArticulo + '</a></span></li>');
-                                    });
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        
             //evento al seleccionar
-            $('#result').on('click', 'li', function () {
-                $('#txtsearch').val($(this).text());
-                savePalabra($(this).text());
-                loadArticulo($(this).val());
-                $('#txtsearch').val('');
-                $('#result').empty();
+            $('#buscadorSel').on('select2:selecting', function (e) {
+                var searchField = e.params.args.data.text;
+                savePalabra(searchField);
+                if (palabraSelect != "") {
+                    savePalabra(palabraSelect);
+                }
+                //loadArticulo(searchField);
+                loadListaArticulosxPalabra(searchField);
+                palabraSelect = "";
             });
 
-            //evento al dar enter
-            $('#txtsearch').keypress(function (e) {
-                if (e.keyCode == 13) {
-                    var palabra = $('#txtsearch').val();
-
-                    if (palabra != "") {
-                        loadListaArticulosxPalabra(palabra);
+            //al dar enter en el input
+            $(document).on('keyup', '.select2-search__field', function (e) {
+                var keyEnter = e.keyCode;
+                console.log(keyEnter);
+                if (keyEnter == 13) {
+                    if (palabraSelect != "") {
+                        savePalabra(palabraSelect);
                     }
+                    //loadArticulo(searchField);
+                    loadListaArticulosxPalabra(palabraSelect);
+                    palabraSelect = "";
+                    $('#buscadorSel').select2("close");
                 }
             });
 
@@ -274,23 +303,25 @@
                         var countPosts = 0;
                         $.each(posts, function (i, d) {
                             $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
-                                                            '<div class="news_post_content">' +
-                                                                '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
-                                                                '<div class="news_post_text">' +
-                                                                   d[2] +
-                                                                '</div>' +
-                                                                '<div class="news_post_meta">' +
-                                                                    '<ul class="d-flex flex-row align-items-start justify-content-start">' +
-                                                                        '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
-                                                                        '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
-                                                                        '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                                                                        '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
-                                                                    '</ul></div></div></div>');
+                                '<div class="news_post_content">' +
+                                '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
+                                '<div class="news_post_text">' +
+                                d[2] +
+                                '</div>' +
+                                '<div class="news_post_meta">' +
+                                '<ul class="d-flex flex-row align-items-start justify-content-start">' +
+                                '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
+                                '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
+                                '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
+                                '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+                                '</ul></div></div></div>');
                             countPosts++;
                         });
 
                         if (countPosts == 0) {
                             $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para el criterio de busqueda <strong>"' + palabra + '"</strong>. </div> </div>');
+                            $('#buscadorSel').val(null).trigger('change');
+                            palabraSelect = "";
                         }
 
                         savePalabra(palabra);
@@ -308,6 +339,7 @@
                             allowOutsideClick: false,
                             closeOnClickOutside: false
                         });
+
                     }
                 });
             }
@@ -315,19 +347,148 @@
             var bandera = false;
             //evento boton buscar
             $("#btnBuscar").click(function () {
-                var palabra = $('#txtsearch').val();
-                if (palabra != "") {
-                    loadListaArticulosxPalabra(palabra);
+                //var palabra = $('.select2-search__field').val();
+                if (palabraSelect != "") {
+                    savePalabra(palabraSelect);
+                    loadListaArticulosxPalabra(palabraSelect);
                 } else {
                     swal("Favor de ingresar un criterio de búsqueda", {
                         icon: "warning",
                         allowOutsideClick: false,
                         closeOnClickOutside: false
                     });
+                    $('#buscadorSel').val(null).trigger('change');
                 }
-                
+
             });
         });
+            ////////////$.ajaxSetup({ cache: false });
+            ////////////$('.contentArticulo').hide();
+            ////////////$('#tablaArticulos').hide();
+            ////////////$('#box-blog').hide();
+            ////////////$('#box-historial-blog').hide();
+            ////////////$('#box-historial-detalleArticulo').hide();
+            ////////////$('#txtsearch').keyup(function () {
+            ////////////    $('#result').html('');
+            ////////////    $('#state').val('');
+            ////////////    var searchField = $('#txtsearch').val();
+            ////////////    var expression = new RegExp(searchField);
+
+            ////////////    //solicitud datos
+            ////////////    if ($('#txtsearch').val() != "") {
+            ////////////        $.ajax({
+            ////////////            async: false,
+            ////////////            type: "POST",
+            ////////////            url: "Index.aspx/articulosxValidar",
+            ////////////            contentType: "application/json; charset=utf-8",
+            ////////////            dataType: "json",
+            ////////////            data: "{'palabra':'" + $('#txtsearch').val() + "'}",
+            ////////////            success: function (response) {
+            ////////////                if (response.d != "") {
+            ////////////                    $.each(response, function (item, index) {
+            ////////////                        $.each(jQuery.parseJSON(index), function (item, index) {
+            ////////////                            $('#result').append('<li class="list-group-item link-class" value="' + index.idarticulo + '"><span class="l"><a href="javascript:void(0)">' + index.nombreArticulo + '</a></span></li>');
+            ////////////                        });
+            ////////////                    });
+            ////////////                }
+            ////////////            }
+            ////////////        });
+            ////////////    }
+            ////////////});
+        
+            //////////////evento al seleccionar
+            ////////////$('#result').on('click', 'li', function () {
+            ////////////    $('#txtsearch').val($(this).text());
+            ////////////    savePalabra($(this).text());
+            ////////////    loadArticulo($(this).val());
+            ////////////    $('#txtsearch').val('');
+            ////////////    $('#result').empty();
+            ////////////});
+
+            //////////////evento al dar enter
+            ////////////$('#txtsearch').keypress(function (e) {
+            ////////////    if (e.keyCode == 13) {
+            ////////////        var palabra = $('#txtsearch').val();
+
+            ////////////        if (palabra != "") {
+            ////////////            loadListaArticulosxPalabra(palabra);
+            ////////////        }
+            ////////////    }
+            ////////////});
+
+            //////////////Carga lista de articulos en base a una palabra
+            ////////////function loadListaArticulosxPalabra(palabra) {
+            ////////////    $("#idPostMasVistos").empty();
+            ////////////    $(".easyPaginateNav").remove();
+            ////////////    if ($("#box-blog").is(":visible")) {
+            ////////////        $("#box-blog").hide();
+            ////////////        $("#idPostMasVistos").show();
+            ////////////    }
+            ////////////    $.ajax({
+            ////////////        type: "POST",
+            ////////////        url: "Index.aspx/articulosxClick",
+            ////////////        contentType: "application/json; charset=utf-8",
+            ////////////        dataType: "json",
+            ////////////        data: "{'palabra':'" + palabra + "'}",
+            ////////////        success: function (response) {
+            ////////////            var posts = $.parseJSON(response.d);
+            ////////////            var countPosts = 0;
+            ////////////            $.each(posts, function (i, d) {
+            ////////////                $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+            ////////////                                                '<div class="news_post_content">' +
+            ////////////                                                    '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
+            ////////////                                                    '<div class="news_post_text">' +
+            ////////////                                                       d[2] +
+            ////////////                                                    '</div>' +
+            ////////////                                                    '<div class="news_post_meta">' +
+            ////////////                                                        '<ul class="d-flex flex-row align-items-start justify-content-start">' +
+            ////////////                                                            '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
+            ////////////                                                            '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
+            ////////////                                                            '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
+            ////////////                                                            '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+            ////////////                                                        '</ul></div></div></div>');
+            ////////////                countPosts++;
+            ////////////            });
+
+            ////////////            if (countPosts == 0) {
+            ////////////                $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para el criterio de busqueda <strong>"' + palabra + '"</strong>. </div> </div>');
+            ////////////            }
+
+            ////////////            savePalabra(palabra);
+            ////////////            $('#txtsearch').val('');
+            ////////////            $("#result").empty('');
+            ////////////            $('#idPostMasVistos').easyPaginate({
+            ////////////                paginateElement: '.news_post',
+            ////////////                elementsPerPage: 5,
+            ////////////                effect: 'climb'
+            ////////////            });
+            ////////////        },
+            ////////////        error: function (response) {
+            ////////////            swal("Hubo un error en esta búsqueda", {
+            ////////////                icon: "error",
+            ////////////                allowOutsideClick: false,
+            ////////////                closeOnClickOutside: false
+            ////////////            });
+            ////////////        }
+            ////////////    });
+            ////////////}
+
+            ////////////var bandera = false;
+            //////////////evento boton buscar
+            ////////////$("#btnBuscar").click(function () {
+            ////////////    var palabra = $('#txtsearch').val();
+            ////////////    if (palabra != "") {
+            ////////////        loadListaArticulosxPalabra(palabra);
+            ////////////    } else {
+            ////////////        swal("Favor de ingresar un criterio de búsqueda", {
+            ////////////            icon: "warning",
+            ////////////            allowOutsideClick: false,
+            ////////////            closeOnClickOutside: false
+            ////////////        });
+            ////////////    }
+                
+            ////////////});
+        ////////////});
 
         function savePalabra(palabra) {
             $.ajax({

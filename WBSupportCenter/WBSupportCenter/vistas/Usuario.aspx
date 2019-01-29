@@ -234,13 +234,13 @@
             if (code == 13) {
                 event.preventDefault();
                 swal({
-                    text: 'Por seguridad escriba su contraseña',
+                    text: 'Por favor, ingresa tu contraseña:',
                     content: "input"
                 }).then(name => {
                     if (name != null) {
                         swal('hola' + '<%=Session["nombres"]%>');
                 } else {
-                    swal("Oh no!", "La contraseña es incorrecta", "error");
+                        swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
                 }
             });
         }
@@ -314,7 +314,7 @@
                 console.log(response.d);
 
                 if (response.d == true) {
-                    swal("Perfecto!", "Usuario agregado " + $("#txtNombres").val(), "success");
+                    swal("Alta de usuario exitosa.", "", "success");
                     $("#form1")[0].reset();
                     select2();
                     $("#camposActive").addClass('hidden');
@@ -354,7 +354,7 @@
                                         if (response.d.length == 5) {
                                             $("#txtCorreo").val(response.d[4])
                                         } else { $("#txtCorreo").val(response.d[3] + "@itesoluciones.com") }
-                                        swal("Perfecto!", "Datos de " + response.d[1] + " encontrados", "success");
+                                        swal("Usuario encontrado.", "", "success");
                                         $("#camposActive").removeClass('hidden');
                                         $("#divbtn").removeClass('hidden');
                                     } else {
