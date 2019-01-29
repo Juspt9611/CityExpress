@@ -755,13 +755,14 @@ section {
 	margin-top: 11px;
 }
 .news_post_content {
-	padding-top: 51px;
-	padding-bottom: 86px;
-	border: 1px solid #023c56;
-	border-radius: 5px;
-	padding: 1rem 2rem;
-	margin: 2rem 1.5rem;
+    padding-top: 51px;
+    padding-bottom: 86px;
+    border: 1px solid #023c56;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    margin: 2rem 1.5rem;
     overflow-wrap: break-word;
+    overflow: hidden;
 }
 
 .news_post_title a {

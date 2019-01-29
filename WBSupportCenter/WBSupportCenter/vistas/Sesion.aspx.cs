@@ -11,7 +11,10 @@ using WBSupportCenter.WSsupport1;
 namespace WBSupportCenter.vistas {
     public partial class Sesion : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-
+            if (!Page.IsPostBack)
+            {
+                CerrarSesion();
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e) {
@@ -76,6 +79,12 @@ namespace WBSupportCenter.vistas {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "script", "swal('¡Lo sentimos!', 'Por favor verifica tus accesos o contacta a tu coordinador', 'error')", true);
 
             }
+        }
+
+        public static void CerrarSesion()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
         }
 
 

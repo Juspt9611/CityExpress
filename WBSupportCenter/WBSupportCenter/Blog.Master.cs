@@ -44,12 +44,5 @@ namespace WBSupportCenter
             idAdmin.Value = usuario;
 
         }
-
-        public void DoMyOnClickCall(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Session.Abandon();
-            Response.Redirect("Sesion.aspx");
-        }
     }
 }
