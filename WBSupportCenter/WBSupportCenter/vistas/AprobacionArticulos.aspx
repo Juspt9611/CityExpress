@@ -137,7 +137,7 @@
 
             $("#aceptar").click(function (e) {
                 e.preventDefault(), swal({
-                    title: "¿Esta seguro que desea aprobar este articulo?",
+                    title: "¿Aprobar artículo?",
                     text: "",
                     icon: "info",
                     closeOnClickOutside: false,

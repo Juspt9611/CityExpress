@@ -43,6 +43,9 @@ namespace WBSupportCenter
             string usuario = Session["usuario"].ToString();
             idAdmin.Value = usuario;
 
+            string pass = Session["pass"].ToString();
+            idPass.Value = pass;
+
         }
     }
 }

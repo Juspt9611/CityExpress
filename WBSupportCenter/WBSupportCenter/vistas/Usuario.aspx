@@ -8,7 +8,7 @@
         <div class="container">
 
             <div class="box_table_container">
-                <a class="btn btn-warning btn-sm text-white hidden pull-right" id="btnAtras" onclick="atras();">Atrás</a>
+                <%--<a class="btn btn-warning btn-sm text-white hidden pull-right" id="btnAtras" onclick="atras();">Atrás</a>--%>
                 <div class="row">
                     <h1 class="box_table_title" style="margin-bottom: 1rem;"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Usuario</h1>
                     <%--<span class="box_table_title" style="margin-bottom: 1rem;">Usuario</span>--%>
@@ -21,15 +21,17 @@
                     <div class="row insertUser">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="nombre_box_form_crearart" class="col-form-label">Nombre Usuario:</label>
+                                <label for="nombre_box_form_crearart" class="col-form-label">Nombre de usuario:</label>
                                 <input type="text" id="UsuarioB" class="form-control" />
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-1">
                             <div class="form-group">
-                                <br />
-                                <br />
+                                <label class="col-form-label" style="color: transparent;">Boton:</label>
                                 <button type="button" class="btn btn-primary" id="btnInfor">Ir</button>
+                                <%--<br />
+                                <br />
+                                <button type="button" class="btn btn-primary" id="btnInfor">Ir</button>--%>
                             </div>
                         </div>
                     </div>
@@ -62,7 +64,7 @@
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <label for="nombre_box_form_crearart" class="col-form-label">Roles:</label>
+                            <label for="nombre_box_form_crearart" class="col-form-label">Rol:</label>
                             <select class="js-example-responsive form-control" style="width: 100%" name="drowRol" id="drowRol">
                             </select>
                         </div>
@@ -73,12 +75,19 @@
                         <span class="box_table_title" style="margin-bottom: 1rem;"></span>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <button type="button" class="btn btn-success pull-right" id="btnGuardar"><span class="fa fa-floppy-o"></span>Guardar</button>
+                                <button type="button" class="btn btn-success pull-right" id="btnGuardar"><i class="fa fa-check" aria-hidden="true"></i>Guardar</button>
+                                <%--<button type="button" class="btn btn-success pull-right" id="btnGuardarEdit"><i class="fa fa-check" aria-hidden="true"></i>Guardar</button>--%>
+                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atras"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
                             </div>
                         </div>
                     </div>
                     <br />
-                    <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
+                    <div class="table" id="divTable">
+                        <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>
@@ -86,26 +95,33 @@
 
     <script>
         var usuarioAdmin = $('#idAdmin').val();
+        var passAdmin = $('#idPass').val();
+
+        var idPersonal = "";
+        var idUsuario = "";
+        var idGrupo;
+        var idRol = "";
+
         $(document).ready(function () {
             select2();
             //dataTableData();
-            tablaUsuarios(usuarioAdmin);
+            tablaUsuarios(usuarioAdmin, passAdmin);
         });
 
-        function atras() {
-            $("#camposActive").addClass('hidden');
-            $("#divbtn").addClass('hidden');
-            $("#btnAtras").addClass('hidden');
-            $(".insertUser").show();
-            tablaUsuarios(usuarioAdmin);
-        }
+        //function atras() {
+        //    $("#camposActive").addClass('hidden');
+        //    $("#divbtn").addClass('hidden');
+        //    $("#btnAtras").addClass('hidden');
+        //    $(".insertUser").show();
+        //    tablaUsuarios(usuarioAdmin, passAdmin);
+        //}
 
-        function tablaUsuarios(usuario) {
+        function tablaUsuarios(usuario, pass) {
             $.ajax({
                 async: false,
                 type: "POST",
                 url: "Usuario.aspx/consultarUsuariosxAdmin",
-                data: "{'usuario': '"+ usuario +"' }",
+                data: "{'usuario': '" + usuario + "' }",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
@@ -114,8 +130,15 @@
                     console.log(jsonReporte);
                     $('#tablaUsuarios').DataTable({
                         data: jsonReporte,
+                        dom: '<"pull-left"f><"pull-right">tip',
+                        language: {
+                            //"emptyTable": "No hay información",
+                            "infoEmpty": "Mostrando 0 de 0 entradas",
+                            "zeroRecords": "Sin resultados encontrados"
+                        },
                         orderCellsTop: true,
                         fixedHeader: true,
+                        pageLength: 10,
                         columns: [
                             { title: 'Nombres', data: 'nombre' },
                             { title: 'Apellidos', data: 'apellidos' },
@@ -127,7 +150,8 @@
                                 data: null,
                                 sortable: false,
                                 render: function (data, type, row) {
-                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + '<%=Session["usuario"]%>' + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>'
+                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + pass + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\', \'' + data.idPersonal + '\', \'' + data.idUsuario + '\', \'' + data.idGrupos + '\', \'' + data.idRol + '\');">Editar</a></center>'
+                                    //return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + 'Lun4-963$%' + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>';
                                 }
                             }
                         ]
@@ -136,7 +160,11 @@
             });
         }
 
-        function editarUsuario(admin, contra, usuario, rol, grupo) {
+        function editarUsuario(admin, contra, usuario, rol, grupo, idP, idU, idG, idR) {
+            idPersonal =  idP;
+            idUsuario =  idU;
+            idGrupo = idG;
+            idRol = idR;
             if (contra != "") {
                 $.ajax({
                     async: false,
@@ -228,7 +256,7 @@
             });
         }
 
-        function KeyPressed(e) {
+<%--        function KeyPressed(e) {
             //Get the Key Code
             var code = (e.keyCode ? e.keyCode : e.which);
             if (code == 13) {
@@ -239,135 +267,188 @@
                 }).then(name => {
                     if (name != null) {
                         swal('hola' + '<%=Session["nombres"]%>');
-                } else {
-                        swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
+                        } else {
+                            swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
+                        }
+                    });
+            }
+        }--%>
+
+        /*
+        function dataTableData() {
+            var datos = null;
+            $.ajax({
+                type: 'POST',
+                url: 'AprobacionArticulos.aspx/consultarArticuloAprobar',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    datos = response.d;
+                    var json = $.parseJSON(datos);
+                    console.log(json);
+                    dataTable = $('#tablaAprobacionArticulos').DataTable({
+                        data: json,
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        "lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
+                        columns: [
+                            { title: "ID", "visible": false },
+                            { title: "Nombre" },
+                            { title: "Apellidos" },
+                            { title: "Usuario" },
+                            { title: "Fecha" },
+                            {
+                                "title": "Detalle",
+                                "mData": null,
+                                "bSortable": false,
+                                "mRender": function (data, type, full) {
+                                    return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Ver' + '</a>';
+                                }
+                            }
+    
+                        ]
+                    });
+                    $('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
+                        var data_row = dataTable.row($(this).closest('tr')).data();
+                        console.log(data_row[2]);
+                        console.log("###");
+                        $("#contenidoTabla").hide();
+                        $('#contenidoArticulo').removeAttr('hidden').fadeIn(2000);
+                        addDataCard(data_row);
+                    })
+                },
+                failure: function (response) {
+                    console.log(response);
                 }
             });
         }
-    }
+        */
+        $("#atras").click(function () {
+            //$("#form1")[0].reset();
+            //select2();
+            //$("#camposActive").addClass('hidden');
+            //$("#divbtn").addClass('hidden');
+            //$("#divTable").removeClass('hidden');
 
-    /*
-    function dataTableData() {
-        var datos = null;
-        $.ajax({
-            type: 'POST',
-            url: 'AprobacionArticulos.aspx/consultarArticuloAprobar',
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                datos = response.d;
-                var json = $.parseJSON(datos);
-                console.log(json);
-                dataTable = $('#tablaAprobacionArticulos').DataTable({
-                    data: json,
-                    orderCellsTop: true,
-                    fixedHeader: true,
-                    "lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
-                    columns: [
-                        { title: "ID", "visible": false },
-                        { title: "Nombre" },
-                        { title: "Apellidos" },
-                        { title: "Usuario" },
-                        { title: "Fecha" },
-                        {
-                            "title": "Detalle",
-                            "mData": null,
-                            "bSortable": false,
-                            "mRender": function (data, type, full) {
-                                return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Ver' + '</a>';
+            $("#form1")[0].reset();
+            select2();
+            $("#camposActive").addClass('hidden');
+            $("#divbtn").addClass('hidden');
+            $(".insertUser").show();
+            $("#divTable").removeClass('hidden');
+            //tablaUsuarios(usuarioAdmin, passAdmin);
+        });
+
+        $("#btnGuardar").click(function () {
+            var varGrup = "";
+            var varRol = "";
+            //console.log(arrayDeCadenas);
+
+            $.each($("#drowGrupo").val(), function (index, value) { varGrup += value + "|"; });
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "Usuario.aspx/InsertarUsuario",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'Nombres':'" + $("#txtNombres").val() + "','Apellido':'" + $("#txtApellidos").val() + "','Usuario':'" + $('#UsuarioB').val() + "','grupos':'" + varGrup.substring(0, varGrup.length - 1) + "','rol':'" + $("#drowRol").val() + "'}",
+                success: function (response) {
+
+                    console.log(response.d);
+
+                    if (response.d == true) {
+                        swal("Alta de usuario exitosa.", "", "success");
+                        $("#form1")[0].reset();
+                        select2();
+                        $("#camposActive").addClass('hidden');
+                        $("#divbtn").addClass('hidden');
+                        $("#divTable").removeClass('hidden');
+                    } else {
+
+                        swal("Oh no!", "Algo salio mal", "error");
+                    }
+
+                }
+            });
+        });
+
+        //$("#btnGuardarEdit").click(function () {
+        //    var varGrup = "";
+        //    var varRol = "";
+        //    //$.each($("#drowGrupo").val(), function (index, value) { varGrup += value + "|"; });
+        //    $.ajax({
+        //        async: false,
+        //        type: "POST",
+        //        url: "Usuario.aspx/EditarUsuario",
+        //        contentType: "application/json; charset=utf-8",
+        //        dataType: "json",
+        //        data: "{'idPersonal':'" + idPersonal + "','idUsuario':'"+ idUsuario + "','idGrupo':'" + idGrupo + "','idRol':'" + idRol + "'}",
+        //        success: function (response) {
+
+        //            console.log(response.d);
+
+        //            if (response.d == true) {
+        //                swal("Alta de usuario exitosa.", "", "success");
+        //                $("#form1")[0].reset();
+        //                select2();
+        //                $("#camposActive").addClass('hidden');
+        //                $("#divbtn").addClass('hidden');
+        //                $("#divTable").removeClass('hidden');
+        //            } else {
+
+        //                swal("Oh no!", "Algo salio mal", "error");
+        //            }
+
+        //        }
+        //    });
+        //});
+
+        $("#btnInfor").click(function () {
+            swal({
+                text: 'Por favor, ingresa tu contraseña:',
+                content: {
+                    element: "input",
+                    attributes: {
+                        //placeholder: "Type your password",
+                        type: "password",
+                    }
+                }
+            }).then(name => {
+                if (name != "") {
+                    name = name.trim();
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "Usuario.aspx/buscaDatos",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: "{'Usuario':'" + '<%=Session["usuario"]%>' + "','contrasena':'" + name + "','UsuarioB':'" + $('#UsuarioB').val() + "'}",
+                        success: function (response) {
+                            console.log(response.d);
+                            if (response.d != "ErrorContraseña") {
+                                if (response.d != "notuser") {
+                                    $("#divTable").addClass('hidden');
+                                    select2();
+                                    $('#txtNombres').val(response.d[1])
+                                    $('#txtApellidos').val(response.d[2])
+                                    $("#txtuser").val(response.d[3])
+                                    if (response.d.length == 5) {
+                                        $("#txtCorreo").val(response.d[4])
+                                    } else { $("#txtCorreo").val(response.d[3] + "@itesoluciones.com") }
+                                    swal("Usuario encontrado.", "", "success");
+                                    $("#camposActive").removeClass('hidden');
+                                    $("#divbtn").removeClass('hidden');
+                                } else {
+                                    swal("Oh no!", "Usuario no encontrado", "error");
+                                }
+                            } else {
+                                swal("Oh no!", "Contraseña incorrecta", "error");
                             }
                         }
-
-                    ]
-                });
-                $('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
-                    var data_row = dataTable.row($(this).closest('tr')).data();
-                    console.log(data_row[2]);
-                    console.log("###");
-                    $("#contenidoTabla").hide();
-                    $('#contenidoArticulo').removeAttr('hidden').fadeIn(2000);
-                    addDataCard(data_row);
-                })
-            },
-            failure: function (response) {
-                console.log(response);
-            }
-        });
-    }
-    */
-    $("#btnGuardar").click(function () {
-
-        var varGrup = "";
-        var varRol = "";
-        //console.log(arrayDeCadenas);
-
-        $.each($("#drowGrupo").val(), function (index, value) { varGrup += value + "|"; });
-        $.ajax({
-            async: false,
-            type: "POST",
-            url: "Usuario.aspx/InsertarUsuario",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: "{'Nombres':'" + $("#txtNombres").val() + "','Apellido':'" + $("#txtApellidos").val() + "','Usuario':'" + $('#UsuarioB').val() + "','grupos':'" + varGrup.substring(0, varGrup.length - 1) + "','rol':'" + $("#drowRol").val() + "'}",
-            success: function (response) {
-
-                console.log(response.d);
-
-                if (response.d == true) {
-                    swal("Alta de usuario exitosa.", "", "success");
-                    $("#form1")[0].reset();
-                    select2();
-                    $("#camposActive").addClass('hidden');
-                    $("#divbtn").addClass('hidden');
-
-                } else {
-
-                    swal("Oh no!", "Algo salio mal", "error");
-                }
-
-            }
-        });
-    });
-
-    $("#btnInfor").click(function () {
-        swal({
-            text: 'Por seguridad escriba su contraseña',
-            content: "input"
-        }).then(name => {
-            if (name != "") {
-                name = name.trim();
-                $.ajax({
-                    async: false,
-                    type: "POST",
-                    url: "Usuario.aspx/buscaDatos",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: "{'Usuario':'" + '<%=Session["usuario"]%>' + "','contrasena':'" + name + "','UsuarioB':'" + $('#UsuarioB').val() + "'}",
-                            success: function (response) {
-                                console.log(response.d);
-                                if (response.d != "ErrorContraseña") {
-                                    if (response.d != "notuser") {
-                                        select2();
-                                        $('#txtNombres').val(response.d[1])
-                                        $('#txtApellidos').val(response.d[2])
-                                        $("#txtuser").val(response.d[3])
-                                        if (response.d.length == 5) {
-                                            $("#txtCorreo").val(response.d[4])
-                                        } else { $("#txtCorreo").val(response.d[3] + "@itesoluciones.com") }
-                                        swal("Usuario encontrado.", "", "success");
-                                        $("#camposActive").removeClass('hidden');
-                                        $("#divbtn").removeClass('hidden');
-                                    } else {
-                                        swal("Oh no!", "Usuario no encontrado", "error");
-                                    }
-                                } else {
-                                    swal("Oh no!", "Contraseña incorrecta", "error");
-                                }
-                            }
-                        });
+                    });
                         //swal('hola: '+'<%=Session["nombres"]%>');
                     }
                 })
-            });
+        });
     </script>
 </asp:Content>

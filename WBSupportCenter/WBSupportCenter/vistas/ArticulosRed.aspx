@@ -17,7 +17,7 @@
 
         <div class="box_table_container">
             <div class="row">
-                <span class="box_table_title">Artículos en autorización</span>
+                <span class="box_table_title">Crear y editar artículos</span>
             </div>
             <div class="row">
                 <div class="col-lg-12 box_table_buttons">
@@ -65,6 +65,11 @@
             data: $.parseJSON(infoDatatable),
             lengthChange: false,
             dom: '<"pull-left"f><"pull-right">tip',
+            language: {
+                            //"emptyTable": "No hay información",
+                            "infoEmpty": "Mostrando 0 de 0 entradas",
+                            "zeroRecords": "Sin resultados encontrados"
+                        },
             columnDefs: [{
                 "targets": -1,
                 "data": null,

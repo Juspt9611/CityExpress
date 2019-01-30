@@ -241,6 +241,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
+    public bool WSEditarPers(int idPersonal, int idUsuario, int idGrupo, int idRol)
+    {
+        NGPersonal WSPersonal = new NGPersonal();
+        return WSPersonal.NGEditarPers(idPersonal, idUsuario, idGrupo, idRol);
+    }
+
+    [WebMethod]
     public List<UsuarioEntidades> WSConsultarUsuarioxAdmin(string usuario)
     {
         NGPersonal Personal = new NGPersonal();

@@ -588,6 +588,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="WSEditarPers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idPersonal" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idGrupo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEditarPersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSEditarPersResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSConsultarUsuarioxAdmin">
         <s:complexType>
           <s:sequence>
@@ -840,6 +857,12 @@
   <wsdl:message name="WSInsertarPersSoapOut">
     <wsdl:part name="parameters" element="tns:WSInsertarPersResponse" />
   </wsdl:message>
+  <wsdl:message name="WSEditarPersSoapIn">
+    <wsdl:part name="parameters" element="tns:WSEditarPers" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarPersSoapOut">
+    <wsdl:part name="parameters" element="tns:WSEditarPersResponse" />
+  </wsdl:message>
   <wsdl:message name="WSConsultarUsuarioxAdminSoapIn">
     <wsdl:part name="parameters" element="tns:WSConsultarUsuarioxAdmin" />
   </wsdl:message>
@@ -1046,6 +1069,15 @@
     <wsdl:part name="rol" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSInsertarPersHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarPersHttpGetIn">
+    <wsdl:part name="idPersonal" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
+    <wsdl:part name="idGrupo" type="s:string" />
+    <wsdl:part name="idRol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarPersHttpGetOut">
     <wsdl:part name="Body" element="tns:boolean" />
   </wsdl:message>
   <wsdl:message name="WSConsultarUsuarioxAdminHttpGetIn">
@@ -1256,6 +1288,15 @@
   <wsdl:message name="WSInsertarPersHttpPostOut">
     <wsdl:part name="Body" element="tns:boolean" />
   </wsdl:message>
+  <wsdl:message name="WSEditarPersHttpPostIn">
+    <wsdl:part name="idPersonal" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
+    <wsdl:part name="idGrupo" type="s:string" />
+    <wsdl:part name="idRol" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEditarPersHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
   <wsdl:message name="WSConsultarUsuarioxAdminHttpPostIn">
     <wsdl:part name="usuario" type="s:string" />
   </wsdl:message>
@@ -1389,6 +1430,10 @@
       <wsdl:input message="tns:WSInsertarPersSoapIn" />
       <wsdl:output message="tns:WSInsertarPersSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <wsdl:input message="tns:WSEditarPersSoapIn" />
+      <wsdl:output message="tns:WSEditarPersSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <wsdl:input message="tns:WSConsultarUsuarioxAdminSoapIn" />
       <wsdl:output message="tns:WSConsultarUsuarioxAdminSoapOut" />
@@ -1519,6 +1564,10 @@
       <wsdl:input message="tns:WSInsertarPersHttpGetIn" />
       <wsdl:output message="tns:WSInsertarPersHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <wsdl:input message="tns:WSEditarPersHttpGetIn" />
+      <wsdl:output message="tns:WSEditarPersHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <wsdl:input message="tns:WSConsultarUsuarioxAdminHttpGetIn" />
       <wsdl:output message="tns:WSConsultarUsuarioxAdminHttpGetOut" />
@@ -1648,6 +1697,10 @@
     <wsdl:operation name="WSInsertarPers">
       <wsdl:input message="tns:WSInsertarPersHttpPostIn" />
       <wsdl:output message="tns:WSInsertarPersHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <wsdl:input message="tns:WSEditarPersHttpPostIn" />
+      <wsdl:output message="tns:WSEditarPersHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <wsdl:input message="tns:WSConsultarUsuarioxAdminHttpPostIn" />
@@ -1923,6 +1976,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSInsertarPers">
       <soap:operation soapAction="http://tempuri.org/WSInsertarPers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <soap:operation soapAction="http://tempuri.org/WSEditarPers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2221,6 +2283,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <soap12:operation soapAction="http://tempuri.org/WSEditarPers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <soap12:operation soapAction="http://tempuri.org/WSConsultarUsuarioxAdmin" style="document" />
       <wsdl:input>
@@ -2512,6 +2583,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <http:operation location="/WSEditarPers" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <http:operation location="/WSConsultarUsuarioxAdmin" />
       <wsdl:input>
@@ -2796,6 +2876,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSInsertarPers">
       <http:operation location="/WSInsertarPers" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEditarPers">
+      <http:operation location="/WSEditarPers" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

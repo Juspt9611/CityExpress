@@ -85,6 +85,39 @@ namespace SupportCenter.Datos {
 
             return resp;
         }
+
+        public bool DTEditarPers(int idPersonal, int idUsuario, int idGrupo, int idRol)
+        {
+            SqlConnection connection = null;
+            bool resp = false;
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+                    SqlDataReader consulta;
+                    connection.Open();
+                    var parametros = new[]{
+                    ParametroAcceso.CrearParametro("@idPersonal", SqlDbType.Int, idPersonal , ParameterDirection.Input),
+                    ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario, ParameterDirection.Input),
+                    ParametroAcceso.CrearParametro("@idGrupo", SqlDbType.Int, idGrupo , ParameterDirection.Input),
+                    ParametroAcceso.CrearParametro("@idRol", SqlDbType.Int, idRol , ParameterDirection.Input),
+                    };
+
+                    resp = Ejecuta.EjecutarSpSinRetorno(connection, parametros, "SP_EditarPersonal");
+
+                    connection.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return resp;
+        }
+
         public DataSet DTRolUser(string Usuario)
         {
             SqlConnection connection = null;
@@ -135,7 +168,8 @@ namespace SupportCenter.Datos {
 
                 foreach (DataRow item in dt.Rows)                {
                    UsuarioEntidades obj = new UsuarioEntidades();
-                    obj = new UsuarioEntidades();                    obj.nombre = item["nombre"].ToString();                    obj.apellidos = item["apellidos"].ToString();                    obj.nombreUsuario = item["nombreUsuario"].ToString();                    obj.nombreRol = item["nombreRol"].ToString();                    obj.nombreGrupo = item["nombreGrupo"].ToString();                    listaUsuarios.Add(obj);                }
+                    obj = new UsuarioEntidades();                    obj.nombre = item["nombre"].ToString();                    obj.apellidos = item["apellidos"].ToString();                    obj.nombreUsuario = item["nombreUsuario"].ToString();                    obj.nombreRol = item["nombreRol"].ToString();                    obj.nombreGrupo = item["nombreGrupo"].ToString();
+                    obj.idPersonal = Convert.ToInt32(item["idPersonal"].ToString());                    obj.idUsuario = Convert.ToInt32(item["idUsuario"].ToString());                    obj.idGrupos = Convert.ToInt32(item["idGrupos"].ToString());                    obj.idRol = Convert.ToInt32(item["idRol"].ToString());                    listaUsuarios.Add(obj);                }
             }
             catch (Exception ex)
             {

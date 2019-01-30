@@ -74,6 +74,14 @@ namespace WBSupportCenter.vistas {
         }
 
         [WebMethod]
+        public static bool EditarUsuario(int idPersonal, int idUsuario, int idGrupo, int idRol)
+        {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+
+            return metodo.WSEditarPers(idPersonal, idUsuario, idGrupo, idRol);
+        }
+
+        [WebMethod]
         public static string consultarUsuariosxAdmin(string usuario)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
