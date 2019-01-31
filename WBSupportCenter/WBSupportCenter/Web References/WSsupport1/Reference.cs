@@ -94,6 +94,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSConsultarUsuarioxAdminOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSConsultarUsuarioExistOperationCompleted;
+        
         private System.Threading.SendOrPostCallback WSOptenRolOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -229,6 +231,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSConsultarUsuarioxAdminCompletedEventHandler WSConsultarUsuarioxAdminCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarUsuarioExistCompletedEventHandler WSConsultarUsuarioExistCompleted;
         
         /// <remarks/>
         public event WSOptenRolCompletedEventHandler WSOptenRolCompleted;
@@ -1110,8 +1115,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSInsertarPers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool WSInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol) {
+        public bool WSInsertarPers(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol) {
             object[] results = this.Invoke("WSInsertarPers", new object[] {
+                        idCreador,
                         Nombres,
                         Apellido,
                         Usuario,
@@ -1121,16 +1127,17 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public void WSInsertarPersAsync(string Nombres, string Apellido, string Usuario, string grupos, string rol) {
-            this.WSInsertarPersAsync(Nombres, Apellido, Usuario, grupos, rol, null);
+        public void WSInsertarPersAsync(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol) {
+            this.WSInsertarPersAsync(idCreador, Nombres, Apellido, Usuario, grupos, rol, null);
         }
         
         /// <remarks/>
-        public void WSInsertarPersAsync(string Nombres, string Apellido, string Usuario, string grupos, string rol, object userState) {
+        public void WSInsertarPersAsync(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol, object userState) {
             if ((this.WSInsertarPersOperationCompleted == null)) {
                 this.WSInsertarPersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSInsertarPersOperationCompleted);
             }
             this.InvokeAsync("WSInsertarPers", new object[] {
+                        idCreador,
                         Nombres,
                         Apellido,
                         Usuario,
@@ -1147,7 +1154,7 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEditarPers", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool WSEditarPers(int idPersonal, int idUsuario, int idGrupo, int idRol) {
+        public bool WSEditarPers(int idPersonal, int idUsuario, string idGrupo, int idRol) {
             object[] results = this.Invoke("WSEditarPers", new object[] {
                         idPersonal,
                         idUsuario,
@@ -1157,12 +1164,12 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public void WSEditarPersAsync(int idPersonal, int idUsuario, int idGrupo, int idRol) {
+        public void WSEditarPersAsync(int idPersonal, int idUsuario, string idGrupo, int idRol) {
             this.WSEditarPersAsync(idPersonal, idUsuario, idGrupo, idRol, null);
         }
         
         /// <remarks/>
-        public void WSEditarPersAsync(int idPersonal, int idUsuario, int idGrupo, int idRol, object userState) {
+        public void WSEditarPersAsync(int idPersonal, int idUsuario, string idGrupo, int idRol, object userState) {
             if ((this.WSEditarPersOperationCompleted == null)) {
                 this.WSEditarPersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEditarPersOperationCompleted);
             }
@@ -1206,6 +1213,35 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSConsultarUsuarioxAdminCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSConsultarUsuarioxAdminCompleted(this, new WSConsultarUsuarioxAdminCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarUsuarioExist", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UsuarioEntidades[] WSConsultarUsuarioExist(string nombreUsuario) {
+            object[] results = this.Invoke("WSConsultarUsuarioExist", new object[] {
+                        nombreUsuario});
+            return ((UsuarioEntidades[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarUsuarioExistAsync(string nombreUsuario) {
+            this.WSConsultarUsuarioExistAsync(nombreUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarUsuarioExistAsync(string nombreUsuario, object userState) {
+            if ((this.WSConsultarUsuarioExistOperationCompleted == null)) {
+                this.WSConsultarUsuarioExistOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarUsuarioExistOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarUsuarioExist", new object[] {
+                        nombreUsuario}, this.WSConsultarUsuarioExistOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarUsuarioExistOperationCompleted(object arg) {
+            if ((this.WSConsultarUsuarioExistCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarUsuarioExistCompleted(this, new WSConsultarUsuarioExistCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1388,6 +1424,12 @@ namespace WBSupportCenter.WSsupport1 {
         
         private string idResponsableRegistroField;
         
+        private int idUsuarioField;
+        
+        private string idGruposField;
+        
+        private int idRolField;
+        
         /// <remarks/>
         public int idPersonal {
             get {
@@ -1475,6 +1517,36 @@ namespace WBSupportCenter.WSsupport1 {
             }
             set {
                 this.idResponsableRegistroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int idUsuario {
+            get {
+                return this.idUsuarioField;
+            }
+            set {
+                this.idUsuarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string idGrupos {
+            get {
+                return this.idGruposField;
+            }
+            set {
+                this.idGruposField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int idRol {
+            get {
+                return this.idRolField;
+            }
+            set {
+                this.idRolField = value;
             }
         }
     }
@@ -2610,6 +2682,32 @@ namespace WBSupportCenter.WSsupport1 {
         private object[] results;
         
         internal WSConsultarUsuarioxAdminCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UsuarioEntidades[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UsuarioEntidades[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    public delegate void WSConsultarUsuarioExistCompletedEventHandler(object sender, WSConsultarUsuarioExistCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarUsuarioExistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarUsuarioExistCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

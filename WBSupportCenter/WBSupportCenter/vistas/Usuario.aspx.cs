@@ -66,15 +66,15 @@ namespace WBSupportCenter.vistas {
             return DataTableToJSONWithStringBuilder(metodo.WSOptenerRols().Tables[0]);
         }
         [WebMethod]
-        public static bool InsertarUsuario(string Nombres, string Apellido, string Usuario, string grupos, string rol)
+        public static bool InsertarUsuario(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
 
-            return metodo.WSInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+            return metodo.WSInsertarPers(idCreador, Nombres, Apellido, Usuario, grupos, rol);
         }
 
         [WebMethod]
-        public static bool EditarUsuario(int idPersonal, int idUsuario, int idGrupo, int idRol)
+        public static bool EditarUsuario(int idPersonal, int idUsuario, string idGrupo, int idRol)
         {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
 
@@ -87,6 +87,15 @@ namespace WBSupportCenter.vistas {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             DataTable dtUsuarios = new DataTable();
             dtUsuarios = ConvertToDataTable(metodo.WSConsultarUsuarioxAdmin(usuario));
+            return DataTableToJSONWithStringBuilder(dtUsuarios);
+        }
+
+        [WebMethod]
+        public static string consultarUsuarioExiste(string nombreUsuario)
+        {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            DataTable dtUsuarios = new DataTable();
+            dtUsuarios = ConvertToDataTable(metodo.WSConsultarUsuarioExist(nombreUsuario));
             return DataTableToJSONWithStringBuilder(dtUsuarios);
         }
 

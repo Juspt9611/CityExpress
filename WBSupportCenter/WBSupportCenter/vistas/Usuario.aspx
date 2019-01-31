@@ -76,8 +76,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <button type="button" class="btn btn-success pull-right" id="btnGuardar"><i class="fa fa-check" aria-hidden="true"></i>Guardar</button>
-                                <%--<button type="button" class="btn btn-success pull-right" id="btnGuardarEdit"><i class="fa fa-check" aria-hidden="true"></i>Guardar</button>--%>
+                                <button type="button" class="btn btn-success pull-right" id="btnGuardarEdit"><i class="fa fa-check" aria-hidden="true"></i>Editar</button>
                                 <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atras"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
+                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atrasEdit"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -96,15 +97,16 @@
     <script>
         var usuarioAdmin = $('#idAdmin').val();
         var passAdmin = $('#idPass').val();
+        var idCreador = $('#idCreador').val();
 
-        var idPersonal = "";
-        var idUsuario = "";
+        var idPersonal;
+        var idUsuario;
         var idGrupo;
-        var idRol = "";
+        var idRol;
+
+        var arrayUsers = [];
 
         $(document).ready(function () {
-            select2();
-            //dataTableData();
             tablaUsuarios(usuarioAdmin, passAdmin);
         });
 
@@ -116,7 +118,34 @@
         //    tablaUsuarios(usuarioAdmin, passAdmin);
         //}
 
+        $("#atras").click(function () {
+            $("#form1")[0].reset();
+            //select2();
+            $("#camposActive").addClass('hidden');
+            $("#divbtn").addClass('hidden');
+            $("#divTable").removeClass('hidden');
+            $(".insertUser").show();
+            tablaUsuarios(usuarioAdmin, passAdmin);
+            //$("#form1")[0].reset();
+            //select2();
+            //$("#camposActive").addClass('hidden');
+            //$("#divbtn").addClass('hidden');
+            //$(".insertUser").show();
+            //$("#divTable").removeClass('hidden');
+            //tablaUsuarios(usuarioAdmin, passAdmin);
+        });
+
+        $("#atrasEdit").click(function () {
+            $("#form1")[0].reset();
+            $("#camposActive").addClass('hidden');
+            $("#divbtn").addClass('hidden');
+            $("#divTable").removeClass('hidden');
+            $(".insertUser").show();
+            tablaUsuarios(usuarioAdmin, passAdmin);
+        });
+
         function tablaUsuarios(usuario, pass) {
+            arrayUsers = [];
             $.ajax({
                 async: false,
                 type: "POST",
@@ -145,11 +174,16 @@
                             { title: 'Usuario', data: 'nombreUsuario' },
                             { title: 'Rol', data: 'nombreRol' },
                             { title: 'Grupos', data: 'nombreGrupo' },
+                            { title: 'Id Rol', data: 'idRol', visible: false },
+                            { title: 'Id Personal', data: 'idPersonal', visible: false },
+                            { title: 'Id Usuario', data: 'idUsuario', visible: false },
+                            { title: 'Id Grupos', data: 'idGrupos', visible: false },
                             {
                                 title: 'Detalle',
                                 data: null,
                                 sortable: false,
                                 render: function (data, type, row) {
+                                    arrayUsers.push(data.nombreUsuario);
                                     return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + pass + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\', \'' + data.idPersonal + '\', \'' + data.idUsuario + '\', \'' + data.idGrupos + '\', \'' + data.idRol + '\');">Editar</a></center>'
                                     //return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + 'Lun4-963$%' + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>';
                                 }
@@ -161,8 +195,8 @@
         }
 
         function editarUsuario(admin, contra, usuario, rol, grupo, idP, idU, idG, idR) {
-            idPersonal =  idP;
-            idUsuario =  idU;
+            idPersonal = idP;
+            idUsuario = idU;
             idGrupo = idG;
             idRol = idR;
             if (contra != "") {
@@ -177,14 +211,14 @@
                         console.log(response.d);
                         if (response.d != "ErrorContraseña") {
                             if (response.d != "notuser") {
-                                select2(rol, grupo);
+                                select2(rol, idGrupo);
                                 $('#txtNombres').val(response.d[1])
                                 $('#txtApellidos').val(response.d[2])
                                 $("#txtuser").val(response.d[3])
                                 if (response.d.length == 5) {
                                     $("#txtCorreo").val(response.d[4])
                                 } else {
-                                    $("#txtCorreo").val(response.d[3] + "@itesoluciones.com")
+                                    $("#txtCorreo").val(response.d[3] + "@hotelescity.com")
                                 }
                                 swal("Perfecto!", "Datos de " + response.d[1] + " encontrados", "success");
                                 $("#camposActive").removeClass('hidden');
@@ -194,6 +228,10 @@
                                 $("#UsuarioB").val('');
                                 $('#tablaUsuarios').DataTable().destroy();
                                 $('#tablaUsuarios').empty();
+                                $("#btnGuardarEdit").removeClass('hidden');
+                                $("#btnGuardar").addClass('hidden');
+                                $("#atrasEdit").removeClass('hidden');
+                                $("#atras").addClass('hidden');
                             } else {
                                 swal("Oh no!", "Usuario no encontrado", "error");
                             }
@@ -206,7 +244,7 @@
             }
         }
 
-        function select2(rol, grupo) {
+        function select2(rol, idGrupo) {
             $.ajax({
                 async: false,
                 type: "POST",
@@ -216,18 +254,18 @@
                 success: function (data) {
                     var opciones = "";
                     $.each(jQuery.parseJSON(data.d), function (item, index) {
+                        //opciones += '<option value="' + index.nombreGrupo + '" id="' + index.idGrupo + '">' + index.nombreGrupo + '</option>';
                         opciones += '<option value="' + index.idGrupo + '">' + index.nombreGrupo + '</option>';
                     });
                     $('#drowGrupo').html(opciones);
                     $('#drowGrupo').select2({ placeholder: 'Selecciona...' });
-
-                    if (grupo == 'Support Center') {
-                        $('#drowGrupo').val('1').trigger('change.select2');
-                    } else if (grupo == 'Mejora') {
-                        $('#drowGrupo').val('2').trigger('change.select2');
-                    } else if (grupo == 'Marketing') {
-                        $('#drowGrupo').val('3').trigger('change.select2');
+                    if (idGrupo != undefined) {
+                        var str = idGrupo;
+                        var separador = ", ";
+                        var arregloGrup = str.split(separador);
+                        $('#drowGrupo').val(arregloGrup).trigger('change.select2');
                     }
+
                 }
             });
             $.ajax({
@@ -256,199 +294,154 @@
             });
         }
 
-<%--        function KeyPressed(e) {
-            //Get the Key Code
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) {
-                event.preventDefault();
-                swal({
-                    text: 'Por favor, ingresa tu contraseña:',
-                    content: "input"
-                }).then(name => {
-                    if (name != null) {
-                        swal('hola' + '<%=Session["nombres"]%>');
-                        } else {
-                            swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
-                        }
-                    });
-            }
-        }--%>
-
-        /*
-        function dataTableData() {
-            var datos = null;
-            $.ajax({
-                type: 'POST',
-                url: 'AprobacionArticulos.aspx/consultarArticuloAprobar',
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    datos = response.d;
-                    var json = $.parseJSON(datos);
-                    console.log(json);
-                    dataTable = $('#tablaAprobacionArticulos').DataTable({
-                        data: json,
-                        orderCellsTop: true,
-                        fixedHeader: true,
-                        "lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
-                        columns: [
-                            { title: "ID", "visible": false },
-                            { title: "Nombre" },
-                            { title: "Apellidos" },
-                            { title: "Usuario" },
-                            { title: "Fecha" },
-                            {
-                                "title": "Detalle",
-                                "mData": null,
-                                "bSortable": false,
-                                "mRender": function (data, type, full) {
-                                    return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Ver' + '</a>';
-                                }
-                            }
-    
-                        ]
-                    });
-                    $('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
-                        var data_row = dataTable.row($(this).closest('tr')).data();
-                        console.log(data_row[2]);
-                        console.log("###");
-                        $("#contenidoTabla").hide();
-                        $('#contenidoArticulo').removeAttr('hidden').fadeIn(2000);
-                        addDataCard(data_row);
-                    })
-                },
-                failure: function (response) {
-                    console.log(response);
-                }
-            });
-        }
-        */
-        $("#atras").click(function () {
-            //$("#form1")[0].reset();
-            //select2();
-            //$("#camposActive").addClass('hidden');
-            //$("#divbtn").addClass('hidden');
-            //$("#divTable").removeClass('hidden');
-
-            $("#form1")[0].reset();
-            select2();
-            $("#camposActive").addClass('hidden');
-            $("#divbtn").addClass('hidden');
-            $(".insertUser").show();
-            $("#divTable").removeClass('hidden');
-            //tablaUsuarios(usuarioAdmin, passAdmin);
-        });
-
         $("#btnGuardar").click(function () {
             var varGrup = "";
             var varRol = "";
-            //console.log(arrayDeCadenas);
+            if ($('#drowGrupo').val() != null) {
+                $.each($("#drowGrupo").val(), function (index, value) {
+                    varGrup += value + "|";
+                });
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "Usuario.aspx/InsertarUsuario",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'idCreador':'" + idCreador + "', 'Nombres':'" + $("#txtNombres").val() + "','Apellido':'" + $("#txtApellidos").val() + "','Usuario':'" + $('#UsuarioB').val() + "','grupos':'" + varGrup.substring(0, varGrup.length - 1) + "','rol':'" + $("#drowRol").val() + "'}",
+                    success: function (response) {
+                        console.log(response.d);
+                        if (response.d == true) {
+                            swal("Alta de usuario exitosa.", "", "success");
+                            $("#form1")[0].reset();
+                            select2();
+                            $("#camposActive").addClass('hidden');
+                            $("#divbtn").addClass('hidden');
+                            $("#divTable").removeClass('hidden');
+                            $(".insertUser").show();
+                            tablaUsuarios(usuarioAdmin, passAdmin);
+                        } else {
+                            swal("Oh no!", "Algo salio mal", "error");
+                        }
 
-            $.each($("#drowGrupo").val(), function (index, value) { varGrup += value + "|"; });
-            $.ajax({
-                async: false,
-                type: "POST",
-                url: "Usuario.aspx/InsertarUsuario",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "{'Nombres':'" + $("#txtNombres").val() + "','Apellido':'" + $("#txtApellidos").val() + "','Usuario':'" + $('#UsuarioB').val() + "','grupos':'" + varGrup.substring(0, varGrup.length - 1) + "','rol':'" + $("#drowRol").val() + "'}",
-                success: function (response) {
-
-                    console.log(response.d);
-
-                    if (response.d == true) {
-                        swal("Alta de usuario exitosa.", "", "success");
-                        $("#form1")[0].reset();
-                        select2();
-                        $("#camposActive").addClass('hidden');
-                        $("#divbtn").addClass('hidden');
-                        $("#divTable").removeClass('hidden');
-                    } else {
-
-                        swal("Oh no!", "Algo salio mal", "error");
                     }
+                });
+            } else {
+                swal("Campo vacío", "Ingresar por lo menos un grupo", "error");
+            }
 
-                }
-            });
         });
 
-        //$("#btnGuardarEdit").click(function () {
-        //    var varGrup = "";
-        //    var varRol = "";
-        //    //$.each($("#drowGrupo").val(), function (index, value) { varGrup += value + "|"; });
-        //    $.ajax({
-        //        async: false,
-        //        type: "POST",
-        //        url: "Usuario.aspx/EditarUsuario",
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        data: "{'idPersonal':'" + idPersonal + "','idUsuario':'"+ idUsuario + "','idGrupo':'" + idGrupo + "','idRol':'" + idRol + "'}",
-        //        success: function (response) {
-
-        //            console.log(response.d);
-
-        //            if (response.d == true) {
-        //                swal("Alta de usuario exitosa.", "", "success");
-        //                $("#form1")[0].reset();
-        //                select2();
-        //                $("#camposActive").addClass('hidden');
-        //                $("#divbtn").addClass('hidden');
-        //                $("#divTable").removeClass('hidden');
-        //            } else {
-
-        //                swal("Oh no!", "Algo salio mal", "error");
-        //            }
-
-        //        }
-        //    });
-        //});
+        $("#btnGuardarEdit").click(function () {
+            var arrayGrups = [];
+            if ($('#drowGrupo').val() != null) {
+                $.each($("#drowGrupo").val(), function (index, value) {
+                    arrayGrups.push(value);
+                });
+                console.log(arrayGrups);
+                var arrayString = arrayGrups.join();
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "Usuario.aspx/EditarUsuario",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'idPersonal':'" + idPersonal + "','idUsuario':'" + idUsuario + "','idGrupo':'" + arrayString + "','idRol':'" + $("#drowRol").val() + "'}",
+                    success: function (response) {
+                        console.log(response.d);
+                        if (response.d == true) {
+                            swal("Alta de usuario exitosa.", "", "success");
+                            $("#camposActive").addClass('hidden');
+                            $("#divbtn").addClass('hidden');
+                            $("#btnAtras").addClass('hidden');
+                            $(".insertUser").show();
+                            tablaUsuarios(usuarioAdmin, passAdmin);
+                        } else {
+                            swal("Oh no!", "Algo salio mal", "error");
+                        }
+                    }
+                });
+            } else {
+                swal("Campo vacío", "Ingresar por lo menos un grupo", "error");
+            }
+        });
 
         $("#btnInfor").click(function () {
-            swal({
-                text: 'Por favor, ingresa tu contraseña:',
-                content: {
-                    element: "input",
-                    attributes: {
-                        //placeholder: "Type your password",
-                        type: "password",
-                    }
-                }
-            }).then(name => {
-                if (name != "") {
-                    name = name.trim();
-                    $.ajax({
-                        async: false,
-                        type: "POST",
-                        url: "Usuario.aspx/buscaDatos",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: "{'Usuario':'" + '<%=Session["usuario"]%>' + "','contrasena':'" + name + "','UsuarioB':'" + $('#UsuarioB').val() + "'}",
-                        success: function (response) {
-                            console.log(response.d);
-                            if (response.d != "ErrorContraseña") {
-                                if (response.d != "notuser") {
-                                    $("#divTable").addClass('hidden');
-                                    select2();
-                                    $('#txtNombres').val(response.d[1])
-                                    $('#txtApellidos').val(response.d[2])
-                                    $("#txtuser").val(response.d[3])
-                                    if (response.d.length == 5) {
-                                        $("#txtCorreo").val(response.d[4])
-                                    } else { $("#txtCorreo").val(response.d[3] + "@itesoluciones.com") }
-                                    swal("Usuario encontrado.", "", "success");
-                                    $("#camposActive").removeClass('hidden');
-                                    $("#divbtn").removeClass('hidden');
-                                } else {
-                                    swal("Oh no!", "Usuario no encontrado", "error");
+            if ($("#UsuarioB").val() != "") {
+                //for (var i = 0; i <= arrayUsers.length; i++) {
+                //    if (arrayUsers[i] == $('#UsuarioB').val()) {
+                //        var existe = true;
+                //    }
+                //}
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "Usuario.aspx/consultarUsuarioExiste",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{'nombreUsuario':'" + $("#UsuarioB").val() + "'}",
+                    success: function (response) {
+                        var json = $.parseJSON(response.d);
+                        if (json[0].estatus > 0) {
+                            swal("Usuario ya activado", "Intentar con nuevo usuario", "error");
+                        } else {
+                            swal({
+                                text: 'Por favor, ingresa tu contraseña:',
+                                content: {
+                                    element: "input",
+                                    attributes: {
+                                        //placeholder: "Type your password",
+                                        type: "password",
+                                    }
                                 }
-                            } else {
-                                swal("Oh no!", "Contraseña incorrecta", "error");
-                            }
+                            }).then(name => {
+                                if (name != "") {
+                                    name = name.trim();
+                                    $.ajax({
+                                        async: false,
+                                        type: "POST",
+                                        url: "Usuario.aspx/buscaDatos",
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        data: "{'Usuario':'" + '<%=Session["usuario"]%>' + "','contrasena':'" + name + "','UsuarioB':'" + $('#UsuarioB').val() + "'}",
+                                        success: function (response) {
+                                            console.log(response.d);
+                                            if (response.d != "ErrorContraseña") {
+                                                if (response.d != "notuser") {
+                                                    $("#divTable").addClass('hidden');
+                                                    select2();
+                                                    $('#txtNombres').val(response.d[1])
+                                                    $('#txtApellidos').val(response.d[2])
+                                                    $("#txtuser").val(response.d[3])
+                                                    if (response.d.length == 5) {
+                                                        $("#txtCorreo").val(response.d[4])
+                                                    } else { $("#txtCorreo").val(response.d[3] + "@hotelescity.com") }
+                                                    swal("Usuario encontrado.", "", "success");
+                                                    $('#tablaUsuarios').DataTable().destroy();
+                                                    $('#tablaUsuarios').empty();
+                                                    $("#camposActive").removeClass('hidden');
+                                                    $("#divbtn").removeClass('hidden');
+                                                    $("#btnGuardar").removeClass('hidden');
+                                                    $("#btnGuardarEdit").addClass('hidden');
+                                                    $("#atras").removeClass('hidden');
+                                                    $("#atrasEdit").addClass('hidden');
+                                                    $(".insertUser").hide();
+                                                } else {
+                                                    swal("Oh no!", "Usuario no encontrado", "error");
+                                                }
+                                            } else {
+                                                swal("Oh no!", "Contraseña incorrecta", "error");
+                                            }
+                                        }
+                                    });
+                                    //swal('hola: '+'<%=Session["nombres"]%>');
+                                }
+                            })
                         }
-                    });
-                        //swal('hola: '+'<%=Session["nombres"]%>');
                     }
-                })
+                });
+            } else {
+                 swal("Campo vacío", "Ingresar un nombre de usuario", "error");
+            }
         });
     </script>
 </asp:Content>

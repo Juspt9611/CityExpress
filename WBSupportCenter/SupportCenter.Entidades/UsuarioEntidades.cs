@@ -16,7 +16,7 @@ namespace SupportCenter.Entidades {
         public string estatus{ get; set; }
         public string idResponsableRegistro { get; set; }
         public int idUsuario { get; set; }
-        public int idGrupos { get; set; }
+        public string idGrupos { get; set; }
         public int idRol { get; set; }
 
 
