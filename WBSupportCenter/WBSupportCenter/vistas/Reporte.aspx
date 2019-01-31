@@ -219,6 +219,15 @@
             return ("00" + n).slice(-2);
         }
 
+        function formatDateActual() {
+            var d = new Date,
+                dformatActual = [(d.getDate()),
+                padLeft(d.getMonth() + 1),
+                d.getFullYear()
+                ].join('/');
+            return dformatActual
+        }
+
         function formatDateI() {
             var d = new Date,
                 dformat = [padLeft(primerDia.getDate()),
@@ -346,12 +355,20 @@
                 success: function (response) {
                     var jsonReporte = $.parseJSON(response.d);
                     successResp = jsonReporte;
-                    console.log('prueba' + response);
-                    console.log('prueba' + jsonReporte);
-                    console.log('prueba' +  reporteSelect);
-
+                    var nameReport;
+                    if (reporteSelect == "palabras") {
+                        nameReport = "Palabras más buscadas";
+                    }
+                    else if (reporteSelect == "valorados") {
+                        nameReport = "Articulos más valorados";
+                    }
+                    else if (reporteSelect == "vistos") {
+                        nameReport = "Articulos más vistos";
+                    }
+                    else if (reporteSelect == "vistas") {
+                        nameReport = "Categorias más vistas";
+                    }
                     if (jsonReporte != null) {
-
                         if (reporteSelect == "palabras") {
                             $.each(jsonReporte, function (item, index) {
                                 arrayGrafic.push({
@@ -385,12 +402,15 @@
                                             text: '<i class="fa fa-file-excel-o"></i>',
                                             titleAttr: 'Exportar Excel',
                                             className: 'btn btn-app export excel',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
+                                            //message: "Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n"
                                         },
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',
                                             titleAttr: 'Exportar PDF',
                                             className: 'btn btn-app export pdf',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                             //exportOptions: {
                                             //    columns: [0, 1]
                                             //},

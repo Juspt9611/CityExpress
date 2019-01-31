@@ -234,14 +234,14 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public bool WSInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol)
+    public bool WSInsertarPers(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol)
     {
         NGPersonal WSPersonal = new NGPersonal();
-        return WSPersonal.NGInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+        return WSPersonal.NGInsertarPers(idCreador, Nombres, Apellido, Usuario, grupos, rol);
     }
 
     [WebMethod]
-    public bool WSEditarPers(int idPersonal, int idUsuario, int idGrupo, int idRol)
+    public bool WSEditarPers(int idPersonal, int idUsuario, string idGrupo, int idRol)
     {
         NGPersonal WSPersonal = new NGPersonal();
         return WSPersonal.NGEditarPers(idPersonal, idUsuario, idGrupo, idRol);
@@ -252,6 +252,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     {
         NGPersonal Personal = new NGPersonal();
         return Personal.NG_ConsultarUsuarioxAdmin(usuario);
+    }
+
+    [WebMethod]
+    public List<UsuarioEntidades> WSConsultarUsuarioExist(string nombreUsuario)
+    {
+        NGPersonal Personal = new NGPersonal();
+        return Personal.NG_ConsultarUsuarioExist(nombreUsuario);
     }
     #endregion
 

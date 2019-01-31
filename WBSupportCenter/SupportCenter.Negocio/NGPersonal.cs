@@ -20,12 +20,12 @@ namespace SupportCenter.Negocio
         {
             return Objeto.DTLlenaRoles();
         }
-        public bool NGInsertarPers(string Nombres, string Apellido, string Usuario, string grupos, string rol)
+        public bool NGInsertarPers(int idCreador, string Nombres, string Apellido, string Usuario, string grupos, string rol)
         {
-            return Objeto.DTInsertarPers(Nombres, Apellido, Usuario, grupos, rol);
+            return Objeto.DTInsertarPers(idCreador, Nombres, Apellido, Usuario, grupos, rol);
         }
 
-        public bool NGEditarPers(int idPersonal, int idUsuario, int idGrupo, int idRol)
+        public bool NGEditarPers(int idPersonal, int idUsuario, string idGrupo, int idRol)
         {
             return Objeto.DTEditarPers(idPersonal, idUsuario, idGrupo, idRol);
         }
@@ -38,6 +38,11 @@ namespace SupportCenter.Negocio
         public List<UsuarioEntidades> NG_ConsultarUsuarioxAdmin(string usuario)
         {
             return Objeto.DT_ConsultarUsuariosxAdmin(usuario);
+        }
+
+        public List<UsuarioEntidades> NG_ConsultarUsuarioExist(string nombreUsuario)
+        {
+            return Objeto.DT_ConsultarUsuarioExist(nombreUsuario);
         }
     }
 }

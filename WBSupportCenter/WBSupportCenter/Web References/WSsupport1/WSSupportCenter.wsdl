@@ -573,6 +573,7 @@
       <s:element name="WSInsertarPers">
         <s:complexType>
           <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCreador" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="Nombres" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="Apellido" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
@@ -593,7 +594,7 @@
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="idPersonal" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
-            <s:element minOccurs="1" maxOccurs="1" name="idGrupo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="idGrupo" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
           </s:sequence>
         </s:complexType>
@@ -635,8 +636,25 @@
           <s:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="estatus" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="idResponsableRegistro" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="idGrupos" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idRol" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="WSConsultarUsuarioExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarUsuarioExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarUsuarioExistResult" type="tns:ArrayOfUsuarioEntidades" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSOptenRol">
         <s:complexType>
           <s:sequence>
@@ -869,6 +887,12 @@
   <wsdl:message name="WSConsultarUsuarioxAdminSoapOut">
     <wsdl:part name="parameters" element="tns:WSConsultarUsuarioxAdminResponse" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarUsuarioExist" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarUsuarioExistResponse" />
+  </wsdl:message>
   <wsdl:message name="WSOptenRolSoapIn">
     <wsdl:part name="parameters" element="tns:WSOptenRol" />
   </wsdl:message>
@@ -1062,6 +1086,7 @@
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSInsertarPersHttpGetIn">
+    <wsdl:part name="idCreador" type="s:string" />
     <wsdl:part name="Nombres" type="s:string" />
     <wsdl:part name="Apellido" type="s:string" />
     <wsdl:part name="Usuario" type="s:string" />
@@ -1084,6 +1109,12 @@
     <wsdl:part name="usuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSConsultarUsuarioxAdminHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistHttpGetIn">
+    <wsdl:part name="nombreUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
   </wsdl:message>
   <wsdl:message name="WSOptenRolHttpGetIn">
@@ -1279,6 +1310,7 @@
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSInsertarPersHttpPostIn">
+    <wsdl:part name="idCreador" type="s:string" />
     <wsdl:part name="Nombres" type="s:string" />
     <wsdl:part name="Apellido" type="s:string" />
     <wsdl:part name="Usuario" type="s:string" />
@@ -1301,6 +1333,12 @@
     <wsdl:part name="usuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSConsultarUsuarioxAdminHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistHttpPostIn">
+    <wsdl:part name="nombreUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarUsuarioExistHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfUsuarioEntidades" />
   </wsdl:message>
   <wsdl:message name="WSOptenRolHttpPostIn">
@@ -1438,6 +1476,10 @@
       <wsdl:input message="tns:WSConsultarUsuarioxAdminSoapIn" />
       <wsdl:output message="tns:WSConsultarUsuarioxAdminSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <wsdl:input message="tns:WSConsultarUsuarioExistSoapIn" />
+      <wsdl:output message="tns:WSConsultarUsuarioExistSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOptenRol">
       <wsdl:input message="tns:WSOptenRolSoapIn" />
       <wsdl:output message="tns:WSOptenRolSoapOut" />
@@ -1572,6 +1614,10 @@
       <wsdl:input message="tns:WSConsultarUsuarioxAdminHttpGetIn" />
       <wsdl:output message="tns:WSConsultarUsuarioxAdminHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <wsdl:input message="tns:WSConsultarUsuarioExistHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarUsuarioExistHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOptenRol">
       <wsdl:input message="tns:WSOptenRolHttpGetIn" />
       <wsdl:output message="tns:WSOptenRolHttpGetOut" />
@@ -1705,6 +1751,10 @@
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <wsdl:input message="tns:WSConsultarUsuarioxAdminHttpPostIn" />
       <wsdl:output message="tns:WSConsultarUsuarioxAdminHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <wsdl:input message="tns:WSConsultarUsuarioExistHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarUsuarioExistHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOptenRol">
       <wsdl:input message="tns:WSOptenRolHttpPostIn" />
@@ -1994,6 +2044,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <soap:operation soapAction="http://tempuri.org/WSConsultarUsuarioxAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarUsuarioExist" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2301,6 +2360,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarUsuarioExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOptenRol">
       <soap12:operation soapAction="http://tempuri.org/WSOptenRol" style="document" />
       <wsdl:input>
@@ -2601,6 +2669,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <http:operation location="/WSConsultarUsuarioExist" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOptenRol">
       <http:operation location="/WSOptenRol" />
       <wsdl:input>
@@ -2894,6 +2971,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarUsuarioxAdmin">
       <http:operation location="/WSConsultarUsuarioxAdmin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarUsuarioExist">
+      <http:operation location="/WSConsultarUsuarioExist" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
