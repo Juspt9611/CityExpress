@@ -24,7 +24,7 @@ namespace WBSupportCenter.WSsupport1 {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WSsupportCenterClassSoap", Namespace="http://tempuri.org/")]
@@ -67,6 +67,10 @@ namespace WBSupportCenter.WSsupport1 {
         private System.Threading.SendOrPostCallback WSOguardarEstatusArticuloAprobarOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSConsultarGruposxUsuarioOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSConsultarArtAprobadosOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback WSEliminarArticuloOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSRegistrarCategoriaOperationCompleted;
         
@@ -192,6 +196,12 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSConsultarGruposxUsuarioCompletedEventHandler WSConsultarGruposxUsuarioCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarArtAprobadosCompletedEventHandler WSConsultarArtAprobadosCompleted;
+        
+        /// <remarks/>
+        public event WSEliminarArticuloCompletedEventHandler WSEliminarArticuloCompleted;
         
         /// <remarks/>
         public event WSRegistrarCategoriaCompletedEventHandler WSRegistrarCategoriaCompleted;
@@ -820,6 +830,64 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArtAprobados", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Articulos[] WSConsultarArtAprobados(int idUsuario) {
+            object[] results = this.Invoke("WSConsultarArtAprobados", new object[] {
+                        idUsuario});
+            return ((Articulos[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArtAprobadosAsync(int idUsuario) {
+            this.WSConsultarArtAprobadosAsync(idUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArtAprobadosAsync(int idUsuario, object userState) {
+            if ((this.WSConsultarArtAprobadosOperationCompleted == null)) {
+                this.WSConsultarArtAprobadosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarArtAprobadosOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarArtAprobados", new object[] {
+                        idUsuario}, this.WSConsultarArtAprobadosOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarArtAprobadosOperationCompleted(object arg) {
+            if ((this.WSConsultarArtAprobadosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarArtAprobadosCompleted(this, new WSConsultarArtAprobadosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEliminarArticulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WSEliminarArticulo(int idArticulo) {
+            object[] results = this.Invoke("WSEliminarArticulo", new object[] {
+                        idArticulo});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSEliminarArticuloAsync(int idArticulo) {
+            this.WSEliminarArticuloAsync(idArticulo, null);
+        }
+        
+        /// <remarks/>
+        public void WSEliminarArticuloAsync(int idArticulo, object userState) {
+            if ((this.WSEliminarArticuloOperationCompleted == null)) {
+                this.WSEliminarArticuloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEliminarArticuloOperationCompleted);
+            }
+            this.InvokeAsync("WSEliminarArticulo", new object[] {
+                        idArticulo}, this.WSEliminarArticuloOperationCompleted, userState);
+        }
+        
+        private void OnWSEliminarArticuloOperationCompleted(object arg) {
+            if ((this.WSEliminarArticuloCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSEliminarArticuloCompleted(this, new WSEliminarArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSRegistrarCategoria", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public int WSRegistrarCategoria(string nombreCategoria) {
             object[] results = this.Invoke("WSRegistrarCategoria", new object[] {
@@ -1294,7 +1362,7 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1316,6 +1384,8 @@ namespace WBSupportCenter.WSsupport1 {
         private string fechaCreacionField;
         
         private string nombreCategoriaField;
+        
+        private string estatusField;
         
         /// <remarks/>
         public int idarticulo {
@@ -1396,10 +1466,20 @@ namespace WBSupportCenter.WSsupport1 {
                 this.nombreCategoriaField = value;
             }
         }
+        
+        /// <remarks/>
+        public string estatus {
+            get {
+                return this.estatusField;
+            }
+            set {
+                this.estatusField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1552,7 +1632,7 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1645,7 +1725,7 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1762,7 +1842,7 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1795,7 +1875,7 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1864,11 +1944,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerArtCompletedEventHandler(object sender, WSOptenerArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1890,11 +1970,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerCatgCompletedEventHandler(object sender, WSOptenerCatgCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerCatgCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1916,11 +1996,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSBusquedaTituloCompletedEventHandler(object sender, WSBusquedaTituloCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSBusquedaTituloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1942,11 +2022,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarArticuloxIdCompletedEventHandler(object sender, WSConsultarArticuloxIdCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarArticuloxIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1968,11 +2048,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSBusquedaArticulosxClickCompletedEventHandler(object sender, WSBusquedaArticulosxClickCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSBusquedaArticulosxClickCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1994,11 +2074,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSGuardarPalabraBuscadaCompletedEventHandler(object sender, WSGuardarPalabraBuscadaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSGuardarPalabraBuscadaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2020,11 +2100,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSBuscarArtMasVistorCompletedEventHandler(object sender, WSBuscarArtMasVistorCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSBuscarArtMasVistorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2046,11 +2126,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSregistrarVisitaCompletedEventHandler(object sender, WSregistrarVisitaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSregistrarVisitaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2072,11 +2152,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSconsultarComentariosxArtCompletedEventHandler(object sender, WSconsultarComentariosxArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSconsultarComentariosxArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2098,11 +2178,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSregistrarValoracionxArticuloCompletedEventHandler(object sender, WSregistrarValoracionxArticuloCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSregistrarValoracionxArticuloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2124,11 +2204,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOpregistrarArtCompletedEventHandler(object sender, WSOpregistrarArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOpregistrarArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2150,11 +2230,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarArtxCategoriaCompletedEventHandler(object sender, WSConsultarArtxCategoriaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarArtxCategoriaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2176,11 +2256,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOpconsultarArtxValidarCompletedEventHandler(object sender, WSOpconsultarArtxValidarCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOpconsultarArtxValidarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2202,11 +2282,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarArtEdicionCompletedEventHandler(object sender, WSConsultarArtEdicionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarArtEdicionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2228,11 +2308,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarCategoriasCompletedEventHandler(object sender, WSConsultarCategoriasCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarCategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2254,11 +2334,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSEditarArtCompletedEventHandler(object sender, WSEditarArtCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSEditarArtCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2280,11 +2360,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarArtPorValidarCompletedEventHandler(object sender, WSConsultarArtPorValidarCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarArtPorValidarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2306,11 +2386,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOguardarEstatusArticuloAprobarCompletedEventHandler(object sender, WSOguardarEstatusArticuloAprobarCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOguardarEstatusArticuloAprobarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2332,11 +2412,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarGruposxUsuarioCompletedEventHandler(object sender, WSConsultarGruposxUsuarioCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarGruposxUsuarioCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2358,11 +2438,63 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSConsultarArtAprobadosCompletedEventHandler(object sender, WSConsultarArtAprobadosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarArtAprobadosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarArtAprobadosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Articulos[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Articulos[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSEliminarArticuloCompletedEventHandler(object sender, WSEliminarArticuloCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSEliminarArticuloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSEliminarArticuloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSRegistrarCategoriaCompletedEventHandler(object sender, WSRegistrarCategoriaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSRegistrarCategoriaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2384,11 +2516,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSRegistrarSubcategoriaCompletedEventHandler(object sender, WSRegistrarSubcategoriaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSRegistrarSubcategoriaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2410,11 +2542,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSEditarCategoriasCompletedEventHandler(object sender, WSEditarCategoriasCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSEditarCategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2436,11 +2568,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSEliminarCategoriasCompletedEventHandler(object sender, WSEliminarCategoriasCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSEliminarCategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2462,11 +2594,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarCategoriasSubCompletedEventHandler(object sender, WSConsultarCategoriasSubCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarCategoriasSubCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2488,11 +2620,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarSubcategoriasCompletedEventHandler(object sender, WSConsultarSubcategoriasCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarSubcategoriasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2514,11 +2646,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSObtenerArticuloCompletedEventHandler(object sender, WSObtenerArticuloCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSObtenerArticuloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2540,11 +2672,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarHistorialArticuloCompletedEventHandler(object sender, WSConsultarHistorialArticuloCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarHistorialArticuloCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2566,11 +2698,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerGrupCompletedEventHandler(object sender, WSOptenerGrupCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerGrupCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2592,11 +2724,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenerRolsCompletedEventHandler(object sender, WSOptenerRolsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenerRolsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2618,11 +2750,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSInsertarPersCompletedEventHandler(object sender, WSInsertarPersCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSInsertarPersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2644,11 +2776,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSEditarPersCompletedEventHandler(object sender, WSEditarPersCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSEditarPersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2670,11 +2802,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarUsuarioxAdminCompletedEventHandler(object sender, WSConsultarUsuarioxAdminCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarUsuarioxAdminCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2696,11 +2828,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSConsultarUsuarioExistCompletedEventHandler(object sender, WSConsultarUsuarioExistCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSConsultarUsuarioExistCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2722,11 +2854,11 @@ namespace WBSupportCenter.WSsupport1 {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void WSOptenRolCompletedEventHandler(object sender, WSOptenRolCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class WSOptenRolCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

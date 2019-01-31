@@ -94,6 +94,15 @@ namespace WBSupportCenter {
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden idPass;
         
         /// <summary>
+        /// Control idCreador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden idCreador;
+        
+        /// <summary>
         /// Control session.
         /// </summary>
         /// <remarks>

@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="AprobacionArticulos.aspx.cs" Inherits="WBSupportCenter.vistas.articulosVistos" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         table.dataTable thead th, table.dataTable thead td {
@@ -20,21 +19,20 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
     <div class="container" id="contenidoTabla">
-
         <div class="box_table_container">
+            <a class="btn btn-danger btn-sm text-white pull-right" id="btnEliminar" onclick="eliminar();">Eliminar</a>
+            <a class="btn btn-primary btn-sm text-white pull-right hidden" id="btnAutorizar" onclick="autorizar();">Autorizar</a>
             <div class="row">
-                <span class="box_table_title">Autorizar artículos</span>
+                <span class="box_table_title" id="titleSpan"></span>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
                     <br />
-                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable" width="100%">
+                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable " width="100%">
                         <thead>
                             <tr>
-                                <th>#Codigo</th>
+                                <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Contenido</th>
                                 <th>Estatus</th>
@@ -47,15 +45,19 @@
                                 <th>Detalle</th>
                             </tr>
                         </thead>
-
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
+                    <br />
+                    <table id="tablaEliminacionArticulos" class="table table-striped table-bordered nowrap display dataTable hidden" width="100%"></table>
                 </div>
             </div>
         </div>
     </div>
     <br>
     <div class="container" id="contenidoArticulo" hidden>
-
         <div id="box-blog" class="box_table_container">
             <div class="row">
                 <span id="titleCard" class="box_table_title" style="margin-bottom:1rem; font-weight:700; text-align:center !important; font-size:2rem;"></span>
@@ -74,31 +76,18 @@
         </div>
         <br>
     </div>
-
-
-    <div id="dialog-message" title="Comentario de rechazo" hidden>
-        <p>
-            Se debe agregar un comentario del por que el articulo fue rechazado.
-            <br />
-        </p>
-
+    <div id="dialog-message" title="Agregar comentario" hidden>
+        <p>¿Por qué se rechaza el artículo?<br /></p>
         <form id="formComentario">
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12 div">
                     <textarea id="comentario" name="comentario" style="resize: none;" class="form-control"></textarea>
                 </div>
             </div>
-
         </form>
-
     </div>
-
-
-
-
     <script>
         $(document).ready(function () {
-
             var datos = new Array();
             var dataTable;
             var idArticulo = null;
@@ -107,24 +96,33 @@
             console.log("ready");
             init();
             bootsVal();
+            $('#titleSpan').text('Autorizar artículos');
         });
 
-        function init() {
+        function eliminar() {
+            $('#tablaAprobacionArticulos').DataTable().destroy();
+            $('#tablaAprobacionArticulos').empty();
+            $('#titleSpan').text('Eliminar artículos');
+            $('#btnAutorizar').removeClass('hidden');
+            $('#btnEliminar').addClass('hidden');
+            dataTableDataDelete();
+            $('#tablaEliminacionArticulos').removeClass('hidden');
+        }
 
-
+        function autorizar() {
+            $('#titleSpan').text('Autorizar artículos');
+            $('#btnAutorizar').addClass('hidden');
+            $('#btnEliminar').removeClass('hidden');
+            $('#tablaEliminacionArticulos').DataTable().destroy();
+            $('#tablaEliminacionArticulos').empty();
+            $('#tablaEliminacionArticulos').addClass('hidden');
             dataTableData();
+        }
 
-            //$('#tablaAprobacionArticulos thead tr').clone(true).appendTo('#tablaAprobacionArticulos thead');
+        function init() {
+            dataTableData();
             $('#tablaAprobacionArticulos thead tr:eq(1) th').each(function (i) {
                 var title = $(this).text();
-                //if (i != 10) {
-                //    $(this).html('<input type="text" class="form-control search" id="' + i + '" style="height: 25px; font-size:15px;" placeholder="Buscar ' + title.toLowerCase() + '" />');
-
-                //} else {
-                //    $(this).html('<input type="text" disabled class="form-control search" id="' + i + '" style="height: 25px; font-size:15px;" placeholder="Buscar ' + title.toLowerCase() + '" />');
-
-                //}
-
                 $('input', this).on('keyup change', function () {
                     if (dataTable.column(i).search() !== this.value) {
                         dataTable
@@ -175,7 +173,6 @@
                 });
             })
 
-
             $("#atras").click(function () {
                 $("#contenidoArticulo").hide();
                 $("#contenidoTabla").fadeIn(2000);
@@ -206,8 +203,6 @@
                             "background": "#dc3545",
                             "color": "#fff"
                         });
-
-
                     },
                     buttons: [{
                         id: "cancelarComentario",
@@ -236,11 +231,9 @@
                         }
                     }]
                 });
-
             });
         }
-
-
+        
         function bootsVal() {
             $('#formComentario').bootstrapValidator({
                 submitButtons: 'button[id="guardarComentario"]',
@@ -259,9 +252,7 @@
         }
 
         function dataTableData() {
-
             var datos = null;
-
             $.ajax({
                 type: 'POST',
                 url: 'AprobacionArticulos.aspx/consultarArticuloAprobar',
@@ -273,15 +264,14 @@
                     dataTable = $('#tablaAprobacionArticulos').DataTable({
                         data: json,
                         dom: '<"pull-left"f><"pull-right">tip',
-                        //dom: '<"myfilter"f><"mylength"l>',
-                        //dom: 'f<f<t>f>f',
-                        //"dom": 'f<f"top"f>f<f"bottom"f>f<f"clear"f>',
-                        //"dom": 'f<"top"><"bottom"><"clear">',
                         "data": json,
                         orderCellsTop: true,
                         fixedHeader: true,
                         pageLength: 10,
-                        //dom: '<"top"f>rt<"bottom"ip><"clear">',
+                        language: {
+                            zeroRecords: 'Sin resultados encontrados',
+                            infoEmpty: 'Mostrando 0 de 0 entradas'
+                        },
                         columns: [
                             { title: "Codigo" },
                             { title: "Nombre" },
@@ -314,7 +304,6 @@
                                     return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Revisar' + '</a>';
                                 }
                             }
-
                         ]
                     });
                     $('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
@@ -328,9 +317,76 @@
                     console.log(response);
                 }
             });
+        }
 
+        function dataTableDataDelete() {
+            var datos = null;
+            $.ajax({
+                type: 'POST',
+                url: 'AprobacionArticulos.aspx/consultarArticulosAprobados',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    console.log(response);
+                    datos = response.d;
+                    console.log(datos);
+                    var json = $.parseJSON(datos);
+                    console.log(json);
+                    $('#tablaEliminacionArticulos').DataTable({
+                        data: json,
+                        dom: '<"pull-left"f><"pull-right">tip',
+                        orderCellsTop: true,
+                        fixedHeader: true,
+                        language: {
+                            zeroRecords: 'Sin resultados encontrados',
+                            infoEmpty: 'Mostrando 0 de 0 entradas'
+                        },
+                        columns: [
+                            { title: 'Código', data: 'idarticulo' },
+                            { title: 'Nombre', data: 'nombreArticulo' },
+                            { data: 'autor', visible: false },
+                            { data: 'contenido', visible: false },
+                            { data: 'idEstatusArticulo', visible: false },
+                            { title: 'Versión', data: 'version' },
+                            { title: 'Fecha de Creación', data: 'fechaCreacion' },
+                            { data: 'nombreCategoria', visible: false },
+                            { title: 'Estatus', data: 'estatus' },
+                            {
+                                title: 'Detalle',
+                                data: null,
+                                sortable: false,
+                                render: function (data, type, row) {
+                                    console.log(data.idarticulo);
+                                    return '<center><a class="btn btn-danger btn-sm text-white" onclick="eliminarArticulo(' + data.idarticulo + ');">Eliminar</a></center>'
+                                }
+                            }
+                        ]
+                    });
+                },
+                failure: function (response) {
+                    console.log(response);
+                }
+            });
+        }
 
-
+        function eliminarArticulo(idArticulo) {
+            console.log(idArticulo);
+            $.ajax({
+                type: 'POST',
+                url: 'AprobacionArticulos.aspx/eliminarArticulo',
+                data: '{ idArticulo: ' + idArticulo + ' }',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    swal("¡Éxito!", "¡¡¡El registro ha sido eliminado correctamente!!!", "success");
+                },
+                failure: function (response) {
+                    console.log(response);
+                }
+            });
+            $('#tablaEliminacionArticulos').DataTable().destroy();
+            $('#tablaEliminacionArticulos').empty();
+            dataTableDataDelete();
         }
 
         function addDataCard(data_row) {
@@ -338,13 +394,11 @@
             idArticulo = data_row[0];
             $("#titleCard").empty();
             $("#box-contenido-blog").empty();
-
             $("#titleCard").append(data_row[1]);
             $("#box-contenido-blog").append(data_row[2]);
         }
 
         function saveEstatusArticulo(idArticulo, estatus, comentario) {
-
             $.ajax({
                 async: false,
                 type: "POST",
@@ -368,7 +422,6 @@
                         $("#1").val("");
                         $("#5").val("");
                         $("#9").val("");
-
                     }
                 },
                 failure: function (response) {
@@ -376,7 +429,5 @@
                 }
             });
         }
-
-
     </script>
 </asp:Content>

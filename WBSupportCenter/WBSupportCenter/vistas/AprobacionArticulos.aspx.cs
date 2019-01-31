@@ -8,7 +8,8 @@ using System.Web.Services;
 using WBSupportCenter.WSsupport1;
 using System.Data;
 using Newtonsoft.Json;
-
+using System.ComponentModel;
+using System.Text;
 
 namespace WBSupportCenter.vistas {
     public partial class articulosVistos : System.Web.UI.Page {
@@ -46,6 +47,23 @@ namespace WBSupportCenter.vistas {
         }
 
         [WebMethod]
+        public static string consultarArticulosAprobados()
+        {
+            DataTable dtArticulos = new DataTable();
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            dtArticulos = ConvertToDataTable(metodo.WSConsultarArtAprobados(idUsuario));
+            return DataTableToJSONWithStringBuilder(dtArticulos);
+        }
+
+        [WebMethod]
+        public static void eliminarArticulo(int idArticulo)
+        {
+            WSsupportCenterClass metodo = new WSsupportCenterClass();
+            metodo.WSEliminarArticulo(idArticulo);
+        }
+
+        [WebMethod]
         public static String guardarEstatusArticuloAprobar(int idArticulo, int estatus, String comentario) {
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             return metodo.WSOguardarEstatusArticuloAprobar(idArticulo, estatus, comentario);
@@ -53,6 +71,58 @@ namespace WBSupportCenter.vistas {
 
         public static string DataSetToJSON(DataTable dt) {
             return JsonConvert.SerializeObject(dt.AsEnumerable().Select(r => r.ItemArray));
+        }
+
+        public static DataTable ConvertToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties =
+               TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
+
+        }
+
+        public static string DataTableToJSONWithStringBuilder(DataTable table)
+        {
+            var JSONString = new StringBuilder();
+            if (table.Rows.Count > 0)
+            {
+                JSONString.Append("[");
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    JSONString.Append("{");
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        if (j < table.Columns.Count - 1)
+                        {
+                            JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\",");
+                        }
+                        else if (j == table.Columns.Count - 1)
+                        {
+                            JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\"");
+                        }
+                    }
+                    if (i == table.Rows.Count - 1)
+                    {
+                        JSONString.Append("}");
+                    }
+                    else
+                    {
+                        JSONString.Append("},");
+                    }
+                }
+                JSONString.Append("]");
+            }
+            return JSONString.ToString();
         }
     }
 }

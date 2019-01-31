@@ -184,6 +184,7 @@
                                 <div style="padding-top: 2px;">
                                     <input type="hidden" runat="server" id="idAdmin"  />
                                     <input type="hidden" runat="server" id="idPass"  />
+                                    <input type="hidden" runat="server" id="idCreador"  />
                                     <a href="/vistas/index.aspx">
                                         <h2 style="color: #FFF;">Support<span style="color: #fcea1d;">Center</span></h2>
                                     </a>

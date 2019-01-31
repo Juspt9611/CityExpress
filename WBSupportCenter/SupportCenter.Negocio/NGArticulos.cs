@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SupportCenter.Datos;
 using System.Data;
+using SupportCenter.Entidades;
 
 namespace SupportCenter.Negocio
 {
@@ -59,6 +60,16 @@ namespace SupportCenter.Negocio
         {
             DTArticulo Objeto = new DTArticulo();
             return Objeto.DT_ConsultarGruposxUsuario(idUsuario);
+        }
+
+        public List<Articulos> NG_ConsultarArtAprobados(int idUsuario)
+        {
+            return Objeto.DT_ConsultarArtAprobados(idUsuario);
+        }
+
+        public int NG_EliminarArticulo(int idArticulo)
+        {
+            return Objeto.DT_EliminarArticulo(idArticulo);
         }
     }
 }

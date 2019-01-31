@@ -1,4 +1,5 @@
-﻿using SupportCenter.Framework.AccesoDatos;
+﻿using SupportCenter.Entidades;
+using SupportCenter.Framework.AccesoDatos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -452,6 +453,85 @@ namespace SupportCenter.Datos
             }
 
             return ds;
+        }
+
+        public List<Articulos> DT_ConsultarArtAprobados(int idUsuario)
+        {
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            List<Articulos> listaArticulos = new List<Articulos>();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
+                    };
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarArticulosAprobados", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        Articulos obj = new Articulos();
+                        obj = new Articulos();
+                        obj.idarticulo = Convert.ToInt32(item["idArticulo"].ToString());
+                        obj.nombreArticulo = item["nombreArticulo"].ToString();
+                        obj.version = item["version"].ToString();
+                        obj.fechaCreacion = item["fechaCreacion"].ToString();
+                        obj.estatus = item["estatus"].ToString();
+                        listaArticulos.Add(obj);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+
+            return listaArticulos;
+        }
+
+        public int DT_EliminarArticulo(int idArticulo)
+        {
+            int error = 0;
+            SqlConnection connection = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (connection = Conexion.ObtieneConexion("ConexionBD"))
+                {
+
+                    SqlDataReader consulta;
+                    connection.Open();
+
+                    var parametros = new[]
+                    {
+                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArticulo , ParameterDirection.Input)
+                    };
+
+
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_EliminaArticulos", parametros);
+                    dt.Load(consulta);
+                    connection.Close();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                error = 1;
+                Console.WriteLine(ex);
+            }
+
+            return error;
         }
 
     }

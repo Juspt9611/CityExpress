@@ -148,6 +148,20 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Articulos.NG_ConsultarGruposxUsuario(idUsuario);
     }
 
+    [WebMethod]
+    public List<Articulos> WSConsultarArtAprobados(int idUsuario)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_ConsultarArtAprobados(idUsuario);
+    }
+
+    [WebMethod]
+    public int WSEliminarArticulo(int idArticulo)
+    {
+        NGArticulos Articulos = new NGArticulos();
+        return Articulos.NG_EliminarArticulo(idArticulo);
+    }
+
     #endregion
 
     #region Categorias

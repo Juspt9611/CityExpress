@@ -46,6 +46,9 @@ namespace WBSupportCenter
             string pass = Session["pass"].ToString();
             idPass.Value = pass;
 
+            string creador = Session["idUsuario"].ToString();
+            idCreador.Value = creador;
+
         }
     }
 }

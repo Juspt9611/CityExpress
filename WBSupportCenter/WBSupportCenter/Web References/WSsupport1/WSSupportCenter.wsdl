@@ -27,6 +27,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="version" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="fechaCreacion" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="nombreCategoria" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estatus" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="WSOptenerCatg">
@@ -386,6 +387,34 @@
                 </s:sequence>
               </s:complexType>
             </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtAprobados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArtAprobadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArtAprobadosResult" type="tns:ArrayOfArticulos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEliminarArticulo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSEliminarArticuloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSEliminarArticuloResult" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -809,6 +838,18 @@
   <wsdl:message name="WSConsultarGruposxUsuarioSoapOut">
     <wsdl:part name="parameters" element="tns:WSConsultarGruposxUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtAprobados" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArtAprobadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloSoapIn">
+    <wsdl:part name="parameters" element="tns:WSEliminarArticulo" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloSoapOut">
+    <wsdl:part name="parameters" element="tns:WSEliminarArticuloResponse" />
+  </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaSoapIn">
     <wsdl:part name="parameters" element="tns:WSRegistrarCategoria" />
   </wsdl:message>
@@ -1025,6 +1066,18 @@
   </wsdl:message>
   <wsdl:message name="WSConsultarGruposxUsuarioHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloHttpGetIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpGetIn">
     <wsdl:part name="nombreCategoria" type="s:string" />
@@ -1250,6 +1303,18 @@
   <wsdl:message name="WSConsultarGruposxUsuarioHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArtAprobadosHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloHttpPostIn">
+    <wsdl:part name="idArticulo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSEliminarArticuloHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSRegistrarCategoriaHttpPostIn">
     <wsdl:part name="nombreCategoria" type="s:string" />
   </wsdl:message>
@@ -1424,6 +1489,14 @@
       <wsdl:input message="tns:WSConsultarGruposxUsuarioSoapIn" />
       <wsdl:output message="tns:WSConsultarGruposxUsuarioSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <wsdl:input message="tns:WSConsultarArtAprobadosSoapIn" />
+      <wsdl:output message="tns:WSConsultarArtAprobadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <wsdl:input message="tns:WSEliminarArticuloSoapIn" />
+      <wsdl:output message="tns:WSEliminarArticuloSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSRegistrarCategoria">
       <wsdl:input message="tns:WSRegistrarCategoriaSoapIn" />
       <wsdl:output message="tns:WSRegistrarCategoriaSoapOut" />
@@ -1562,6 +1635,14 @@
       <wsdl:input message="tns:WSConsultarGruposxUsuarioHttpGetIn" />
       <wsdl:output message="tns:WSConsultarGruposxUsuarioHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <wsdl:input message="tns:WSConsultarArtAprobadosHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArtAprobadosHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <wsdl:input message="tns:WSEliminarArticuloHttpGetIn" />
+      <wsdl:output message="tns:WSEliminarArticuloHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSRegistrarCategoria">
       <wsdl:input message="tns:WSRegistrarCategoriaHttpGetIn" />
       <wsdl:output message="tns:WSRegistrarCategoriaHttpGetOut" />
@@ -1699,6 +1780,14 @@
     <wsdl:operation name="WSConsultarGruposxUsuario">
       <wsdl:input message="tns:WSConsultarGruposxUsuarioHttpPostIn" />
       <wsdl:output message="tns:WSConsultarGruposxUsuarioHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <wsdl:input message="tns:WSConsultarArtAprobadosHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArtAprobadosHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <wsdl:input message="tns:WSEliminarArticuloHttpPostIn" />
+      <wsdl:output message="tns:WSEliminarArticuloHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSRegistrarCategoria">
       <wsdl:input message="tns:WSRegistrarCategoriaHttpPostIn" />
@@ -1927,6 +2016,24 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarGruposxUsuario">
       <soap:operation soapAction="http://tempuri.org/WSConsultarGruposxUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArtAprobados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <soap:operation soapAction="http://tempuri.org/WSEliminarArticulo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2243,6 +2350,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArtAprobados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <soap12:operation soapAction="http://tempuri.org/WSEliminarArticulo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSRegistrarCategoria">
       <soap12:operation soapAction="http://tempuri.org/WSRegistrarCategoria" style="document" />
       <wsdl:input>
@@ -2552,6 +2677,24 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <http:operation location="/WSConsultarArtAprobados" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <http:operation location="/WSEliminarArticulo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSRegistrarCategoria">
       <http:operation location="/WSRegistrarCategoria" />
       <wsdl:input>
@@ -2854,6 +2997,24 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarGruposxUsuario">
       <http:operation location="/WSConsultarGruposxUsuario" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArtAprobados">
+      <http:operation location="/WSConsultarArtAprobados" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSEliminarArticulo">
+      <http:operation location="/WSEliminarArticulo" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
