@@ -30,6 +30,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
     <!-- Reportes -->
     <link rel="stylesheet" href="recursos/css/bootstrap-datepicker3.css" />
+    <!-- Modals -->
+    <link rel="stylesheet" href="recursos/css/iziModal.min.css" />
 
 
     <%-- SCRIPTS --%>
@@ -72,9 +74,9 @@
     <script src="../recursos/js/blog/buttons.html5.min.js"></script>
     <script src="../recursos/js/blog/buttons.print.min.js"></script>
 
-    <link href="plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet"/>
+<%--    <link href="plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet"/>
     <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
-    <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
+    <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>--%>
     <link rel="stylesheet" href="recursos/css/buttons.dataTables.min.css">
 
     <!-- Paginacion -->
@@ -82,6 +84,8 @@
 
     <!-- Select 2 -->
     <script src="../recursos/js/blog/lodash.js"></script>
+    <!-- Modals -->
+    <script src="../recursos/js/blog/iziModal.min.js"></script>
 
     <style>
         .circulo {

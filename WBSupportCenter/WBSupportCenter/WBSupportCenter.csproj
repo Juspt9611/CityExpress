@@ -112,6 +112,7 @@
     <Content Include="recursos\css\buttons.dataTables.min.css" />
     <Content Include="recursos\css\datatables.min.css" />
     <Content Include="recursos\css\footer.css" />
+    <Content Include="recursos\css\iziModal.min.css" />
     <Content Include="recursos\css\jquery.gritter.css" />
     <Content Include="recursos\css\personal.css" />
     <Content Include="recursos\css\select2.min.css" />
@@ -149,6 +150,7 @@
     <Content Include="recursos\js\blog\charts.js" />
     <Content Include="recursos\js\blog\core.js" />
     <Content Include="recursos\js\blog\dataTables.buttons.min.js" />
+    <Content Include="recursos\js\blog\iziModal.min.js" />
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
     <Content Include="recursos\js\blog\jquery-ui.min.js" />
     <Content Include="recursos\js\blog\jquery.easyPaginate.js" />

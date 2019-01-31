@@ -26,6 +26,14 @@
     padding-bottom:1rem;
     border-bottom:1px solid #232D3B;
 }
+.box_table_title-multimedia{
+    width:100%;
+    font-size: 14px;
+	font-weight: 600;
+    color:#232D3B;
+    padding-bottom:1rem;
+    margin-left:1em;
+}
 
 .box_table_buttons,
 .box_table_form{
@@ -149,4 +157,69 @@ ul {
     font-weight:bold;
     text-decoration:underline;
     color: #0181bb;
+}
+
+.title-multimedia{
+    padding-top:2em;
+    padding-bottom:1em;
+    margin-bottom:2em;
+    margin-left:1em;
+    margin-right:1em;
+    
+}
+
+.contenido-multimedia{
+   margin-left:1em;
+   margin-right:1em;
+}
+
+/*tabs multimedia*/
+
+.tabs {
+  position: relative;
+  margin-bottom:8em;
+  margin-left:1em;
+  margin-right:1em;
+  width:100%;
+}
+.tab,.content {  
+  padding: 1rem;
+}
+.tab {
+    font-size: 14px;
+    font-weight: 600;
+    color:#232D3B;
+}
+.activo {
+    border-bottom:1px solid #232D3B;
+}
+.content {
+    width:100%;
+    position: absolute;
+    top: 3rem;
+}
+.radio-multimedia-content{
+    margin-left:1em;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+#selector-multimedia{
+    margin-bottom:2em;
+}
+
+.error-media{
+    margin-left:1em;
+    color:red;
+    padding-left: 1rem;
+     font-size: 12px;
+    font-weight: 600;
+}
+
+.ok-media{
+    margin-left:1em;
+    color:#28a745;
+    padding-left: 1rem;
+    font-size: 12px;
+    font-weight: 600;
 }
