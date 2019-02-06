@@ -25,6 +25,7 @@ namespace WBSupportCenter
             }
             else if (id == "4")
             {
+                index.Attributes["class"] = "hidden";
                 usuarios.Attributes["class"] = "hidden";
                 categorias.Attributes["class"] = "hidden";
                 aprobacionArticulos.Attributes["class"] = "hidden";
