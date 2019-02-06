@@ -104,16 +104,6 @@
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
     <Content Include="imgBlog\CityExp_1.png" />
-    <Content Include="imgBlog\CityExp_10.jpg" />
-    <Content Include="imgBlog\CityExp_11.jpg" />
-    <Content Include="imgBlog\CityExp_2.png" />
-    <Content Include="imgBlog\CityExp_3.png" />
-    <Content Include="imgBlog\CityExp_4.png" />
-    <Content Include="imgBlog\CityExp_5.png" />
-    <Content Include="imgBlog\CityExp_6.png" />
-    <Content Include="imgBlog\CityExp_7.png" />
-    <Content Include="imgBlog\CityExp_8.png" />
-    <Content Include="imgBlog\CityExp_9.png" />
     <Content Include="packages.config" />
     <Content Include="general.Master" />
     <Content Include="recursos\ajax\demowidget.php" />
