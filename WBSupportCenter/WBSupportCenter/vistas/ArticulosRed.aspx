@@ -66,10 +66,14 @@
             lengthChange: false,
             dom: '<"pull-left"f><"pull-right">tip',
             language: {
-                            //"emptyTable": "No hay información",
-                            "infoEmpty": "Mostrando 0 de 0 entradas",
-                            "zeroRecords": "Sin resultados encontrados"
-                        },
+                //"emptyTable": "No hay información",
+                "infoEmpty": "Mostrando 0 de 0 entradas",
+                "zeroRecords": "Sin resultados encontrados",
+                "oPaginate": {
+                    "sPrevious": "Ant.", // This is the link to the previous page
+                    "sNext": "Sig."
+                }
+            },
             columnDefs: [{
                 "targets": -1,
                 "data": null,
@@ -78,7 +82,7 @@
             }]
         });
 
-        $("<button type='button' class='btn btn-success float-right' style='margin-bottom:1em;' onclick=\"window.location.href = 'CrearArticulo.aspx'\" id='crear'><i class='fa fa-plus' aria-hidden='true'></i>&nbsp Crear</button>").appendTo('div.pull-right'); 
+        $("<button type='button' class='btn btn-success float-right' style='margin-bottom:1em;' onclick=\"window.location.href = 'CrearArticulo.aspx'\" id='crear'><i class='fa fa-plus' aria-hidden='true'></i>&nbsp Crear</button>").appendTo('div.pull-right');
 
         $('#crear').on('click', 'button', function () {
             window.location.href = 'CrearArticulo.aspx';

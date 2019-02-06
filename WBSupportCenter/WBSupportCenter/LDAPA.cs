@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.DirectoryServices;
 using System.Linq;
 using System.Web;
@@ -27,7 +28,7 @@ namespace WBSupportCenter {
                 SearchResultCollection sResults = null;
 
                 string acceso = dominio + @"\" + usuario;
-                DirectoryEntry entry = new DirectoryEntry("LDAP://ITE.COM", usuario, pass);//cityexpress_dev.local
+                DirectoryEntry entry = new DirectoryEntry(ConfigurationManager.AppSettings["dominio_SupportCenter"].ToString(), usuario, pass);//cityexpress_dev.local
                 entry.AuthenticationType = AuthenticationTypes.Secure;
 
                 try {
@@ -146,7 +147,7 @@ namespace WBSupportCenter {
                 SearchResultCollection sResults = null;
 
                 //string acceso = dominio + @"\" + usuario;
-                DirectoryEntry entry = new DirectoryEntry("LDAP://ITE.COM", usuario, pass);
+                DirectoryEntry entry = new DirectoryEntry(ConfigurationManager.AppSettings["dominio_SupportCenter"].ToString(), usuario, pass);
                 entry.AuthenticationType = AuthenticationTypes.Secure;
 
                 try {

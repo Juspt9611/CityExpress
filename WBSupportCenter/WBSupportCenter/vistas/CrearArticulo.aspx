@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mb-3">
-                        <button id="submit-multimedia-form-crearart" type="button" class="btn btn-success" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown" onclick="limpiamodal()"><i class="fa fa-plus" aria-hidden="true"></i> Agregar archivo multimedia</button>
+                        <button id="submit-multimedia-form-crearart" type="button" class="btn btn-success" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown" onclick="limpiamodal()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp Agregar archivo multimedia</button>
                     </div>
                 </div>
                 <form method="post">
@@ -99,8 +99,8 @@
 
                 <div class="row">
                     <div class="col-lg-12 box_table_buttons">
-                        <button id="submit" type="button" class="btn btn-success float-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>Guardar</button>
-                        <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>Cancelar</button>
+                        <button id="submit" type="button" class="btn btn-success float-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp Guardar</button>
+                        <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@
                 </div>
                 <div class="row">
                     <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                        <button type="button" class="btn btn-success float-right" onclick="cargaImagen()"><i class="fa fa-files-o" aria-hidden="true"></i> Copiar</button>
-                        <button type="button" class="btn btn-danger float-right" onclick="" data-izimodal-close="" data-izimodal-transitionout="bounceOutDown"><i class="fa fa-times" aria-hidden="true"></i> Cancelar</button>
+                        <button type="button" class="btn btn-success float-right" onclick="cargaImagen()"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp Copiar</button>
+                        <button type="button" class="btn btn-danger float-right" onclick="" data-izimodal-close="" data-izimodal-transitionout="bounceOutDown"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Cancelar</button>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@
 
         #imagen {
             position: absolute;
-            width: 50%;
+            width: 70%;
             top: 0;
             left: 0;
             right: 0;
@@ -76,13 +76,9 @@
 
                         <div class="col-lg-12 footer_col">
                             <div class="footer_about">
-                                <br />
-                                <br />
                                 <div id="centrador">
                                     <img id="imagen" class="img-fluid" src="../recursos/StyleLogin/img/CTE.png" />
                                 </div>
-                                <br />
-                                <br />
                             </div>
                         </div>
 

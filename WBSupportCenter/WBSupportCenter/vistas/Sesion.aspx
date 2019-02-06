@@ -16,11 +16,11 @@
 
         <br />
         <p id="profile-name" class="profile-name-card"></p>
-        <asp:TextBox type="text" ID="Usuario" runat="server" class="form-control" placeholder="Usuario" Style="background-color: rgba(0, 0, 0, 0.72); border-color: #77DAD5; color: #fff; font-size: 20px;" focus></asp:TextBox>
+        <asp:TextBox type="text" ID="Usuario" runat="server" required="" class="form-control" placeholder="Usuario" Style="background-color: rgba(0, 0, 0, 0.72); border-color: #77DAD5; color: #fff; font-size: 20px;" focus></asp:TextBox>
         <asp:Label ID="ErrUsu" runat="server" Text="" Style="color: red; font-size: 18px"></asp:Label>
         <br />
         <br />
-        <asp:TextBox type="password" ID="contrasena" runat="server" class="form-control" placeholder="Contraseña" Style="background-color: rgba(0, 0, 0, 0.72); border-color: #77DAD5; color: #fff; font-size: 20px;"></asp:TextBox>
+        <asp:TextBox type="password" ID="contrasena" runat="server" required="" class="form-control" placeholder="Contraseña" Style="background-color: rgba(0, 0, 0, 0.72); border-color: #77DAD5; color: #fff; font-size: 20px;"></asp:TextBox>
         <asp:Label ID="Errpass" runat="server" Text=""></asp:Label>
         <br />
         <br />

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="AprobacionArticulos.aspx.cs" Inherits="WBSupportCenter.vistas.articulosVistos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         table.dataTable thead th, table.dataTable thead td {
@@ -60,7 +61,7 @@
     <div class="container" id="contenidoArticulo" hidden>
         <div id="box-blog" class="box_table_container">
             <div class="row">
-                <span id="titleCard" class="box_table_title" style="margin-bottom:1rem; font-weight:700; text-align:center !important; font-size:2rem;"></span>
+                <span id="titleCard" class="box_table_title" style="margin-bottom: 1rem; font-weight: 700; text-align: center !important; font-size: 2rem;"></span>
             </div>
             <div class="row">
                 <div id="box-contenido-blog">
@@ -68,23 +69,13 @@
             </div>
             <div class="row">
                 <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                    <button class="btn btn-warning pull-left" style="border-right: 5px;" id="atras"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
-                    <button class="btn btn-success pull-right" style="color: #FFFFFF;" id="aceptar"><i class="fa fa-check" aria-hidden="true"></i> Aprobar</button>
-                    <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="rechazar"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button>
+                    <button class="btn btn-warning pull-left" style="border-right: 5px;" id="atras"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Regresar</button>
+                    <button class="btn btn-success pull-right" style="color: #FFFFFF;" id="aceptar"><i class="fa fa-check" aria-hidden="true"></i>&nbsp Aprobar</button>
+                    <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="rechazar"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Rechazar</button>
                 </div>
             </div>
         </div>
         <br>
-    </div>
-    <div id="dialog-message" title="Agregar comentario" hidden>
-        <p>¿Por qué se rechaza el artículo?<br /></p>
-        <form id="formComentario">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12 div">
-                    <textarea id="comentario" name="comentario" style="resize: none;" class="form-control"></textarea>
-                </div>
-            </div>
-        </form>
     </div>
     <script>
         $(document).ready(function () {
@@ -95,7 +86,7 @@
             var comentario = null;
             console.log("ready");
             init();
-            bootsVal();
+            //bootsVal();
             $('#titleSpan').text('Autorizar artículos');
         });
 
@@ -179,75 +170,50 @@
             });
 
             $("#rechazar").click(function () {
-                bootsVal();
-                $("#guardarComentario").prop("disabled", false);
-                $("#dialog-message").removeAttr('hidden');
-                $("#dialog-message").dialog({
-                    modal: true,
-                    draggable: false,
-                    resizable: false,
-                    position: ['center', 'center'],
-                    show: 'blind',
-                    hide: 'blind',
-                    width: 400,
-                    open: function (event, ui) {
-                        $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
-                        $("#comentario").val("");
-                        $('#dialog-message').css('overflow', 'hidden');
-                        $("#guardarComentario").css({
-                            "background": "#28a745",
-                            "color": "#fff"
-                        });
-
-                        $("#cancelarComentario").css({
-                            "background": "#dc3545",
-                            "color": "#fff"
-                        });
+                //bootsVal();
+                swal({
+                    title: "Agregar comentario",
+                    text: "¿Por qué se rechaza el artículo?",
+                    buttons: true,
+                    dangerMode: true,
+                    content: {
+                        element: "input",
                     },
-                    buttons: [{
-                        id: "cancelarComentario",
-                        text: "Cancelar",
-                        click: function () {
-                            $('#formComentario').bootstrapValidator('destroy');
-                            $(this).dialog("close");
-                        }
-                    }, {
-                        id: "guardarComentario",
-                        text: "Guardar",
-                        click: function () {
-                            bootsVal();
-                            $("#guardarComentario").prop("disabled", true);
-                            $('#formComentario').data('bootstrapValidator').validate();
-                            var n = $('#formComentario').data('bootstrapValidator').isValid();
-                            if (n) {
-                                $(this).dialog("close");
-                                estatus = 2;
-                                comentario = $("#comentario").val();
-
-                                saveEstatusArticulo(idArticulo, estatus, comentario);
-                            } else {
-                                bootsVal();
-                            }
-                        }
-                    }]
-                });
-            });
-        }
-        
-        function bootsVal() {
-            $('#formComentario').bootstrapValidator({
-                submitButtons: 'button[id="guardarComentario"]',
-                fields: {
-                    comentario: {
-                        selector: '#comentario',
-                        group: '.div',
-                        validators: {
-                            notEmpty: {
-                                message: 'Comentario obligatorio'
-                            },
+                    buttons: {
+                        cancel: {
+                            text: "Cancelar",
+                            //value: null,
+                            visible: !0,
+                            className: "btn btn-default",
+                            closeModal: !0
+                        },
+                        confirm: {
+                            text: "Rechazar",
+                            //value: !0,
+                            visible: !0,
+                            className: "btn btn-info",
+                            closeModal: !0
                         }
                     }
-                },
+                }).then((value) => {
+                    if (value == null) {
+                        $(".swal-button swal-button--cancel btn btn-default").attr("disabled", false);
+                    }else if (value != "") {
+                        estatus = 2;
+                        saveEstatusArticulo(idArticulo, estatus, value);
+                        swal("Rechazado exitosamente", {
+                            icon: "success",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    } else if (value == "") {
+                       swal("Ingresar comentario", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    }           
+                });
             });
         }
 
@@ -270,10 +236,14 @@
                         pageLength: 10,
                         language: {
                             zeroRecords: 'Sin resultados encontrados',
-                            infoEmpty: 'Mostrando 0 de 0 entradas'
+                            infoEmpty: 'Mostrando 0 de 0 entradas',
+                            "oPaginate": {
+                                "sPrevious": "Ant.", // This is the link to the previous page
+                                "sNext": "Sig."
+                            }
                         },
                         columns: [
-                            { title: "Codigo" },
+                            { title: "Código" },
                             { title: "Nombre" },
                             { title: "Contenido", "visible": false },
                             { title: "EstatusArticulo", "visible": false },
@@ -339,7 +309,11 @@
                         fixedHeader: true,
                         language: {
                             zeroRecords: 'Sin resultados encontrados',
-                            infoEmpty: 'Mostrando 0 de 0 entradas'
+                            infoEmpty: 'Mostrando 0 de 0 entradas',
+                            "oPaginate": {
+                                "sPrevious": "Ant.", // This is the link to the previous page
+                                "sNext": "Sig."
+                            }
                         },
                         columns: [
                             { title: 'Código', data: 'idarticulo' },

@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-lg-1">
                             <div class="form-group">
-                                <label class="col-form-label" style="color: transparent;">Boton:</label>
+                                <label class="col-form-label" style="color: transparent;">Boton ir:</label>
                                 <button type="button" class="btn btn-primary" id="btnInfor">Ir</button>
                                 <%--<br />
                                 <br />
@@ -75,10 +75,10 @@
                         <span class="box_table_title" style="margin-bottom: 1rem;"></span>
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <button type="button" class="btn btn-success pull-right" id="btnGuardar"><i class="fa fa-check" aria-hidden="true"></i>Guardar</button>
-                                <button type="button" class="btn btn-success pull-right" id="btnGuardarEdit"><i class="fa fa-check" aria-hidden="true"></i>Editar</button>
-                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atras"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
-                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atrasEdit"><i class="fa fa-times" aria-hidden="true"></i>Cancelar</button>
+                                <button type="button" class="btn btn-success pull-right" id="btnGuardar"><i class="fa fa-check" aria-hidden="true"></i>&nbsp Guardar</button>
+                                <button type="button" class="btn btn-success pull-right" id="btnGuardarEdit"><i class="fa fa-check" aria-hidden="true"></i>&nbsp Editar</button>
+                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atras"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Cancelar</button>
+                                <button type="button" class="btn btn-danger pull-right" style="color: #FFFFFF; margin-right: 10px;" id="atrasEdit"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -108,6 +108,10 @@
 
         $(document).ready(function () {
             tablaUsuarios(usuarioAdmin, passAdmin);
+
+            if (top.location != self.location) top.location = self.location;
+            shortcut.add("space",function() {});
+
         });
 
         //function atras() {
@@ -163,7 +167,11 @@
                         language: {
                             //"emptyTable": "No hay información",
                             "infoEmpty": "Mostrando 0 de 0 entradas",
-                            "zeroRecords": "Sin resultados encontrados"
+                            "zeroRecords": "Sin resultados encontrados",
+                            "oPaginate": {
+                                "sPrevious": "Ant.", // This is the link to the previous page
+                                "sNext": "Sig."
+                            }
                         },
                         orderCellsTop: true,
                         fixedHeader: true,
@@ -236,7 +244,7 @@
                                 swal("Oh no!", "Usuario no encontrado", "error");
                             }
                         } else {
-                            swal("Oh no!", "Contraseña incorrecta", "error");
+                            swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
                         }
                     }
                 });
@@ -429,7 +437,7 @@
                                                     swal("Oh no!", "Usuario no encontrado", "error");
                                                 }
                                             } else {
-                                                swal("Oh no!", "Contraseña incorrecta", "error");
+                                                swal("Contraseña incorrecta.", "Por favor verifícala e inténtalo de nuevo.", "error");
                                             }
                                         }
                                     });

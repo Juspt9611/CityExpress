@@ -25,6 +25,7 @@
     <link href="recursos/css/personal.css" rel="stylesheet" />
     <%--    DataTable--%>
     <link rel="stylesheet" type="text/css" href="recursos/css/datatables.min.css" />
+    <link rel="stylesheet" href="recursos/css/buttons.dataTables.min.css">
     <link href="recursos/css/select2.min.css" rel="stylesheet" />
     <!-- Notificaciones -->
     <link rel="stylesheet" type="text/css" media="screen" href="recursos/css/jquery.gritter.css">
@@ -56,7 +57,8 @@
 
     <%--    DataTable--%>
     <script src="../recursos/js/datatables.min.js"></script>
-    <script src="../recursos/bootstrapvalidator/bootstrapValidator.min.js"></script>
+    <script src="../recursos/bootstrapvalidator/bootstrapValidator.min.js"></script> 
+    <script src="../recursos/js/blog/dataTables.buttons.min.js"></script>
 
     <!-- Reportes -->
     <script type="text/javascript" src="../recursos/js/blog/bootstrap-datepicker.min.js"></script>
@@ -64,21 +66,14 @@
     <script src="../recursos/js/blog/core.js"></script>
     <script src="../recursos/js/blog/charts.js"></script>
     <script src="../recursos/js/blog/animated.js"></script>
-
     <script src="../recursos/js/bootstrap-datepicker.es.js" charset="UTF-8"></script>
-    <script src="../recursos/js/blog/dataTables.buttons.min.js"></script>
     <script src="../recursos/js/blog/buttons.flash.min.js"></script>
     <script src="../recursos/js/blog/jszip.min.js"></script>
     <script src="../recursos/js/blog/pdfmake.min.js"></script>
     <script src="../recursos/js/blog/vfs_fonts.js"></script>
     <script src="../recursos/js/blog/buttons.html5.min.js"></script>
     <script src="../recursos/js/blog/buttons.print.min.js"></script>
-
-<%--    <link href="plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet"/>
-    <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
-    <link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>--%>
-    <link rel="stylesheet" href="recursos/css/buttons.dataTables.min.css">
-
+    
     <!-- Paginacion -->
     <script src="../recursos/js/blog/jquery.easyPaginate.js"></script>
 
@@ -86,6 +81,10 @@
     <script src="../recursos/js/blog/lodash.js"></script>
     <!-- Modals -->
     <script src="../recursos/js/blog/iziModal.min.js"></script>
+
+    <!-- Shortcuts -->
+    <script src="../recursos/js/blog/shortcut.js" type="text/javascript"></script>
+
 
     <style>
         .circulo {
@@ -125,7 +124,7 @@
 
         #imagen {
             position: absolute;
-            width: 50%;
+            width: 70%;
             top: 0;
             left: 0;
             right: 0;
@@ -153,7 +152,7 @@
                     <a href="/vistas/index.aspx">Buscar artículos</a>
                 </li>
                 <li runat="server" id="usuarios">
-                    <a href="/vistas/Usuario.aspx">Asignar Roles</a>
+                    <a href="/vistas/Usuario.aspx">Asignar roles</a>
                 </li>
                 <li runat="server" id="articulosRed">
                     <a href="/vistas/ArticulosRed.aspx">Crear y editar artículos</a>
@@ -226,13 +225,9 @@
 
                         <div class="col-lg-12 footer_col">
                             <div class="footer_about">
-                                <br />
-                                <br />
                                 <div id="centrador">
                                     <img id="imagen" class="img-fluid" src="../recursos/StyleLogin/img/CTE.png" />
                                 </div>
-                                <br />
-                                <br />
                             </div>
                         </div>
 

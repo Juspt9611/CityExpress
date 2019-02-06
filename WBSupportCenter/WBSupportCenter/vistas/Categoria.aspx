@@ -140,7 +140,167 @@
             $('#btnSub2Edit').hide();
             $('#btnSub3Edit').hide();
             $('#btnSub4Edit').hide();
+
+            // Bloquear inputs
+            $('#inputSubcategoria1').prop('disabled', true);
+            $('#inputSubcategoria2').prop('disabled', true);
+            $('#inputSubcategoria3').prop('disabled', true);
+            $('#inputSubcategoria4').prop('disabled', true);
+
+            // Bloquear botones
+            $('#btnSub1').addClass('disabled');
+            $('#btnSub2').addClass('disabled');
+            $('#btnSub3').addClass('disabled');
+            $('#btnSub4').addClass('disabled');
         });
+
+        function clean() {
+            $('#inputCategoria').val('');
+            $('#inputSubcategoria1').val('');
+            $('#inputSubcategoria2').val('');
+            $('#inputSubcategoria3').val('');
+            $('#inputSubcategoria4').val('');
+            
+            $('#btnCat').show();
+            $('#btnSub1').show();
+            $('#btnSub2').show();
+            $('#btnSub3').show();
+            $('#btnSub4').show();
+            $('#btnCatEdit').hide();
+            $('#btnSub1Edit').hide();
+            $('#btnSub2Edit').hide();
+            $('#btnSub3Edit').hide();
+            $('#btnSub4Edit').hide();
+        }
+
+        function cleanEdit(type) {
+            switch (type) {
+                case 1:
+                    $('#inputSubcategoria1').val('');
+                    $('#inputSubcategoria2').val('');
+                    $('#inputSubcategoria3').val('');
+                    $('#inputSubcategoria4').val('');
+
+                    $('#btnSub1').show();
+                    $('#btnSub2').show();
+                    $('#btnSub3').show();
+                    $('#btnSub4').show();
+                    $('#btnSub1Edit').hide();
+                    $('#btnSub2Edit').hide();
+                    $('#btnSub3Edit').hide();
+                    $('#btnSub4Edit').hide();
+                    break;
+                case 2:
+                    $('#inputCategoria').val('');
+                    $('#inputSubcategoria2').val('');
+                    $('#inputSubcategoria3').val('');
+                    $('#inputSubcategoria4').val('');
+
+                    $('#btnCat').show();
+                    $('#btnSub2').show();
+                    $('#btnSub3').show();
+                    $('#btnSub4').show();
+                    $('#btnCatEdit').hide();
+                    $('#btnSub2Edit').hide();
+                    $('#btnSub3Edit').hide();
+                    $('#btnSub4Edit').hide();
+                    break;
+                case 3:
+                    $('#inputCategoria').val('');
+                    $('#inputSubcategoria1').val('');
+                    $('#inputSubcategoria3').val('');
+                    $('#inputSubcategoria4').val('');
+
+                    $('#btnCat').show();
+                    $('#btnSub1').show();
+                    $('#btnSub3').show();
+                    $('#btnSub4').show();
+                    $('#btnCatEdit').hide();
+                    $('#btnSub1Edit').hide();
+                    $('#btnSub3Edit').hide();
+                    $('#btnSub4Edit').hide();
+                    break;
+                case 4:
+                    $('#inputCategoria').val('');
+                    $('#inputSubcategoria1').val('');
+                    $('#inputSubcategoria2').val('');
+                    $('#inputSubcategoria4').val('');
+
+                    $('#btnCat').show();
+                    $('#btnSub1').show();
+                    $('#btnSub2').show();
+                    $('#btnSub4').show();
+                    $('#btnCatEdit').hide();
+                    $('#btnSub1Edit').hide();
+                    $('#btnSub2Edit').hide();
+                    $('#btnSub4Edit').hide();
+                    break;
+                case 5:
+                    $('#inputCategoria').val('');
+                    $('#inputSubcategoria1').val('');
+                    $('#inputSubcategoria2').val('');
+                    $('#inputSubcategoria3').val('');
+
+                    $('#btnCat').show();
+                    $('#btnSub1').show();
+                    $('#btnSub2').show();
+                    $('#btnSub3').show();
+                    $('#btnCatEdit').hide();
+                    $('#btnSub1Edit').hide();
+                    $('#btnSub2Edit').hide();
+                    $('#btnSub3Edit').hide();
+                    break;
+            }
+        }
+
+        function habDeshab(type) {
+            switch (type) {
+                case 1:
+                    $('#inputSubcategoria1').prop('disabled', true);
+                    $('#inputSubcategoria2').prop('disabled', true);
+                    $('#inputSubcategoria3').prop('disabled', true);
+                    $('#inputSubcategoria4').prop('disabled', true);
+
+                    $('#btnSub1').addClass('disabled');
+                    $('#btnSub2').addClass('disabled');
+                    $('#btnSub3').addClass('disabled');
+                    $('#btnSub4').addClass('disabled');
+
+                    $('#inputSubcategoria1').prop('disabled', false);
+                    $('#btnSub1').removeClass('disabled');
+                    break;
+                case 2:
+                    $('#inputSubcategoria2').prop('disabled', true);
+                    $('#inputSubcategoria3').prop('disabled', true);
+                    $('#inputSubcategoria4').prop('disabled', true);
+
+                    $('#btnSub2').addClass('disabled');
+                    $('#btnSub3').addClass('disabled');
+                    $('#btnSub4').addClass('disabled');
+
+                    $('#inputSubcategoria2').prop('disabled', false);
+                    $('#btnSub2').removeClass('disabled');
+                    break;
+                case 3:
+                    $('#inputSubcategoria3').prop('disabled', true);
+                    $('#inputSubcategoria4').prop('disabled', true);
+
+                    $('#btnSub3').addClass('disabled');
+                    $('#btnSub4').addClass('disabled');
+
+                    $('#inputSubcategoria3').prop('disabled', false);
+                    $('#btnSub3').removeClass('disabled');
+                    break;
+                case 4:
+                    $('#inputSubcategoria4').prop('disabled', true);
+                
+                    $('#btnSub4').addClass('disabled');
+                
+                    $('#inputSubcategoria4').prop('disabled', false);
+                    $('#btnSub4').removeClass('disabled');
+                    break;
+            }
+        }
 
         function showListCategoria() {
             var html;
@@ -155,6 +315,8 @@
                         $('#listCategoria').append('<a href="javascript:void(0)" onclick="showListSubcategoriaUno(' + list.idCategoria + ');cargarIdCategoria(' + list.idCategoria + ');" role="button" class="dblClickCat list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
                         $('#listCategoria').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarCategorias(' + list.idCategoria + ');refresh(1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 1);">Editar</button></td></tr></table>');
                         $('#listCategoria a').on('click', function () {
+                            clean();
+                            habDeshab(1);
                             $('#listCategoria a').removeClass('active');
                             $(this).addClass('active');
                         });
@@ -166,33 +328,42 @@
             $('#listCategoria').html(html);
         }
 
-
         function cargarDatosEditar(idCat, nombre, typeExe) {
-            if (typeExe == 1) {
-                $('#idCategoriaEdit').val(idCat);
-                $('#inputCategoria').val(nombre);
-                $('#btnCat').hide();
-                $('#btnCatEdit').show();
-            } else if (typeExe == 2) {
-                $('#idSubcategoria1Edit').val(idCat);
-                $('#inputSubcategoria1').val(nombre);
-                $('#btnSub1').hide();
-                $('#btnSub1Edit').show();
-            } else if (typeExe == 3) {
-                $('#idSubcategoria2Edit').val(idCat);
-                $('#inputSubcategoria2').val(nombre);
-                $('#btnSub2').hide();
-                $('#btnSub2Edit').show();
-            } else if (typeExe == 4) {
-                $('#idSubcategoria3Edit').val(idCat);
-                $('#inputSubcategoria3').val(nombre);
-                $('#btnSub3').hide();
-                $('#btnSub3Edit').show();
-            } else if (typeExe == 5) {
-                $('#idSubcategoria4Edit').val(idCat);
-                $('#inputSubcategoria4').val(nombre);
-                $('#btnSub4').hide();
-                $('#btnSub4Edit').show();
+            switch (typeExe) {
+                case 1:
+                    $('#idCategoriaEdit').val(idCat);
+                    $('#inputCategoria').val(nombre);
+                    $('#btnCat').hide();
+                    $('#btnCatEdit').show();
+                    cleanEdit(typeExe);
+                    break;
+                case 2:
+                    $('#idSubcategoria1Edit').val(idCat);
+                    $('#inputSubcategoria1').val(nombre);
+                    $('#btnSub1').hide();
+                    $('#btnSub1Edit').show();
+                    cleanEdit(typeExe);
+                    break;
+                case 3:
+                    $('#idSubcategoria2Edit').val(idCat);
+                    $('#inputSubcategoria2').val(nombre);
+                    $('#btnSub2').hide();
+                    $('#btnSub2Edit').show();
+                    cleanEdit(typeExe);
+                    break;
+                case 4:
+                    $('#idSubcategoria3Edit').val(idCat);
+                    $('#inputSubcategoria3').val(nombre);
+                    $('#btnSub3').hide();
+                    $('#btnSub3Edit').show();
+                    break;
+                case 5:
+                    $('#idSubcategoria4Edit').val(idCat);
+                    $('#inputSubcategoria4').val(nombre);
+                    $('#btnSub4').hide();
+                    $('#btnSub4Edit').show();
+                    cleanEdit(typeExe);
+                    break;
             }
         }
 
@@ -201,14 +372,19 @@
         }
 
         function cargarIdSubcategorias(idCat, typeExe) {
-            if (typeExe == 1) {
-                $('#idSubcategoria1').val(idCat);
-            } else if (typeExe == 2) {
-                $('#idSubcategoria2').val(idCat);
-            } else if (typeExe == 3) {
-                $('#idSubcategoria3').val(idCat);
-            } else if (typeExe == 4) {
-                $('#idSubcategoria4').val(idCat);
+            switch (typeExe) {
+                case 1:
+                    $('#idSubcategoria1').val(idCat);
+                    break;
+                case 2:
+                    $('#idSubcategoria2').val(idCat);
+                    break;
+                case 3:
+                    $('#idSubcategoria3').val(idCat);
+                    break;
+                case 4:
+                    $('#idSubcategoria4').val(idCat);
+                    break;
             }
         }
 
@@ -225,8 +401,10 @@
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria1').append('<a href="javascript:void(0)" onclick="showListSubcategoriaDos(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 1);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
-                            $('#listSubcategoria1').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(2, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 2);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria1').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(2, ' + list.idCategoria + ', 1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 2);">Editar</button></td></tr></table>');
                             $('#listSubcategoria1 a').on('click', function () {
+                                clean();
+                                habDeshab(2);
                                 $('#listSubcategoria1 a').removeClass('active');
                                 $(this).addClass('active');
                             });
@@ -261,8 +439,10 @@
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria2').append('<a href="javascript:void(0)" onclick="showListSubcategoriaTres(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 2);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
-                            $('#listSubcategoria2').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(3, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 3);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria2').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width:70px;" onclick="eliminarSubCat(3, ' + list.idCategoria + ', 1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width:70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 3);">Editar</button></td></tr></table>');
                             $('#listSubcategoria2 a').on('click', function () {
+                                clean();
+                                habDeshab(3);
                                 $('#listSubcategoria2 a').removeClass('active');
                                 $(this).addClass('active');
                             });
@@ -295,8 +475,10 @@
                     if (jsonReporte != null) {
                         $.each(jsonReporte, function (key, list) {
                             $('#listSubcategoria3').append('<a href="javascript:void(0)" onclick="showListSubcategoriaCuatro(' + list.idCategoria + ');cargarIdSubcategorias(' + list.idCategoria + ', 3);" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">' + list.nombreCategoria + '</a>');
-                            $('#listSubcategoria3').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(4, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 4);">Editar</button></td></tr></table>');
+                            $('#listSubcategoria3').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(4, ' + list.idCategoria + ', 1);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 4);">Editar</button></td></tr></table>');
                             $('#listSubcategoria3 a').on('click', function () {
+                                clean();
+                                habDeshab(4);
                                 $('#listSubcategoria3 a').removeClass('active');
                                 $(this).addClass('active');
                             });
@@ -326,8 +508,9 @@
                     var jsonReporte = $.parseJSON(response.d);
                     $.each(jsonReporte, function (key, list) {
                         $('#listSubcategoria4').append('<a href="javascript:void(0)" role="button" class="list-group-item list-group-item-action font-weight-bold textoCategorias">&nbsp;&nbsp;' + list.nombreCategoria + '</a>');
-                        $('#listSubcategoria4').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(5, ' + list.idCategoria + ');">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 5);">Editar</button></td></tr></table>');
+                        $('#listSubcategoria4').append('<table><tr><td><button class="btn btn-danger btn-sm" style="padding: 0px; width: 70px;" onclick="eliminarSubCat(5, ' + list.idCategoria + ', 2);">Eliminar</button></td><td><button class="btn btn-warning btn-sm text-white" style="padding: 0px; width: 70px;" onclick="cargarDatosEditar(' + list.idCategoria + ', \'' + list.nombreCategoria + '\', 5);">Editar</button></td></tr></table>');
                         $('#listSubcategoria4 a').on('click', function () {
+                            clean();
                             $('#listSubcategoria4 a').removeClass('active');
                             $(this).addClass('active');
                         });
@@ -342,7 +525,8 @@
 
         function eliminarCategorias(idCat) {
             swal({
-                title: "Estás seguro?",
+                title: "¿Realmente deseas eliminar la categoría?",
+                text: "Esta acción no se puede deshacer.",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -359,8 +543,8 @@
                             console.log(jsonReporte);
                             if (jsonReporte[0].total > 0) {
                                 swal({
-                                    title: "No se puede eliminar",
-                                    text: "Artículos relacionados con esta categoría",
+                                    title: "Esta categoría no se puede eliminar.",
+                                    text: "Existen artículos relacionados con esta categoría, elimina los artículos y después vuelve a intentarlo.",
                                     icon: "warning",
                                 });
                             } else {
@@ -375,7 +559,7 @@
             });
         }
 
-        function eliminarSubCat(typeExe, idCat) {
+        function eliminarSubCat(typeExe, idCat, type) {
             swal({
                 title: "Estás seguro?",
                 icon: "warning",
@@ -392,11 +576,13 @@
                         success: function (response) {
                             var jsonReporte = $.parseJSON(response.d);
                             if (jsonReporte[0].total > 0) {
-                                swal({
-                                    title: "No se puede eliminar",
-                                    text: "Artículos relacionados con esta categoría",
-                                    icon: "warning",
-                                });
+                                if (type == 1) {
+                                    swal({
+                                        title: "Esta subcategoría no se puede eliminar.",
+                                        text: "Existen categorías relacionados con ésta subcategoría.",
+                                        icon: "warning",
+                                    });
+                                }
                             } else {
                                 swal("Ha sido eliminado", {
                                     icon: "success",
@@ -410,16 +596,22 @@
         }
 
         function refresh(typeExe) {
-            if (typeExe == 1) {
-                showListCategoria();
-            } else if (typeExe == 2) {
-                showListSubcategoriaUno($('#idCategoria').val());
-            } else if (typeExe == 3) {
-                showListSubcategoriaDos($('#idSubcategoria1').val());
-            } else if (typeExe == 4) {
-                showListSubcategoriaTres($('#idSubcategoria2').val());
-            } else if (typeExe == 5) {
-                showListSubcategoriaCuatro($('#idSubcategoria3').val());
+            switch (typeExe) {
+                case 1:
+                    showListCategoria();
+                    break;
+                case 2:
+                    showListSubcategoriaUno($('#idCategoria').val());
+                    break;
+                case 3:
+                    showListSubcategoriaDos($('#idSubcategoria1').val());
+                    break;
+                case 4:
+                    showListSubcategoriaTres($('#idSubcategoria2').val());
+                    break;
+                case 5:
+                    showListSubcategoriaCuatro($('#idSubcategoria3').val());
+                    break;
             }
         }
 
@@ -435,8 +627,7 @@
                     success: function (response) {
                         $('#inputCategoria').val('');
                         swal({
-                            title: "Éxito!!",
-                            text: "Categoría guardada!!",
+                            title: "Alta de categoría exitosa",
                             icon: "success",
                             button: "Aceptar"
                         });
@@ -467,8 +658,7 @@
                         success: function (response) {
                             $('#inputSubcategoria1').val('');
                             swal({
-                                title: "Éxito!!",
-                                text: "Subcategoría guardada!!",
+                                title: "Alta de subcategoría exitosa",
                                 icon: "success",
                                 button: "Aceptar"
                             });
@@ -496,8 +686,7 @@
                         success: function (response) {
                             $('#inputSubcategoria2').val('');
                             swal({
-                                title: "Éxito!!",
-                                text: "Subcategoría guardada!!",
+                                title: "Alta de subcategoría exitosa",
                                 icon: "success",
                                 button: "Aceptar"
                             });
@@ -525,8 +714,7 @@
                         success: function (response) {
                             $('#inputSubcategoria3').val('');
                             swal({
-                                title: "Éxito!!",
-                                text: "Subcategoría guardada!!",
+                                title: "Alta de subcategoría exitosa",
                                 icon: "success",
                                 button: "Aceptar"
                             });
@@ -554,8 +742,7 @@
                         success: function (response) {
                             $('#inputSubcategoria4').val('');
                             swal({
-                                title: "Éxito!!",
-                                text: "Subcategoría guardada!!",
+                                title: "Alta de subcategoría exitosa",
                                 icon: "success",
                                 button: "Aceptar"
                             });

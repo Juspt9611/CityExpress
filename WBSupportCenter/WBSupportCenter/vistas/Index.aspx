@@ -150,9 +150,9 @@
                         </div>
                         <div class="row">
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i>Comentar</button>
-                                <button type="button" class="btn btn-warning float-right" s onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>Historial</button>
-                                <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>Regresar</button>
+                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp Comentar</button>
+                                <button type="button" class="btn btn-warning float-right" s onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp Historial</button>
+                                <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Regresar</button>
                             </div>
                         </div>
                         <div class="row">

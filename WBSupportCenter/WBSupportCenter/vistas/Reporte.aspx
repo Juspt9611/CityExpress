@@ -221,7 +221,7 @@
 
         function formatDateActual() {
             var d = new Date,
-                dformatActual = [(d.getDate()),
+                dformatActual = [padLeft(d.getDate()),
                 padLeft(d.getMonth() + 1),
                 d.getFullYear()
                 ].join('/');
@@ -297,7 +297,7 @@
                         reporteGrafica = "Búsquedas";
                     }
                     else if (reporteSelect == "valorados") {
-                        reporteGrafica = "Calificación total";
+                        reporteGrafica = "Número de valoraciones";
                     }
                     else if (reporteSelect == "vistos") {
                         reporteGrafica = "Visitas";
@@ -386,6 +386,15 @@
                                 dom: '<"pull-left"B><"pull-right">tip',
                                 //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
                                 //dom: 'Bfrt<"col-md-6 inline"i> <"col-md-6 inline"p>',
+                                language: {
+                                    //"emptyTable": "No hay información",
+                                    "infoEmpty": "Mostrando 0 de 0 entradas",
+                                    "zeroRecords": "Sin resultados encontrados",
+                                    "oPaginate": {
+                                        "sPrevious": "Ant.", // This is the link to the previous page
+                                        "sNext": "Sig."
+                                    }
+                                },
                                 buttons: {
                                     dom: {
                                         container: {
@@ -439,6 +448,15 @@
                                 paging: true,
                                 dom: '<"pull-left"B><"pull-right">tip',
                                 //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                language: {
+                                    //"emptyTable": "No hay información",
+                                    "infoEmpty": "Mostrando 0 de 0 entradas",
+                                    "zeroRecords": "Sin resultados encontrados",
+                                    "oPaginate": {
+                                        "sPrevious": "Ant.", // This is the link to the previous page
+                                        "sNext": "Sig."
+                                    }
+                                },
                                 buttons: {
                                     dom: {
                                         container: {
@@ -455,12 +473,14 @@
                                             text: '<i class="fa fa-file-excel-o"></i>',
                                             titleAttr: 'Exportar Excel',
                                             className: 'btn btn-app export excel',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                         },
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',
                                             titleAttr: 'Exportar PDF',
                                             className: 'btn btn-app export pdf',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                             //exportOptions: {
                                             //    columns: [0, 1]
                                             //},
@@ -472,13 +492,19 @@
                                     { data: "nombreArticulo", title: 'Nombre del artículo' },
                                     { data: "categoria", title: 'Categoría' },
                                     {
-                                        data: "promedioCalificacion", title: 'Promedio de calificación', render: function (data, type, row) {
+                                        data: "promedioCalificacion", id: '1', title: 'Promedio de calificación', render: function (data, type, row) {
                                             var starPercentage = data / 5 * 100;
                                             var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
-                                            return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
+                                            //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
+                                            //return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
+                                            //        $('td').attr('id', '1');
+                                            //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
+                                            var df = '<td id="1" >' + data + '</td>';
+                                            return df;
+
                                         }
                                     },
-                                    { data: "calificacionTotal", title: 'Calificación total' }
+                                    { data: "calificacionTotal", title: 'Número de valoraciones' }
                                 ]
                             });
                         }
@@ -498,6 +524,15 @@
                                 paging: true,
                                 dom: '<"pull-left"B><"pull-right">tip',
                                 //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                language: {
+                                    //"emptyTable": "No hay información",
+                                    "infoEmpty": "Mostrando 0 de 0 entradas",
+                                    "zeroRecords": "Sin resultados encontrados",
+                                    "oPaginate": {
+                                        "sPrevious": "Ant.", // This is the link to the previous page
+                                        "sNext": "Sig."
+                                    }
+                                },
                                 buttons: {
                                     dom: {
                                         container: {
@@ -514,12 +549,14 @@
                                             text: '<i class="fa fa-file-excel-o"></i>',
                                             titleAttr: 'Exportar Excel',
                                             className: 'btn btn-app export excel',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                         },
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',
                                             titleAttr: 'Exportar PDF',
                                             className: 'btn btn-app export pdf',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                             //exportOptions: {
                                             //    columns: [0, 1]
                                             //},
@@ -550,6 +587,15 @@
                                 paging: true,
                                 dom: '<"pull-left"B><"pull-right">tip',
                                 //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                language: {
+                                    //"emptyTable": "No hay información",
+                                    "infoEmpty": "Mostrando 0 de 0 entradas",
+                                    "zeroRecords": "Sin resultados encontrados",
+                                    "oPaginate": {
+                                        "sPrevious": "Ant.", // This is the link to the previous page
+                                        "sNext": "Sig."
+                                    }
+                                },
                                 buttons: {
                                     dom: {
                                         container: {
@@ -566,12 +612,14 @@
                                             text: '<i class="fa fa-file-excel-o"></i>',
                                             titleAttr: 'Exportar Excel',
                                             className: 'btn btn-app export excel',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                         },
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',
                                             titleAttr: 'Exportar PDF',
                                             className: 'btn btn-app export pdf',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
                                             //exportOptions: {
                                             //    columns: [0, 1]
                                             //},
