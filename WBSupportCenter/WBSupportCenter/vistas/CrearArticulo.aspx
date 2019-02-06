@@ -568,7 +568,7 @@
         //Se inicializa modal de multimedia
         function limpiamodal() {
             multimediaTab(1);
-            $('#img-form-crearart').val(nulls);
+            $('#img-form-crearart').val(null);
             urlLocal = '';
         }
 

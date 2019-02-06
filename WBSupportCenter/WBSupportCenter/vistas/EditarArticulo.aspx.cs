@@ -30,7 +30,7 @@ namespace WBSupportCenter.vistas
             {
                 try
                 {
-                    string usuariosValidos = "Administrador,Redactor";
+                    string usuariosValidos = "Administrador,Redactor, Autorizador";
                     string auth = HttpContext.Current.Session["Autenticacion"].ToString();
                     string nombreRol = HttpContext.Current.Session["nomRol"].ToString();
                     if (auth.Equals("false") || (usuariosValidos.IndexOf(nombreRol) < 0))
