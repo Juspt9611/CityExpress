@@ -100,7 +100,7 @@
                 <div class="row">
                     <div class="col-lg-12 box_table_buttons">
                         <button id="submit" type="button" class="btn btn-success float-right"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp Guardar</button>
-                        <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'ArticulosRed.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Cancelar</button>
+                        <button type="button" class="btn btn-danger float-right" onclick="cancelarArticulo()"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -108,8 +108,7 @@
         </div>
 
     </form>
-    <a href="../imgBlog/" >Go to downloads page</a>
-    <!-- Modal structure -->
+    <!-- Modal carga de multimedia -->
     <div id="modal">
         <!-- Modal content -->
         <div>
@@ -187,8 +186,8 @@
                 </div>
                 <div class="row">
                     <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                        <button type="button" class="btn btn-success float-right" onclick="cargaImagen()"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp Copiar</button>
-                        <button type="button" class="btn btn-danger float-right" onclick="" data-izimodal-close="" data-izimodal-transitionout="bounceOutDown"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Cancelar</button>
+                        <button type="button" class="btn btn-success float-right" onclick="cargaImagen()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp Agregar</button>
+                        <button type="button" class="btn btn-danger float-right" onclick="" data-izimodal-close="" data-izimodal-transitionout="bounceOutDown"><i class="fa fa-times" aria-hidden="true"></i>&nbsp Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -201,6 +200,40 @@
         var tags = [];
         var urlLocal;
 
+        function cancelarArticulo() {
+            swal({
+                    title: "¿Salir de la ventana de edición?",
+                    text: "Se perderan los cambios realizados.",
+                    icon: "warning",
+                    closeOnClickOutside: false,
+                    buttons: {
+                        cancel: {
+                            text: "Cancelar",
+                            value: null,
+                            visible: !0,
+                            className: "btn btn-default",
+                            closeModal: !0
+                        },
+                        confirm: {
+                            text: "Salir",
+                            value: !0,
+                            visible: !0,
+                            className: "btn btn-info",
+                            closeModal: !0
+                        }
+                    }
+                }).then((willDelete) => {
+                    $(".swal-button swal-button--confirm btn btn-info").click(function () {
+                        $(".swal-button swal-button--confirm btn btn-info").attr("disabled", true);
+                    })
+                    if (willDelete) {
+                        window.location.href = 'ArticulosRed.aspx';
+                    } else {
+                        $(".swal-button swal-button--confirm btn btn-info").attr("disabled", false);
+                    }
+                });
+        }
+
         var isValidUrl = function(string){
             try {
                 new URL(string);
@@ -210,11 +243,12 @@
             }
         }
 
+        //Genera la cadena multimedia para ser agregada en la instancia de CKEditor
         function cadengaGenerada() {
 
             var cadena = '';
             var tipo = $("input[name='tipo']:checked").val();
-            console.log(tipo);
+            //console.log(tipo);
             switch (tipo) {
                 case '1':
                     cadena = "<img src=" + urlLocal + " alt='' style='height:" + $("#alto-media-form-crearart").val() + "%; width:" + $("#ancho-media-form-crearart").val() + "%'/>";
@@ -228,11 +262,11 @@
                 default:
                     console.log("Default");
             }
-            console.log(cadena);
+            //console.log(cadena);
             return cadena;
 
         }
-
+        //Valida los campos del formulario de carga de multimedia
         function cargaImagen() {
             var verifica = 0;
             $("#msnError-multimedia").empty();
@@ -248,9 +282,11 @@
                         if ($("input[name='tipo']:checked").val() == undefined) {
                             verifica = 1;
                         } else {
-                            
+                            //Se carga una imagen de local
                             var imgHtml = CKEDITOR.dom.element.createFromHtml(cadengaGenerada());
                             CKEDITOR.instances.editor1.insertElement(imgHtml);
+                            urlLocal = '';
+                            $('#modal').iziModal('close');
                         }
 
                     } else {
@@ -266,6 +302,8 @@
 
                     var imgHtml = CKEDITOR.dom.element.createFromHtml(cadengaGenerada());
                     CKEDITOR.instances.editor1.insertElement(imgHtml);
+                    urlLocal = '';
+                    $('#modal').iziModal('close');
                     
                 } else {
                     $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Ingresar una url valida.").addClass("error-media");
@@ -274,7 +312,8 @@
             }
 
         }
-        
+
+        //Velifica el tab de carga local o por url
         function multimediaTab(tipo) {
             $("#msnError-multimedia").empty();
             $("#tab-multimedia-1").removeClass("activo");
@@ -474,8 +513,7 @@
 
         });
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //Cargar archivo
+        //Cargar de archivos multimedia
         function cargarArchivos(archivo) {
             var url = window.location.href;
             urlLocal = '';
@@ -484,7 +522,7 @@
                 url: 'fileUploader.ashx',
                 data: archivo,
                 success: function (status) {
-                    console.log(status);
+                    //console.log(status);
                     if (status == 'error') {
                         $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Error al subir el archivo.").addClass("error-media");
                     } else if (status == 'invalido') {
@@ -527,9 +565,11 @@
         initCategorias(0);
 
         limpiamodal();
-
+        //Se inicializa modal de multimedia
         function limpiamodal() {
             multimediaTab(1);
+            $('#img-form-crearart').val(nulls);
+            urlLocal = '';
         }
 
         $("#modal").iziModal({

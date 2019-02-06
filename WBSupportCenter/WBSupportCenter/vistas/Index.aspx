@@ -76,7 +76,7 @@
                 <div id="sidebarArticulo" class="col-lg-2 sidebar_col">
                     <div class="sidebar listasOcultar">
                         <!-- Recent Posts -->
-                        <div class="recent_posts sidebar_section magic_fade_in">
+                        <div class="recent_posts sidebar_section">
                             <div class="sidebar_title_container">
                                 <div>Artículos más vistos</div>
                             </div>
@@ -121,7 +121,7 @@
                                         <li><i class="fa fa-user"></i><a id="box-Botones-blog-autor" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-star"></i><a id="box-Botones-blog-estrella" href="javascript:void(0)"></a></li>
                                         <li><i class="fa fa-comment"></i><a id="box-Botones-blog-comentario" href="javascript:void(0)"></a></li>
-                                        <li><i class="fa fa-hashtag"></i>Etiquetas: <a id="box-Botones-blog-tags" href="javascript:void(0)"></a></li>
+                                        <li>&nbsp Etiquetas: <a id="box-Botones-blog-tags" href="javascript:void(0)"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -146,11 +146,11 @@
                                         Ingresar un comentario.
                                     </div>
                                 </div>
+                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp Comentar</button>
                             </div>
                         </div>
                         <div class="row">
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp Comentar</button>
                                 <button type="button" class="btn btn-warning float-right" s onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp Historial</button>
                                 <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Regresar</button>
                             </div>
@@ -168,7 +168,7 @@
                 <div id="sidebarCategoria" class="col-lg-2 sidebar_col pull-right">
                     <div class="sidebar listasOcultar">
                         <!-- Recent Comments -->
-                        <div class="recent_posts sidebar_section magic_fade_in">
+                        <div class="recent_posts sidebar_section">
                             <div class="sidebar_title_container">
                                 <div>Categorías más vistas</div>
                             </div>
@@ -268,7 +268,7 @@
                 $("#box-blog").show();
                 $("#box-historial-blog").hide();
                 $('#box-historial-detalleArticulo').hide();
-                $("#box-contenido-blog").show();
+                $("#box-contenido-blog, #box-blog-star-rating,#box-comentarios-blog, #box-blog-lista-comentarios").show();
                 $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario, #box-Botones-blog-tags").empty();
                 $.ajax({
                     type: "POST",
@@ -350,7 +350,7 @@
                         var posts = $.parseJSON(response.d);
                         var countPosts = 0;
                         $.each(posts, function (i, d) {
-                            $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                            $("#idPostMasVistos").append('<div class="news_post">' +
                                 '<div class="news_post_content">' +
                                 '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
                                 '<div class="news_post_text">' +
@@ -361,7 +361,7 @@
                                 '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
                                 '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
                                 '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                                '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+                                '<li>&nbsp Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
                                 '</ul></div></div></div>');
                             countPosts++;
                         });
@@ -417,133 +417,6 @@
 
             });
         });
-        ////////////$.ajaxSetup({ cache: false });
-        ////////////$('.contentArticulo').hide();
-        ////////////$('#tablaArticulos').hide();
-        ////////////$('#box-blog').hide();
-        ////////////$('#box-historial-blog').hide();
-        ////////////$('#box-historial-detalleArticulo').hide();
-        ////////////$('#txtsearch').keyup(function () {
-        ////////////    $('#result').html('');
-        ////////////    $('#state').val('');
-        ////////////    var searchField = $('#txtsearch').val();
-        ////////////    var expression = new RegExp(searchField);
-
-        ////////////    //solicitud datos
-        ////////////    if ($('#txtsearch').val() != "") {
-        ////////////        $.ajax({
-        ////////////            async: false,
-        ////////////            type: "POST",
-        ////////////            url: "Index.aspx/articulosxValidar",
-        ////////////            contentType: "application/json; charset=utf-8",
-        ////////////            dataType: "json",
-        ////////////            data: "{'palabra':'" + $('#txtsearch').val() + "'}",
-        ////////////            success: function (response) {
-        ////////////                if (response.d != "") {
-        ////////////                    $.each(response, function (item, index) {
-        ////////////                        $.each(jQuery.parseJSON(index), function (item, index) {
-        ////////////                            $('#result').append('<li class="list-group-item link-class" value="' + index.idarticulo + '"><span class="l"><a href="javascript:void(0)">' + index.nombreArticulo + '</a></span></li>');
-        ////////////                        });
-        ////////////                    });
-        ////////////                }
-        ////////////            }
-        ////////////        });
-        ////////////    }
-        ////////////});
-
-        //////////////evento al seleccionar
-        ////////////$('#result').on('click', 'li', function () {
-        ////////////    $('#txtsearch').val($(this).text());
-        ////////////    savePalabra($(this).text());
-        ////////////    loadArticulo($(this).val());
-        ////////////    $('#txtsearch').val('');
-        ////////////    $('#result').empty();
-        ////////////});
-
-        //////////////evento al dar enter
-        ////////////$('#txtsearch').keypress(function (e) {
-        ////////////    if (e.keyCode == 13) {
-        ////////////        var palabra = $('#txtsearch').val();
-
-        ////////////        if (palabra != "") {
-        ////////////            loadListaArticulosxPalabra(palabra);
-        ////////////        }
-        ////////////    }
-        ////////////});
-
-        //////////////Carga lista de articulos en base a una palabra
-        ////////////function loadListaArticulosxPalabra(palabra) {
-        ////////////    $("#idPostMasVistos").empty();
-        ////////////    $(".easyPaginateNav").remove();
-        ////////////    if ($("#box-blog").is(":visible")) {
-        ////////////        $("#box-blog").hide();
-        ////////////        $("#idPostMasVistos").show();
-        ////////////    }
-        ////////////    $.ajax({
-        ////////////        type: "POST",
-        ////////////        url: "Index.aspx/articulosxClick",
-        ////////////        contentType: "application/json; charset=utf-8",
-        ////////////        dataType: "json",
-        ////////////        data: "{'palabra':'" + palabra + "'}",
-        ////////////        success: function (response) {
-        ////////////            var posts = $.parseJSON(response.d);
-        ////////////            var countPosts = 0;
-        ////////////            $.each(posts, function (i, d) {
-        ////////////                $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
-        ////////////                                                '<div class="news_post_content">' +
-        ////////////                                                    '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
-        ////////////                                                    '<div class="news_post_text">' +
-        ////////////                                                       d[2] +
-        ////////////                                                    '</div>' +
-        ////////////                                                    '<div class="news_post_meta">' +
-        ////////////                                                        '<ul class="d-flex flex-row align-items-start justify-content-start">' +
-        ////////////                                                            '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
-        ////////////                                                            '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
-        ////////////                                                            '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-        ////////////                                                            '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
-        ////////////                                                        '</ul></div></div></div>');
-        ////////////                countPosts++;
-        ////////////            });
-
-        ////////////            if (countPosts == 0) {
-        ////////////                $("#idPostMasVistos").append('<div class="news_post"> <div class="news_post_content"> No se encontraron artículos para el criterio de busqueda <strong>"' + palabra + '"</strong>. </div> </div>');
-        ////////////            }
-
-        ////////////            savePalabra(palabra);
-        ////////////            $('#txtsearch').val('');
-        ////////////            $("#result").empty('');
-        ////////////            $('#idPostMasVistos').easyPaginate({
-        ////////////                paginateElement: '.news_post',
-        ////////////                elementsPerPage: 5,
-        ////////////                effect: 'climb'
-        ////////////            });
-        ////////////        },
-        ////////////        error: function (response) {
-        ////////////            swal("Hubo un error en esta búsqueda", {
-        ////////////                icon: "error",
-        ////////////                allowOutsideClick: false,
-        ////////////                closeOnClickOutside: false
-        ////////////            });
-        ////////////        }
-        ////////////    });
-        ////////////}
-
-        ////////////var bandera = false;
-        //////////////evento boton buscar
-        ////////////$("#btnBuscar").click(function () {
-        ////////////    var palabra = $('#txtsearch').val();
-        ////////////    if (palabra != "") {
-        ////////////        loadListaArticulosxPalabra(palabra);
-        ////////////    } else {
-        ////////////        swal("Favor de ingresar un criterio de búsqueda", {
-        ////////////            icon: "warning",
-        ////////////            allowOutsideClick: false,
-        ////////////            closeOnClickOutside: false
-        ////////////        });
-        ////////////    }
-
-        ////////////});
-        ////////////});
 
         function savePalabra(palabra) {
             $.ajax({
@@ -576,7 +449,7 @@
                     var posts = $.parseJSON(response.d);
                     var countPosts = 0;
                     $.each(posts, function (i, d) {
-                        $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                        $("#idPostMasVistos").append('<div class="news_post">' +
                             '<div class="news_post_content">' +
                             '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
                             '<div class="news_post_text">' +
@@ -587,7 +460,7 @@
                             '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
                             '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
                             '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                            '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+                            '<li>&nbsp Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
                             '</ul></div></div></div>');
                         countPosts++;
                     });
@@ -630,7 +503,7 @@
                     var posts = $.parseJSON(response.d);
                     var countPostMasvistos = 0;
                     $.each(posts, function (i, d) {
-                        $("#idPostMasVistos").append('<div class="news_post magic_fade_in">' +
+                        $("#idPostMasVistos").append('<div class="news_post">' +
                             '<div class="news_post_content">' +
                             '<div class="news_post_title"><a href="javascript:loadArticulo(' + d[0] + ')">' + d[1] + '</a><br><span class="span-blog-categorias">' + d[8].replace(/,/g, ' >> ') + '</span></div>' +
                             '<div class="news_post_text">' +
@@ -641,7 +514,7 @@
                             '<li><i class="fa fa-user"></i><a href="javascript:void(0)"> ' + d[3] + '</a></li>' +
                             '<li><i class="fa fa-star"></i><a href="javascript:void(0)"> ' + d[6] + '</a></li>' +
                             '<li><i class="fa fa-comment"></i><a href="javascript:void(0)"> ' + d[5] + ' Comentarios</a></li>' +
-                            '<li><i class="fa fa-hashtag"></i> Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
+                            '<li>&nbsp Etiquetas: <a href="javascript:void(0)">' + d[7] + '</a></li>' +
                             '</ul></div></div></div>');
                         countPostMasvistos++;
                     });
@@ -662,7 +535,7 @@
             $("#box-blog").show();
             $("#box-historial-blog").hide();
             $('#box-historial-detalleArticulo').hide();
-            $("#box-contenido-blog").show();
+            $("#box-contenido-blog, #box-blog-star-rating,#box-comentarios-blog, #box-blog-lista-comentarios").show();
             $("#box-titulo-blog, #box-contenido-blog, #box-Botones-blog-autor, #box-Botones-blog-estrella, #box-Botones-blog-comentario,#box-Botones-blog-comentario, #box-Botones-blog-tags").empty();
             $.ajax({
                 type: "POST",
@@ -815,13 +688,14 @@
         //Cambia contenido del blog por el historial o viceversa
         function verHistorial() {
             if ($("#box-contenido-blog").is(":visible")) {
-                $("#box-contenido-blog").hide();
+                $("#box-contenido-blog, #box-blog-star-rating,#box-comentarios-blog, #box-blog-lista-comentarios").hide();
                 $("#box-historial-blog").show();
             } else {
                 $("#box-historial-blog").hide();
                 $('#box-historial-detalleArticulo').hide();
-                $("#box-contenido-blog").show();
+                $("#box-contenido-blog, #box-blog-star-rating,#box-comentarios-blog, #box-blog-lista-comentarios").show();
             }
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
         }
 
         //Carga el historial

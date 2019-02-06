@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
                     <br />
-                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable " width="100%">
+                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable dt-responsive" width="100%">
                         <thead>
                             <tr>
                                 <th>Código</th>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
                     <br />
-                    <table id="tablaEliminacionArticulos" class="table table-striped table-bordered nowrap display dataTable hidden" width="100%"></table>
+                    <table id="tablaEliminacionArticulos" class="table table-striped table-bordered nowrap display dataTable hidden dt-responsive" width="100%"></table>
                 </div>
             </div>
         </div>
@@ -84,7 +84,6 @@
             var idArticulo = null;
             var estatus = null;
             var comentario = null;
-            console.log("ready");
             init();
             //bootsVal();
             $('#titleSpan').text('Autorizar artículos');
@@ -284,7 +283,7 @@
                     })
                 },
                 failure: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 }
             });
         }
@@ -297,11 +296,11 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     datos = response.d;
-                    console.log(datos);
+                    //console.log(datos);
                     var json = $.parseJSON(datos);
-                    console.log(json);
+                    //console.log(json);
                     $('#tablaEliminacionArticulos').DataTable({
                         data: json,
                         dom: '<"pull-left"f><"pull-right">tip',
@@ -330,7 +329,7 @@
                                 data: null,
                                 sortable: false,
                                 render: function (data, type, row) {
-                                    console.log(data.idarticulo);
+                                    //console.log(data.idarticulo);
                                     return '<center><a class="btn btn-danger btn-sm text-white" onclick="eliminarArticulo(' + data.idarticulo + ');">Eliminar</a></center>'
                                 }
                             }
@@ -338,13 +337,13 @@
                     });
                 },
                 failure: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 }
             });
         }
 
         function eliminarArticulo(idArticulo) {
-            console.log(idArticulo);
+            //console.log(idArticulo);
             $.ajax({
                 type: 'POST',
                 url: 'AprobacionArticulos.aspx/eliminarArticulo',
@@ -355,7 +354,7 @@
                     swal("¡Éxito!", "¡¡¡El registro ha sido eliminado correctamente!!!", "success");
                 },
                 failure: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 }
             });
             $('#tablaEliminacionArticulos').DataTable().destroy();
@@ -399,7 +398,7 @@
                     }
                 },
                 failure: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 }
             });
         }

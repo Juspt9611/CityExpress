@@ -22,8 +22,6 @@ namespace WBSupportCenter
             else if (id == "3")
             {
                 usuarios.Attributes["class"] = "hidden";
-                articulosRed.Attributes["class"] = "hidden";
-                reportes.Attributes["class"] = "hidden";
             }
             else if (id == "4")
             {
