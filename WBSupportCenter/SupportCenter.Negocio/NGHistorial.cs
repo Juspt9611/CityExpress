@@ -16,5 +16,10 @@ namespace SupportCenter.Negocio
         {
             return Objeto.DT_ConsultarHistorialArticulo(idArt);
         }
+
+        public List<Historial> NG_ConsultarArticuloxVersion(int idArt, int ver)
+        {
+            return Objeto.DT_ConsultarArticuloxVersion(idArt, ver);
+        }
     }
 }

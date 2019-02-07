@@ -721,6 +721,8 @@
                             break;
                         }
                         window.responseGlobal = valNew[i];
+                        var id = 0;
+                        var ver = 0;
 
                         html += '<li><label class="text-dark font-weight-bold">Fecha de Creación: </label>';
                         var fechaCreacion = moment(val[i][4], 'DD-MM-YYYY').format('DD-MM-YYYY');
@@ -732,7 +734,9 @@
                         html += '<label class="font-italic">' + val[i][6] + '&nbsp;&nbsp;</label>';
                         html += '<label class="text-dark font-weight-bold">Versión: </label>';
                         html += '<label class="font-italic">' + val[i][2] + '&nbsp;&nbsp;</label>';
-                        html += '<a id="btnVer" class="btn btn-link font-weight-bold" href="javascript:void(0)" onclick="showArticuloHistorial(responseGlobal);" role="button">Ver versión</a></li><br>';
+                        id = val[i][0];
+                        ver = val[i][2];
+                        html += '<a id="btnVer" class="btn btn-link font-weight-bold" href="javascript:void(0)" onclick="showArticuloHistorial(' + id + ', ' + ver + ');" role="button">Ver versión</a></li><br>';
 
                         $('#box-historial-blog').html(html);
                     }
@@ -748,23 +752,44 @@
 
         }
 
-        function showArticuloHistorial(objeto) {
+        function showArticuloHistorial(id, version) {
+            console.log('La versión es ' + version + ' y el id es ' + id);
             $('#box-historial-blog').hide();
-            var valNew = objeto.split('||');
             var html = '';
-            $('#box-historial-detalleArticulo').html('');
 
-            html += '<div class="box_table_container_historial">';
-            html += '   <div class="row">';
-            html += '       <span class="box_table_title"> Vista previa <a id="btnAtras" class="btn btn-warning pull-right" href="javascript:void(0)" onclick="returnHistorial();" role="button"> <i class="fa fa-minus-square" aria-hidden="true"></i> Ocultar vista previa</a></span>';
-            // html += '       ';
-            html += '   </div>';
-            html += '   <br>';
-            html += '   <div id="box-contenido-blog">' + valNew[3] + '</div>';
-            html += '</div>';
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/articuloxVersion",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArt':'" + id + "', 'ver':'" + version + "'}",
+                success: function (response) {
+                    console.log(response);
+                    var valNew = response.d.split('||');
 
-            $('#box-historial-detalleArticulo').show();
-            $('#box-historial-detalleArticulo').html(html);
+                    $('#box-historial-detalleArticulo').html('');
+
+                    html += '<div class="box_table_container_historial">';
+                    html += '   <div class="row">';
+                    html += '       <span class="box_table_title"> Vista previa <a id="btnAtras" class="btn btn-warning pull-right" href="javascript:void(0)" onclick="returnHistorial();" role="button"> <i class="fa fa-minus-square" aria-hidden="true"></i> Ocultar vista previa</a></span>';
+                    html += '   </div>';
+                    html += '   <br>';
+                    html += '   <div id="box-contenido-blog">' + valNew[3] + '</div>';
+                    html += '</div>';
+
+                    $('#box-historial-detalleArticulo').show();
+                    $('#box-historial-detalleArticulo').html(html);
+                    
+                },
+                error: function (response) {
+                    swal("Hubo un error con esta búsqueda", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
+            
         }
 
         function returnHistorial() {

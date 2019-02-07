@@ -11,11 +11,14 @@ using WBSupportCenter.WSsupport1;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace SupportCenter {
-    public partial class Index : System.Web.UI.Page {
+namespace SupportCenter
+{
+    public partial class Index : System.Web.UI.Page
+    {
         static WSsupportCenterClass metodo = new WSsupportCenterClass();
 
-        protected void Page_Load(object sender, EventArgs e) {
+        protected void Page_Load(object sender, EventArgs e)
+        {
 
             if (!Page.IsPostBack)
             {
@@ -48,7 +51,8 @@ namespace SupportCenter {
         }
 
 
-        public void OptenerArt() {
+        public void OptenerArt()
+        {
             DataTable tblArti = new DataTable();
             lstArt.InnerText = "";
 
@@ -57,7 +61,8 @@ namespace SupportCenter {
             lstArt.InnerHtml += "<ul>";
             //Forech para ver Articulos
 
-            foreach (DataRow item in tblArti.Rows) {
+            foreach (DataRow item in tblArti.Rows)
+            {
                 lstArt.InnerHtml += "<li>";
                 lstArt.InnerHtml += "<a href='#' class='d-flex flex-row align-items-start justify-content-start'>";
                 lstArt.InnerHtml += "<div class='sidebar_dot d-flex flex-row align-items-center justify-content-start'>";
@@ -73,16 +78,18 @@ namespace SupportCenter {
 
         }
 
-        public void OptenerCatg() {
+        public void OptenerCatg()
+        {
             DataTable DTCateg = new DataTable();
-            lstCatg.InnerText="";
+            lstCatg.InnerText = "";
 
             DTCateg = ConvertToDataTable(metodo.WSOptenerCatg());
 
             lstCatg.InnerHtml += "<ul>";
             //Forech para ver Articulos
 
-            foreach (DataRow item in DTCateg.Rows) {
+            foreach (DataRow item in DTCateg.Rows)
+            {
 
                 lstCatg.InnerHtml += "<li>";
                 lstCatg.InnerHtml += "<a href='#' class='d-flex flex-row align-items-start justify-content-start'>";
@@ -101,7 +108,8 @@ namespace SupportCenter {
 
 
         [WebMethod]
-        public static string articulosxValidar(string palabra) {
+        public static string articulosxValidar(string palabra)
+        {
             DataTable dtTitulo = new DataTable();
             dtTitulo = ConvertToDataTable(metodo.WSBusquedaTitulo(palabra));
             return DataTableToJSONWithStringBuilder(dtTitulo);
@@ -127,13 +135,15 @@ namespace SupportCenter {
             return res;
         }
 
-        public static DataTable ConvertToDataTable<T>(IList<T> data) {
+        public static DataTable ConvertToDataTable<T>(IList<T> data)
+        {
             PropertyDescriptorCollection properties =
                TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
             foreach (PropertyDescriptor prop in properties)
                 table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-            foreach (T item in data) {
+            foreach (T item in data)
+            {
                 DataRow row = table.NewRow();
                 foreach (PropertyDescriptor prop in properties)
                     row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
@@ -144,26 +154,37 @@ namespace SupportCenter {
         }
 
 
-        public static string DataSetToJSON(DataTable dt) {
+        public static string DataSetToJSON(DataTable dt)
+        {
             return JsonConvert.SerializeObject(dt.AsEnumerable().Select(r => r.ItemArray));
         }
 
-        public static string DataTableToJSONWithStringBuilder(DataTable table) {
+        public static string DataTableToJSONWithStringBuilder(DataTable table)
+        {
             var JSONString = new StringBuilder();
-            if (table.Rows.Count > 0) {
+            if (table.Rows.Count > 0)
+            {
                 JSONString.Append("[");
-                for (int i = 0; i < table.Rows.Count; i++) {
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
                     JSONString.Append("{");
-                    for (int j = 0; j < table.Columns.Count; j++) {
-                        if (j < table.Columns.Count - 1) {
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        if (j < table.Columns.Count - 1)
+                        {
                             JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\",");
-                        } else if (j == table.Columns.Count - 1) {
+                        }
+                        else if (j == table.Columns.Count - 1)
+                        {
                             JSONString.Append("\"" + table.Columns[j].ColumnName.ToString() + "\":" + "\"" + table.Rows[i][j].ToString() + "\"");
                         }
                     }
-                    if (i == table.Rows.Count - 1) {
+                    if (i == table.Rows.Count - 1)
+                    {
                         JSONString.Append("}");
-                    } else {
+                    }
+                    else
+                    {
                         JSONString.Append("},");
                     }
                 }
@@ -218,6 +239,23 @@ namespace SupportCenter {
                     "||" + item["version"].ToString() + "||" + item["contenido"].ToString() +
                     "||" + item["fechaCreacion"] + "||" + item["fechaModificacion"] +
                     "||" + item["nombre"] + "$$";
+            }
+            return contentJSON;
+        }
+
+        [WebMethod]
+        public static string articuloxVersion(int idArt, int ver)
+        {
+            DataTable dtHistorial = new DataTable();
+            dtHistorial = ConvertToDataTable(metodo.WSConsultarArticuloxVersion(idArt, ver));
+            string contentJSON = "";
+
+            foreach (DataRow item in dtHistorial.Rows)
+            {
+                contentJSON += item["idArticulo"] + "||" + item["nombreArticulo"].ToString() +
+                    "||" + item["version"].ToString() + "||" + item["contenido"].ToString() +
+                    "||" + item["fechaCreacion"] + "||" + item["fechaModificacion"] +
+                    "||" + item["nombre"];
             }
             return contentJSON;
         }

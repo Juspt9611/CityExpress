@@ -565,6 +565,21 @@
           <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="WSConsultarArticuloxVersion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idArt" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ver" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSConsultarArticuloxVersionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WSConsultarArticuloxVersionResult" type="tns:ArrayOfHistorial" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSOptenerGrup">
         <s:complexType />
       </s:element>
@@ -898,6 +913,12 @@
   <wsdl:message name="WSConsultarHistorialArticuloSoapOut">
     <wsdl:part name="parameters" element="tns:WSConsultarHistorialArticuloResponse" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionSoapIn">
+    <wsdl:part name="parameters" element="tns:WSConsultarArticuloxVersion" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionSoapOut">
+    <wsdl:part name="parameters" element="tns:WSConsultarArticuloxVersionResponse" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerGrupSoapIn">
     <wsdl:part name="parameters" element="tns:WSOptenerGrup" />
   </wsdl:message>
@@ -1128,6 +1149,13 @@
     <wsdl:part name="idArt" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSConsultarHistorialArticuloHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionHttpGetIn">
+    <wsdl:part name="idArt" type="s:string" />
+    <wsdl:part name="ver" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
   <wsdl:message name="WSOptenerGrupHttpGetIn" />
@@ -1366,6 +1394,13 @@
   <wsdl:message name="WSConsultarHistorialArticuloHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionHttpPostIn">
+    <wsdl:part name="idArt" type="s:string" />
+    <wsdl:part name="ver" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSConsultarArticuloxVersionHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerGrupHttpPostIn" />
   <wsdl:message name="WSOptenerGrupHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
@@ -1529,6 +1564,10 @@
       <wsdl:input message="tns:WSConsultarHistorialArticuloSoapIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <wsdl:input message="tns:WSConsultarArticuloxVersionSoapIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxVersionSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOptenerGrup">
       <wsdl:input message="tns:WSOptenerGrupSoapIn" />
       <wsdl:output message="tns:WSOptenerGrupSoapOut" />
@@ -1675,6 +1714,10 @@
       <wsdl:input message="tns:WSConsultarHistorialArticuloHttpGetIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <wsdl:input message="tns:WSConsultarArticuloxVersionHttpGetIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxVersionHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOptenerGrup">
       <wsdl:input message="tns:WSOptenerGrupHttpGetIn" />
       <wsdl:output message="tns:WSOptenerGrupHttpGetOut" />
@@ -1820,6 +1863,10 @@
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <wsdl:input message="tns:WSConsultarHistorialArticuloHttpPostIn" />
       <wsdl:output message="tns:WSConsultarHistorialArticuloHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <wsdl:input message="tns:WSConsultarArticuloxVersionHttpPostIn" />
+      <wsdl:output message="tns:WSConsultarArticuloxVersionHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOptenerGrup">
       <wsdl:input message="tns:WSOptenerGrupHttpPostIn" />
@@ -2106,6 +2153,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <soap:operation soapAction="http://tempuri.org/WSConsultarHistorialArticulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <soap:operation soapAction="http://tempuri.org/WSConsultarArticuloxVersion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2440,6 +2496,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <soap12:operation soapAction="http://tempuri.org/WSConsultarArticuloxVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOptenerGrup">
       <soap12:operation soapAction="http://tempuri.org/WSOptenerGrup" style="document" />
       <wsdl:input>
@@ -2767,6 +2832,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <http:operation location="/WSConsultarArticuloxVersion" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOptenerGrup">
       <http:operation location="/WSOptenerGrup" />
       <wsdl:input>
@@ -3087,6 +3161,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSConsultarHistorialArticulo">
       <http:operation location="/WSConsultarHistorialArticulo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSConsultarArticuloxVersion">
+      <http:operation location="/WSConsultarArticuloxVersion" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

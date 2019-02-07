@@ -88,6 +88,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSConsultarHistorialArticuloOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSConsultarArticuloxVersionOperationCompleted;
+        
         private System.Threading.SendOrPostCallback WSOptenerGrupOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSOptenerRolsOperationCompleted;
@@ -226,6 +228,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSConsultarHistorialArticuloCompletedEventHandler WSConsultarHistorialArticuloCompleted;
+        
+        /// <remarks/>
+        public event WSConsultarArticuloxVersionCompletedEventHandler WSConsultarArticuloxVersionCompleted;
         
         /// <remarks/>
         public event WSOptenerGrupCompletedEventHandler WSOptenerGrupCompleted;
@@ -1124,6 +1129,37 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSConsultarHistorialArticuloCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSConsultarHistorialArticuloCompleted(this, new WSConsultarHistorialArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSConsultarArticuloxVersion", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Historial[] WSConsultarArticuloxVersion(int idArt, int ver) {
+            object[] results = this.Invoke("WSConsultarArticuloxVersion", new object[] {
+                        idArt,
+                        ver});
+            return ((Historial[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArticuloxVersionAsync(int idArt, int ver) {
+            this.WSConsultarArticuloxVersionAsync(idArt, ver, null);
+        }
+        
+        /// <remarks/>
+        public void WSConsultarArticuloxVersionAsync(int idArt, int ver, object userState) {
+            if ((this.WSConsultarArticuloxVersionOperationCompleted == null)) {
+                this.WSConsultarArticuloxVersionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSConsultarArticuloxVersionOperationCompleted);
+            }
+            this.InvokeAsync("WSConsultarArticuloxVersion", new object[] {
+                        idArt,
+                        ver}, this.WSConsultarArticuloxVersionOperationCompleted, userState);
+        }
+        
+        private void OnWSConsultarArticuloxVersionOperationCompleted(object arg) {
+            if ((this.WSConsultarArticuloxVersionCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSConsultarArticuloxVersionCompleted(this, new WSConsultarArticuloxVersionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2684,6 +2720,32 @@ namespace WBSupportCenter.WSsupport1 {
         private object[] results;
         
         internal WSConsultarHistorialArticuloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Historial[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Historial[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSConsultarArticuloxVersionCompletedEventHandler(object sender, WSConsultarArticuloxVersionCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSConsultarArticuloxVersionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSConsultarArticuloxVersionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

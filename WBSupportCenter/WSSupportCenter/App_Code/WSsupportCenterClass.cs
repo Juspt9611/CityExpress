@@ -231,6 +231,13 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Historial.NG_ConsultarHistorialArticulo(idArt);
     }
 
+    [WebMethod]
+    public List<Historial> WSConsultarArticuloxVersion(int idArt, int ver)
+    {
+        NGHistorial Historial = new NGHistorial();
+        return Historial.NG_ConsultarArticuloxVersion(idArt, ver);
+    }
+
     #endregion
 
     #region Personal
