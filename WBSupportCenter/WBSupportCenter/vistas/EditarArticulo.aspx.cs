@@ -25,6 +25,7 @@ namespace WBSupportCenter.vistas
             string categorias = "";
             string tags = "";
             string grupos = "";
+            string contenidoNormal = "";
 
             if (!Page.IsPostBack)
             {
@@ -44,6 +45,7 @@ namespace WBSupportCenter.vistas
                         ds = metodo.WSConsultarArtEdicion(Convert.ToInt32(idArt));
 
                         tituloArt = (string)ds.Tables[0].Rows[0][0];
+                        contenidoNormal = (string)ds.Tables[0].Rows[0][1];
                         contenido = (string)ds.Tables[0].Rows[0][2];
                         estatus = (Int32)ds.Tables[0].Rows[0][3];
                         categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
@@ -56,6 +58,7 @@ namespace WBSupportCenter.vistas
                         this.hiddenTags.Value = tags;
                         this.hiddenGrupos.Value = grupos;
                         this.hiddenEstatus.Value = estatus.ToString();
+                        this.hiddenContenidoNormal.Value = contenidoNormal;
                     }
                 }
                 catch (Exception exp)
@@ -71,6 +74,7 @@ namespace WBSupportCenter.vistas
             ds = metodo.WSConsultarArtEdicion(Convert.ToInt32(idArt));
 
             tituloArt = (string)ds.Tables[0].Rows[0][0];
+            contenidoNormal = (string)ds.Tables[0].Rows[0][1];
             contenido = (string)ds.Tables[0].Rows[0][2];
             estatus = (Int32)ds.Tables[0].Rows[0][3];
             categorias = JsonConvert.SerializeObject(ds.Tables[1].AsEnumerable().Select(r => r.ItemArray));
@@ -83,6 +87,7 @@ namespace WBSupportCenter.vistas
             this.hiddenTags.Value = tags;
             this.hiddenGrupos.Value = grupos;
             this.hiddenEstatus.Value = estatus.ToString();
+            this.hiddenContenidoNormal.Value = contenidoNormal;
 
         }
 

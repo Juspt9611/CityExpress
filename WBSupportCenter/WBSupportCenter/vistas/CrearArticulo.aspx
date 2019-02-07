@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 align-self-center">
                         <div id="tagcontainer_box_form_crearart"></div>
                     </div>
                 </div>

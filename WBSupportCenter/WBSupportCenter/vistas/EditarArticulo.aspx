@@ -51,7 +51,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 align-self-center">
                     <div id="tagcontainer_box_form_crearart"></div>
                 </div>
             </div>      
@@ -104,6 +104,7 @@
             </div>
             <input id="hiddenTituloArt" type="hidden" runat="server" />  
             <input id="hiddenContenido" type="hidden" runat="server" />
+            <input id="hiddenContenidoNormal" type="hidden" runat="server" />
             <input id="hiddenTags" type="hidden" runat="server" />  
             <input id="hiddenCategorias" type="hidden" runat="server" />   
             <input id="hiddenGrupos" type="hidden" runat="server" /> 
@@ -199,8 +200,11 @@
     <script>
 
         var cat = [];
+        var catNormal = [];
         var tags = [];  
+        var tagsNomral = [];
         var urlLocal;
+        var gruposNormal = [];
 
         //Valida la salida del usuario de la sección de edición de artículos
         function cancelarArticulo() {
@@ -504,6 +508,7 @@
                 //Se cargan los grupos asociados al artículo
                 hiddenGrupos.forEach(function (element) {
                     $(":checkbox[value=" + element[0] + "]").prop("checked", "true");
+                    gruposNormal.push(element[0]);
                 });
             });
 
@@ -511,6 +516,7 @@
             hiddenTags.forEach(function (element) {
                 $("#tagcontainer_box_form_crearart").append("<button type='button' id=idTag" + element[1] + " class='btn btn-info' style='margin:0.2rem;' onclick='borrarTag(\"" + (element[1]).toString() + "\");'>" + element[1] + "</button>");
                 tags.push((element[1]).toString());
+                tagsNomral.push((element[1]).toString());
             });
 
             //Se cargan Categorias
@@ -519,6 +525,7 @@
                 $("#catSpan_box_form_crearart").append("<span  onclick='spanClickCat(" + element[0] + ");'> >> <i style='cursor: pointer;'> " + element[1] + "</i></span>");
                 intCatPadre = element[0];
                 cat.push((element[0]).toString());
+                catNormal.push((element[0]).toString());
             });
             initCategorias(intCatPadre);
 
@@ -573,46 +580,68 @@
                     $("#inGrupos-form-crearart").addClass('is-invalid');
                 } else {
 
-                    var articuloNuevo = {};
-                    articuloNuevo.idArticulo = (window.location.search.substring(1).split('=')[1]);
-                    articuloNuevo.nombreArticulo = tituloArt;
-                    articuloNuevo.contenido = data;
-                    articuloNuevo.categorias = cat.join();
-                    articuloNuevo.tags = (tags.length == 0 ? "" : tags.join());
-                    articuloNuevo.grupos = grupos.join();
+                    if ((tituloArt == ($('#<%=hiddenTituloArt.ClientID %>').val())) && (data == ($('#<%=hiddenContenidoNormal.ClientID %>').val())) && (( (tags.length == 0 ? "" : tags.join()) == (tagsNomral.length == 0 ? "" : tagsNomral.join()) )) && (catNormal.join() == cat.join()) && (gruposNormal.join() == grupos.join()) ) {
 
-                    $.ajax({
-
-                        type: "POST",
-                        url: "EditarArticulo.aspx/editarArticulo",
-                        data: JSON.stringify(articuloNuevo),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-
-                            if (response.d == 0) {
-
-                                //Se limpian campos de formulario
-                                $('#nombre_box_form_crearart').val("");
-                                cat.length = 0;
-                                initCategorias(0);
-                                $("#catSpan_box_form_crearart").empty();
-                                tags.length = 0;
-                                $('#tags_box_form_crearart').val("");
-                                $('#tagcontainer_box_form_crearart').empty();
-                                CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
-
-                                swal("Aritículo editado", {
-                                    icon: "success",
+                        swal("No se han realizado cambios al artículo.", {
+                                    icon: "info",
                                     allowOutsideClick: false,
                                     closeOnClickOutside: false
-                                });
-                                $(".swal-button").click(function () {
-                                    //closeSite();
-                                    window.location.href = 'ArticulosRed.aspx';
-                                });
+                        });
 
-                            } else {
+                    } else {
+
+                        var articuloNuevo = {};
+                        articuloNuevo.idArticulo = (window.location.search.substring(1).split('=')[1]);
+                        articuloNuevo.nombreArticulo = tituloArt;
+                        articuloNuevo.contenido = data;
+                        articuloNuevo.categorias = cat.join();
+                        articuloNuevo.tags = (tags.length == 0 ? "" : tags.join());
+                        articuloNuevo.grupos = grupos.join();
+
+                        $.ajax({
+
+                            type: "POST",
+                            url: "EditarArticulo.aspx/editarArticulo",
+                            data: JSON.stringify(articuloNuevo),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+
+                                if (response.d == 0) {
+
+                                    //Se limpian campos de formulario
+                                    $('#nombre_box_form_crearart').val("");
+                                    cat.length = 0;
+                                    initCategorias(0);
+                                    $("#catSpan_box_form_crearart").empty();
+                                    tags.length = 0;
+                                    $('#tags_box_form_crearart').val("");
+                                    $('#tagcontainer_box_form_crearart').empty();
+                                    CKEDITOR.instances.editor1.setData("<p>Ingresar contenido.</p>");
+
+                                    swal("Aritículo editado", {
+                                        icon: "success",
+                                        allowOutsideClick: false,
+                                        closeOnClickOutside: false
+                                    });
+                                    $(".swal-button").click(function () {
+                                        //closeSite();
+                                        window.location.href = 'ArticulosRed.aspx';
+                                    });
+
+                                } else {
+                                    swal("Hubo un error con el registro", {
+                                        icon: "error",
+                                        allowOutsideClick: false,
+                                        closeOnClickOutside: false
+                                    });
+                                    $(".swal-button").click(function () {
+                                        //closeSite();
+                                    });
+                                }
+
+                            },
+                            failure: function (response) {
                                 swal("Hubo un error con el registro", {
                                     icon: "error",
                                     allowOutsideClick: false,
@@ -622,19 +651,9 @@
                                     //closeSite();
                                 });
                             }
+                        });
 
-                        },
-                        failure: function (response) {
-                            swal("Hubo un error con el registro", {
-                                icon: "error",
-                                allowOutsideClick: false,
-                                closeOnClickOutside: false
-                            });
-                            $(".swal-button").click(function () {
-                                //closeSite();
-                            });
-                        }
-                    });
+                    }
                 }
             }
 
