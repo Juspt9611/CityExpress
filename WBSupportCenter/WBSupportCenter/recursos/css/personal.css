@@ -14,9 +14,13 @@
     overflow-wrap: break-word;
 }
 
-#box-contenido-blog{
+#box-historial-detalleArticulo{
     width:100%;
-    overflow:hidden;
+}
+
+#box-contenido-blog {
+    width: 100%;
+    overflow: hidden;
 }
 .box_table_title{
     width:100%;

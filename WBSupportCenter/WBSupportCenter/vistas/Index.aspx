@@ -129,11 +129,11 @@
                         <div class="row">
                             <div class="col-lg-6 offset-lg-6" style="text-align: center !important;">
                                 <div id="box-blog-star-rating">
-                                    <span id="star5" class="fa fa-star star float-right" onclick="estrellas(5)"></span>
-                                    <span id="star4" class="fa fa-star star float-right" onclick="estrellas(4)"></span>
-                                    <span id="star3" class="fa fa-star star float-right" onclick="estrellas(3)"></span>
-                                    <span id="star2" class="fa fa-star star float-right" onclick="estrellas(2)"></span>
-                                    <span id="star1" class="fa fa-star star float-right" onclick="estrellas(1)"></span>
+                                    <span id="star5" class="fa fa-star star float-right" onclick="registrarValoracionxArt(2,5)"></span>
+                                    <span id="star4" class="fa fa-star star float-right" onclick="registrarValoracionxArt(2,4)"></span>
+                                    <span id="star3" class="fa fa-star star float-right" onclick="registrarValoracionxArt(2,3)"></span>
+                                    <span id="star2" class="fa fa-star star float-right" onclick="registrarValoracionxArt(2,2)"></span>
+                                    <span id="star1" class="fa fa-star star float-right" onclick="registrarValoracionxArt(2,1)"></span>
                                 </div>
                             </div>
                         </div>
@@ -143,10 +143,10 @@
                                     <label for="box-blog-txtComentario">Comparte tu opinión: </label>
                                     <textarea class="form-control" id="box-blog-txtComentario" placeholder="Ingresa un comentario" required></textarea>
                                     <div class="invalid-feedback">
-                                        Ingresar un comentario.
+                                        Campo de comentario vacio, ingresar un comentario.
                                     </div>
                                 </div>
-                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt()"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp Comentar</button>
+                                <button id="submit" type="button" class="btn btn-success float-right" onclick="registrarValoracionxArt(1)"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp Comentar</button>
                             </div>
                         </div>
                         <div class="row">
@@ -530,6 +530,9 @@
         var idArticuloActual;
         function loadArticulo(idArt) {
             idArticuloActual = 0;
+            if ($("#box-blog-txtComentario").hasClass("is-invalid")) {
+                $("#box-blog-txtComentario").removeClass('is-invalid');
+            }
             $("#idPostMasVistos").hide();
             $(".easyPaginateNav").remove();
             $("#box-blog").show();
@@ -604,6 +607,9 @@
         //Consulta de comentario por id del artículo
         function consultarComentarios(idArticulo) {
             $("#box-blog-listas-comentarios").empty();
+            if ($(".easyPaginateNav")[0]) {
+                $(".easyPaginateNav").remove();
+            }
             $.ajax({
                 async: false,
                 type: "POST",
@@ -637,7 +643,15 @@
             });
         }
 
-        function registrarValoracionArticulo(estrellas, idArticulo, comentario) {
+        function registrarValoracionArticulo(estrellas, idArticulo, comentario, tipo) {
+
+            var msn = '';
+
+            if (tipo == 1) {
+                msn = 'Comentario registrado.';
+            } else {
+                msn = 'Valoración registrada.';
+            }
 
             $.ajax({
                 async: false,
@@ -650,7 +664,7 @@
                     if (response.d == 0) {
                         $("#box-blog-txtComentario").val('');
                         consultarComentarios(idArticulo);
-                        swal('Valoración registrada.', {
+                        swal(msn, {
                             icon: "success",
                             allowOutsideClick: false,
                             closeOnClickOutside: false
@@ -673,10 +687,25 @@
             });
         }
 
-        function registrarValoracionxArt() {
+        function registrarValoracionxArt(tipo, numEstrellas) {
 
             var comentario = $("#box-blog-txtComentario").val();
-            registrarValoracionArticulo(estrellaArticulo, idArticuloActual, comentario);
+            if ($("#box-blog-txtComentario").hasClass("is-invalid")) {
+                $("#box-blog-txtComentario").removeClass('is-invalid');
+            }
+
+            if (tipo == 1) {
+                if (comentario.length == 0) {
+                    $("#box-blog-txtComentario").addClass('is-invalid');
+                } else {
+                    registrarValoracionArticulo(6, idArticuloActual, comentario, tipo);
+                }
+            } else {
+                estrellas(numEstrellas);
+                registrarValoracionArticulo(numEstrellas, idArticuloActual, '', tipo);
+            }
+
+            
 
         }
 
