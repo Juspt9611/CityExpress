@@ -212,7 +212,9 @@
         $(document).ready(function () {
             $('.js-data-example-ajax').select2({
                 language: 'es',
-                formatInputTooShort: "Por favor, ingrese un criterio de busqueda.",
+                formatInputTooShort: function () {
+                    return "Por favor, ingrese un criterio de busqueda.";
+                },
                 placeholder: { id: '-1', text: 'Buscador...' },
                 allowClear: true,
                 ajax: {
