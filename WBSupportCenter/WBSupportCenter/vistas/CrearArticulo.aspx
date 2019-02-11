@@ -71,9 +71,7 @@
                     </div>
                 </div>
                 <form method="post">
-                    <textarea name="editor1" id="editor1">
-                    &lt;p&gt;Ingresar contenido.&lt;/p&gt;
-                </textarea>
+                    <textarea name="editor1" id="editor1"></textarea>
                     <script>
                         CKEDITOR.replace('editor1', {
                             //filebrowserUploadUrl: 'upload.ashx',
@@ -330,7 +328,7 @@
         //Cargar categorias a select
         function initCategorias(idPAdreCat) {
             $("#cat_box_form_crearart").empty();
-            $("#cat_box_form_crearart").append('<option value="cat">Selecciona una categoría</option>');
+            $("#cat_box_form_crearart").append('<option id="invalidOption" value="cat">Selecciona una categoría</option>');
             $.ajax({
                 type: "POST",
                 url: "CrearArticulo.aspx/consultarCat",
@@ -403,6 +401,7 @@
                     success: function (response) {
 
                         //Se limpian campos de formulario
+                        $('input[type=checkbox]').prop('checked', false);
                         $('#nombre_box_form_crearart').val("");
                         cat.length = 0;
                         initCategorias(0);
