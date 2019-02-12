@@ -70,16 +70,19 @@
                 "infoEmpty": "Mostrando 0 de 0 entradas",
                 "zeroRecords": "Sin resultados encontrados",
                 "oPaginate": {
-                    "sPrevious": "Ant.", // This is the link to the previous page
+                    "sPrevious": "Ant.", 
                     "sNext": "Sig."
                 }
             },
-            columnDefs: [{
-                "targets": -1,
-                "data": null,
-                "className": "text-center",
-                "defaultContent": "<button type='button' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>"
-            }]
+            "aoColumnDefs": [
+                {
+                        "aTargets": [5],
+                        "mData": "userId",
+                        "mRender": function (data, type, full) {
+                            return (full[3] == "Pendiente " ? "<button type='button' class='btn btn-warning' disabled><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>" : "<button type='button' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>");
+                    }
+                }
+            ]
         });
 
         $("<button type='button' class='btn btn-success float-right' style='margin-bottom:1em;' onclick=\"window.location.href = 'CrearArticulo.aspx'\" id='crear'><i class='fa fa-plus' aria-hidden='true'></i>&nbsp Crear</button>").appendTo('div.pull-right');
