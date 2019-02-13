@@ -20,7 +20,7 @@ namespace SupportCenter.Negocio
 
         //}
 
-        public List<Reporte> NGConsultaReportes(string fechaInicial, string fechaFinal, string valReporte, string valTop)
+        public DataSet NGConsultaReportes(string fechaInicial, string fechaFinal, string valReporte, string valTop)
         {
             DTReporte Objeto = new DTReporte();
 

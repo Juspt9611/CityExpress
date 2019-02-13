@@ -513,28 +513,17 @@
       <s:element name="WSObtenerArticuloResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="WSObtenerArticuloResult" type="tns:ArrayOfReporte" />
+            <s:element minOccurs="0" maxOccurs="1" name="WSObtenerArticuloResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfReporte">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Reporte" nillable="true" type="tns:Reporte" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Reporte">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="idArticulo" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="nombreArticulo" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="categoria" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="visitas" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="palabraBuscada" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="numeroDeBusquedas" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="promedioCalificacion" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="calificacionTotal" type="s:int" />
-          <s:element minOccurs="1" maxOccurs="1" name="categoriaMasVista" type="s:int" />
-        </s:sequence>
-      </s:complexType>
       <s:element name="WSConsultarHistorialArticulo">
         <s:complexType>
           <s:sequence>
@@ -733,7 +722,6 @@
       </s:element>
       <s:element name="int" type="s:int" />
       <s:element name="string" nillable="true" type="s:string" />
-      <s:element name="ArrayOfReporte" nillable="true" type="tns:ArrayOfReporte" />
       <s:element name="ArrayOfHistorial" nillable="true" type="tns:ArrayOfHistorial" />
       <s:element name="boolean" type="s:boolean" />
       <s:element name="ArrayOfUsuarioEntidades" nillable="true" type="tns:ArrayOfUsuarioEntidades" />
@@ -1143,7 +1131,7 @@
     <wsdl:part name="valTop" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSObtenerArticuloHttpGetOut">
-    <wsdl:part name="Body" element="tns:ArrayOfReporte" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSConsultarHistorialArticuloHttpGetIn">
     <wsdl:part name="idArt" type="s:string" />
@@ -1386,7 +1374,7 @@
     <wsdl:part name="valTop" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSObtenerArticuloHttpPostOut">
-    <wsdl:part name="Body" element="tns:ArrayOfReporte" />
+    <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
   <wsdl:message name="WSConsultarHistorialArticuloHttpPostIn">
     <wsdl:part name="idArt" type="s:string" />

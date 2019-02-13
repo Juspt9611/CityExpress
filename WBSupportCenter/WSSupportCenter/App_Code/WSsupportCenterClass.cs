@@ -214,7 +214,7 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     #region Reporte
     [WebMethod]
-    public List<Reporte> WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop)
+    public DataSet WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop)
     {
         NGReporte ObjetoNG = new NGReporte();
 

@@ -47,9 +47,10 @@ namespace WBSupportCenter.vistas
         [WebMethod]
         public static string ObtenerDatos(string fechaInicial, string fechaFinal, string valReporte, string valTop)
         {
+
             WSsupportCenterClass metodo = new WSsupportCenterClass();
             DataTable dtTitulo = new DataTable();
-            dtTitulo = ConvertToDataTable(metodo.WSObtenerArticulo(fechaInicial, fechaFinal, valReporte, valTop));
+            dtTitulo = metodo.WSObtenerArticulo(fechaInicial, fechaFinal, valReporte, valTop).Tables[0];
             return DataTableToJSONWithStringBuilder(dtTitulo);
           
         }

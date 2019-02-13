@@ -1070,13 +1070,13 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSObtenerArticulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Reporte[] WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop) {
+        public System.Data.DataSet WSObtenerArticulo(string fechaInicial, string fechaFinal, string valReporte, string valTop) {
             object[] results = this.Invoke("WSObtenerArticulo", new object[] {
                         fechaInicial,
                         fechaFinal,
                         valReporte,
                         valTop});
-            return ((Reporte[])(results[0]));
+            return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
@@ -1756,123 +1756,6 @@ namespace WBSupportCenter.WSsupport1 {
             }
             set {
                 this.nombreField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    public partial class Reporte {
-        
-        private int idArticuloField;
-        
-        private string nombreArticuloField;
-        
-        private string categoriaField;
-        
-        private int visitasField;
-        
-        private string palabraBuscadaField;
-        
-        private int numeroDeBusquedasField;
-        
-        private int promedioCalificacionField;
-        
-        private int calificacionTotalField;
-        
-        private int categoriaMasVistaField;
-        
-        /// <remarks/>
-        public int idArticulo {
-            get {
-                return this.idArticuloField;
-            }
-            set {
-                this.idArticuloField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string nombreArticulo {
-            get {
-                return this.nombreArticuloField;
-            }
-            set {
-                this.nombreArticuloField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string categoria {
-            get {
-                return this.categoriaField;
-            }
-            set {
-                this.categoriaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int visitas {
-            get {
-                return this.visitasField;
-            }
-            set {
-                this.visitasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string palabraBuscada {
-            get {
-                return this.palabraBuscadaField;
-            }
-            set {
-                this.palabraBuscadaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int numeroDeBusquedas {
-            get {
-                return this.numeroDeBusquedasField;
-            }
-            set {
-                this.numeroDeBusquedasField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int promedioCalificacion {
-            get {
-                return this.promedioCalificacionField;
-            }
-            set {
-                this.promedioCalificacionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int calificacionTotal {
-            get {
-                return this.calificacionTotalField;
-            }
-            set {
-                this.calificacionTotalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int categoriaMasVista {
-            get {
-                return this.categoriaMasVistaField;
-            }
-            set {
-                this.categoriaMasVistaField = value;
             }
         }
     }
@@ -2699,10 +2582,10 @@ namespace WBSupportCenter.WSsupport1 {
         }
         
         /// <remarks/>
-        public Reporte[] Result {
+        public System.Data.DataSet Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Reporte[])(this.results[0]));
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

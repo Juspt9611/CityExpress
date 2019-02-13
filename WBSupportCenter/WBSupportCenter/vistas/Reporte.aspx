@@ -305,7 +305,7 @@
                     else if (reporteSelect == "vistas") {
                         reporteGrafica = "Número de vistas";
                     }
-                    console.log(selectedOption.value);
+                    //console.log(selectedOption.value);
 
                     if (repetirBusqueda == true) {
 
@@ -344,6 +344,11 @@
         });
 
         function dataTableData() {
+
+            if ($('#numberTop').val() == "") {
+                topResult = 0;
+            }
+
             $.ajax({
                 async: false,
                 type: 'POST',
@@ -369,14 +374,15 @@
                         nameReport = "Categorias más vistas";
                     }
                     if (jsonReporte != null) {
+
                         if (reporteSelect == "palabras") {
                             $.each(jsonReporte, function (item, index) {
                                 arrayGrafic.push({
-                                    country: index.palabraBuscada,
-                                    visits: parseInt(index.numeroDeBusquedas, 10)
+                                    country: index.PalabraBuscada,
+                                    visits: parseInt(index.NumeroDeBusquedas, 10)
                                 })
                             });
-                            console.log(arrayGrafic);
+                            //console.log(arrayGrafic);
                             $('#tableArticulos').DataTable({
                                 data: jsonReporte,
                                 orderCellsTop: true,
@@ -473,8 +479,8 @@
                                     ]
                                 },
                                 columns: [
-                                    { data: "palabraBuscada", title: 'Palabra buscada' },
-                                    { data: "numeroDeBusquedas", title: 'Número de búsquedas' }
+                                    { data: "PalabraBuscada", title: 'Palabra buscada' },
+                                    { data: "NumeroDeBusquedas", title: 'Número de búsquedas' }
                                 ]
                             });
                         }
@@ -485,7 +491,7 @@
                                     visits: parseInt(index.calificacionTotal, 10)
                                 })
                             });
-                            console.log(arrayGrafic);
+                            //console.log(arrayGrafic);
                             $('#tableArticulos').DataTable({
                                 data: jsonReporte,
                                 orderCellsTop: true,
@@ -582,20 +588,19 @@
                                 columns: [
                                     { data: "idArticulo", title: 'Id del artículo' },
                                     { data: "nombreArticulo", title: 'Nombre del artículo' },
-                                    { data: "categoria", title: 'Categoría' },
-                                    {
-                                        data: "promedioCalificacion", id: '1', title: 'Promedio de calificación', render: function (data, type, row) {
-                                            var starPercentage = data / 5 * 100;
-                                            var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
-                                            //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
-                                            //return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
-                                            //        $('td').attr('id', '1');
-                                            //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
-                                            var df = '<td id="1" >' + data + '</td>';
-                                            return df;
+                                    { data: "nombreCategoria", title: 'Categoría' },
+                                    { data: "PromedioCalificacion", title: 'Promedio de calificación' },
+                                        //data: "promedioCalificacion", id: '1', title: 'Promedio de calificación', render: function (data, type, row) {
+                                        //    var starPercentage = data / 5 * 100;
+                                        //    var starPercentageRounded = Math.round(starPercentage / 10) * 10 + "%";
+                                        //    //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
+                                        //    //return '<div class="stars-outer"><div class="stars-inner" style="width: ' + starPercentageRounded + ';"></div></div>';
+                                        //    //        $('td').attr('id', '1');
+                                        //    //$('#1').html('<div class="stars-outer"><div class="stars-inner" style="width: 50%;"></div></div>');
+                                        //    var df = '<td id="1" >' + data + '</td>';
+                                        //    return df;
 
-                                        }
-                                    },
+                                        //}
                                     { data: "calificacionTotal", title: 'Número de valoraciones' }
                                 ]
                             });
@@ -607,7 +612,6 @@
                                     visits: parseInt(index.visitas, 10)
                                 })
                             });
-                            console.log(arrayGrafic);
                             $('#tableArticulos').DataTable({
                                 data: jsonReporte,
                                 orderCellsTop: true,
@@ -712,11 +716,10 @@
                         else if (reporteSelect == "vistas") {
                             $.each(jsonReporte, function (item, index) {
                                 arrayGrafic.push({
-                                    country: index.categoria,
-                                    visits: parseInt(index.categoriaMasVista, 10)
+                                    country: index.nombreCategoria,
+                                    visits: parseInt(index.CategoriaMasVista, 10)
                                 })
                             });
-                            console.log(arrayGrafic);
                             $('#tableArticulos').DataTable({
                                 data: jsonReporte,
                                 orderCellsTop: true,
@@ -811,8 +814,8 @@
                                     ]
                                 },
                                 columns: [
-                                    { data: "categoria", title: 'Categoría' },
-                                    { data: "categoriaMasVista", title: 'Número de vistas' }
+                                    { data: "nombreCategoria", title: 'Categoría' },
+                                    { data: "CategoriaMasVista", title: 'Número de vistas' }
                                 ]
                             });
                         }
@@ -835,10 +838,10 @@
 
                 },
                 failure: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 },
                 error: function (response) {
-                    console.log(response);
+                    //console.log(response);
                 }
             });
         }

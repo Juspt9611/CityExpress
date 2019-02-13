@@ -46,9 +46,10 @@ namespace SupportCenter.Datos
         //    return dt;
         //}
 
-        public List<Reporte> DT_ConsultaReporte(string fechaInicial, string fechaFinal, string valReporte, string valTop)
+        public DataSet DT_ConsultaReporte(string fechaInicial, string fechaFinal, string valReporte, string valTop)
         {
             SqlConnection connection = null;
+            DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             List<Reporte> entidad = new List<Reporte>();
 
@@ -92,52 +93,50 @@ namespace SupportCenter.Datos
                     connection.Close();
                 }
 
-                foreach (DataRow item in dt.Rows)
-                {
-                    Reporte obj = new Reporte();
+                ds.Tables.Add(dt);
 
-                    if (valReporte == "palabras")
-                    {
+                //foreach (DataRow item in dt.Rows)
+                //{
+                //    Reporte obj = new Reporte();
 
-                        obj.palabraBuscada = item["PalabraBuscada"].ToString();
-                        obj.numeroDeBusquedas = Convert.ToInt32(item["NumeroDeBusquedas"].ToString());
-                        entidad.Add(obj);
-                    }
-                    else if (valReporte == "valorados")
-                    {
-                        obj.idArticulo = Convert.ToInt32(item["idArticulo"].ToString());
-                        obj.nombreArticulo = item["nombreArticulo"].ToString();
-                        obj.categoria = item["nombreCategoria"].ToString();
-                        obj.promedioCalificacion = Convert.ToInt32(item["PromedioCalificacion"].ToString());
-                        obj.calificacionTotal = Convert.ToInt32(item["calificacionTotal"].ToString());
-                        entidad.Add(obj);
-                    }
-                    else if (valReporte == "vistos")
-                    {
-                        obj.idArticulo = Convert.ToInt32(item["idArticulo"].ToString());
-                        obj.nombreArticulo = item["nombreArticulo"].ToString();
-                        obj.categoria = item["categoria"].ToString();
-                        obj.visitas = Convert.ToInt32(item["visitas"].ToString());
-                        entidad.Add(obj);
-                    }
-                    else if (valReporte == "vistas")
-                    {
-                        obj.categoria = item["nombreCategoria"].ToString();
-                        obj.categoriaMasVista = Convert.ToInt32(item["CategoriaMasVista"].ToString());
-                        entidad.Add(obj);
-                    }
+                //    if (valReporte == "palabras")
+                //    {
 
-                    
-
-                   
-                }
+                //        obj.palabraBuscada = item["PalabraBuscada"].ToString();
+                //        obj.numeroDeBusquedas = Convert.ToInt32(item["NumeroDeBusquedas"].ToString());
+                //        entidad.Add(obj);
+                //    }
+                //    else if (valReporte == "valorados")
+                //    {
+                //        obj.idArticulo = Convert.ToInt32(item["idArticulo"].ToString());
+                //        obj.nombreArticulo = item["nombreArticulo"].ToString();
+                //        obj.categoria = item["nombreCategoria"].ToString();
+                //        obj.promedioCalificacion = Convert.ToInt32(item["PromedioCalificacion"].ToString());
+                //        obj.calificacionTotal = Convert.ToInt32(item["calificacionTotal"].ToString());
+                //        entidad.Add(obj);
+                //    }
+                //    else if (valReporte == "vistos")
+                //    {
+                //        obj.idArticulo = Convert.ToInt32(item["idArticulo"].ToString());
+                //        obj.nombreArticulo = item["nombreArticulo"].ToString();
+                //        obj.categoria = item["categoria"].ToString();
+                //        obj.visitas = Convert.ToInt32(item["visitas"].ToString());
+                //        entidad.Add(obj);
+                //    }
+                //    else if (valReporte == "vistas")
+                //    {
+                //        obj.categoria = item["nombreCategoria"].ToString();
+                //        obj.categoriaMasVista = Convert.ToInt32(item["CategoriaMasVista"].ToString());
+                //        entidad.Add(obj);
+                //    } 
+                //}
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
 
-            return entidad;
+            return ds;
         }
     }
 
