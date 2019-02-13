@@ -79,7 +79,7 @@
                         "aTargets": [5],
                         "mData": "userId",
                         "mRender": function (data, type, full) {
-                            return (full[3] == "Pendiente " ? "<button type='button' class='btn btn-warning' disabled><i class='fa fa-pencil' aria-hidden='true' disabled></i> Editar</button>" : "<button type='button' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>");
+                            return (full[3] == "Pendiente " ? "<button type='button' class='btn btn-warning' disabled><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>" : "<button type='button' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button>");
                     }
                 }
             ]
@@ -91,7 +91,7 @@
             window.location.href = 'CrearArticulo.aspx';
         });
 
-        $('#example tbody').on('click', 'button', function () {
+        $('#example tbody').on('click', '.btn', function () {
             var data = table.row($(this).parents('tr')).data();
             window.location.href = 'EditarArticulo.aspx?idArticulo=' + data[0];
         });
