@@ -427,7 +427,11 @@
     //Cargar categorias a select
         function initCategorias(idPAdreCat) {
             $("#cat_box_form_crearart").empty();
-            $("#cat_box_form_crearart").append('<option value="cat">Selecciona una categoría</option>');
+            if (idPAdreCat == 0) {
+                $("#cat_box_form_crearart").append('<option id="invalidOption" value="cat">Selecciona una categoría</option>');
+            } else {
+                $("#cat_box_form_crearart").append('<option id="invalidOption" value="cat">Selecciona una subcategoría</option>');
+            }
             $.ajax({
                 type: "POST",
                 url: "EditarArticulo.aspx/consultarCat",
