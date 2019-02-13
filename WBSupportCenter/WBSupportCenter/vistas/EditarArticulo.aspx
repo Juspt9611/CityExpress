@@ -361,7 +361,7 @@
                         $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Este tipo de archivo no es valido.").addClass("error-media");
                     } else {
                         $("#msnError-multimedia").append("<i class='fa fa-check' aria-hidden='true'></i> Archivo cargado exitosamente.").addClass("ok-media");
-                        urlLocal = url.substring(0, url.indexOf('/vistas')) + '/imgBlog/' + status;
+                        urlLocal = url.substring(0, url.indexOf('/vistas')) + '/WBSupportCenter/imgBlog/' + status;
                     }
                 },
                 processData: false,
