@@ -82,7 +82,7 @@ namespace SupportCenter.Datos {
 
             return lstCat;
         }
-        public List<BusquedaTitulo> DT_BusquedaTitulo(string palabra) {
+        public List<BusquedaTitulo> DT_BusquedaTitulo(string palabra, int idUsuario) {
 
             SqlConnection connection = null;
             DataTable dt = new DataTable();
@@ -94,7 +94,8 @@ namespace SupportCenter.Datos {
                     connection.Open();
 
                     var parametros = new[]{
-                    ParametroAcceso.CrearParametro("@palabra", SqlDbType.VarChar, palabra , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@palabra", SqlDbType.VarChar, palabra , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
                     };
                     consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_BusquedaxTitulo", parametros);
                     dt.Load(consulta);

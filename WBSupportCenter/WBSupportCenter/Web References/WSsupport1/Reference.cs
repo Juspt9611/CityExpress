@@ -313,24 +313,26 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSBusquedaTitulo", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public BusquedaTitulo[] WSBusquedaTitulo(string palabra) {
+        public BusquedaTitulo[] WSBusquedaTitulo(string palabra, int idUsuario) {
             object[] results = this.Invoke("WSBusquedaTitulo", new object[] {
-                        palabra});
+                        palabra,
+                        idUsuario});
             return ((BusquedaTitulo[])(results[0]));
         }
         
         /// <remarks/>
-        public void WSBusquedaTituloAsync(string palabra) {
-            this.WSBusquedaTituloAsync(palabra, null);
+        public void WSBusquedaTituloAsync(string palabra, int idUsuario) {
+            this.WSBusquedaTituloAsync(palabra, idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSBusquedaTituloAsync(string palabra, object userState) {
+        public void WSBusquedaTituloAsync(string palabra, int idUsuario, object userState) {
             if ((this.WSBusquedaTituloOperationCompleted == null)) {
                 this.WSBusquedaTituloOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSBusquedaTituloOperationCompleted);
             }
             this.InvokeAsync("WSBusquedaTitulo", new object[] {
-                        palabra}, this.WSBusquedaTituloOperationCompleted, userState);
+                        palabra,
+                        idUsuario}, this.WSBusquedaTituloOperationCompleted, userState);
         }
         
         private void OnWSBusquedaTituloOperationCompleted(object arg) {

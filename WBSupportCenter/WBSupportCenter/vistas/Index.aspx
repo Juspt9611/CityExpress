@@ -151,7 +151,8 @@
                         </div>
                         <div class="row">
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
-                                <button type="button" class="btn btn-warning float-right" s onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp Historial</button>
+                                <button type="button" class="btn btn-warning float-right" onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp Historial</button>
+                                <button type="button" class="btn btn-primary float-right" onclick="enviarCorreo()"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp Enviar por correo</button>
                                 <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Regresar</button>
                             </div>
                         </div>
@@ -202,8 +203,36 @@
             </div>
         </div>
     </div>
-
     <script>
+
+        function enviarCorreo() {
+
+            $('html,body').scrollTop(0);
+
+            html2canvas($("#box-blog"), {
+                //scale:10,
+                useCORS: true,
+                dpi: 100,
+                //height: $("#box-blog").height(),
+                onrendered: function (canvas) {
+                    var img = canvas.toDataURL("image/png");
+                    var doc = new jsPDF();
+                    //console.log(img);
+                    doc.addImage(img, 'JPEG', 20, 20);
+                    doc.save('test.pdf');
+                    //var iframe = document.createElement('iframe');
+                    //iframe.setAttribute('style', 'position:absolute;right:0; top:30%; bottom:0; height:100%; width:500px');
+                    //document.body.appendChild(iframe);
+                    //iframe.src = pdf.output('datauristring');
+
+                    //var div = document.createElement('pre');
+                    //div.innerText=pdf.output();
+                    //document.body.appendChild(div);
+                }
+            });
+        }
+
+        
 
         //Variables
         var estrellaArticulo = 6;

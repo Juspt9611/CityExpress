@@ -29,9 +29,9 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public List<BusquedaTitulo> WSBusquedaTitulo(string palabra) {
+    public List<BusquedaTitulo> WSBusquedaTitulo(string palabra, int idUsuario) {
 
-        return Busqueda.NG_BusquedaTitulo(palabra);
+        return Busqueda.NG_BusquedaTitulo(palabra, idUsuario);
     }
 
     [WebMethod]

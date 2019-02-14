@@ -19,8 +19,8 @@ namespace SupportCenter.Negocio {
         public List<CategoriasxSubcategorias> NG_ObtenerCatg(int idUsuario) {
             return Obejeto.DT_ObtenerCatg(idUsuario);                   
         }
-        public List<BusquedaTitulo> NG_BusquedaTitulo(string palabra) {
-            return Obejeto.DT_BusquedaTitulo(palabra);
+        public List<BusquedaTitulo> NG_BusquedaTitulo(string palabra, int idUsuario) {
+            return Obejeto.DT_BusquedaTitulo(palabra, idUsuario);
         }
 
         public DataSet NG_ConsultaArticuloxId(int idArt, int idUsuarioConsulta)

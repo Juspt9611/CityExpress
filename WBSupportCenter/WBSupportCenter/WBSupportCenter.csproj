@@ -193,10 +193,12 @@
     <Content Include="recursos\js\blog\charts.js" />
     <Content Include="recursos\js\blog\core.js" />
     <Content Include="recursos\js\blog\dataTables.buttons.min.js" />
+    <Content Include="recursos\js\blog\html2canvas.min.js" />
     <Content Include="recursos\js\blog\iziModal.min.js" />
     <Content Include="recursos\js\blog\jquery-3.2.1.min.js" />
     <Content Include="recursos\js\blog\jquery-ui.min.js" />
     <Content Include="recursos\js\blog\jquery.easyPaginate.js" />
+    <Content Include="recursos\js\blog\jspdf.min.js" />
     <Content Include="recursos\js\blog\jszip.min.js" />
     <Content Include="recursos\js\blog\lodash.js" />
     <Content Include="recursos\js\blog\moment.min.js" />
