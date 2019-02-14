@@ -16,15 +16,15 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public List<Articulos> WSOptenerArt() {
-        return Busqueda.NG_ObtenerArt();
+    public List<Articulos> WSOptenerArt(int idUsuario) {
+        return Busqueda.NG_ObtenerArt(idUsuario);
     }
 
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public List<CategoriasxSubcategorias> WSOptenerCatg() {
+    public List<CategoriasxSubcategorias> WSOptenerCatg(int idUsuario) {
 
-        return Busqueda.NG_ObtenerCatg();
+        return Busqueda.NG_ObtenerCatg(idUsuario);
     }
 
     [WebMethod(EnableSession = true)]
@@ -41,9 +41,9 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public DataSet WSBusquedaArticulosxClick(string palabra)
+    public DataSet WSBusquedaArticulosxClick(string palabra, int idUsuario)
     {
-        return Busqueda.NG_BusquedaArticulosxClick(palabra);
+        return Busqueda.NG_BusquedaArticulosxClick(palabra, idUsuario);
     }
 
     [WebMethod]
@@ -53,9 +53,9 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public DataSet WSBuscarArtMasVistor(int top)
+    public DataSet WSBuscarArtMasVistor(int top, int idUsuario)
     {
-        return Busqueda.NG_BuscarArtMasVistos(top);
+        return Busqueda.NG_BuscarArtMasVistos(top, idUsuario);
     }
 
     [WebMethod]

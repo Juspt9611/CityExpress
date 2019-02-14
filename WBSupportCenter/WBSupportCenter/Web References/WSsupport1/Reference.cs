@@ -255,22 +255,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Articulos[] WSOptenerArt() {
-            object[] results = this.Invoke("WSOptenerArt", new object[0]);
+        public Articulos[] WSOptenerArt(int idUsuario) {
+            object[] results = this.Invoke("WSOptenerArt", new object[] {
+                        idUsuario});
             return ((Articulos[])(results[0]));
         }
         
         /// <remarks/>
-        public void WSOptenerArtAsync() {
-            this.WSOptenerArtAsync(null);
+        public void WSOptenerArtAsync(int idUsuario) {
+            this.WSOptenerArtAsync(idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSOptenerArtAsync(object userState) {
+        public void WSOptenerArtAsync(int idUsuario, object userState) {
             if ((this.WSOptenerArtOperationCompleted == null)) {
                 this.WSOptenerArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerArtOperationCompleted);
             }
-            this.InvokeAsync("WSOptenerArt", new object[0], this.WSOptenerArtOperationCompleted, userState);
+            this.InvokeAsync("WSOptenerArt", new object[] {
+                        idUsuario}, this.WSOptenerArtOperationCompleted, userState);
         }
         
         private void OnWSOptenerArtOperationCompleted(object arg) {
@@ -282,22 +284,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerCatg", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public CategoriasxSubcategorias[] WSOptenerCatg() {
-            object[] results = this.Invoke("WSOptenerCatg", new object[0]);
+        public CategoriasxSubcategorias[] WSOptenerCatg(int idUsuario) {
+            object[] results = this.Invoke("WSOptenerCatg", new object[] {
+                        idUsuario});
             return ((CategoriasxSubcategorias[])(results[0]));
         }
         
         /// <remarks/>
-        public void WSOptenerCatgAsync() {
-            this.WSOptenerCatgAsync(null);
+        public void WSOptenerCatgAsync(int idUsuario) {
+            this.WSOptenerCatgAsync(idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSOptenerCatgAsync(object userState) {
+        public void WSOptenerCatgAsync(int idUsuario, object userState) {
             if ((this.WSOptenerCatgOperationCompleted == null)) {
                 this.WSOptenerCatgOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerCatgOperationCompleted);
             }
-            this.InvokeAsync("WSOptenerCatg", new object[0], this.WSOptenerCatgOperationCompleted, userState);
+            this.InvokeAsync("WSOptenerCatg", new object[] {
+                        idUsuario}, this.WSOptenerCatgOperationCompleted, userState);
         }
         
         private void OnWSOptenerCatgOperationCompleted(object arg) {
@@ -369,24 +373,26 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSBusquedaArticulosxClick", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet WSBusquedaArticulosxClick(string palabra) {
+        public System.Data.DataSet WSBusquedaArticulosxClick(string palabra, int idUsuario) {
             object[] results = this.Invoke("WSBusquedaArticulosxClick", new object[] {
-                        palabra});
+                        palabra,
+                        idUsuario});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void WSBusquedaArticulosxClickAsync(string palabra) {
-            this.WSBusquedaArticulosxClickAsync(palabra, null);
+        public void WSBusquedaArticulosxClickAsync(string palabra, int idUsuario) {
+            this.WSBusquedaArticulosxClickAsync(palabra, idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSBusquedaArticulosxClickAsync(string palabra, object userState) {
+        public void WSBusquedaArticulosxClickAsync(string palabra, int idUsuario, object userState) {
             if ((this.WSBusquedaArticulosxClickOperationCompleted == null)) {
                 this.WSBusquedaArticulosxClickOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSBusquedaArticulosxClickOperationCompleted);
             }
             this.InvokeAsync("WSBusquedaArticulosxClick", new object[] {
-                        palabra}, this.WSBusquedaArticulosxClickOperationCompleted, userState);
+                        palabra,
+                        idUsuario}, this.WSBusquedaArticulosxClickOperationCompleted, userState);
         }
         
         private void OnWSBusquedaArticulosxClickOperationCompleted(object arg) {
@@ -427,24 +433,26 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSBuscarArtMasVistor", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet WSBuscarArtMasVistor(int top) {
+        public System.Data.DataSet WSBuscarArtMasVistor(int top, int idUsuario) {
             object[] results = this.Invoke("WSBuscarArtMasVistor", new object[] {
-                        top});
+                        top,
+                        idUsuario});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void WSBuscarArtMasVistorAsync(int top) {
-            this.WSBuscarArtMasVistorAsync(top, null);
+        public void WSBuscarArtMasVistorAsync(int top, int idUsuario) {
+            this.WSBuscarArtMasVistorAsync(top, idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSBuscarArtMasVistorAsync(int top, object userState) {
+        public void WSBuscarArtMasVistorAsync(int top, int idUsuario, object userState) {
             if ((this.WSBuscarArtMasVistorOperationCompleted == null)) {
                 this.WSBuscarArtMasVistorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSBuscarArtMasVistorOperationCompleted);
             }
             this.InvokeAsync("WSBuscarArtMasVistor", new object[] {
-                        top}, this.WSBuscarArtMasVistorOperationCompleted, userState);
+                        top,
+                        idUsuario}, this.WSBuscarArtMasVistorOperationCompleted, userState);
         }
         
         private void OnWSBuscarArtMasVistorOperationCompleted(object arg) {

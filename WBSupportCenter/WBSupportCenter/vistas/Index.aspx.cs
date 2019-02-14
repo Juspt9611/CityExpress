@@ -56,7 +56,8 @@ namespace SupportCenter
             DataTable tblArti = new DataTable();
             lstArt.InnerText = "";
 
-            tblArti = ConvertToDataTable(metodo.WSOptenerArt());
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            tblArti = ConvertToDataTable(metodo.WSOptenerArt(idUsuario));
             //ejemplo = metodo.WSOptenerArt();
             lstArt.InnerHtml += "<ul>";
             //Forech para ver Articulos
@@ -83,7 +84,8 @@ namespace SupportCenter
             DataTable DTCateg = new DataTable();
             lstCatg.InnerText = "";
 
-            DTCateg = ConvertToDataTable(metodo.WSOptenerCatg());
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            DTCateg = ConvertToDataTable(metodo.WSOptenerCatg(idUsuario));
 
             lstCatg.InnerHtml += "<ul>";
             //Forech para ver Articulos
@@ -131,7 +133,8 @@ namespace SupportCenter
         [WebMethod]
         public static string articulosxClick(string palabra)
         {
-            string res = DataSetToJSON(metodo.WSBusquedaArticulosxClick(palabra).Tables[0]);
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            string res = DataSetToJSON(metodo.WSBusquedaArticulosxClick(palabra, idUsuario).Tables[0]);
             return res;
         }
 
@@ -197,7 +200,8 @@ namespace SupportCenter
         [WebMethod]
         public static string buscarArtMasVistos(int top)
         {
-            return DataSetToJSON(metodo.WSBuscarArtMasVistor(top).Tables[0]);
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+            return DataSetToJSON(metodo.WSBuscarArtMasVistor(top, idUsuario).Tables[0]);
         }
 
         [WebMethod]

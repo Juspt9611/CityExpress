@@ -12,12 +12,12 @@ namespace SupportCenter.Negocio {
         DTBusqueda Obejeto = new DTBusqueda();
 
 
-        public List<Articulos> NG_ObtenerArt() {
+        public List<Articulos> NG_ObtenerArt(int idUsuario) {
             
-            return Obejeto.DT_ObtenerArt();
+            return Obejeto.DT_ObtenerArt(idUsuario);
         }
-        public List<CategoriasxSubcategorias> NG_ObtenerCatg() {
-            return Obejeto.DT_ObtenerCatg();                   
+        public List<CategoriasxSubcategorias> NG_ObtenerCatg(int idUsuario) {
+            return Obejeto.DT_ObtenerCatg(idUsuario);                   
         }
         public List<BusquedaTitulo> NG_BusquedaTitulo(string palabra) {
             return Obejeto.DT_BusquedaTitulo(palabra);
@@ -28,9 +28,9 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_ConsultarArticuloxId(idArt, idUsuarioConsulta);
         }
 
-        public DataSet NG_BusquedaArticulosxClick(string palabra)
+        public DataSet NG_BusquedaArticulosxClick(string palabra, int idUsuario)
         {
-            return Obejeto.DT_BusquedaArticulosxClick(palabra);
+            return Obejeto.DT_BusquedaArticulosxClick(palabra, idUsuario);
         }
 
         public int NG_GuardarPalabraBuscada(string palabra)
@@ -38,9 +38,9 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_GuardarPalabraBuscada(palabra);
         }
 
-        public DataSet NG_BuscarArtMasVistos(int top)
+        public DataSet NG_BuscarArtMasVistos(int top, int idUsuario)
         {
-            return Obejeto.DT_BuscarArtMasVistos(top);
+            return Obejeto.DT_BuscarArtMasVistos(top, idUsuario);
         }
 
         public int NG_RegistrarVisita(int idUsuario, int idArticulo)

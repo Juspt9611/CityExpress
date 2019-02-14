@@ -10,7 +10,7 @@ using SupportCenter.Entidades;
 
 namespace SupportCenter.Datos {
     public class DTBusqueda {
-        public List<Articulos> DT_ObtenerArt() {
+        public List<Articulos> DT_ObtenerArt(int idUsuario) {
 
             SqlConnection connection = null;
             DataTable dtArt = new DataTable();
@@ -22,7 +22,7 @@ namespace SupportCenter.Datos {
                 connection.Open();
 
                     var parametros = new[]{
-                    ParametroAcceso.CrearParametro("@NombreUsuario", SqlDbType.VarChar, "mdiaz" , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
                     };
 
 
@@ -49,7 +49,7 @@ namespace SupportCenter.Datos {
 
             return lstArti;
         }
-        public List<CategoriasxSubcategorias> DT_ObtenerCatg() {
+        public List<CategoriasxSubcategorias> DT_ObtenerCatg(int idUsuario) {
             SqlConnection connection = null;
             DataTable dtCatg = new DataTable();
             List<CategoriasxSubcategorias> lstCat = new List<CategoriasxSubcategorias>();
@@ -60,7 +60,7 @@ namespace SupportCenter.Datos {
                     connection.Open();
 
                     var parametros = new[]{
-                    ParametroAcceso.CrearParametro("@NombreUsuario", SqlDbType.VarChar, "mdiaz" , ParameterDirection.Input),
+                    ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input),
                     };
                     consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_CategoriasMasVistas ", parametros);
                     dtCatg.Load(consulta);
@@ -116,10 +116,10 @@ namespace SupportCenter.Datos {
         }
 
         public DataSet DT_ConsultarArticuloxId(int idArt, int idUsuarioConsulta)        {            DataSet ds = new DataSet();            SqlConnection connection = null;            DataTable dt = new DataTable();            try            {                using (connection = Conexion.ObtieneConexion("ConexionBD"))                {                    SqlDataReader consulta;                    var paramCat = new[]                    {                        ParametroAcceso.CrearParametro("@idArticulo", SqlDbType.Int, idArt , ParameterDirection.Input),                        ParametroAcceso.CrearParametro("@idUsuarioConsulta", SqlDbType.Int, idUsuarioConsulta , ParameterDirection.Input)                    };                    connection.Open();                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultaArticulosxId", paramCat);                    dt.Load(consulta);                    connection.Close();                    ds.Tables.Add(dt);                }            }            catch (Exception ex)            {                Console.WriteLine(ex);            }            return ds;        }
-        public DataSet DT_BusquedaArticulosxClick(string palabra)        {            DataSet ds = new DataSet();            SqlConnection connection = null;            DataTable dt = new DataTable();            try            {                using (connection = Conexion.ObtieneConexion("ConexionBD"))                {                    SqlDataReader consulta;                    connection.Open();                    var parametros = new[]{                        ParametroAcceso.CrearParametro("@palabra", SqlDbType.VarChar, palabra , ParameterDirection.Input),                    };                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_Buscador", parametros);                    dt.Load(consulta);                    connection.Close();                    ds.Tables.Add(dt);                }            }            catch (Exception ex)            {                Console.WriteLine(ex);            }            return ds;        }
+        public DataSet DT_BusquedaArticulosxClick(string palabra, int idUsuario)        {            DataSet ds = new DataSet();            SqlConnection connection = null;            DataTable dt = new DataTable();            try            {                using (connection = Conexion.ObtieneConexion("ConexionBD"))                {                    SqlDataReader consulta;                    connection.Open();                    var parametros = new[]{                        ParametroAcceso.CrearParametro("@palabra", SqlDbType.VarChar, palabra , ParameterDirection.Input),                        ParametroAcceso.CrearParametro("idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)                    };                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_Buscador", parametros);                    dt.Load(consulta);                    connection.Close();                    ds.Tables.Add(dt);                }            }            catch (Exception ex)            {                Console.WriteLine(ex);            }            return ds;        }
         public int DT_GuardarPalabraBuscada(string palabra)        {            int error = 0;            SqlConnection connection = null;            DataTable dt = new DataTable();            try            {                using (connection = Conexion.ObtieneConexion("ConexionBD"))                {                    SqlDataReader consulta;                    connection.Open();                    var parametros = new[]                    {                        ParametroAcceso.CrearParametro("@palabraBuscada", SqlDbType.VarChar, palabra, ParameterDirection.Input)                    };                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_InsertarPalabrasBuscadas", parametros);                    dt.Load(consulta);                    connection.Close();                }            }            catch (Exception ex)            {                error = -1;                Console.WriteLine(ex);            }            return error;        }
 
-        public DataSet DT_BuscarArtMasVistos(int top)
+        public DataSet DT_BuscarArtMasVistos(int top, int idUsuario)
         {
 
             SqlConnection connection = null;
@@ -131,7 +131,8 @@ namespace SupportCenter.Datos {
                 {
                     var parametros = new[]
                     {
-                        ParametroAcceso.CrearParametro("@top", SqlDbType.Int, top , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@top", SqlDbType.Int, top , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
                     };
 
                     SqlDataReader consulta;

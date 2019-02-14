@@ -91,7 +91,7 @@
             window.location.href = 'CrearArticulo.aspx';
         });
 
-        $('#example tbody').on('click', '.btn:not(disabled)', function () {
+        $('#example tbody').on('click', '.btn:not([disabled])', function () {
             var data = table.row($(this).parents('tr')).data();
             window.location.href = 'EditarArticulo.aspx?idArticulo=' + data[0];
         });

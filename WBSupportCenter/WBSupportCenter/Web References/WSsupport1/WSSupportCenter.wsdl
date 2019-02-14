@@ -3,7 +3,11 @@
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
       <s:element name="WSOptenerArt">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="WSOptenerArtResponse">
         <s:complexType>
@@ -31,7 +35,11 @@
         </s:sequence>
       </s:complexType>
       <s:element name="WSOptenerCatg">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="WSOptenerCatgResponse">
         <s:complexType>
@@ -105,6 +113,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="palabra" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -140,6 +149,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="top" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -949,11 +959,15 @@
   <wsdl:message name="WSOptenRolSoapOut">
     <wsdl:part name="parameters" element="tns:WSOptenRolResponse" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerArtHttpGetIn" />
+  <wsdl:message name="WSOptenerArtHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerCatgHttpGetIn" />
+  <wsdl:message name="WSOptenerCatgHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerCatgHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
   </wsdl:message>
@@ -972,6 +986,7 @@
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpGetIn">
     <wsdl:part name="palabra" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
@@ -984,6 +999,7 @@
   </wsdl:message>
   <wsdl:message name="WSBuscarArtMasVistorHttpGetIn">
     <wsdl:part name="top" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBuscarArtMasVistorHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
@@ -1192,11 +1208,15 @@
   <wsdl:message name="WSOptenRolHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerArtHttpPostIn" />
+  <wsdl:message name="WSOptenerArtHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerArtHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfArticulos" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerCatgHttpPostIn" />
+  <wsdl:message name="WSOptenerCatgHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerCatgHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfCategoriasxSubcategorias" />
   </wsdl:message>
@@ -1215,6 +1235,7 @@
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpPostIn">
     <wsdl:part name="palabra" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBusquedaArticulosxClickHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
@@ -1227,6 +1248,7 @@
   </wsdl:message>
   <wsdl:message name="WSBuscarArtMasVistorHttpPostIn">
     <wsdl:part name="top" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSBuscarArtMasVistorHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
