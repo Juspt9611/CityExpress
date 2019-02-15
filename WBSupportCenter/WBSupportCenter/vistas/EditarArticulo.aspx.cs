@@ -94,8 +94,9 @@ namespace WBSupportCenter.vistas
         [WebMethod]
         public static int editarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
         {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
+            return metodo.WSEditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
         }
 
         [WebMethod]

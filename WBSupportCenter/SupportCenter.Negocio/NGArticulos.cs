@@ -23,9 +23,9 @@ namespace SupportCenter.Negocio
             return Objeto.DT_ConsultarArtxCategoria(idCategoria);
         }
 
-        public int NG_EditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
+        public int NG_EditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario)
         {
-            return Objeto.DT_EditarArticulo(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
+            return Objeto.DT_EditarArticulo(idArticulo, nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
         }
 
         public DataSet NG_ConsultarArtxValidar(int idUsuario)

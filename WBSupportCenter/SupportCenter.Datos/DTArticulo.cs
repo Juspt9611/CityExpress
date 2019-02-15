@@ -52,7 +52,7 @@ namespace SupportCenter.Datos
             return error;
         }
 
-        public int DT_EditarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
+        public int DT_EditarArticulo(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario)
         {
             int error = 0;
             SqlConnection connection = null;
@@ -72,7 +72,8 @@ namespace SupportCenter.Datos
                         ParametroAcceso.CrearParametro("@contenido", SqlDbType.VarChar, contenido , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@categorias", SqlDbType.VarChar, categorias , ParameterDirection.Input),
                         ParametroAcceso.CrearParametro("@tags", SqlDbType.VarChar, tags , ParameterDirection.Input),
-                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input)
+                        ParametroAcceso.CrearParametro("@grupos", SqlDbType.VarChar, grupos , ParameterDirection.Input),
+                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario , ParameterDirection.Input)
                     };
 
 

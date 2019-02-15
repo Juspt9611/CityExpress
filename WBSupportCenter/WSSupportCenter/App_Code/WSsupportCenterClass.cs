@@ -119,10 +119,10 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     //EditarArticulo 
     [WebMethod]
-    public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos)
+    public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario)
     {
         NGArticulos Articulos = new NGArticulos();
-        return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos);
+        return Articulos.NG_EditarArt(idArticulo, nombreArticulo, contenido, categorias, tags, grupos, idUsuario);
     }
 
     //Consultar articulos por validar

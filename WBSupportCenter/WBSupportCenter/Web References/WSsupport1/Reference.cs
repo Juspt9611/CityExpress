@@ -716,24 +716,25 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSEditarArt", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos) {
+        public int WSEditarArt(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario) {
             object[] results = this.Invoke("WSEditarArt", new object[] {
                         idArticulo,
                         nombreArticulo,
                         contenido,
                         categorias,
                         tags,
-                        grupos});
+                        grupos,
+                        idUsuario});
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos) {
-            this.WSEditarArtAsync(idArticulo, nombreArticulo, contenido, categorias, tags, grupos, null);
+        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario) {
+            this.WSEditarArtAsync(idArticulo, nombreArticulo, contenido, categorias, tags, grupos, idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, object userState) {
+        public void WSEditarArtAsync(int idArticulo, string nombreArticulo, string contenido, string categorias, string tags, string grupos, int idUsuario, object userState) {
             if ((this.WSEditarArtOperationCompleted == null)) {
                 this.WSEditarArtOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSEditarArtOperationCompleted);
             }
@@ -743,7 +744,8 @@ namespace WBSupportCenter.WSsupport1 {
                         contenido,
                         categorias,
                         tags,
-                        grupos}, this.WSEditarArtOperationCompleted, userState);
+                        grupos,
+                        idUsuario}, this.WSEditarArtOperationCompleted, userState);
         }
         
         private void OnWSEditarArtOperationCompleted(object arg) {

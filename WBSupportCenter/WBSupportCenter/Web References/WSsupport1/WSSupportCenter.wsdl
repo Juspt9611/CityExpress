@@ -333,6 +333,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="categorias" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="tags" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="grupos" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1070,6 +1071,7 @@
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
     <wsdl:part name="grupos" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSEditarArtHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
@@ -1320,6 +1322,7 @@
     <wsdl:part name="categorias" type="s:string" />
     <wsdl:part name="tags" type="s:string" />
     <wsdl:part name="grupos" type="s:string" />
+    <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSEditarArtHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
