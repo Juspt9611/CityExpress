@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IronPdf, Version=5.0.5.17148, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.5.0.5.2\lib\net40\IronPdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -694,6 +698,7 @@
     <Content Include="Web References\WSsupport1\Historial.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="SUPPORTCENTERPDF\Hoteles city19_02_2019_16_42_18.pdf" />
     <None Include="Web References\WSsupport1\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using WBSupportCenter.WSsupport1;
 using Newtonsoft.Json;
 using System.Text;
+using System.Net.Mail;
+using System.Configuration;
 
 namespace SupportCenter
 {
@@ -264,6 +266,60 @@ namespace SupportCenter
                     "||" + item["nombre"];
             }
             return contentJSON;
+        }
+
+        [WebMethod]
+        public static string EnviaMailconArchivo(int idArticulo)
+        {
+            string verifica = "0";
+
+            try
+            {
+                int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+                DataTable dt = metodo.WSConsultarArticuloxId(idArticulo, idUsuario).Tables[0];
+
+                string contenido = dt.Rows[0][2].ToString();
+                string tituloArticulo  = dt.Rows[0][1].ToString();
+                string correo = HttpContext.Current.Session["nombres"].ToString().Substring(0, 1) + HttpContext.Current.Session["Apellidos"].ToString() + "@hotelescity.com";
+                string fecha = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+
+                fecha = fecha.Replace(" ", "_");
+                fecha = fecha.Replace(":", "_");
+                fecha = fecha.Replace("-", "_");
+
+                var Renderer = new IronPdf.HtmlToPdf();
+                var PDF = Renderer.RenderHtmlAsPdf(contenido);
+                string OutputPath = HttpContext.Current.Server.MapPath("~/SUPPORTCENTERPDF/" + tituloArticulo + fecha + ".pdf");
+                PDF.SaveAs(OutputPath);
+
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress(ConfigurationManager.AppSettings["direccion_email_envio"].ToString());
+                msg.To.Add(correo);
+
+                msg.Subject = "SupportCenter | Envío de artículo - " + tituloArticulo;
+                msg.Body = "Artículo enviado desde portar SupportCenter artículo " + tituloArticulo + ".";
+                msg.Attachments.Add(new Attachment(OutputPath));
+                msg.IsBodyHtml = true;
+                msg.Priority = System.Net.Mail.MailPriority.Normal;
+
+                SmtpClient clienteSmtp = new SmtpClient();
+                clienteSmtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), ConfigurationManager.AppSettings["direccion_email_envio_password"].ToString());
+                clienteSmtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["direccion_email_puerto"].ToString());
+                clienteSmtp.Host = ConfigurationManager.AppSettings["direccion_email_host"].ToString();
+                clienteSmtp.EnableSsl = true;
+
+                clienteSmtp.Send(msg);
+
+                verifica = correo;
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.ReadLine();
+                verifica = "1";
+            }
+            return verifica;
         }
 
     }

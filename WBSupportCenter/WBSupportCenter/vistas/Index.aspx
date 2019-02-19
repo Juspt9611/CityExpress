@@ -207,37 +207,37 @@
 
         function enviarCorreo() {
 
-            var doc = new jsPDF();
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/EnviaMailconArchivo",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArticulo':" + idArticuloActual + "}",
+                success: function (response) {
+                    if (response.d != "1") {
+                        swal("Artículo enviado a " + response.d +" correctamente.", {
+                            icon: "success",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    } else {
+                        swal("Hubo un problema durante el envío de este artículo.", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    }
+                    console.log(response);
+                },
+                error: function (response) {
+                    swal("Hubo un problema durante el envío de este artículo.", {
+                        icon: "error",
+                        allowOutsideClick: false,
+                        closeOnClickOutside: false
+                    });
+                }
+            });
 
-            doc.fromHTML($('#box-contenido-blog').html(), 15, 15, {
-                    'width': 170
-                    //'elementHandlers': specialElementHandlers
-                });
-                doc.save('sample-file.pdf');
-
-            //$('html,body').scrollTop(0);
-
-            //html2canvas($("#box-blog"), {
-            //    //scale:10,
-            //    useCORS: true,
-            //    //dpi: 100,
-            //    //height: $("#box-blog").height(),
-            //    onrendered: function (canvas) {
-            //        var img = canvas.toDataURL("image/png");
-            //        var doc = new jsPDF();
-            //        //console.log(img);
-            //        doc.addImage(img, 'JPEG', 20, 20);
-            //        doc.save('test.pdf');
-            //        //var iframe = document.createElement('iframe');
-            //        //iframe.setAttribute('style', 'position:absolute;right:0; top:30%; bottom:0; height:100%; width:500px');
-            //        //document.body.appendChild(iframe);
-            //        //iframe.src = pdf.output('datauristring');
-
-            //        //var div = document.createElement('pre');
-            //        //div.innerText=pdf.output();
-            //        //document.body.appendChild(div);
-            //    }
-            //});
         }
 
         
