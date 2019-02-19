@@ -11,16 +11,19 @@ using SupportCenter.Framework.AccesoDatos;
 namespace SupportCenter.Datos {
     public class DTPersonal {
 
-        public DataSet DTLlenaGrupo() {
+        public DataSet DTLlenaGrupo(int idUsuario) {
             SqlConnection connection = null;
             DataTable dt = new DataTable();
             DataSet ds = new DataSet();
             try {
                 using (connection = Conexion.ObtieneConexion("ConexionBD")) {
+
+                    var param = new[]                    {                        ParametroAcceso.CrearParametro("@idUsuario", SqlDbType.Int, idUsuario, ParameterDirection.Input)                    };
+
                     SqlDataReader consulta;
                     connection.Open();
 
-                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarGrupos");
+                    consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ConsultarGrupos", param);
                     dt.Load(consulta);
                     connection.Close();
                     ds.Tables.Add(dt);

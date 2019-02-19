@@ -242,10 +242,10 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
 
     #region Personal
     [WebMethod]
-    public DataSet WSOptenerGrup()
+    public DataSet WSOptenerGrup(int idUsuario)
     {
         NGPersonal WSPersonal = new NGPersonal();
-        return WSPersonal.NGOptenerGrup();
+        return WSPersonal.NGOptenerGrup(idUsuario);
     }
     [WebMethod]
     public DataSet WSOptenerRols()

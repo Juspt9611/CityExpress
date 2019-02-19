@@ -1177,22 +1177,24 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSOptenerGrup", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public System.Data.DataSet WSOptenerGrup() {
-            object[] results = this.Invoke("WSOptenerGrup", new object[0]);
+        public System.Data.DataSet WSOptenerGrup(int idUsuario) {
+            object[] results = this.Invoke("WSOptenerGrup", new object[] {
+                        idUsuario});
             return ((System.Data.DataSet)(results[0]));
         }
         
         /// <remarks/>
-        public void WSOptenerGrupAsync() {
-            this.WSOptenerGrupAsync(null);
+        public void WSOptenerGrupAsync(int idUsuario) {
+            this.WSOptenerGrupAsync(idUsuario, null);
         }
         
         /// <remarks/>
-        public void WSOptenerGrupAsync(object userState) {
+        public void WSOptenerGrupAsync(int idUsuario, object userState) {
             if ((this.WSOptenerGrupOperationCompleted == null)) {
                 this.WSOptenerGrupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSOptenerGrupOperationCompleted);
             }
-            this.InvokeAsync("WSOptenerGrup", new object[0], this.WSOptenerGrupOperationCompleted, userState);
+            this.InvokeAsync("WSOptenerGrup", new object[] {
+                        idUsuario}, this.WSOptenerGrupOperationCompleted, userState);
         }
         
         private void OnWSOptenerGrupOperationCompleted(object arg) {

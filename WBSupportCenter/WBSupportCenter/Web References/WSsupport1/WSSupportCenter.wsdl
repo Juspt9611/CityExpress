@@ -582,7 +582,11 @@
         </s:complexType>
       </s:element>
       <s:element name="WSOptenerGrup">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="WSOptenerGrupResponse">
         <s:complexType>
@@ -1166,7 +1170,9 @@
   <wsdl:message name="WSConsultarArticuloxVersionHttpGetOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerGrupHttpGetIn" />
+  <wsdl:message name="WSOptenerGrupHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerGrupHttpGetOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>
@@ -1417,7 +1423,9 @@
   <wsdl:message name="WSConsultarArticuloxVersionHttpPostOut">
     <wsdl:part name="Body" element="tns:ArrayOfHistorial" />
   </wsdl:message>
-  <wsdl:message name="WSOptenerGrupHttpPostIn" />
+  <wsdl:message name="WSOptenerGrupHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
   <wsdl:message name="WSOptenerGrupHttpPostOut">
     <wsdl:part name="Body" element="tns:DataSet" />
   </wsdl:message>

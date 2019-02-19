@@ -12,9 +12,9 @@ namespace SupportCenter.Negocio
     public class NGPersonal
     {
         DTPersonal Objeto = new DTPersonal();
-        public DataSet NGOptenerGrup()
+        public DataSet NGOptenerGrup(int idUsuario)
         {
-            return Objeto.DTLlenaGrupo();
+            return Objeto.DTLlenaGrupo(idUsuario);
         }
         public DataSet NGOptenerRol()
         {

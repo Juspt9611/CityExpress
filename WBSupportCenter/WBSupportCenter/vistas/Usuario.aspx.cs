@@ -57,8 +57,9 @@ namespace WBSupportCenter.vistas {
         }
         [WebMethod]
         public static string LlenaGrupo() {
+            int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             WSsupportCenterClass metodo = new WSsupportCenterClass();
-            return DataTableToJSONWithStringBuilder(metodo.WSOptenerGrup().Tables[0]);
+            return DataTableToJSONWithStringBuilder(metodo.WSOptenerGrup(idUsuario).Tables[0]);
         }
         [WebMethod]
         public static string LlenaRol() {
