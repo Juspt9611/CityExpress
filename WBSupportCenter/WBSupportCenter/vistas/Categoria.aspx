@@ -329,10 +329,12 @@
         }
 
         function cargarDatosEditar(idCat, nombre, typeExe) {
+            $('html,body').scrollTop(0);
             switch (typeExe) {
                 case 1:
                     $('#idCategoriaEdit').val(idCat);
                     $('#inputCategoria').val(nombre);
+                    $('#inputCategoria').focus();
                     $('#btnCat').hide();
                     $('#btnCatEdit').show();
                     cleanEdit(typeExe);
@@ -340,6 +342,7 @@
                 case 2:
                     $('#idSubcategoria1Edit').val(idCat);
                     $('#inputSubcategoria1').val(nombre);
+                    $('#inputSubcategoria1').focus();
                     $('#btnSub1').hide();
                     $('#btnSub1Edit').show();
                     cleanEdit(typeExe);
@@ -347,6 +350,7 @@
                 case 3:
                     $('#idSubcategoria2Edit').val(idCat);
                     $('#inputSubcategoria2').val(nombre);
+                    $('#inputSubcategoria2').focus();
                     $('#btnSub2').hide();
                     $('#btnSub2Edit').show();
                     cleanEdit(typeExe);
@@ -354,12 +358,14 @@
                 case 4:
                     $('#idSubcategoria3Edit').val(idCat);
                     $('#inputSubcategoria3').val(nombre);
+                    $('#inputSubcategoria3').focus();
                     $('#btnSub3').hide();
                     $('#btnSub3Edit').show();
                     break;
                 case 5:
                     $('#idSubcategoria4Edit').val(idCat);
                     $('#inputSubcategoria4').val(nombre);
+                    $('#inputSubcategoria4').focus();
                     $('#btnSub4').hide();
                     $('#btnSub4Edit').show();
                     cleanEdit(typeExe);

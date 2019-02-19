@@ -207,29 +207,37 @@
 
         function enviarCorreo() {
 
-            $('html,body').scrollTop(0);
+            var doc = new jsPDF();
 
-            html2canvas($("#box-blog"), {
-                //scale:10,
-                useCORS: true,
-                dpi: 100,
-                //height: $("#box-blog").height(),
-                onrendered: function (canvas) {
-                    var img = canvas.toDataURL("image/png");
-                    var doc = new jsPDF();
-                    //console.log(img);
-                    doc.addImage(img, 'JPEG', 20, 20);
-                    doc.save('test.pdf');
-                    //var iframe = document.createElement('iframe');
-                    //iframe.setAttribute('style', 'position:absolute;right:0; top:30%; bottom:0; height:100%; width:500px');
-                    //document.body.appendChild(iframe);
-                    //iframe.src = pdf.output('datauristring');
+            doc.fromHTML($('#box-contenido-blog').html(), 15, 15, {
+                    'width': 170
+                    //'elementHandlers': specialElementHandlers
+                });
+                doc.save('sample-file.pdf');
 
-                    //var div = document.createElement('pre');
-                    //div.innerText=pdf.output();
-                    //document.body.appendChild(div);
-                }
-            });
+            //$('html,body').scrollTop(0);
+
+            //html2canvas($("#box-blog"), {
+            //    //scale:10,
+            //    useCORS: true,
+            //    //dpi: 100,
+            //    //height: $("#box-blog").height(),
+            //    onrendered: function (canvas) {
+            //        var img = canvas.toDataURL("image/png");
+            //        var doc = new jsPDF();
+            //        //console.log(img);
+            //        doc.addImage(img, 'JPEG', 20, 20);
+            //        doc.save('test.pdf');
+            //        //var iframe = document.createElement('iframe');
+            //        //iframe.setAttribute('style', 'position:absolute;right:0; top:30%; bottom:0; height:100%; width:500px');
+            //        //document.body.appendChild(iframe);
+            //        //iframe.src = pdf.output('datauristring');
+
+            //        //var div = document.createElement('pre');
+            //        //div.innerText=pdf.output();
+            //        //document.body.appendChild(div);
+            //    }
+            //});
         }
 
         

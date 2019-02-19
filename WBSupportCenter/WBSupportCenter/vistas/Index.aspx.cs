@@ -113,6 +113,7 @@ namespace SupportCenter
         public static string articulosxValidar(string palabra)
         {
             DataTable dtTitulo = new DataTable();
+
             int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
             dtTitulo = ConvertToDataTable(metodo.WSBusquedaTitulo(palabra, idUsuario));
             return DataTableToJSONWithStringBuilder(dtTitulo);

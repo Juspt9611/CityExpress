@@ -23,7 +23,7 @@ namespace WBSupportCenter.vistas {
 
             LDAPA AutetiDA = new LDAPA();
 
-            bool result = AutetiDA.autenticado("", Usuario.Text, contrasena.Text);
+            bool result = AutetiDA.autenticado("", Usuario.Text.Trim(), contrasena.Text.Trim());
 
             if (result != false)
             {

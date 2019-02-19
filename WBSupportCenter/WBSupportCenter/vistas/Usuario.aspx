@@ -228,7 +228,7 @@
                                 } else {
                                     $("#txtCorreo").val(response.d[3] + "@hotelescity.com")
                                 }
-                                swal("Perfecto!", "Datos de " + response.d[1] + " encontrados", "success");
+                                //swal("Perfecto!", "Datos de " + response.d[1] + " encontrados", "success");
                                 $("#camposActive").removeClass('hidden');
                                 $("#divbtn").removeClass('hidden');
                                 $("#btnAtras").removeClass('hidden');
@@ -357,7 +357,7 @@
                     success: function (response) {
                         console.log(response.d);
                         if (response.d == true) {
-                            swal("Alta de usuario exitosa.", "", "success");
+                            swal("Edición de usuario exitosa.", "", "success");
                             $("#camposActive").addClass('hidden');
                             $("#divbtn").addClass('hidden');
                             $("#btnAtras").addClass('hidden');

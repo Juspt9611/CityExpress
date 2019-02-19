@@ -586,7 +586,7 @@
                                     ]
                                 },
                                 columns: [
-                                    { data: "idArticulo", title: 'Id del artículo' },
+                                    { data: "idArticulo", title: 'Número del artículo' },
                                     { data: "nombreArticulo", title: 'Nombre del artículo' },
                                     { data: "nombreCategoria", title: 'Categoría' },
                                     { data: "PromedioCalificacion", title: 'Promedio de calificación' },
@@ -706,7 +706,7 @@
                                     ]
                                 },
                                 columns: [
-                                    { data: "idArticulo", title: 'Id del artículo' },
+                                    { data: "idArticulo", title: 'Número del artículo' },
                                     { data: "nombreArticulo", title: 'Nombre del artículo' },
                                     { data: "categoria", title: 'Categoría' },
                                     { data: "visitas", title: 'Visitas' }

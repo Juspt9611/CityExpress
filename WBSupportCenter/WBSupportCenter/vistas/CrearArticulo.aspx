@@ -18,7 +18,7 @@
                                 <label for="nombre_box_form_crearart" class="col-form-label">Título del artículo:</label>
                                 <input id="nombre_box_form_crearart" type="text" class="form-control" />
                                 <div class="invalid-feedback">
-                                    Agregar un título entre 1 y 50 caracteres.
+                                    Agregar un título entre 1 y 100 caracteres.
                                 </div>
                             </div>
                         </div>
@@ -381,7 +381,7 @@
                 $("#tags_box_form_crearart").removeClass('is-invalid'); ///////////////////////////////
             }
 
-            if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
+            if (tituloArt.length == 0 || tituloArt.length > 100) {  //Se valida campo del titulo de articulo
 
                 $("#nombre_box_form_crearart").addClass('is-invalid');
 
@@ -425,6 +425,7 @@
                             });
                             $(".swal-button").click(function () {
                                 //closeSite();
+                                window.location.href = 'ArticulosRed.aspx';
                             });
 
                         } else {
