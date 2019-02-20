@@ -91,6 +91,11 @@ ul {
     Comentarios
     ***************/
 
+#box-blog{
+    z-index: 10;
+	background-color: #ffffff;
+}
+
 #box-blog-lista-comentarios{
     margin-left:4em;
     margin-right:4em;
