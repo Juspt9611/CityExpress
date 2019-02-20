@@ -523,27 +523,37 @@ section {
 	z-index: 2;
 }
 
+.cloud_13 {
+	top: 3%;
+	left: -138px;
+	-webkit-animation: cloud_anim 30s -30s linear infinite;
+	animation: cloud_anim 30s -30s linear infinite;
+    z-index: 2;
+}
 .cloud_14 {
-	bottom: 50%;
+	top: 20%;
 	left: -138px;
 	-webkit-animation: cloud_anim 60s -15s linear infinite;
 	animation: cloud_anim 60s -15s linear infinite;
+    animation-direction:reverse;
 	z-index: 2;
 }
-.cloud_13 {
-	bottom: 35%;
+.cloud_113 {
+	top: 30%;
 	left: -138px;
-	-webkit-animation: cloud_anim 60s -48s linear infinite;
-	animation: cloud_anim 60s -48s linear infinite;
+	-webkit-animation: cloud_anim 40s -35s linear infinite;
+	animation: cloud_anim 40s -35s linear infinite;
     z-index: 2;
 }
 .cloud_114 {
-	bottom: 8%;
+	top: 40%;
 	left: -138px;
-	-webkit-animation: cloud_anim 60s -25s linear infinite;
-	animation: cloud_anim 60s -25s linear infinite;
+	-webkit-animation: cloud_anim 110s -25s linear infinite;
+	animation: cloud_anim 110s -25s linear infinite;
+    animation-direction:reverse;
 	z-index: 2;
 }
+
 @-webkit-keyframes cloud_anim {
 	0% {
 		left: -138px;
@@ -787,6 +797,11 @@ section {
     overflow: hidden;
     z-index: 10;
 	background-color: #ffffff;
+}
+
+#sidebarCategoria,
+#sidebarArticulo{
+    z-index: 10;
 }
 
 .news_post_title a {

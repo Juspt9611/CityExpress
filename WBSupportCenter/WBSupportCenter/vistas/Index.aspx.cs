@@ -272,43 +272,59 @@ namespace SupportCenter
         public static string EnviaMailconArchivo(int idArticulo)
         {
             string verifica = "0";
+            int tipoEjecucion = 1; // 0 - Pruebas  | 1 - Produccion
 
             try
             {
                 int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
                 DataTable dt = metodo.WSConsultarArticuloxId(idArticulo, idUsuario).Tables[0];
 
+                //Se establecen valores para el contenido del correo
                 string contenido = dt.Rows[0][2].ToString();
                 string tituloArticulo  = dt.Rows[0][1].ToString();
-                string correo = HttpContext.Current.Session["nombres"].ToString().Substring(0, 1) + HttpContext.Current.Session["Apellidos"].ToString() + "@hotelescity.com";
+                string correo = HttpContext.Current.Session["usuario"].ToString() + "@hotelescity.com";
                 string fecha = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
 
                 fecha = fecha.Replace(" ", "_");
                 fecha = fecha.Replace(":", "_");
                 fecha = fecha.Replace("-", "_");
-
+                
+                //Se genera PDF
                 var Renderer = new IronPdf.HtmlToPdf();
                 var PDF = Renderer.RenderHtmlAsPdf(contenido);
                 string OutputPath = HttpContext.Current.Server.MapPath("~/SUPPORTCENTERPDF/" + tituloArticulo + fecha + ".pdf");
                 PDF.SaveAs(OutputPath);
 
+                //Se generan datos de envio y contenido del correo
                 MailMessage msg = new MailMessage();
-                msg.From = new MailAddress(ConfigurationManager.AppSettings["direccion_email_envio"].ToString());
+                msg.From = new MailAddress(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), "Support Center");
                 msg.To.Add(correo);
-
+                msg.To.Add("rmendoza@hotelescity.com");
                 msg.Subject = "SupportCenter | Envío de artículo - " + tituloArticulo;
                 msg.Body = "Artículo enviado desde portar SupportCenter artículo " + tituloArticulo + ".";
                 msg.Attachments.Add(new Attachment(OutputPath));
                 msg.IsBodyHtml = true;
                 msg.Priority = System.Net.Mail.MailPriority.Normal;
 
-                SmtpClient clienteSmtp = new SmtpClient();
-                clienteSmtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), ConfigurationManager.AppSettings["direccion_email_envio_password"].ToString());
-                clienteSmtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["direccion_email_puerto"].ToString());
-                clienteSmtp.Host = ConfigurationManager.AppSettings["direccion_email_host"].ToString();
-                clienteSmtp.EnableSsl = true;
+                if (tipoEjecucion == 0) {
 
-                clienteSmtp.Send(msg);
+                    //Envio de correo
+                    SmtpClient clienteSmtp = new SmtpClient();
+                    clienteSmtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), ConfigurationManager.AppSettings["direccion_email_envio_password"].ToString());
+                    clienteSmtp.Port = 587;
+                    clienteSmtp.Host = "smtp.gmail.com";
+                    clienteSmtp.EnableSsl = true;
+                    clienteSmtp.Send(msg);
+
+                }else
+                {
+                    SmtpClient clienteSmtp = new SmtpClient();
+                    clienteSmtp.Port = 587;
+                    clienteSmtp.EnableSsl = true;
+                    clienteSmtp.Host = "smtp-relay.gmail.com";
+                    clienteSmtp.Send(msg);
+
+                }
 
                 verifica = correo;
 

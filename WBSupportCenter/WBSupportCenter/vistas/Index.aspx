@@ -166,15 +166,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cloud cloud_14" style="margin-top: 120px !important;">
+                    <div class="cloud cloud_13">
                         <img src="../recursos/img/city/cloud.png" alt="" />
                     </div>
-                    <div class="cloud cloud_13" style="margin-top: 80px !important;">
-                        <img src="../recursos/img/city/cloud_full.png" alt="" />
-                    </div>
-                    <div class="cloud cloud_114" style="margin-top: 120px !important;">
+                    <div class="cloud cloud_14">
                         <img src="../recursos/img/city/cloud.png" alt="" />
                     </div>
+                    <div class="cloud cloud_113">
+                        <img src="../recursos/img/city/cloud.png" alt="" />
+                    </div>
+                    <div class="cloud cloud_114">
+                        <img src="../recursos/img/city/cloud.png" alt="" />
+                    </div>  
                 </div>
                 <!-- News Sidebar -->
                 <div id="sidebarCategoria" class="col-lg-2 sidebar_col pull-right">
