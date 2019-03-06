@@ -30,13 +30,13 @@ namespace WBSupportCenter.vistas
                     if (auth.Equals("false") || (usuariosValidos.IndexOf(nombreRol) < 0))
                     {
                         Session.Clear();
-                        Response.Redirect("sesion.aspx");
+                        Response.Redirect("../default.aspx");
                     }
                 }
                 catch (Exception exp)
                 {
                     Session.Clear();
-                    Response.Redirect("sesion.aspx");
+                    Response.Redirect("../default.aspx");
                 }
 
                 return;

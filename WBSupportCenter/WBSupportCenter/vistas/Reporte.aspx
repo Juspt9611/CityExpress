@@ -825,7 +825,7 @@
 
                     } else {
                         swal("No se encontraron datos para esta búsqueda.", {
-                            icon: "error",
+                            icon: "info",
                             button: "Aceptar",
                             allowOutsideClick: false,
                             closeOnClickOutside: false

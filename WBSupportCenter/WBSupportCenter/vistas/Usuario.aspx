@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Usuario.aspx.cs" Inherits="WBSupportCenter.vistas.prueba" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .dataTables_filter {
+            display: none; 
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -21,8 +26,8 @@
                     <div class="row insertUser">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="nombre_box_form_crearart" class="col-form-label">Nombre de usuario:</label>
-                                <input type="text" id="UsuarioB" class="form-control" />
+                                <label for="nombre_box_form_crearart" class="col-form-label">Buscar un nombre de usuario para darlo de alta:</label>
+                                <input type="text" id="UsuarioB" class="form-control" placeholder="Usuario" />
                             </div>
                         </div>
                         <div class="col-lg-1">
@@ -84,6 +89,14 @@
                     </div>
                     <br />
                     <div class="table" id="divTable">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="nombre_box_form_crearart" class="col-form-label">Buscar un usuario ya registrado:</label>
+                                    <input type="text" id="txtUsuarioRegistrado" class="form-control" placeholder="Buscar" />
+                                </div>
+                            </div>
+                        </div>
                         <table id="tablaUsuarios" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%"></table>
                     </div>
                     <br />
@@ -110,7 +123,11 @@
             tablaUsuarios(usuarioAdmin, passAdmin);
 
             if (top.location != self.location) top.location = self.location;
-            shortcut.add("space",function() {});
+            shortcut.add("space", function () { });
+
+            $("#txtUsuarioRegistrado").keyup(function () {
+                $('#tablaUsuarios').DataTable().search($("#txtUsuarioRegistrado").val()).draw();
+            });
 
         });
 
@@ -165,6 +182,8 @@
                         data: jsonReporte,
                         dom: '<"pull-left"f><"pull-right">tip',
                         language: {
+                            "searchPlaceholder": "Usuario",
+                            "search": "Buscar un nombre de usuario ya registrado: </br>",
                             //"emptyTable": "No hay información",
                             "infoEmpty": "Mostrando 0 de 0 entradas",
                             "zeroRecords": "Sin resultados encontrados",
@@ -192,7 +211,7 @@
                                 sortable: false,
                                 render: function (data, type, row) {
                                     arrayUsers.push(data.nombreUsuario);
-                                    return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + pass + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\', \'' + data.idPersonal + '\', \'' + data.idUsuario + '\', \'' + data.idGrupos + '\', \'' + data.idRol + '\');">Editar</a></center>'
+                                    return '<center><a class="btn btn-warning btn-sm" onclick="editarUsuario(\'' + usuario + '\',\'' + pass + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\', \'' + data.idPersonal + '\', \'' + data.idUsuario + '\', \'' + data.idGrupos + '\', \'' + data.idRol + '\');"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></center>'
                                     //return '<center><a class="btn btn-warning btn-sm text-white" onclick="editarUsuario(\'' + usuario + '\',\'' + 'Lun4-963$%' + '\', \'' + data.nombreUsuario + '\', \'' + data.nombreRol + '\', \'' + data.nombreGrupo + '\');">Editar</a></center>';
                                 }
                             }
