@@ -47,7 +47,7 @@ namespace WBSupportCenter.vistas
 
                 metodo.WSregistrarAcceso(1);
 
-                Response.Redirect("/vistas/index.aspx");
+                Response.Redirect("~/vistas/index.aspx");
             }
 
             if (result != false)
@@ -89,7 +89,7 @@ namespace WBSupportCenter.vistas
                         int idUsuario1 = Int32.Parse(Session["idUsuario"].ToString());
                         metodo.WSregistrarAcceso(idUsuario1);
 
-                        Response.Redirect("/vistas/index.aspx");
+                        Response.Redirect("~/vistas/index.aspx");
 
                     }
                     else
