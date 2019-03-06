@@ -31,15 +31,6 @@ namespace WBSupportCenter {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl index;
         
         /// <summary>
-        /// Control usuarios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usuarios;
-        
-        /// <summary>
         /// Control articulosRed.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace WBSupportCenter {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl categorias;
+        
+        /// <summary>
+        /// Control usuarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usuarios;
         
         /// <summary>
         /// Control reportes.

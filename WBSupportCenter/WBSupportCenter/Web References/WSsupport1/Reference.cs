@@ -50,6 +50,8 @@ namespace WBSupportCenter.WSsupport1 {
         
         private System.Threading.SendOrPostCallback WSregistrarValoracionxArticuloOperationCompleted;
         
+        private System.Threading.SendOrPostCallback WSregistrarAccesoOperationCompleted;
+        
         private System.Threading.SendOrPostCallback WSOpregistrarArtOperationCompleted;
         
         private System.Threading.SendOrPostCallback WSConsultarArtxCategoriaOperationCompleted;
@@ -171,6 +173,9 @@ namespace WBSupportCenter.WSsupport1 {
         
         /// <remarks/>
         public event WSregistrarValoracionxArticuloCompletedEventHandler WSregistrarValoracionxArticuloCompleted;
+        
+        /// <remarks/>
+        public event WSregistrarAccesoCompletedEventHandler WSregistrarAccesoCompleted;
         
         /// <remarks/>
         public event WSOpregistrarArtCompletedEventHandler WSOpregistrarArtCompleted;
@@ -556,6 +561,35 @@ namespace WBSupportCenter.WSsupport1 {
             if ((this.WSregistrarValoracionxArticuloCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.WSregistrarValoracionxArticuloCompleted(this, new WSregistrarValoracionxArticuloCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/WSregistrarAcceso", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int WSregistrarAcceso(int idUsuario) {
+            object[] results = this.Invoke("WSregistrarAcceso", new object[] {
+                        idUsuario});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void WSregistrarAccesoAsync(int idUsuario) {
+            this.WSregistrarAccesoAsync(idUsuario, null);
+        }
+        
+        /// <remarks/>
+        public void WSregistrarAccesoAsync(int idUsuario, object userState) {
+            if ((this.WSregistrarAccesoOperationCompleted == null)) {
+                this.WSregistrarAccesoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWSregistrarAccesoOperationCompleted);
+            }
+            this.InvokeAsync("WSregistrarAcceso", new object[] {
+                        idUsuario}, this.WSregistrarAccesoOperationCompleted, userState);
+        }
+        
+        private void OnWSregistrarAccesoOperationCompleted(object arg) {
+            if ((this.WSregistrarAccesoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.WSregistrarAccesoCompleted(this, new WSregistrarAccesoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2123,6 +2157,32 @@ namespace WBSupportCenter.WSsupport1 {
         private object[] results;
         
         internal WSregistrarValoracionxArticuloCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    public delegate void WSregistrarAccesoCompletedEventHandler(object sender, WSregistrarAccesoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class WSregistrarAccesoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal WSregistrarAccesoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -155,9 +155,6 @@
                 <li runat="server" id="index">
                     <a href="/vistas/index.aspx">Buscar artículos</a>
                 </li>
-                <li runat="server" id="usuarios">
-                    <a href="/vistas/Usuario.aspx">Asignar roles</a>
-                </li>
                 <li runat="server" id="articulosRed">
                     <a href="/vistas/ArticulosRed.aspx">Crear y editar artículos</a>
                 </li>
@@ -165,13 +162,16 @@
                     <a href="/vistas/AprobacionArticulos.aspx">Autorizar artículos</a>
                 </li>
                 <li runat="server" id="categorias">
-                    <a href="/vistas/Categoria.aspx">Crear y editar categorías</a>
+                    <a href="/vistas/Categoria.aspx">Administrar categorías</a>
+                </li>
+                <li runat="server" id="usuarios">
+                    <a href="/vistas/Usuario.aspx">Administrar usuarios</a>
                 </li>
                 <li runat="server" id="reportes">
-                    <a href="/vistas/Reporte.aspx">Reportes</a>
+                    <a href="/vistas/Reporte.aspx">Generar reportes</a>
                 </li>
                 <li runat="server">
-                    <a href="/vistas/Sesion.aspx">Cerrar sesión</a>
+                    <a href="../default.aspx">Cerrar sesión</a>
                 </li>
             </ul>
         </div>

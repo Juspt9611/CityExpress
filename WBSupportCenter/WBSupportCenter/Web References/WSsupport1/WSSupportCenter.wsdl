@@ -221,6 +221,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="WSregistrarAcceso">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WSregistrarAccesoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="WSregistrarAccesoResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="WSOpregistrarArt">
         <s:complexType>
           <s:sequence>
@@ -803,6 +817,12 @@
   <wsdl:message name="WSregistrarValoracionxArticuloSoapOut">
     <wsdl:part name="parameters" element="tns:WSregistrarValoracionxArticuloResponse" />
   </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoSoapIn">
+    <wsdl:part name="parameters" element="tns:WSregistrarAcceso" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoSoapOut">
+    <wsdl:part name="parameters" element="tns:WSregistrarAccesoResponse" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtSoapIn">
     <wsdl:part name="parameters" element="tns:WSOpregistrarArt" />
   </wsdl:message>
@@ -1031,6 +1051,12 @@
     <wsdl:part name="idUsuario" type="s:string" />
   </wsdl:message>
   <wsdl:message name="WSregistrarValoracionxArticuloHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoHttpGetIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoHttpGetOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpGetIn">
@@ -1286,6 +1312,12 @@
   <wsdl:message name="WSregistrarValoracionxArticuloHttpPostOut">
     <wsdl:part name="Body" element="tns:int" />
   </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoHttpPostIn">
+    <wsdl:part name="idUsuario" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="WSregistrarAccesoHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
   <wsdl:message name="WSOpregistrarArtHttpPostIn">
     <wsdl:part name="nombreArticulo" type="s:string" />
     <wsdl:part name="contenido" type="s:string" />
@@ -1512,6 +1544,10 @@
       <wsdl:input message="tns:WSregistrarValoracionxArticuloSoapIn" />
       <wsdl:output message="tns:WSregistrarValoracionxArticuloSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <wsdl:input message="tns:WSregistrarAccesoSoapIn" />
+      <wsdl:output message="tns:WSregistrarAccesoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtSoapIn" />
       <wsdl:output message="tns:WSOpregistrarArtSoapOut" />
@@ -1662,6 +1698,10 @@
       <wsdl:input message="tns:WSregistrarValoracionxArticuloHttpGetIn" />
       <wsdl:output message="tns:WSregistrarValoracionxArticuloHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <wsdl:input message="tns:WSregistrarAccesoHttpGetIn" />
+      <wsdl:output message="tns:WSregistrarAccesoHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpGetIn" />
       <wsdl:output message="tns:WSOpregistrarArtHttpGetOut" />
@@ -1811,6 +1851,10 @@
     <wsdl:operation name="WSregistrarValoracionxArticulo">
       <wsdl:input message="tns:WSregistrarValoracionxArticuloHttpPostIn" />
       <wsdl:output message="tns:WSregistrarValoracionxArticuloHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <wsdl:input message="tns:WSregistrarAccesoHttpPostIn" />
+      <wsdl:output message="tns:WSregistrarAccesoHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <wsdl:input message="tns:WSOpregistrarArtHttpPostIn" />
@@ -2006,6 +2050,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSregistrarValoracionxArticulo">
       <soap:operation soapAction="http://tempuri.org/WSregistrarValoracionxArticulo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <soap:operation soapAction="http://tempuri.org/WSregistrarAcceso" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -2349,6 +2402,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <soap12:operation soapAction="http://tempuri.org/WSregistrarAcceso" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <soap12:operation soapAction="http://tempuri.org/WSOpregistrarArt" style="document" />
       <wsdl:input>
@@ -2685,6 +2747,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <http:operation location="/WSregistrarAcceso" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="WSOpregistrarArt">
       <http:operation location="/WSOpregistrarArt" />
       <wsdl:input>
@@ -3014,6 +3085,15 @@
     </wsdl:operation>
     <wsdl:operation name="WSregistrarValoracionxArticulo">
       <http:operation location="/WSregistrarValoracionxArticulo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WSregistrarAcceso">
+      <http:operation location="/WSregistrarAcceso" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

@@ -8,16 +8,20 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WBSupportCenter.WSsupport1;
 
-namespace WBSupportCenter.vistas {
-    public partial class Sesion : System.Web.UI.Page {
-        protected void Page_Load(object sender, EventArgs e) {
+namespace WBSupportCenter.vistas
+{
+    public partial class Sesion : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
             if (!Page.IsPostBack)
             {
                 CerrarSesion();
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e) {
+        protected void Button1_Click(object sender, EventArgs e)
+        {
 
             Session["Autenticacion"] = "false";
 
@@ -27,6 +31,8 @@ namespace WBSupportCenter.vistas {
 
             if (Usuario.Text.Trim().Equals("Coyo") && contrasena.Text.Trim().Equals("Coyo12345"))
             {
+                WSsupportCenterClass metodo = new WSsupportCenterClass();
+
                 Session["Autenticacion"] = "true";
                 Session["nombres"] = "Pablo";
                 Session["Apellidos"] = "Galicia";
@@ -38,6 +44,8 @@ namespace WBSupportCenter.vistas {
 
                 Usuario.Text = "";
                 contrasena.Text = "";
+
+                metodo.WSregistrarAcceso(1);
 
                 Response.Redirect("/vistas/index.aspx");
             }
@@ -74,10 +82,13 @@ namespace WBSupportCenter.vistas {
                         Session["nomRol"] = nomRol;
                         Session["idUsuario"] = idUsuario;
                         Session["pass"] = contrasena.Text;
-                        
+
                         Usuario.Text = "";
                         contrasena.Text = "";
-                               
+
+                        int idUsuario1 = Int32.Parse(Session["idUsuario"].ToString());
+                        metodo.WSregistrarAcceso(idUsuario1);
+
                         Response.Redirect("/vistas/index.aspx");
 
                     }

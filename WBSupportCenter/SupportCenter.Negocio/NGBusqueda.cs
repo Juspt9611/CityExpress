@@ -58,6 +58,11 @@ namespace SupportCenter.Negocio {
             return Obejeto.DT_RegistraValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
         }
 
+        public int NG_RegistrarAcceso(int idUsuario)
+        {
+            return Obejeto.DT_RegistrarAcceso(idUsuario);
+        }
+
 
     }
 }

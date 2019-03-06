@@ -170,6 +170,7 @@
                             <option value="valorados">Artículos más valorados</option>
                             <option value="vistos">Artículos más vistos</option>
                             <option value="vistas">Categorías más vistas</option>
+                            <option value="accesos">Accesos al sitio</option>
                         </select>
                     </div>
                     <div class="col-4">
@@ -305,6 +306,9 @@
                     else if (reporteSelect == "vistas") {
                         reporteGrafica = "Número de vistas";
                     }
+                    else if (reporteSelect == "accesos") {
+                        reporteGrafica = "Accesos por usuario";
+                    }
                     //console.log(selectedOption.value);
 
                     if (repetirBusqueda == true) {
@@ -372,6 +376,9 @@
                     }
                     else if (reporteSelect == "vistas") {
                         nameReport = "Categorias más vistas";
+                    }
+                    else if (reporteSelect == "accesos") {
+                        nameReport = "Accesos por usuario";
                     }
                     if (jsonReporte != null) {
 
@@ -709,7 +716,7 @@
                                     { data: "idArticulo", title: 'Número del artículo' },
                                     { data: "nombreArticulo", title: 'Nombre del artículo' },
                                     { data: "categoria", title: 'Categoría' },
-                                    { data: "visitas", title: 'Visitas' }
+                                    { data: "visitas", title: 'Visitas' },
                                 ]
                             });
                         }
@@ -816,6 +823,112 @@
                                 columns: [
                                     { data: "nombreCategoria", title: 'Categoría' },
                                     { data: "CategoriaMasVista", title: 'Número de vistas' }
+                                ]
+                            });
+                        }
+                        else if (reporteSelect == "accesos") {
+                            $.each(jsonReporte, function (item, index) {
+                                arrayGrafic.push({
+                                    country: index.nombreUsuario,
+                                    visits: parseInt(index.Accesos, 10)
+                                })
+                            });
+                            $('#tableArticulos').DataTable({
+                                data: jsonReporte,
+                                orderCellsTop: true,
+                                fixedHeader: true,
+                                destroy: true,
+                                paging: true,
+                                dom: '<"pull-left"B><"pull-right">tip',
+                                //dom: '<"top"Bf>rt<"bottom"ip><"clear">',
+                                language: {
+                                    //"emptyTable": "No hay información",
+                                    "infoEmpty": "Mostrando 0 de 0 entradas",
+                                    "zeroRecords": "Sin resultados encontrados",
+                                    "oPaginate": {
+                                        "sPrevious": "Ant.", // This is the link to the previous page
+                                        "sNext": "Sig."
+                                    }
+                                },
+                                buttons: {
+                                    dom: {
+                                        container: {
+                                            tag: 'div',
+                                            className: 'flexcontent'
+                                        },
+                                        buttonLiner: {
+                                            tag: null
+                                        }
+                                    },
+                                    buttons: [
+                                        {
+                                            extend: 'excelHtml5',
+                                            text: '<i class="fa fa-file-excel-o"></i>',
+                                            titleAttr: 'Exportar Excel',
+                                            className: 'btn btn-app export excel',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
+                                        },
+                                        {
+                                            extend: 'pdfHtml5',
+                                            customize: function (doc) {
+                                                doc.defaultStyle.alignment = 'center';
+                                                doc.content.splice(0, 1);
+                                                //Create a date string that we use in the footer. Format is dd-mm-yyyy
+                                                var now = new Date();
+                                                var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+                                                doc.pageMargins = [20, 60, 20, 30];
+                                                doc.defaultStyle.fontSize = 7;
+                                                doc.styles.tableHeader.fontSize = 7;
+                                                doc['header'] = (function () {
+                                                    return {
+                                                        columns: [
+                                                            {
+                                                                alignment: 'center',
+                                                                fontSize: 14,
+                                                                text: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
+                                                            }
+                                                        ],
+                                                        margin: 20
+                                                    }
+                                                });
+                                                doc['footer'] = (function (page, pages) {
+                                                    return {
+                                                        columns: [
+                                                            {
+                                                                alignment: 'left',
+                                                                text: ['Creado: ', { text: jsDate.toString() }]
+                                                            },
+                                                            {
+                                                                alignment: 'right',
+                                                                text: ['pagina ', { text: page.toString() }, ' de ', { text: pages.toString() }]
+                                                            }
+                                                        ],
+                                                        margin: 20
+                                                    }
+                                                });
+
+                                                var objLayout = {};
+                                                objLayout['hLineWidth'] = function (i) { return .5; };
+                                                objLayout['vLineWidth'] = function (i) { return .5; };
+                                                objLayout['hLineColor'] = function (i) { return '#aaa'; };
+                                                objLayout['vLineColor'] = function (i) { return '#aaa'; };
+                                                objLayout['paddingLeft'] = function (i) { return 4; };
+                                                objLayout['paddingRight'] = function (i) { return 4; };
+                                                doc.content[0].layout = objLayout;
+                                            },
+                                            text: '<i class="fa fa-file-pdf-o"></i>',
+                                            titleAttr: 'Exportar PDF',
+                                            className: 'btn btn-app export pdf',
+                                            title: "Support Center | Reporte: " + nameReport + " | Consulta del: " + $('#ContentPlaceHolder1_fechaInicial').val() + " al " + $('#ContentPlaceHolder1_fechaFinal').val() + " | Fecha de ejecución: " + formatDateActual() + "",
+                                            //exportOptions: {
+                                            //    columns: [0, 1]
+                                            //},
+                                        },
+                                    ]
+                                },
+                                columns: [
+                                    { data: "nombreUsuario", title: 'Nombre de Usuario' },
+                                    { data: "Accesos", title: 'Número de Accesos' }
                                 ]
                             });
                         }

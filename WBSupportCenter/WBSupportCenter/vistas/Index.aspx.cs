@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Net.Mail;
 using System.Configuration;
+using TheArtOfDev.HtmlRenderer.PdfSharp;
 
 namespace SupportCenter
 {
@@ -30,7 +31,7 @@ namespace SupportCenter
                     if (auth.Equals("false"))
                     {
                         Session.Clear();
-                        Response.Redirect("sesion.aspx");
+                        Response.Redirect("../default.aspx");
                     }
                     else
                     {
@@ -42,7 +43,7 @@ namespace SupportCenter
                 catch (Exception exp)
                 {
                     Session.Clear();
-                    Response.Redirect("sesion.aspx");
+                    Response.Redirect("../default.aspx");
                 }
 
                 return;
@@ -268,11 +269,66 @@ namespace SupportCenter
             return contentJSON;
         }
 
+        public static string generaPDF(int tipo, int idArticulo)
+        {
+            string estado = "0";
+
+            try
+            {
+                int idUsuario = Int32.Parse(HttpContext.Current.Session["idUsuario"].ToString());
+                DataTable dt = metodo.WSConsultarArticuloxId(idArticulo, idUsuario).Tables[0];
+
+                string contenido = dt.Rows[0][2].ToString();
+                string tituloArticulo = dt.Rows[0][1].ToString();
+
+                string fecha = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+
+                fecha = fecha.Replace(" ", "_");
+                fecha = fecha.Replace(":", "_");
+                fecha = fecha.Replace("-", "_");
+
+                //Se genera PDF
+                //var Renderer = new IronPdf.HtmlToPdf();
+                //var PDF = Renderer.RenderHtmlAsPdf(contenido);
+                PdfSharp.Pdf.PdfDocument pdf = PdfGenerator.GeneratePdf(contenido, PdfSharp.PageSize.A4, 65);
+                var config = new PdfGenerateConfig()
+                {
+                    MarginBottom = 70,
+                    MarginLeft = 20,
+                    MarginRight = 20,
+                    MarginTop = 70,
+                };
+
+                string OutputPath = HttpContext.Current.Server.MapPath("~/SUPPORTCENTERPDF/" + tituloArticulo + fecha + ".pdf");
+                pdf.Save(OutputPath);
+
+                if (tipo == 1) {
+                    estado = "../SUPPORTCENTERPDF/" + tituloArticulo + fecha + ".pdf";
+                }else
+                {
+                    estado = OutputPath;
+                }
+            }
+            catch (Exception exp)
+            {
+                estado = "3";
+            }
+
+            return estado;
+
+        }
+
+        [WebMethod]
+        public static string descargaArticuloPDF(int idArticulo)
+        {
+            return generaPDF(1, idArticulo);
+        }
+
         [WebMethod]
         public static string EnviaMailconArchivo(int idArticulo)
         {
             string verifica = "0";
-            int tipoEjecucion = 1; // 0 - Pruebas  | 1 - Produccion
+            int tipoEjecucion = Convert.ToInt32(ConfigurationManager.AppSettings["email_tipo_ejecucion"].ToString()); // 0 - Pruebas  | 1 - Produccion
 
             try
             {
@@ -288,45 +344,51 @@ namespace SupportCenter
                 fecha = fecha.Replace(" ", "_");
                 fecha = fecha.Replace(":", "_");
                 fecha = fecha.Replace("-", "_");
-                
+
                 //Se genera PDF
-                var Renderer = new IronPdf.HtmlToPdf();
-                var PDF = Renderer.RenderHtmlAsPdf(contenido);
-                string OutputPath = HttpContext.Current.Server.MapPath("~/SUPPORTCENTERPDF/" + tituloArticulo + fecha + ".pdf");
-                PDF.SaveAs(OutputPath);
+                string OutputPath = generaPDF(2, idArticulo);
 
-                //Se generan datos de envio y contenido del correo
-                MailMessage msg = new MailMessage();
-                msg.From = new MailAddress(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), "Support Center");
-                msg.To.Add(correo);
-                msg.To.Add("rmendoza@hotelescity.com");
-                msg.Subject = "SupportCenter | Envío de artículo - " + tituloArticulo;
-                msg.Body = "Artículo enviado desde portar SupportCenter artículo " + tituloArticulo + ".";
-                msg.Attachments.Add(new Attachment(OutputPath));
-                msg.IsBodyHtml = true;
-                msg.Priority = System.Net.Mail.MailPriority.Normal;
-
-                if (tipoEjecucion == 0) {
-
-                    //Envio de correo
-                    SmtpClient clienteSmtp = new SmtpClient();
-                    clienteSmtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), ConfigurationManager.AppSettings["direccion_email_envio_password"].ToString());
-                    clienteSmtp.Port = 587;
-                    clienteSmtp.Host = "smtp.gmail.com";
-                    clienteSmtp.EnableSsl = true;
-                    clienteSmtp.Send(msg);
-
-                }else
+                if (OutputPath.Equals("3"))
                 {
-                    SmtpClient clienteSmtp = new SmtpClient();
-                    clienteSmtp.Port = 587;
-                    clienteSmtp.EnableSsl = true;
-                    clienteSmtp.Host = "smtp-relay.gmail.com";
-                    clienteSmtp.Send(msg);
-
+                    verifica = "3";
                 }
+                else
+                {
+                    //Se generan datos de envio y contenido del correo
+                    MailMessage msg = new MailMessage();
+                    msg.From = new MailAddress(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), "Support Center");
+                    msg.To.Add(correo);
+                    //msg.To.Add("rmendoza@hotelescity.com");
+                    msg.Subject = "SupportCenter | Envío de artículo - " + tituloArticulo;
+                    msg.Body = "Artículo enviado desde portar SupportCenter artículo " + tituloArticulo + ".";
+                    msg.Attachments.Add(new Attachment(OutputPath));
+                    msg.IsBodyHtml = true;
+                    msg.Priority = System.Net.Mail.MailPriority.Normal;
 
-                verifica = correo;
+                    if (tipoEjecucion == 0)
+                    {
+
+                        //Envio de correo
+                        SmtpClient clienteSmtp = new SmtpClient();
+                        clienteSmtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["direccion_email_envio"].ToString(), ConfigurationManager.AppSettings["direccion_email_envio_password"].ToString());
+                        clienteSmtp.Port = 587;
+                        clienteSmtp.Host = "smtp.gmail.com";
+                        clienteSmtp.EnableSsl = true;
+                        clienteSmtp.Send(msg);
+
+                    }
+                    else
+                    {
+                        SmtpClient clienteSmtp = new SmtpClient();
+                        clienteSmtp.Port = 587;
+                        clienteSmtp.EnableSsl = true;
+                        clienteSmtp.Host = "smtp-relay.gmail.com";
+                        clienteSmtp.Send(msg);
+
+                    }
+
+                    verifica = correo;
+                }
 
             }
             catch (Exception ex)
@@ -334,6 +396,7 @@ namespace SupportCenter
                 //Console.WriteLine(ex.Message);
                 //Console.ReadLine();
                 verifica = "1";
+                //verifica = ex.Message.ToString();
             }
             return verifica;
         }

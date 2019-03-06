@@ -76,6 +76,12 @@ public class WSsupportCenterClass : System.Web.Services.WebService {
         return Busqueda.NG_RegistraValoracionxArticulo(estrellas, idArticulo, comentario, idUsuario);
     }
 
+    [WebMethod]
+    public int WSregistrarAcceso(int idUsuario)
+    {
+        return Busqueda.NG_RegistrarAcceso(idUsuario);
+    }
+
     #endregion 
 
     #region Articulos

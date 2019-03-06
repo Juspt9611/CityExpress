@@ -155,6 +155,7 @@
                             <div id="box-Botones-blog" class="col-lg-12 box_table_buttons">
                                 <button type="button" class="btn btn-warning float-right" onclick="verHistorial()"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp Historial</button>
                                 <button type="button" class="btn btn-primary float-right" onclick="enviarCorreo()"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp Enviar por correo</button>
+                                <button type="button" class="btn btn-info float-right" onclick="descargarPDF()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp Descargar PDF</button>
                                 <button type="button" class="btn btn-danger float-right" onclick="window.location.href = 'Index.aspx'"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp Regresar</button>
                             </div>
                         </div>
@@ -219,7 +220,68 @@
     </div>
     <script>
 
+        function descargarPDF() {
+
+            var slider = document.createElement("div");
+            $(slider).addClass("loader").append("<div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__ball'></div>Cargando...");
+
+            swal({
+                closeOnClickOutside: false,
+                content: slider,
+                button: false
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/descargaArticuloPDF",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "{'idArticulo':" + idArticuloActual + "}",
+                success: function (response) {
+                    if (response.d.indexOf(".pdf") >= 0) {
+                        setTimeout(function () {
+                            swal("PDF descargado correctamente.", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            });
+                            $(".swal-button").click(function () {
+                                window.open(response.d, "_blank");
+                            });
+                        }, 3000);      
+                    } else {
+                        setTimeout(function () {
+                            swal("Hubo un problema durante la generación del PDF.", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                        }, 3000);
+                    }
+                },
+                error: function (response) {
+                    setTimeout(function () {
+                        swal("Hubo un problema durante la generación del PDF.", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                    }, 3000);
+                }
+            });
+
+        }
+
         function enviarCorreo() {
+
+            var slider = document.createElement("div");
+            $(slider).addClass("loader").append("<div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__ball'></div>Cargando...");
+
+            swal({
+                closeOnClickOutside: false,
+                content: slider,
+                button: false
+            });
 
             $.ajax({
                 type: "POST",
@@ -228,27 +290,43 @@
                 dataType: "json",
                 data: "{'idArticulo':" + idArticuloActual + "}",
                 success: function (response) {
-                    if (response.d != "1") {
-                        swal("Artículo enviado a " + response.d +" correctamente.", {
-                            icon: "success",
-                            allowOutsideClick: false,
-                            closeOnClickOutside: false
-                        });
+                    console.log(response);
+                    if (response.d.indexOf("@hotelescity.com") > 0) {
+                        setTimeout(function () {
+                            swal("Artículo enviado a " + response.d + " correctamente.", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                        }, 3000);
                     } else {
+                        if (response.d == "1") {
+                            setTimeout(function () {
+                                swal("Hubo un problema durante el envío de este artículo.", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                            }, 3000);
+                        } else {
+                            setTimeout(function () {
+                                swal("Hubo un problema durante la generación del PDF.", {
+                                    icon: "error",
+                                    allowOutsideClick: false,
+                                    closeOnClickOutside: false
+                                })
+                            }, 3000);
+                        }
+                    }
+                },
+                error: function (response) {
+                    setTimeout(function () {
                         swal("Hubo un problema durante el envío de este artículo.", {
                             icon: "error",
                             allowOutsideClick: false,
                             closeOnClickOutside: false
                         });
-                    }
-                    console.log(response);
-                },
-                error: function (response) {
-                    swal("Hubo un problema durante el envío de este artículo.", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
+                    }, 3000);
                 }
             });
 

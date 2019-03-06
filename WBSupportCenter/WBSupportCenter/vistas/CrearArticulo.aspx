@@ -555,7 +555,7 @@
                         }, 3000);
                     } else {
                         $("#msnError-multimedia").append("<i class='fa fa-check' aria-hidden='true'></i> Archivo cargado exitosamente.").addClass("ok-media");
-                        urlLocal = url.substring(0, url.indexOf('/vistas')) + '/WBSupportCenter/imgBlog/' + status;
+                        urlLocal = '../imgBlog/' + status; // url.substring(0, url.indexOf('/vistas')) + '/WBSupportCenter/imgBlog/' + status;
                         setTimeout(function () {
                             swal("Archivo cargado exitosamente", {
                                 icon: "success",

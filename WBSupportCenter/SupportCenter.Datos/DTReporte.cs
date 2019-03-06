@@ -89,6 +89,11 @@ namespace SupportCenter.Datos
                         consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ReporteCategoriasMasVistas", parametros);
                         dt.Load(consulta);
                     }
+                    else if (valReporte == "accesos")
+                    {
+                        consulta = Ejecuta.ProcedimientoAlmacenado(connection, "SP_ReporteAccesos", parametros);
+                        dt.Load(consulta);
+                    }
 
                     connection.Close();
                 }
