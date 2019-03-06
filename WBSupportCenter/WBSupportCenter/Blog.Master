@@ -149,26 +149,26 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="/vistas/index.aspx">Support Center
+                    <a href="index.aspx">Support Center
                     </a>
                 </li>
                 <li runat="server" id="index">
-                    <a href="/vistas/index.aspx">Buscar artículos</a>
+                    <a href="index.aspx">Buscar artículos</a>
                 </li>
                 <li runat="server" id="articulosRed">
-                    <a href="/vistas/ArticulosRed.aspx">Crear y editar artículos</a>
+                    <a href="ArticulosRed.aspx">Crear y editar artículos</a>
                 </li>
                 <li runat="server" id="aprobacionArticulos">
-                    <a href="/vistas/AprobacionArticulos.aspx">Autorizar artículos</a>
+                    <a href="AprobacionArticulos.aspx">Autorizar artículos</a>
                 </li>
                 <li runat="server" id="categorias">
-                    <a href="/vistas/Categoria.aspx">Administrar categorías</a>
+                    <a href="Categoria.aspx">Administrar categorías</a>
                 </li>
                 <li runat="server" id="usuarios">
-                    <a href="/vistas/Usuario.aspx">Administrar usuarios</a>
+                    <a href="Usuario.aspx">Administrar usuarios</a>
                 </li>
                 <li runat="server" id="reportes">
-                    <a href="/vistas/Reporte.aspx">Generar reportes</a>
+                    <a href="Reporte.aspx">Generar reportes</a>
                 </li>
                 <li runat="server">
                     <a href="../default.aspx">Cerrar sesión</a>
@@ -188,7 +188,7 @@
                                     <input type="hidden" runat="server" id="idAdmin"  />
                                     <input type="hidden" runat="server" id="idPass"  />
                                     <input type="hidden" runat="server" id="idCreador"  />
-                                    <a href="/vistas/index.aspx">
+                                    <a href="index.aspx">
                                         <h2 style="color: #FFF;">Support<span style="color: #fcea1d;">Center</span></h2>
                                     </a>
                                     <%--<span> <img src="../recursos/img/city/logo.png" alt="SmartAdmin" style="width:50%;height:4rem;"> </span>--%>
