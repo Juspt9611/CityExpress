@@ -574,14 +574,21 @@
                     $("#inGrupos-form-crearart").removeClass('is-invalid');
                 }
 
-                if (tituloArt.length == 0 || tituloArt.length > 51) {  //Se valida campo del titulo de articulo
+                if (tituloArt.length == 0 || tituloArt.length > 100) {  //Se valida campo del titulo de articulo
 
                     $("#nombre_box_form_crearart").addClass('is-invalid');
+                    $('#nombre_box_form_crearart').focus();
+                    $('html,body').scrollTop(0);
 
                 } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
                     $("#cat_box_form_crearart").addClass('is-invalid');
+                    $('html,body').scrollTop(0);
+
                 } else if (i == 0) {
                     $("#inGrupos-form-crearart").addClass('is-invalid');
+                    $('#inGrupos-form-crearart').focus();
+                    $('html,body').scrollTop(200);
+
                 } else {
 
                     if ((tituloArt == ($('#<%=hiddenTituloArt.ClientID %>').val())) && (data == ($('#<%=hiddenContenidoNormal.ClientID %>').val())) && (( (tags.length == 0 ? "" : tags.join()) == (tagsNomral.length == 0 ? "" : tagsNomral.join()) )) && (catNormal.join() == cat.join()) && (gruposNormal.join() == grupos.join()) ) {

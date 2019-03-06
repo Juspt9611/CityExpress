@@ -384,11 +384,17 @@
             if (tituloArt.length == 0 || tituloArt.length > 100) {  //Se valida campo del titulo de articulo
 
                 $("#nombre_box_form_crearart").addClass('is-invalid');
+                $('#nombre_box_form_crearart').focus();
+                $('html,body').scrollTop(0);
 
             } else if (cat.length == 0) {   // Se valida que se haya ingresado una cetegoria
                 $("#cat_box_form_crearart").addClass('is-invalid');
+                $('html,body').scrollTop(0);
+
             } else if (i == 0) {
                 $("#inGrupos-form-crearart").addClass('is-invalid');
+                $('#inGrupos-form-crearart').focus();
+                $('html,body').scrollTop(200);
             } else {
 
                 var articuloNuevo = {};
@@ -531,38 +537,72 @@
                     //console.log(status);
                     if (status == 'error') {
                         $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Error al subir el archivo.").addClass("error-media");
+                        setTimeout(function () {
+                            swal("Error al subir el archivo", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                        }, 3000);
                     } else if (status == 'invalido') {
                         $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Este tipo de archivo no es valido.").addClass("error-media");
+                        setTimeout(function () {
+                            swal("Tipo de archivo invalido", {
+                                icon: "error",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                        }, 3000);
                     } else {
                         $("#msnError-multimedia").append("<i class='fa fa-check' aria-hidden='true'></i> Archivo cargado exitosamente.").addClass("ok-media");
                         urlLocal = url.substring(0, url.indexOf('/vistas')) + '/WBSupportCenter/imgBlog/' + status;
+                        setTimeout(function () {
+                            swal("Archivo cargado exitosamente", {
+                                icon: "success",
+                                allowOutsideClick: false,
+                                closeOnClickOutside: false
+                            })
+                        }, 3000);
                     }
                 },
                 processData: false,
                 contentType: false,
                 error: function () {
-                    swal("Error al subir archivo.", {
-                        icon: "error",
-                        allowOutsideClick: false,
-                        closeOnClickOutside: false
-                    });
+                    setTimeout(function () {
+                        swal("Error al subir archivo.", {
+                            icon: "error",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        })
+                    }, 3000);
                 }
             });
         }
 
         function carga() {
             $("#msnError-multimedia").empty();
+
+            var slider = document.createElement("div");
+            $(slider).addClass("loader").append("<div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__bar'></div><div class='loader__ball'></div>Cargando...");
+
             var fd = new FormData();
             var files = $('#img-form-crearart')[0].files[0];
             fd.append('file', files);
 
             if (files != null) {
 
+                swal({
+                    closeOnClickOutside: false,
+                    content: slider,
+                    button: false
+                });
+
                 cargarArchivos(fd);
 
             } else {
                 $("#msnError-multimedia").append("<i class='fa fa-times' aria-hidden='true'></i> Agregar un archivo.").addClass("error-media");
             }
+
         }
 
         /*********** JS init

@@ -24,7 +24,7 @@
                     <%--<button type="button" class="btn btn-success float-right" onclick="window.location.href = 'CrearArticulo.aspx'"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp Crear</button>--%>
                 </div>
             </div>
-            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
+            <table id="example" class="table table-striped table-bordered dt-responsive" style="width: 100%">
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -83,6 +83,16 @@
                     }
                 }
             ]
+            //,
+            //"columns": [
+            //    {
+            //        data:null,
+            //        render: function (data, type, full) {
+            //            console.log(full);
+            //            //return "<div class='text-wrap width-200'>" + data + "</div>";
+            //        }
+            //    }
+            //]
         });
 
         $("<button type='button' class='btn btn-success float-right' style='margin-bottom:1em;' onclick=\"window.location.href = 'CrearArticulo.aspx'\" id='crear'><i class='fa fa-plus' aria-hidden='true'></i>&nbsp Crear</button>").appendTo('div.pull-right');

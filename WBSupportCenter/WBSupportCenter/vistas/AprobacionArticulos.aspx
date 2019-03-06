@@ -22,15 +22,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" id="contenidoTabla">
         <div class="box_table_container">
-            <a class="btn btn-danger btn-sm text-white pull-right" id="btnEliminar" onclick="eliminar();">Eliminar</a>
-            <a class="btn btn-primary btn-sm text-white pull-right hidden" id="btnAutorizar" onclick="autorizar();">Autorizar</a>
+            <a class="btn btn-danger btn-sm text-white pull-right" id="btnEliminar" onclick="eliminar();"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+            <a class="btn btn-primary btn-sm text-white pull-right hidden" id="btnAutorizar" onclick="autorizar();"><i class="fa fa-check" aria-hidden="true"></i> Autorizar</a>
             <div class="row">
                 <span class="box_table_title" id="titleSpan"></span>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
                     <br />
-                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered nowrap display dataTable dt-responsive" width="100%">
+                    <table id="tablaAprobacionArticulos" class="table table-striped table-bordered display dataTable dt-responsive"  style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Código</th>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xlg-12">
                     <br />
-                    <table id="tablaEliminacionArticulos" class="table table-striped table-bordered nowrap display dataTable hidden dt-responsive" width="100%"></table>
+                    <table id="tablaEliminacionArticulos" class="table table-striped table-bordered display dataTable hidden dt-responsive"  style="width: 100%"></table>
                 </div>
             </div>
         </div>
@@ -270,9 +270,10 @@
                                 "mData": null,
                                 "bSortable": false,
                                 "mRender": function (data, type, full) {
-                                    return '<a class="btn btn-info btn-sm boton" style="width: 100%; color: #FFFFFF;">' + 'Revisar' + '</a>';
+                                    return '<center><a class="btn btn-info btn-sm boton" style="color: #FFFFFF;"><i class="fa fa-eye" aria-hidden="true"></i> Revisar </a></center>';
                                 }
                             }
+                            //{ title: "cats", "visible": false },
                         ]
                     });
                     $('#tablaAprobacionArticulos').on('click', 'tbody .boton', function () {
@@ -330,7 +331,7 @@
                                 sortable: false,
                                 render: function (data, type, row) {
                                     //console.log(data.idarticulo);
-                                    return '<center><a class="btn btn-danger btn-sm text-white" onclick="eliminarArticulo(' + data.idarticulo + ');">Eliminar</a></center>'
+                                    return '<center><a class="btn btn-danger btn-sm text-white" onclick="eliminarArticulo(' + data.idarticulo + ');"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a></center>'
                                 }
                             }
                         ]
@@ -367,7 +368,7 @@
             idArticulo = data_row[0];
             $("#titleCard").empty();
             $("#box-contenido-blog").empty();
-            $("#titleCard").append(data_row[1]);
+            $("#titleCard").append(data_row[1] + '<br><span class="span-blog-categorias">' + data_row[7].replace(/,/g, ' >> ') + '</span>');
             $("#box-contenido-blog").append(data_row[2]);
         }
 
