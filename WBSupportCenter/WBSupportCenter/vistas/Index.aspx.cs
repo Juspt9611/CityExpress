@@ -290,7 +290,7 @@ namespace SupportCenter
                 //Se genera PDF
                 //var Renderer = new IronPdf.HtmlToPdf();
                 //var PDF = Renderer.RenderHtmlAsPdf(contenido);
-                PdfSharp.Pdf.PdfDocument pdf = PdfGenerator.GeneratePdf(contenido, PdfSharp.PageSize.A4, 65);
+                PdfSharp.Pdf.PdfDocument pdf = PdfGenerator.GeneratePdf("<h3>"+ tituloArticulo + "</h3>" + contenido, PdfSharp.PageSize.A4, 65);
                 var config = new PdfGenerateConfig()
                 {
                     MarginBottom = 70,

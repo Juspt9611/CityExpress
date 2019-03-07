@@ -528,7 +528,6 @@
             $("#btnBuscar").click(function () {
                 //var palabra = $('.select2-search__field').val();
                 if (palabraSelect != "") {
-                    savePalabra(palabraSelect);
                     loadListaArticulosxPalabra(palabraSelect);
                     $('#buscadorSel').val(null).trigger('change');
                     $(".select2-selection__rendered").empty();
