@@ -344,23 +344,60 @@
         }
 
         function eliminarArticulo(idArticulo) {
-            //console.log(idArticulo);
-            $.ajax({
-                type: 'POST',
-                url: 'AprobacionArticulos.aspx/eliminarArticulo',
-                data: '{ idArticulo: ' + idArticulo + ' }',
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    swal("¡Éxito!", "¡¡¡El registro ha sido eliminado correctamente!!!", "success");
-                },
-                failure: function (response) {
-                    //console.log(response);
+
+            swal({
+                title: "¿Eliminar artículo?",
+                text: "",
+                icon: "info",
+                closeOnClickOutside: false,
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        value: null,
+                        visible: !0,
+                        className: "btn btn-default",
+                        closeModal: !0
+                    },
+                    confirm: {
+                        text: "Eliminar",
+                        value: !0,
+                        visible: !0,
+                        className: "btn btn-info",
+                        closeModal: !0
+                    }
+                }
+            }).then((willDelete) => {
+                $(".swal-button swal-button--confirm btn btn-info").click(function () {
+                    $(".swal-button swal-button--confirm btn btn-info").attr("disabled", true);
+                })
+                if (willDelete) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'AprobacionArticulos.aspx/eliminarArticulo',
+                        data: '{ idArticulo: ' + idArticulo + ' }',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (response) {
+                            swal("El artículo ha sido eliminado correctamente", {
+                            icon: "success",
+                            allowOutsideClick: false,
+                            closeOnClickOutside: false
+                        });
+                        },
+                        failure: function (response) {
+                            //console.log(response);
+                        }
+                    });
+                    $('#tablaEliminacionArticulos').DataTable().destroy();
+                    $('#tablaEliminacionArticulos').empty();
+                    dataTableDataDelete();
+
+                } else {
+                    $(".swal-button swal-button--confirm btn btn-info").attr("disabled", false);
                 }
             });
-            $('#tablaEliminacionArticulos').DataTable().destroy();
-            $('#tablaEliminacionArticulos').empty();
-            dataTableDataDelete();
+
         }
 
         function addDataCard(data_row) {

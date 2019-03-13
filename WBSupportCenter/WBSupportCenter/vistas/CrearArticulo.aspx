@@ -252,7 +252,7 @@
                     cadena = "<img src=" + urlLocal + " alt='' style='height:" + $("#alto-media-form-crearart").val() + "%; width:" + $("#ancho-media-form-crearart").val() + "%'/>";
                     break;
                 case '2':
-                    cadena = "<video width='" + $("#ancho-media-form-crearart").val() + "' height='" + $("#alto-media-form-crearart").val() + "' autoplay><source src=" + urlLocal + " >Este navegador no soporta el elemento de video.</video>";
+                    cadena = "<video width='" + $("#ancho-media-form-crearart").val() + "%' height='" + $("#alto-media-form-crearart").val() + "%' controls><source src=" + urlLocal + " >Este navegador no soporta el elemento de video.</video>";
                     break;
                 case '3':
                     cadena = "<audio controls><source src=" + urlLocal +">Este navegador no soporta el elemento de audio.</audio>";
