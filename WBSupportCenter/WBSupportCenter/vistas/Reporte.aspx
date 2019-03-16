@@ -206,7 +206,8 @@
 
         var arrayGrafic = new Array();
         var reporteSelect = "palabras";
-        var reporteGrafica = "Búsquedas";
+        var reporteGrafica = "No. de búsquedas";
+        var reporteGraficaX = "Palabra";
         var repetirBusqueda = false;
         var successResp;
         var topResult;
@@ -295,19 +296,24 @@
                     reporteSelect = selectedOption.value;
 
                     if (reporteSelect == "palabras") {
-                        reporteGrafica = "Búsquedas";
+                        reporteGrafica = "Número de búsqueda";
+                        reporteGraficaX = "Palabra";
                     }
                     else if (reporteSelect == "valorados") {
                         reporteGrafica = "Número de valoraciones";
+                        reporteGraficaX = "Número artículo";
                     }
                     else if (reporteSelect == "vistos") {
                         reporteGrafica = "Visitas";
+                        reporteGraficaX = "Número artículo";
                     }
                     else if (reporteSelect == "vistas") {
                         reporteGrafica = "Número de vistas";
+                        reporteGraficaX = "Categoría";
                     }
                     else if (reporteSelect == "accesos") {
-                        reporteGrafica = "Accesos por usuario";
+                        reporteGrafica = "Número de Accesos";
+                        reporteGraficaX = "Usuario";
                     }
                     //console.log(selectedOption.value);
 
@@ -494,7 +500,7 @@
                         else if (reporteSelect == "valorados") {
                             $.each(jsonReporte, function (item, index) {
                                 arrayGrafic.push({
-                                    country: index.nombreArticulo,
+                                    country: index.idArticulo,
                                     visits: parseInt(index.calificacionTotal, 10)
                                 })
                             });
@@ -615,7 +621,7 @@
                         else if (reporteSelect == "vistos") {
                             $.each(jsonReporte, function (item, index) {
                                 arrayGrafic.push({
-                                    country: index.nombreArticulo,
+                                    country: index.idArticulo,
                                     visits: parseInt(index.visitas, 10)
                                 })
                             });
@@ -988,6 +994,10 @@
             let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
             valueAxis.title.text = reporteGrafica;
             valueAxis.title.fontWeight = "bold";
+
+            let valueAxisX = chart.xAxes.push(new am4charts.ValueAxis());
+            valueAxisX.title.text = reporteGraficaX;
+            valueAxisX.title.fontWeight = "bold";
 
             // Create series
             var series = chart.series.push(new am4charts.ColumnSeries3D());
